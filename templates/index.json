@@ -284,6 +284,8 @@
       "type": "haywood-phase2-find-fit",
       "settings": {
         "color_scheme": "scheme-2",
+        "image": "shopify://shop_images/ChatGPT_Image_Aug_5_2026_01_58_29_PM.png",
+        "mobile_image": "shopify://shop_images/ChatGPT_Image_Aug_5_2026_02_00_37_PM.png",
         "image_fit": "contain",
         "desktop_position": "center center",
         "mobile_position": "center center",
