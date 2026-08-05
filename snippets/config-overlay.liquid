@@ -1,0 +1,497 @@
+<style>
+  config-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    background: rgba(0, 0, 0, 0.65); /* ✅ Dim background */
+  }
+
+  config-drawer[open] {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .cfg-inner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    max-width: 90vw;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  config-drawer[open] .cfg-inner {
+    transform: translateX(0);
+  }
+
+  .cfg-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    font-weight: 44;
+    font-size: 1.6rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .cfg-header button {
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    line-height: 1;
+    cursor: pointer;
+    font-weight: bold;
+    color: #888;
+  }
+
+  .cfg-body {
+    display: flex;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .cfg-left {
+    width: 50%;
+    padding-inline: 2rem;
+    position: sticky;
+    top: 1px;
+    height: fit-content;
+    align-self: flex-start;
+  }
+
+  .cfg-left img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border: none;
+    background: none;
+  }
+
+  .cfg-right {
+    width: 50%;
+    padding: 2rem;
+  }
+
+
+
+@media (min-width: 1440px) {
+  .cfg-left {
+    padding-inline: 10rem; /* large desktops (21" screens) */
+  }
+}
+
+@media (min-width: 1920px) {
+  .cfg-left {
+    padding-inline: 15rem; /* ultra-wide monitors */
+  }
+
+}
+
+
+  @media (max-width: 990px) {
+        .cfg-left {
+      display: none;
+    }
+    .cfg-inner {
+      max-width: 100vw;
+    }
+
+    .cfg-body {
+      flex-direction: column;
+    }
+
+    .cfg-left,
+    .cfg-right {
+      width: 100%;
+    }
+  }
+
+  body.overlay-open {
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .mw-option__container .mw-option__value .mw-stack__item .mw-label {
+padding: 0 !important;
+}
+
+.mw-option__value--selected .mw-option__value-title {
+    padding: 0 !important;
+    margin-top: 0 !important; }
+
+    .mw-option__value-title {
+    font-size: 1.25rem !important;
+}
+
+.mw-option__value.mw-option__value--has-horizontal .mw-stack.mw-stack--alignment-center.mw-stack--alignment-horizontal .mw-stack__near {
+
+    margin-top: -4px !important; }
+
+    .mw-option__value.mw-option__value--has-horizontal .mw-stack.mw-stack--alignment-center.mw-stack--alignment-horizontal .mw-stack__near .mw-text {
+    padding-top: 8px;
+    padding-bottOm: 8px;
+}
+
+.mw-option--type-button .mw-option__button, .mw-option--type-multibutton .mw-option__button {
+border: none !important;
+}
+
+.mw-option__value .mw-text {
+  white-space: normal !important;
+}
+
+
+  .set-section:before {
+    content: "Complete Set or Heads Only";
+    display: block;
+    border-bottom: 2px solid #000;
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: bold;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    @media (max-width: 990px) {
+      font-size: 20px;
+    }
+  }
+
+  .putter-section:before {
+    content: "Putter";
+    display: block;
+    border-bottom: 2px solid #000;
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: bold;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    @media (max-width: 990px) {
+      font-size: 20px;
+    }
+  }
+
+  .iron-section:before {
+    content: "Irons";
+    display: block;
+    border-bottom: 2px solid #000;
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: bold;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    @media (max-width: 990px) {
+      font-size: 20px;
+    }
+  }
+
+  .shafts-section:before {
+    content: "Shafts";
+    display: block;
+    border-bottom: 2px solid #000;
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: bold;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    @media (max-width: 990px) {
+      font-size: 20px;
+    }
+  }
+
+  .grip-section:before {
+    content: "Grip";
+    display: block;
+    border-bottom: 2px solid #000;
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: bold;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    @media (max-width: 990px) {
+      font-size: 20px;
+    }
+  }
+
+  .stamp-section:before {
+    content: "Custom Stamping";
+    display: block;
+    border-bottom: 2px solid #000;
+    font-size: 24px;
+    font-weight: bold;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    @media (max-width: 990px) {
+      font-size: 20px;
+    }
+  }
+
+
+
+
+/* ===== Config Overlay • Sticky Footer (cleaned) ===== */
+
+.cfg-footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 90vw;
+  z-index: 10;
+  padding: 1.25rem 1.5rem;
+  background: #fff;
+  border-top: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;        /* vertical align of row items */
+  justify-content: flex-end;  /* anchor the row to the right */
+  gap: 0.75rem;
+}
+
+/* Price + Sezzle block */
+.cfg-footer .footer-info {
+  color: #444;
+  text-align: right;
+}
+.cfg-footer .footer-info .sezzle-shopify-info {
+  font-size: 0.9rem;
+}
+/* keep Sezzle’s inline button text readable on light bg */
+.cfg-footer div.sezzle-shopify-info-button {
+  color: #000;
+}
+
+/* Objection busters row */
+.cfg-footer .objection-busters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-size: 1.1rem;
+  color: #444;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: 1px solid #F2F2F2;
+}
+.cfg-footer .objection-busters span {
+  display: flex;
+  align-items: center;
+}
+
+/* Add to cart button (desktop: pill-sized at right) */
+.cfg-footer .add-to-cart {
+  background: #ffcf00;
+  color: #000;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid grey;
+  border-radius: 9999px;
+  font-size: 1.3rem;
+  padding: 2rem 2.4rem;   /* vertical, horizontal */
+  white-space: nowrap;
+  width: auto;            /* compact on desktop */
+}
+
+/* Info wrapper: stack price/sezzle over busters */
+.cfg-footer .cfg-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Emphasize price */
+#ProductPrice {
+  font-weight: bold;
+  font-size: 2.2rem;
+}
+
+/* ---------- Mobile tweaks ---------- */
+@media (max-width: 990px) {
+  .cfg-footer { width: 100vw; }
+
+  .cfg-footer .footer-info {
+    text-align: left;
+  }
+
+  .cfg-footer .objection-busters {
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+
+  .cfg-footer .add-to-cart {
+    width: 100%;        /* full width on mobile */
+  }
+
+  /* preserve any custom width if you apply .addcartconfig elsewhere */
+  .addcartconfig { width: 200px; }
+}
+
+.cfg-footer .add-to-cart:hover {
+  background-color: #ffd832 !important; /* Slightly lighter yellow */
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* crisp adjustment */
+
+body.overlay-open .crisp-client .cc-1brb6 .cc-1yy0g .cc-1m2mf .cc-157aw, body.overlay-open .cc-yv368 .cc-1kr6o .cc-18ov6 {
+    margin-bottom: 6rem !important;
+    margin-right: 0 !important;
+}
+
+/* ---------- Mobile tweaks ---------- */
+@media (max-width: 750px) {
+  body.overlay-open .crisp-client .cc-1brb6 .cc-1yy0g .cc-1m2mf .cc-157aw, body.overlay-open .cc-yv368 .cc-1kr6o .cc-18ov6 {
+    margin-bottom: 10rem !important;
+}
+
+body.overlay-open #crisp-chatbox > div > div {
+  right: 20px !important;
+   margin-bottom: 10rem !important;
+}
+}
+
+
+
+
+</style>
+
+<config-drawer id="ConfigDrawer">
+<div class="cfg-inner">
+<div class="cfg-header">
+<span>Configuring {{ product.title }}</span>
+<button class="js-hide-configs" aria-label="Close overlay">×</button>
+</div>
+<div class="cfg-body">
+<div class="cfg-left">
+<img id="ProductPhotoImg" src="{{ product.images.first | img_url: '1024x1024' }}" alt="{{ product.title }}" loading="lazy">
+</div>
+<div class="cfg-right">
+{% form 'product', product, class: productClasses %}
+<div class="mw-product-options"></div>
+<div class="hidden">
+<select name="id" id="ProductSelect-{{ section.id }}">
+{% for variant in product.variants %}
+<option {% if variant == product.selected_or_first_available_variant %}selected{% endif %} value="{{ variant.id }}">
+{{ variant.title }} - {{ variant.price | money_with_currency }}
+</option>
+{% endfor %}
+</select>
+</div>
+{% if section.settings.product_quantity_enable %}
+<div>
+<label for="Quantity">{{ 'products.product.quantity' | t }}</label>
+<input type="number" id="Quantity" name="quantity" value="1" min="1">
+</div>
+{% endif %}
+<div class="cfg-footer">
+<div class="top-row">
+    <div class="cfg-info">
+<div class="footer-info">
+    <span class="sezzle-shopify-info" data-price="{{ current_variant.price }}"></span>
+<div class="price" id="ProductPrice">{{ current_variant.price | money }}</div>
+{% if product.compare_at_price_max > product.price %}
+<s id="ComparePrice">{{ current_variant.compare_at_price | money }}</s>
+{% endif %}
+
+
+</div>
+
+</div>
+<div class="objection-busters">
+<span>🚚 {% if product.metafields.custom.build_time %}Ships in {{ product.metafields.custom.build_time }}{% else %}Ships within 3 weeks{% endif %}</span>
+<span>⚙️ Designed by us</span>
+<span>🛠️ Custom-built in-house</span>
+</div>
+
+</div>
+<div class="addcartconfig">
+        <button type="submit" name="add" id="AddToCart" class="add-to-cart">
+<span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
+</button>
+</div>
+</div>
+{% endform %}
+</div>
+</div>
+</div>
+</config-drawer>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  //const openBtn = document.querySelector(".js-show-configs");
+  const overlay = document.getElementById("ConfigDrawer");
+  const closeTriggers = document.querySelectorAll(".js-hide-configs");
+
+const openBtns = document.querySelectorAll(".js-show-configs");
+const stickyBar = document.getElementById("StickyConfigBar");
+
+function hideStickyBar() {
+  if (stickyBar) stickyBar.style.display = "none";
+}
+
+function maybeShowStickyBar() {
+  if (stickyBar && window.scrollY > 600) stickyBar.style.display = "flex";
+}
+
+openBtns.forEach(btn => {
+  btn.addEventListener("click", function (e) {
+    e.preventDefault();
+    overlay.setAttribute("open", "true");
+    document.body.classList.add("overlay-open");
+    hideStickyBar();
+  });
+});
+
+  closeTriggers.forEach(trigger => {
+    trigger.addEventListener("click", function () {
+      overlay.removeAttribute("open");
+      document.body.classList.remove("overlay-open");
+      maybeShowStickyBar();
+    });
+  });
+
+  // ✅ Close on background click
+  overlay.addEventListener("click", function (e) {
+    if (e.target === overlay) {
+      overlay.removeAttribute("open");
+      document.body.classList.remove("overlay-open");
+      maybeShowStickyBar();
+    }
+  });
+
+  // ✅ Image update ONLY for Finish swatches
+  document.body.addEventListener("click", function (e) {
+    const swatch = e.target.closest(".mw-option__swatch-media");
+    if (!swatch || !swatch.querySelector("img")) return;
+
+    const container = swatch.closest(".mw-option__container");
+    if (!container) return;
+
+    // Find the nearest label above it
+    const label = container.closest(".mw-stack__item")?.previousElementSibling;
+    const isFinish = label?.innerText?.trim().toLowerCase().includes("finish");
+
+    if (isFinish) {
+      const preview = document.getElementById("ProductPhotoImg");
+      const newImg = swatch.querySelector("img").src
+        .replace("width=400", "width=1024")
+        .replace("height=400", "height=1024");
+      preview.src = newImg;
+    }
+  });
+  
+});
+</script>
+

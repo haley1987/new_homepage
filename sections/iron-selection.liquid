@@ -1,0 +1,988 @@
+<style>
+
+  #ContactFormEmail{
+      width: 60%;
+      max-width: 500px;
+  }
+  .modal-content-11 h1 img{
+      display: inline;
+      max-width: 50px;
+  } 
+      input[type="checkbox"]#marketingConsent {
+    appearance: auto !important; /* Ensures default checkbox rendering */
+    display: inline-block !important; /* Ensures it's not hidden */
+    opacity: 1 !important; /* Ensures it's visible */
+    position: static !important; /* Ensures it's not removed from flow */
+    width: auto !important; /* Resets any 0 width issue */
+    height: auto !important;
+  }
+  
+  .product_recommend_grid {
+      display: flex;
+      justify-content: center; /* Center content */
+      align-items: center;
+      width: 100%;
+      position: relative;
+    flex-direction: column; 
+  }
+  
+  .product_cart_main {
+      width: 40%; /* Adjust width to make it look better */
+      max-width: 300px; /* Prevent it from taking too much space */
+      display: flex;
+      justify-content: center;
+      background-color: white;
+      padding: 10px;
+      border-radius: 20px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+      transition: opacity 0.3s ease-in-out;
+      margin-bottom: 20px;
+  }
+  
+  #secondCard {
+      display: none !important; /* Ensure it stays hidden */
+  }
+  
+  
+      .product_recommend_grid img {
+          width: 100%;
+          object-fit: cover;
+          object-position: center center;
+          border-radius:20px;
+      }
+   /*   .product_recommend_grid {
+          display: flex;
+          width: 100%;
+          justify-content: center;
+          column-gap: 140px;
+          position: relative;
+      }
+      .product_recommend_grid.orbefore::before {
+          content: "-or-";
+          text-transform: uppercase;
+          font-size: 35px;
+          font-weight: 500;
+          position: absolute;
+          top: 44.3%;
+      }
+      
+      .product_cart_main {
+          width: 30%;
+          display: flex;
+          justify-content: center;
+          background-color: white;
+          padding: 10px;
+          border-radius: 20px;
+      } */
+      .product_card h3 {
+          font-size: 15px;
+          font-weight: 600;
+          margin: 5px auto;
+          border-bottom: 1.5px solid black;
+          text-transform: uppercase;
+          width: 100%;
+          max-width: 87%;
+          padding-bottom: 4px;
+      }
+      .specification h2 {
+          font-size: 13px;
+          font-weight: 600;
+          text-transform: uppercase;
+          margin-bottom: 12px;
+      }
+      .specification a {
+          border: 1px solid #000000;
+          padding: 10px 30px;
+          display: inline-block;
+          text-transform: uppercase;
+          font-size: 13px;
+          font-weight: 600;
+          margin-top: 16px;
+          color: white;
+          background:black;
+          border-radius: 25px;
+          text-decoration: none;
+      }
+      .product_card {
+          width: 100%;
+      }
+      .specs-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin: 5px 0;
+      }
+      .specs-item li {
+          font-size: 12px;
+            font-weight: 600;
+      }
+      .specs-item p {
+          max-width: unset !important;
+          display: inline-block;
+          width: unset !important;
+          font-size: 12px;
+      }
+      
+        .main-container{
+          width: 93%;
+          background-color: #EDF2F7;
+          padding: 28px 0;
+          max-width: 100%;
+          margin: 10px auto;
+        }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      
+      .sub-container {
+        max-width: 800px;
+      }
+      
+      h1 {
+           color: #000000;
+          font-size: 2rem;
+           margin: 20px 0;
+          font-weight: bolder;
+      }
+      
+      . modal-content p {
+        margin-bottom: 20px;
+      }
+      
+      .btn-next {
+          width: 100%;
+          max-width: 300px;
+          display: inline-flex;
+          background-color: #000000;
+          color: #fff;
+          text-decoration: none;
+          transition: background-color 0.3s ease;
+          height: 52px;
+          align-items: center;
+          justify-content: center;
+          font-size: 12px;
+          text-transform: uppercase;
+          letter-spacing: .025rem;
+          font-weight: 700;
+          margin-bottom: 3em !important;
+          border-radius: 9999px;
+          cursor: pointer;
+      }
+      .btn-back{
+         height: 43px;
+          width: 15%;
+          display: inline-block;
+          padding: 1px 12px;
+          background-color: #ffffff;
+          color: #000;
+          text-decoration: none;
+          transition: background-color 0.3s ease;
+          border-radius: 9999px;
+          cursor: pointer;
+      }
+      .btn:hover {
+        background-color: #2980b9;
+      }
+      button.btn-back-1 {
+          color: #000;
+          background-color: #ffffff;
+          text-decoration: none;
+          height: 52px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 15%;
+          border-radius: 9999px;
+      }
+      button.btn-back-1 svg {
+          width: 20px;
+          height: 20px;
+      }
+      .header1 h1 {
+          font-size: 43px;
+      }
+      .howitworks p {
+          font-size: 13px;
+          color: #718096;
+      }
+      .howitworks h2 {
+          font-size: 2em;
+          margin-bottom: 6px;
+      }
+      .started h1 {
+          font-size: 43px;
+          margin: 0 0 10px;
+      }
+      span.Next {
+          color: #707070;
+          font-weight: 600;
+      }
+      .started p {
+          font-size: 13px;
+          color: #718096;
+      }
+      .footer1 span, .footer1 p {
+          font-size: 13px;
+          color: #707070;
+      }
+      /* The Modal (background) */
+      .modal {
+        display: none; 
+        width: 100%; 
+        height: 100%; 
+        justify-content: center;
+        align-items: center;
+      }
+      
+      /* Modal Content/Box */
+      .modal-content {
+              min-height: 100vh;
+          background: #EDF2F7;
+          width: 100%;
+          max-width: 1057px;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin: 0px 0 20px;
+          padding: 40px 0;
+      }
+      
+      /* The Close Button */
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      
+      .radio-group {
+           display: flex;
+          justify-content: center;
+          margin: 40px 0;
+      }
+      .modal-content h1 {
+          margin: 0;
+          font-size: 40px;
+      }
+      .modal-content-1 .radio-group label.radio-label {
+          width: 100%;
+      }
+      .modal-content-1 .radio-group {
+          width: 100%;
+          max-width: 40%;
+          column-gap: 8px;
+      }
+      .modal-content-3 .radio-group label.radio-label {
+          width: 100%;
+      }
+      .radio-label {
+          padding: 12px 16px;
+          cursor: pointer;
+          border: 1px solid #cfcfcf;
+          text-transform: uppercase;
+          font-weight: 600;
+          background-color: white;
+          font-size: 12px;
+          letter-spacing: .025rem;
+        border-radius: 25px;
+      }
+      .modal-content p {
+          color: #718096;
+          width: 100%;
+          max-width: 60%;
+      }
+      .radio-label:hover{
+        border-color: #9d9d9d;
+      }
+      .radio-label input {
+        display: none;
+      }
+      
+      .radio-label.selected {
+          background-color: #000000;
+          color: #fff;
+      }
+      
+      .pagination {
+        margin: 20px 0;
+      }
+      .input-field {
+          width: 92%;
+          border-radius: 5px;
+          font-size: 2.5rem;
+          padding: 1rem;
+      }
+      .modal-content-4 .radio-container {
+          width: 100%;
+          max-width: 80%;
+      }
+        .form-group {
+          display: grid;
+          margin: 10px 0;
+          width: 100%;
+          max-width: 42%;
+      }
+      .modal-content.modal-content-3 .radio-group {
+          width: 100%;
+          max-width: 40%;
+          column-gap: 8px;
+      }
+      
+      
+        .form-group label {
+          text-align: left;
+          color: #718096;
+          font-size: 13px;
+          margin-bottom: 8px;
+      }
+      .modal-content-2 p {
+          width: 100%;
+          max-width: 60%;
+      }
+      .modal-content-10 h1 img {
+          max-width: 40px;
+          height: 40px;
+      }
+      .modal-content-10 h1 {
+          display: flex;
+          align-items: center;
+          column-gap: 5px;
+      }
+          /* Container for radio buttons */
+        .radio-container {
+         margin: 40px 0;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 10px;
+        }
+        .radio-container-score{
+           margin: 15px auto;
+          align-items: center;
+          width: 66%;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 5px;
+        }
+        /* Hide default radio button */
+        .radio-label input[type="radio"] {
+          display: none;
+        }
+        
+       .subHeading-text{
+         font-weight: 600;
+          margin-bottom: 5px;
+       }
+       .howitworks {
+          background: white;
+          border-radius: 12px;
+          padding: 16px 50px;
+          margin: 16px;
+          width: 100%;
+          max-width: 60%;
+          margin: 0 auto;
+      }
+        .btn-main{
+              max-width: 350px;
+          margin: 0 auto;
+        }
+        a#myBtn {
+          cursor: pointer;
+          border-radius: 25px;
+      }
+       .started {
+          margin: 38px 0;
+      }
+       .header1{
+          text-align: center;
+       }
+        .footer1{
+          display:flex;
+          justify-content: center;
+          margin: 70px 0;
+          text-align: center;
+          padding-inline: 3rem;
+        }
+        .footer1 p {
+          color:#9DA0A5;
+        }
+        .button-group {
+          width: 100%;
+          max-width: 50%;
+          display: flex;
+          justify-content: center;
+          column-gap: 10px;
+      }
+      
+      /* Adjust SVG size */
+      .btn-back svg, .btn-next svg {
+        width: 20px;
+        height: 20px;
+      }
+      .btn-back {
+          color: #000;
+          background-color: #ffffff;
+          text-decoration: none;
+          height: 52px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+        
+      .btn-back:hover {
+        background-color: #999999; 
+        transform: scale(1.1); /* Zoom in effect */
+      }
+      .form-group p {
+          max-width: unset !important;
+          text-align: left;
+      }
+        @media screen and (max-width: 767px) {
+
+          .btn-next{
+            max-width: 200px;
+          }
+          .product_recommend_grid.orbefore::before{
+            top: 48%;
+          left: 0;
+          right: 0;
+                font-size: 30px;
+      }
+          
+          .product_cart_main{
+            width: 200px;
+        font-size: .8em;
+           /* margin: 10px auto; */
+          }
+          .product_recommend_grid img {
+          /*height: 220px;*/
+      }
+          .product_recommend_grid {
+          flex-direction: column;
+          column-gap: 0;
+        /*  row-gap: 80px; */
+      }
+          
+      .howitworks{
+            padding: 15px 15px 10px;
+            margin: 0 !important;
+            max-width: 100%;
+      }
+      .footer1 {
+          margin: 30px 0 10px;
+      }
+      .modal-content h1{
+            font-size: 26px;
+      }
+      .modal-content p{
+            max-width: 100%;
+            font-size: 14px;
+      }
+      .input-field{
+            width: 100%;
+      }
+      .modal-content-4 .radio-container {
+          width: 100%;
+          max-width: 100%;
+      }
+       .howitworks p{
+            font-size: 9px;
+       }
+       .started p{
+            font-size: 12px;
+       }
+       .btn-main{
+            width: 100%;
+       }
+       .footer1 span, .footer1 p {
+          font-size: 12px;
+      }
+        .btn-next {
+          width: 85%;
+        }
+          .main-container {
+          height: auto;
+          padding: 20px;
+        }
+        .modal-content {
+          margin-left: 1rem;
+          margin-right: 1rem;
+          height: auto;
+          max-height: fit-content;
+          padding: 30px 20px;
+          margin-top: 10px;
+          justify-content: flex-start;
+        padding-top: 30px;
+      }
+      .button-group{
+        max-width: 100%;
+      }
+      .modal-content-1 .radio-group{
+      max-width: 100%;
+      }
+      .form-group{
+        max-width: 100%;
+      }
+      .modal-content.modal-content-3 .radio-group{
+        max-width: 100%;
+      }
+        .header1 h1,
+        .started h1{
+          font-size: 24px;
+          margin: 0 !important;
+        }
+           .form-group label {
+          margin-right: 98px;
+          margin-bottom: 9px;
+         }
+          .radio-container {
+            height:auto;
+         margin: 20px 0;
+          grid-template-columns: repeat(2, 1fr);
+        
+        }
+        .radio-container-score {
+          width: 100%;
+          max-width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+      }
+      .radio-container-score label.radio-label {
+          width: 100%;
+          max-width: 48%;
+      }
+              .form-group label {
+              margin-right: 25px;
+          }
+      }   
+         .btn-next.disabled{
+          cursor: not-allowed;
+         }
+         .btn-next[disabled] {
+          background-color: #494949;
+      }
+      .top-margin{
+        margin-top: 10px;
+      }
+
+.btn-main {
+  display: block;
+  margin-top: auto;
+  background-color: #000;
+  padding: 1rem 2rem;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  font-weight: 700;
+
+  border-radius: 25px;     /* you already liked this shape */
+  cursor: pointer;
+  transition: background-color .3s ease;
+}
+
+/* Hover/focus/disabled — tweak as you like */
+.btn-main:hover { background-color: #1a1a1a; }
+
+/* If you truly want to remove the focus ring: */
+/* .btn-main:focus { outline: none; } */
+
+/* More accessible focus ring instead of removing it: */
+.btn-main:focus {
+  outline: 2px solid #FFD12D;
+  outline-offset: 2px;
+}
+
+.btn-main[disabled] {
+  background-color: #494949;
+  cursor: not-allowed;
+}
+
+.specs-list{
+    list-style: none;
+    padding: 0;
+}
+
+      </style>
+      
+      <div class="main-container">
+        <div class="header1">
+          <h1>Welcome to the Haywood Golf Iron Selector!</h1>
+        </div>
+        
+        <div class="container">
+        <div class="sub-container">
+          
+          <div class="howitworks">
+        <h2 style="
+          font-weight: bold;
+      ">How it Works</h2>
+        <p>Simply input a variety of data about your game, including your playing style, skill level, and preferences. Our tool will analyse your responses and suggest the Haywood iron model that suits you best.</p>
+          </div>
+          <div class="started">
+             <h1>Ready to Get Started</h1>
+           <p>Click <span class="Next">“Next”</span> to begin the quick and easy process. In just a few minutes, you’ll have a recommendation that’s just for you. Let’s find the perfect irons to take your game to the next level!</p>
+          </div>
+          
+         
+          <a id="myBtn" class="btn-main">Next</a>
+
+        </div>
+        </div>
+        <div class="footer1">
+            <p><strong>Remember:</strong> For the most accurate fit, listing a professional club filter is always the best option. But when that’s not possible, we’re here to help.</p>
+        </div>
+      </div>
+      
+      <div id="myModal1" class="modal">
+        <div class="modal-content modal-content-1">
+          <h1>What is your sex?</h1>
+          {% comment %} <p>Simply input a variety of data about your game, including your  playing style, skill level, and preferences</p> {% endcomment %}
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="gender1" value="male" required onclick="selectOption(this, 1)">Male
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="gender1" value="female" required onclick="selectOption(this, 1)">Female
+            </label>
+          </div>
+      
+          
+          <div class="button-group">
+              <button class="btn-back-1">{% render 'left-arrow-svg' %}</button>
+            <button id="nextButton" class="btn-next" onclick="navigateModal(1, 'next')">Next</button>
+          </div>
+         
+        </div>
+      </div>
+      
+      <!-- Repeat for other modals -->
+      <!-- Example for myModal2 -->
+      <div id="myModal2" class="modal">
+        <div class="modal-content modal-content-2">
+          
+          <h1>What is your Age?</h1>
+          {% comment %} <p>Simply input a variety of data about your game, including your playing style, skill level, and preferences</p> {% endcomment %}
+      <div class="form-group">
+        <label for="ContactFormName">Enter your age</label>
+        <input class="input-field border border-gray-200 focus:outline-none focus:border-gray-900 p-3" type="number" id="ContactFormAge" required name="contact[Name]" placeholder="e.g. 23" autocapitalize="words" value="">
+      </div>
+           <div class="button-group">
+              <button class="btn-back" onclick="navigateModal(2, 'back')">{% render 'left-arrow-svg' %}</button>
+            <button id="nextButton" class="btn-next" onclick="navigateModal(2, 'next')">Next</button>
+          </div>
+        </div>
+      </div>
+      <!-- Example for myModal3 -->
+      <div id="myModal3" class="modal">
+        <div class="modal-content modal-content-3">
+          
+          <h1>Are you Right or Left Handed</h1>
+          {% comment %} <p>Simply input a variety of data about your game, including your  playing style, skill level, and preferences</p> {% endcomment %}
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="gender3" value="Right" required onclick="selectOption(this, 3)">Right Handed
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="gender3" value="Left" required onclick="selectOption(this, 3)">Left Handed
+            </label>
+          </div>
+           <div class="button-group">
+              <button class="btn-back" onclick="navigateModal(3, 'back')">{% render 'left-arrow-svg' %}</button>
+            <button id="nextButton" class="btn-next" onclick="navigateModal(3, 'next')">Next</button>
+          </div>
+        </div>
+      </div>
+      <div id="myModal4" class="modal">
+        <div class="modal-content modal-content-4">
+          
+          <h1>What is your Height</h1>
+          {% comment %} <h2 class="subHeading-text">Preferable with golf shoes on</h2> {% endcomment %}
+            <p >Preferable with golf shoes on</p>
+          <div class="form-group">
+        <label for="ContactFormName">Enter between 5-6</label>
+            <input class="input-field border border-gray-200 focus:outline-none focus:border-gray-900 p-3" type="number" step="1" id="height_ft" required name="contact[Height_Ft]" placeholder="ft." autocapitalize="number" value="" min="5" max="6" onkeypress="return isNumberKey(event)">
+        <label for="ContactFormName" class="top-margin">Enter between 0-11</label>
+            <input class="input-field border border-gray-200 focus:outline-none focus:border-gray-900 p-3" type="number" step="1" id="height_in" required name="contact[Height_In]" placeholder="in." autocapitalize="number" value="" min="0" max="11" onkeypress="return isNumberKey(event)">
+          </div>
+           <div class="button-group">
+              <button class="btn-back" onclick="navigateModal(4, 'back')">{% render 'left-arrow-svg' %}</button>
+            <button id="nextButton" class="btn-next" onclick="navigateModal(4, 'next')">Next</button>
+          </div>
+        </div>
+      </div>
+      <div id="myModal5" class="modal">
+        <div class="modal-content modal-content-5">
+          
+          <h1>What is your wrist-to-floor measurements ?</h1>
+          <h2 class="subHeading-text">Preferable with golf shoes on</h2>
+      <div class="form-group">
+        <label for="ContactFormName">Please enter between 31-39” closest to the nearest quarter inch</label>
+        <input class="input-field border border-gray-200 focus:outline-none focus:border-gray-900 p-3" type="number" id="ContactFormWristToFloor" required name="contact[Name]" placeholder="in." autocapitalize="words" value="" min="31" max="39">
+      </div>
+           <div class="button-group">
+              <button class="btn-back" onclick="navigateModal(5, 'back')">{% render 'left-arrow-svg' %}</button>
+            <button id="nextButton" class="btn-next" onclick="navigateModal(5, 'next')">Next</button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="myModal6" class="modal">
+        <div class="modal-content modal-content-6">
+          
+          <h1>What is your average score?</h1>
+          {% comment %} <p>Simply input a variety of data about your game, including your  playing style, skill level, and preferences</p> {% endcomment %}
+          <div class="radio-container-score">
+            <label class="radio-label">
+              <input type="radio" name="gender6" value="<76" required onclick="selectOption(this, 6)">76 or lower
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="gender6" value="77-82" required onclick="selectOption(this, 6)">77-82
+            </label>
+             <label class="radio-label">
+              <input type="radio" name="gender6" value="83-86" required onclick="selectOption(this, 6)">83-86
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="gender6" value="87-90" required onclick="selectOption(this, 6)">87-90
+            </label>
+             <label class="radio-label">
+              <input type="radio" name="gender6" value="90>=" required onclick="selectOption(this, 6)">90+
+            </label>
+          </div>
+           <div class="button-group">
+              <button class="btn-back" onclick="navigateModal(6, 'back')">{% render 'left-arrow-svg' %}</button>
+            <button id="nextButton" class="btn-next" onclick="navigateModal(6, 'next')">Next</button>
+          </div>
+        </div>
+      </div>
+      <div id="myModal7" class="modal">
+        <div class="modal-content modal-content-7">
+          
+          <h1>How do you consider your ball-striking ability?</h1>
+          {% comment %} <p>Simply input a variety of data about your game, including your playing style, skill level, and preferences</p> {% endcomment %}
+          <div class="radio-container-score">
+            <label class="radio-label">
+              <input type="radio" name="gender7" value="Excellent" required onclick="selectOption(this, 7)">Excellent
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="gender7" value="Above Average" required onclick="selectOption(this, 7)">Above Average
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="gender7" value="Average" required onclick="selectOption(this, 7)">Average
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="gender7" value="Below Average" required onclick="selectOption(this, 7)">Below Average
+            </label>
+          </div>
+           <div class="button-group">
+              <button class="btn-back" onclick="navigateModal(7, 'back')">{% render 'left-arrow-svg' %}</button>
+            <button id="nextButton" class="btn-next" onclick="navigateModal(7, 'next')">Next</button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="myModal8" class="modal">
+        <div class="modal-content modal-content-8">
+          
+          <h1>What is your typical 7-Iron distance?</h1>
+          {% comment %} <p>Simply input a variety of data about your game, including your playing style, skill level, and preferences</p> {% endcomment %}
+          <div class="radio-container-score">
+            <label class="radio-label">
+              <input type="radio" name="gender8" value="110Y<=" required onclick="selectOption(this, 8)">110 or less Yds
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="gender8" value="110-125 Yards" required onclick="selectOption(this, 8)">110-125 Yds
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="gender8" value="125-145 Yards" required onclick="selectOption(this, 8)">125-145 Yds
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="gender8" value="145-165 Yards" required onclick="selectOption(this, 8)">145-165 Yds
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="gender8" value="165Y>=" required onclick="selectOption(this, 8)">165+ Yds
+            </label>
+          </div>
+           <div class="button-group">
+              <button class="btn-back" onclick="navigateModal(8, 'back')">{% render 'left-arrow-svg' %}</button>
+            <button id="nextButton" class="btn-next" onclick="navigateModal(8, 'next')">Next</button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="myModal9" class="modal">
+        <div class="modal-content modal-content-9">
+          
+          <h1>What is your your glove size ?</h1>
+          {% comment %} <p>Simply input a variety of data about your game, including your  playing style, skill level, and preferences</p> {% endcomment %}
+          <div class="radio-container-score">
+            <label class="radio-label">
+              <input type="radio" name="gender9" value="Small" required onclick="selectOption(this, 9)">Small
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="gender9" value="Small-Medium" required onclick="selectOption(this, 9)">Small-Medium
+            </label>
+             <label class="radio-label">
+              <input type="radio" name="gender9" value="Medium" required onclick="selectOption(this, 9)">Medium
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="gender9" value="Medium-Large" required onclick="selectOption(this, 9)">Medium-Large
+            </label>
+             <label class="radio-label">
+              <input type="radio" name="gender9" value="Large" required onclick="selectOption(this, 9)">Large
+            </label>
+             <label class="radio-label">
+              <input type="radio" name="gender9" value="XL" required onclick="selectOption(this, 9)">XL
+            </label>
+          </div>
+            <div class="button-group">
+              <button class="btn-back" onclick="navigateModal(9, 'back')">{% render 'left-arrow-svg' %}</button>
+            <button id="nextButton" class="btn-next btn-done" onclick="navigateModal(9, 'next')">Next</button>
+          </div>
+        </div>
+      </div>
+      <div id="myModal10" class="modal">
+        <div class="modal-content modal-content-10">
+          <h1>Last step before our recommendation</h1>
+          
+          <label for="ContactFormEmail">Please enter your email</label>
+          <input 
+            pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.-]+$" 
+            class="input-field border border-gray-200 focus:outline-none focus:border-gray-900 p-3" 
+            type="email" 
+            required 
+            id="ContactFormEmail" 
+            name="contact[Name]" 
+            placeholder="hello@haywoodgolf.com" 
+            autocapitalize="words" 
+            value=""
+          >
+      
+          <!-- Marketing Consent Checkbox -->
+          <div class="marketing-consent">
+            <input 
+              type="checkbox" 
+              id="marketingConsent" 
+              required
+            >
+            <label for="marketingConsent">I agree to receive marketing emails from Haywood Golf. <br/>You can unsubscribe at any time. Learn more in our <a href="/pages/privacy-policy" target="_blank"><u>Privacy Policy</u></a></label>
+            <p id="consentError" style="color: red; display: none;">Please check the box to continue.</p>
+          </div>
+        <br/>
+      
+        <div class="button-group">
+          <button class="btn-back" onclick="navigateModal(10, 'back')">{% render 'left-arrow-svg' %}</button>
+          <button id="nextButton" class="btn-next btn-done" onclick="validateAndProceed()">Next</button>
+        </div> 
+      </div>
+      </div>
+      
+      <div id="myModal11" class="modal">
+        <div class="modal-content modal-content-11">
+          
+
+            <h2 class="subHeading-text">Based on the data you provided, we suggest:</h2>
+            
+            <div id="recommendationContainer" class="product_recommend_grid">
+              
+              <!-- First Recommendation -->
+              <div class="product_cart_main" id="firstCard">
+                <div class="product_card">
+                  <img class="firstImage onlyImage" src="https://cdn.shopify.com/s/files/1/0066/1202/5428/files/card.png?v=1718407239">
+                  <h3 class="first_productTitle only_productTitle">sv-2s</h3>
+                  <div class="specification">
+                    <h2>Specification</h2>
+                    <ul class="specs-list">
+                      <li>Hand: <span class="recommend_hand">Left</span></li>
+                      <li>Lie Angle: <span class="recommend_lieAngles">2 Strong</span></li>
+                      <li>Shaft Flex: <span class="recommend_ironlength">X-Stiff</span></li>
+                      <li>Iron Length: <span class="recommend_height">125 - 145 Yards</span></li>
+                      <li>Grip Size: <span class="recommend_gripSize">Medium Large</span></li>
+                    </ul>
+                    <div class="product_button">
+                      <a id="firstOption" href="#">Learn More</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+              <!-- Second Recommendation (Initially Hidden) -->
+              <div class="product_cart_main" id="secondCard" style="display: none;">
+                <div class="product_card">
+                  <img class="secondImage" src="https://cdn.shopify.com/s/files/1/0066/1202/5428/files/card.png?v=1718407239">
+                  <h3 class="Second_productTitle">sv-2s</h3>
+                  <div class="specification">
+                    <h2>Specification</h2>
+                    <ul class="specs-list">
+                      <li>Hand: <span class="recommend_hand">Left</span></li>
+                      <li>Lie Angle: <span class="recommend_lieAngles">2 Strong</span></li>
+                      <li>Shaft Flex: <span class="recommend_ironlength">X-Stiff</span></li>
+                      <li>Iron Length: <span class="recommend_height">125 - 145 Yards</span></li>
+                      <li>Grip Size: <span class="recommend_gripSize">Medium Large</span></li>
+                    </ul>
+                    <div class="product_button">
+                      <a id="secondOption" href="#">Learn More</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+        <!-- Navigation Buttons -->
+        <div class="button-group">
+          <button id="prevB" class="btn-next" style="display: none;" onclick="toggleRecommendation()">Previous Recommendation</button>
+          <button id="nextB" class="btn-next" onclick="toggleRecommendation()">Alternative Recommendation</button>
+        </div>
+            </div>
+            
+
+            
+       
+        </div>
+      </div>
+      <!-- Script   -->
+      <script src=" {{ "Backend.js" |  asset_url }} "  defer> </script>
+      
+      <script>
+          let showingFirst = true;
+        
+      function toggleRecommendation() {
+          const firstCard = document.getElementById("firstCard");
+          const secondCard = document.getElementById("secondCard");
+          const prevB = document.getElementById("prevB");
+          const nextB = document.getElementById("nextB");
+      
+          if (showingFirst) {
+              firstCard.style.display = "none";
+              secondCard.setAttribute("style", "display: flex !important;"); // Ensure it's visible
+              prevB.style.display = "block"; 
+              nextB.style.display = "none";
+          } else {
+              firstCard.style.display = "flex"; // Keep flex for layout consistency
+              secondCard.style.display = "none";
+              prevB.style.display = "none"; 
+              nextB.style.display = "block";
+          }
+          showingFirst = !showingFirst;
+      }
+      
+      </script>
+
+
+
+
+
+
+
+

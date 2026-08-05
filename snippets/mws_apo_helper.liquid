@@ -1,0 +1,178 @@
+<script>
+
+//   document.addEventListener('DOMContentLoaded', () => {
+//   if (!window.location.pathname.includes('/cart')) return;
+
+//   const links = document.querySelectorAll('.mw-apo-configure-link');
+
+//   links.forEach(link => {
+//     link.addEventListener('click', () => {
+//       if (link.classList.contains('loading')) return;
+
+//       const originalContent = link.innerHTML;
+
+//       link.classList.add('loading');
+//       link.style.pointerEvents = 'none';
+//       link.innerHTML = `<span class="mw-spinner"></span>`;
+
+//       const interval = setInterval(() => {
+//         const tingle = document.querySelector('.mw-tingle');
+//         if (tingle) {
+//           clearInterval(interval);
+//           link.innerHTML = originalContent;
+//           link.classList.remove('loading');
+//           link.style.pointerEvents = '';
+//         }
+//       }, 200);
+
+//       setTimeout(() => clearInterval(interval), 10000);
+//     });
+//   });
+// });
+
+function mwApoCustom() {
+  function addDescriptionPopup(option) {
+    function getUrl(id) {
+      if (typeof mwApoInit.response !== "undefined") {
+        for (const val of Object.values(mwApoInit.response)) {
+          for (const key in val.values) {
+            if (key == id) {
+              if (
+                typeof val.values[id].value.images !== "undefined" &&
+                val.values[id].value.images.length
+              ) {
+                return [
+                  val.values[id].value.description,
+                  val.values[id].value.images[0].hover,
+                  val.values[id].value.images[0].url,
+                ];
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+    let targetElement = option.querySelector( ".mw-option__control");
+    let id = targetElement.getAttribute("id");
+    let [description, isHover, urlImg] = getUrl(id);
+
+      let div = document.createElement("div");
+      div.classList.add("mws_tippy-add");
+
+      if (description) {
+        div.innerHTML = `<div class="mws-custom-tooltip">
+          <div class="mws-custom-tooltip-wrapper">
+            <div class="mws-custom-tooltip-description">${description}</div>
+          </div>
+        </div>`;
+
+      } else {
+        return;
+      }
+
+         
+    option.appendChild(div);
+
+      // setTimeout(function () {
+      //   let tippyMWS = document.querySelector(".mws_tippy-add");
+
+      //   if (tippyMWS) {
+      //     document.addEventListener("click", (e) => {
+      //       let withinBoundaries = e.composedPath().includes(tippyMWS);
+      //       if (!withinBoundaries) {
+      //         tippyMWS.remove();
+      //       }
+      //     });
+      //   }
+      // }, 300);
+  }
+
+
+
+  function swatches() {
+    let swatches = document.querySelectorAll(
+      ".mw-option--type-swatch .mw-option__value"
+    );
+    swatches.forEach(function (swatch) {
+      let id = swatch.getAttribute("data-value-id");
+      let img = swatch.querySelector(".mw-option__swatch-image");
+      if (img) {
+        const src = img.getAttribute("src").split("?width=")[0];
+        if (src) {
+          img.setAttribute("src", `${src}?width=400&height=400`);
+        }
+      }
+    });
+  }
+
+  window.mwApoInit = window.mwApoInit || {};
+
+  window.mwApoInit.onEvent = function (event, args) {
+    if (event == "init::finish") {
+      setTimeout(() => {
+        swatches();
+      }, 100);
+
+    }
+  };
+
+  window.mwApoInit.onCallback = function (event, data) {
+    if (event == "applyAttributeStateToHtml::price") {
+		  
+      if (window.innerWidth < 1023) {
+        setTimeout(function () {
+            
+          let options = document.querySelectorAll( ".mw-option--type-swatch .mw-option__value.mw-option__value--selected , .mw-option--type-multiswatch .mw-option__value.mw-option__value--selected");
+          options.forEach(option=>{
+              let isDescriptionPopup = option.querySelector(".mws_tippy-add");
+              if (isDescriptionPopup) {
+                isDescriptionPopup.remove();
+              }
+            
+            addDescriptionPopup(option);
+          })
+
+          
+          let optionsNoSelected = document.querySelectorAll( ".mw-option--type-swatch .mw-option__value:not(.mw-option__value--selected) .mws_tippy-add, .mw-option--type-multiswatch .mw-option__value:not(.mw-option__value--selected) .mws_tippy-add");
+          optionsNoSelected.forEach(option=>{   
+            option.remove();            
+          })
+          
+        }, 100);
+      }
+   }
+    return data;
+  };
+}
+</script>
+
+<style>
+  .mws_tippy-add {
+    max-width: 100%;
+    margin-top: 10px;
+    display: block !important;
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+  }
+
+  .mw-option--type-swatch .mw-option__value {
+    position: relative;
+    margin-bottom: 50px; /* Ensure space for the description */
+  }
+
+  .mws-custom-tooltip-wrapper {
+    margin: 0;
+  }
+
+  .mws-custom-tooltip-description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+  }
+</style>

@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "sidebar-drawer": {
+  "type": "sidebar-drawer",
+      "settings": {
+        "menu":                "new-menu",
+        "sidebar_second_menu": "footer-new",
+        "menu_color_scheme":   "1"
+      }
+},
+    "main": {
+      "type": "main-press-list",
+      "settings": {
+        "hero_richtext": "<p>For press opportunities, please email <strong><a href='mailto:info@haywoodgolf.com'>info@haywoodgolf.com</a></strong>.</p>",
+        "show_image": true,
+        "show_date": true,
+        "show_excerpt": false,
+        "excerpt_words": 20,
+        "thumb_width": 220,
+        "thumb_ratio": "16/9",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+   "order": [
+    "sidebar-drawer",
+    "main"
+  ]
+}

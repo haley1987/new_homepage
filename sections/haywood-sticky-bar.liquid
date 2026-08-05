@@ -1,0 +1,42 @@
+{% liquid
+  assign has_apo = true
+  if product.type == 'Gift Card' or product.type == 'Merch'
+    assign has_apo = false
+  endif
+  if product.tags contains 'force-native' or product.tags contains 'native-variants'
+    assign has_apo = false
+  endif
+  if product.tags contains 'force-apo'
+    assign has_apo = true
+  endif
+%}
+{% if has_apo %}
+<div class="sticky-config-bar" id="StickyConfigBar" style="display:none">
+    <span>
+    {{ product.title }} — from {{ product.price_min | money }}
+  </span>
+  <button type="button" class="js-show-configs" data-config-overlay-open
+              aria-controls="ConfigDrawer">{{ section.settings.sticky_cta | default: "Configure >>" }}</button>
+</div>
+<script>
+  (function(){
+    var bar=document.getElementById('StickyConfigBar');
+    var shown=false;
+    function onScroll(){
+      if(window.scrollY > 600 && !shown){ bar.style.display='flex'; shown=true; }
+      if(window.scrollY < 200 && shown){ bar.style.display='none'; shown=false; }
+    }
+    document.addEventListener('scroll', onScroll, {passive:true});
+  })();
+</script>
+{% endif %}
+{% schema %}
+{
+  "name": "Haywood • Sticky config",
+  "settings": [
+    { "type":"text","id":"sticky_text","label":"Text","default":"Ready to configure your build?" },
+    { "type":"text","id":"sticky_cta","label":"CTA","default":"Configure >>" }
+  ],
+  "presets":[{"name":"Haywood • Sticky bar"}]
+}
+{% endschema %}

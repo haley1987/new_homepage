@@ -1,0 +1,33 @@
+{%- comment -%} Haywood • Lifestyle Image (uses product.metafields.custom.lifestyle_image) {%- endcomment -%}
+{% comment %}— Lifestyle Image Block —{% endcomment %}
+{%- assign life = product.metafields.custom.lifestyle_image -%}
+{%- if life -%}
+<section class="hw-lifestyle">
+  <img
+    class="hw-lifestyle__img lazyload"
+    alt="{{ product.title }} in use"
+    src="{{ life | image_url: width: 20 }}"                 {# tiny placeholder #}
+    data-src="{{ life | image_url: width: 1600 }}"           {# good default swap #}
+    data-srcset="
+      {{ life | image_url: width: 640 }} 640w,
+      {{ life | image_url: width: 960 }} 960w,
+      {{ life | image_url: width: 1200 }} 1200w,
+      {{ life | image_url: width: 1600 }} 1600w,
+      {{ life | image_url: width: 2048 }} 2048w,
+      {{ life | image_url: width: 2560 }} 2560w,
+      {{ life | image_url: width: 3200 }} 3200w"
+    data-sizes="auto"
+    {% if life.width and life.height %}width="{{ life.width }}" height="{{ life.height }}"{% endif %}
+    decoding="async">
+</section>
+{%- endif -%}
+
+
+{% schema %}
+{
+  "name": "Haywood • Lifestyle image",
+  "templates": ["product"],
+  "settings": [],
+  "presets": [{ "name": "Haywood • Lifestyle image" }]
+}
+{% endschema %}

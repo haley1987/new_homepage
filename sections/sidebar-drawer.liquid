@@ -1,0 +1,146 @@
+{% schema %}
+{
+  "name": "Sidebar Drawer",
+  "settings": [
+    {
+      "type":  "link_list",
+      "id":    "sidebar_second_menu",
+      "label": "Secondary menu (e.g. Policies/Info)"
+    },
+    {
+      "type":  "link_list",
+      "id":    "menu",
+      "label": "Choose menu"
+    },
+    {
+      "type":    "select",
+      "id":      "menu_color_scheme",
+      "label":   "Color scheme",
+      "options": [
+        { "value": "1", "label": "Light" },
+        { "value": "2", "label": "Dark" }
+      ],
+      "default": "1"
+    }
+  ],
+  "presets": [
+    {
+      "name":     "Sidebar Drawer",
+      "category": "Navigation",
+      "settings": {
+        "menu":                "new-menu",
+        "sidebar_second_menu": "footer-new",
+        "menu_color_scheme":   "1"
+      }
+    }
+  ]
+}
+{% endschema %}
+
+
+<div class="sidebar-drawer">
+  {%- comment -%}
+    We force the drawer into “desktop” mode so it always renders open here.
+  {%- endcomment -%}
+  <header-drawer data-breakpoint="desktop">
+    <details open
+      id="Details-menu-drawer-container"
+      class="menu-drawer-container"
+    >
+      <summary
+        class="header__icon header__icon--menu link focus-inset"
+        aria-label="{{ 'sections.header.menu' | t }}"
+      >
+        <span>
+          {{- 'icon-hamburger.svg' | inline_asset_content -}}
+          {{- 'icon-close.svg'     | inline_asset_content -}}
+        </span>
+      </summary>
+      <div
+        id="menu-drawer"
+        class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}"
+      >
+        <div class="menu-drawer__inner-container">
+              {%- comment -%} — LOGO GOES HERE — {%- endcomment -%}
+    <div class="sidebar-drawer__logo">
+      <a href="{{ shop.url }}" class="link focus-inset" aria-label="{{ shop.name }}">
+        {% render 'haywood-logo' %}
+      </a>
+    </div>
+          <div class="menu-drawer__navigation-container">
+            <nav class="menu-drawer__navigation" aria-label="Main menu">
+              <ul class="menu-drawer__menu has-submenu list-menu" role="list">
+                {%- for link in linklists[section.settings.menu].links -%}
+                  <li>
+                    {%- if link.links != blank -%}
+                      <details open id="Details-menu-drawer-menu-item-{{ forloop.index }}">
+                        <summary
+                          class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
+                          id="HeaderDrawer-{{ link.handle }}"
+                        >
+                          {{ link.title | escape }}
+                          <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+                          <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+                        </summary>
+                        <div class="menu-drawer__submenu has-submenu gradient motion-reduce" tabindex="-1">
+                          <div class="menu-drawer__inner-submenu">
+                            <button class="menu-drawer__close-button link link--text focus-inset">
+                              <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+                              {{ link.title | escape }}
+                            </button>
+                            <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                              {%- for childlink in link.links -%}
+                                <li>
+                                  <a
+                                    href="{{ childlink.url }}"
+                                    class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                    {% if childlink.current %} aria-current="page"{% endif %}
+                                  >
+                                    {{ childlink.title | escape }}
+                                  </a>
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          </div>
+                        </div>
+                      </details>
+                    {%- else -%}
+                      <a
+                        href="{{ link.url }}"
+                        class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"
+                        {% if link.current %} aria-current="page"{% endif %}
+                      >
+                        {{ link.title | escape }}
+                      </a>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </nav>
+            <!-- (utility links / localization / social as in your original code) -->
+          </div>
+          {% comment %}
+  Secondary nav — loops over section.settings.sidebar_second_menu.links
+{% endcomment %}
+{% if section.settings.sidebar_second_menu != blank %}
+  <nav class="menu-drawer__secondary-navigation" aria-label="More links">
+    <ul class="menu-drawer__secondary-menu list-menu" role="list">
+      {% for link in linklists[section.settings.sidebar_second_menu].links %}
+        <li class="menu-drawer__secondary-item">
+          <a href="{{ link.url }}"
+             class="menu-drawer__secondary-link link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"
+             {% if link.current %}aria-current="page"{% endif %}>
+            {{ link.title | escape }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}
+
+        </div>
+      </div>
+      <div class="drawer__overlay" data-drawer-close="menu-drawer"></div>
+    </details>
+  </header-drawer>
+</div>

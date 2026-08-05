@@ -1,0 +1,110 @@
+{% comment %}
+  breadcrumbs.liquid
+  • literal “Home” (no missing-translation)
+  • show current collection for collection & product pages
+  • handle gift cards separately
+  • if on product with no URL context, pick the first real collection (exclude “all”)
+{% endcomment %}
+
+{% assign home_name = 'Home' %}
+{% assign home_url  = routes.root_url %}
+
+{%- comment -%}
+  figure out which collection to show:
+  • on a collection page, use that collection
+  • on a product page, use the URL’s collection if present
+    otherwise pick the first product.collections entry that isn’t “all”
+{%- endcomment -%}
+{% assign crumb_collection = nil %}
+
+{% if request.page_type == 'collection' and collection %}
+  {% assign crumb_collection = collection %}
+{% elsif request.page_type == 'product' %}
+  {% if collection %}
+    {%- comment -%}via /collections/:handle/products/:product{%- endcomment -%}
+    {% assign crumb_collection = collection %}
+  {% else %}
+    {%- comment -%}fallback: pick first product collection ≠ “all”{%- endcomment -%}
+    {% assign crumb_collection = product.collections | reject: "handle", "all" | first %}
+  {% endif %}
+{% endif %}
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol class="breadcrumbs__list" role="list">
+    <li class="breadcrumbs__item">
+      <a href="{{ home_url }}" class="breadcrumbs__link">{{ home_name }}</a>
+    </li>
+
+    {%- if request.page_type == 'blog' -%}
+      <li class="breadcrumbs__item">
+        <span class="breadcrumbs__current">{{ blog.title }}</span>
+      </li>
+
+    {%- elsif request.page_type == 'article' -%}
+      <li class="breadcrumbs__item">
+        <a href="{{ blog.url }}" class="breadcrumbs__link">{{ blog.title }}</a>
+      </li>
+      <li class="breadcrumbs__item">
+        <span class="breadcrumbs__current">{{ article.title }}</span>
+      </li>
+
+    {%- elsif request.page_type == 'product' and product.gift_card? -%}
+      <!-- Special case for gift cards -->
+      <li class="breadcrumbs__item">
+        <span class="breadcrumbs__current">{{ product.title }}</span>
+      </li>
+
+    {%- elsif request.page_type == 'collection' and collection -%}
+      {%- if current_tags == blank -%}
+        <!-- Collection page with no tags -->
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current">{{ collection.title }}</span>
+        </li>
+      {%- else -%}
+        <!-- Tagged collection: Collection link + Tag as current -->
+        <li class="breadcrumbs__item">
+          <a href="{{ collection.url }}" class="breadcrumbs__link">{{ collection.title }}</a>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current">{{ current_tags | join: ', ' }}</span>
+        </li>
+      {%- endif -%}
+     {%- elsif request.page_type == 'product' and crumb_collection == nil -%}
+  <!-- Product opened without a collection context (or only in 'all') -->
+  <li class="breadcrumbs__item">
+    <span class="breadcrumbs__current">{{ product.title }}</span>
+  </li>
+
+    {%- elsif crumb_collection -%}
+      <li class="breadcrumbs__item">
+        <a href="{{ crumb_collection.url }}" class="breadcrumbs__link">{{ crumb_collection.title }}</a>
+      </li>
+      {%- if request.page_type == 'product' -%}
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current">{{ product.title }}</span>
+        </li>
+      {%- endif -%}
+
+    {%- elsif request.page_type == 'page' -%}
+      <li class="breadcrumbs__item">
+        <span class="breadcrumbs__current">{{ page.title }}</span>
+      </li>
+
+    {%- elsif request.page_type == 'list-collections' -%}
+      <li class="breadcrumbs__item">
+        <span class="breadcrumbs__current">{{ 'collections.general.all_collections' | t }}</span>
+      </li>
+
+    {%- elsif request.path == '/cart' -%}
+  <li class="breadcrumbs__item">
+    <span class="breadcrumbs__current">Your Shopping Cart</span>
+  </li>
+
+
+    {%- elsif request.page_type == 'search' -%}
+      <li class="breadcrumbs__item">
+        <span class="breadcrumbs__current">{{ 'general.search.search' | t }}</span>
+      </li>
+    {%- endif -%}
+  </ol>
+</nav>

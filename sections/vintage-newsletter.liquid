@@ -1,0 +1,89 @@
+{% comment %}
+  sections/vintage-newsletter.liquid
+  “Vintage Newsletter” — subscribe form styled just like your old theme
+{% endcomment %}
+
+<section id="shopify-section-{{ section.id }}" class="vintage-newsletter-section">
+  <div class="vintage-newsletter__inner">
+    {% if section.settings.section_title != blank %}
+      <label
+        for="Email-{{ section.id }}"
+        class="vintage-newsletter__label"
+      >
+        {{ section.settings.section_title | escape }}
+      </label>
+    {% endif %}
+
+    {% if section.settings.subheading != blank %}
+      <p class="vintage-newsletter__subheading">
+        {{ section.settings.subheading | escape }}
+      </p>
+    {% endif %}
+
+    <div class="vintage-newsletter__form-column">
+      {% form 'customer' %}
+        {% if form.posted_successfully? %}
+          <p class="vintage-newsletter__confirmation">
+            {{ 'newsletter.success' | t }}
+          </p>
+        {% else %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+
+          <div class="vintage-newsletter__fields">
+            <input
+              type="email"
+              name="contact[email]"
+              id="Email-{{ section.id }}"
+              class="vintage-newsletter__input"
+              value="{% if customer.email %}{{ customer.email }}{% endif %}"
+              placeholder="Email Address"
+              autocorrect="off"
+              autocapitalize="off"
+              required
+            >
+            <button
+              type="submit"
+              name="commit"
+              id="Subscribe-{{ section.id }}"
+              class="vintage-newsletter__button"
+            >
+              <span>Submit</span>
+            </button>
+          </div>
+
+          {% if form.errors %}
+            <div class="vintage-newsletter__errors">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Vintage Newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Heading",
+      "default": "Subscribe to our newsletter"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Any customers who sign up will have an account created for them in Shopify."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vintage Newsletter",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}

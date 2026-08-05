@@ -1,0 +1,112 @@
+<!-- sections/fitter.liquid -->
+<section class="fitter-wrapper">
+  <div class="fitter-text">
+    <h1>Become a Fitter</h1>
+    <p>
+      Haywood Golf is now welcoming dealer applications! We are excited to collaborate with fitters, build shops, and retailers who are committed to providing premium equipment and expert club-building services. Simply complete the form below, and our sales team will promptly follow up with the full application form.
+    </p>
+  </div>
+
+  <div class="fitter-form">
+    {% form 'contact' %}
+      {% if form.posted_successfully? %}
+        <p class="form--success">{{ 'contact.form.post_success' | t }}</p>
+      {% endif %}
+      {{ form.errors | default_errors }}
+
+      <div class="fitter-grid">
+        <input type="text" name="contact[first_name]" placeholder="First Name" required>
+        <input type="text" name="contact[last_name]" placeholder="Last Name" required>
+        <input type="text" name="contact[business_name]" placeholder="Business Name" required>
+        <input type="text" name="contact[country]" placeholder="Country" required>
+        <input type="email" name="contact[email]" placeholder="Email" required>
+        <input type="url" name="contact[website]" placeholder="Website">
+      </div>
+
+      <fieldset class="fitter-fieldset">
+        <legend>Business Type</legend>
+        {% assign business_types = "Club Fitter,Club Builder with Shop,Certified Teacher (individual),Golf Academy,Golf Course / Country Club" | split: "," %}
+        {% for type in business_types %}
+          <label>
+            <input type="radio" name="contact[business_type]" value="{{ type }}" required> {{ type }}
+          </label>
+        {% endfor %}
+      </fieldset>
+
+      <textarea name="contact[message]" placeholder="Please feel free to provide any details about your business" rows="5" required></textarea>
+      <input type="submit" value="Apply" class="fitter-submit">
+    {% endform %}
+  </div>
+</section>
+
+<style>
+.fitter-wrapper {
+  max-width:100%;
+}
+@media (min-width: 990px) {
+  .fitter-wrapper {
+    max-width:80%;
+  }
+}
+.fitter-text {
+  max-width: 960px;
+  margin: 0 auto 2.5rem auto;
+}
+.fitter-form {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.fitter-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .fitter-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.fitter-form input[type="text"],
+.fitter-form input[type="email"],
+.fitter-form input[type="url"],
+.fitter-form textarea {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  width: 100%;
+  font-size: 1.6rem;
+}
+.fitter-fieldset {
+  border: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+.fitter-fieldset legend {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.fitter-fieldset label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.fitter-fieldset input[type="radio"] {
+  appearance: auto;
+  margin-right: 8px;
+}
+.fitter-submit {
+    background: #065f46;
+    color: white;
+    font-weight: bold;
+    padding: 1.8rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    font-size: 1.8rem;
+    border-radius: 999px;
+}
+div.fitter-text > h1 {
+font-weight: bold;}
+</style>

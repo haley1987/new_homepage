@@ -1,0 +1,76 @@
+{% comment %}
+  sections/vintage-image-text.liquid
+  “Vintage Image with Text” — simple 2-col, edge and invert options
+{% endcomment %}
+
+<section id="shopify-section-{{ section.id }}" class="vintage-image-text">
+  <div class="vintage-image-text__wrapper
+              {% if section.settings.invert %}vintage-image-text__wrapper--reverse{% endif %}
+              vintage-image-text__wrapper--edge-{{ section.settings.image_edge }}">
+    <!-- IMAGE COLUMN -->
+    <div class="vintage-image-text__media">
+      {% if section.settings.image != blank %}
+<img
+  src="{{ section.settings.image | image_url: width: 600 }}"
+  alt="{{ section.settings.heading }}"
+  class="vintage-image-text__img" />
+
+      {% endif %}
+    </div>
+
+    <!-- TEXT COLUMN -->
+    <div class="vintage-image-text__content">
+      {% if section.settings.eyebrow != blank %}
+        <p class="vintage-image-text__eyebrow">
+          {{ section.settings.eyebrow }}
+        </p>
+      {% endif %}
+
+      {% if section.settings.heading %}
+        <h2 class="vintage-image-text__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.description %}
+        <p class="vintage-image-text__description">
+          {{ section.settings.description | newline_to_br }}
+        </p>
+      {% endif %}
+
+      {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+        <a
+          href="{{ section.settings.button_link }}"
+          class="vintage-image-text__button">
+          {{ section.settings.button_label }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Vintage Image with Text",
+  "settings": [
+    { "type":"image_picker", "id":"image",         "label":"Image"                  },
+    { "type":"radio",        "id":"image_edge",    "label":"Image Edge",
+      "options":[
+        {"value":"top",    "label":"Touch Top Edge"},
+        {"value":"bottom", "label":"Touch Bottom Edge"},
+        {"value":"none",   "label":"No Edge"      }
+      ],
+      "default":"none"
+    },
+    { "type":"checkbox",     "id":"invert",        "label":"Invert image/text"      },
+    { "type":"text",         "id":"eyebrow",       "label":"Eyebrow text",    "default":"Text" },
+    { "type":"text",         "id":"heading",       "label":"Heading",         "default":"Heading" },
+    { "type":"textarea",     "id":"description",   "label":"Description",     "default":"Description" },
+    { "type":"text",         "id":"button_label",  "label":"Button label",    "default":"Shop Now" },
+    { "type":"url",          "id":"button_link",   "label":"Button link",     "default":"/" }
+  ],
+  "presets": [
+    { "name":"Vintage Image with Text", "category":"Image" }
+  ]
+}
+{% endschema %}

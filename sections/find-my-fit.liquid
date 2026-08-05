@@ -1,0 +1,1484 @@
+{%- comment -%}
+  Haywood Find Your Fit — Brand-aligned visual rebuild
+  ----------------------------------------------------
+  Logic, catalog, scoring, email flow, and Liquid section settings preserved as-is.
+  Visual system rewritten: heavy modern grotesk type, near-black + cream + gold,
+  segmented controls, SVG flight/miss icons, gold-accent results, no rounded corners.
+
+  FONT NOTE: Set --hyq-font below. To match the Rep Haywood page exactly, replace
+  the @import line and the --hyq-font variable with your licensed font (e.g. Söhne,
+  National 2, Founders Grotesk). Inter ships free as a close visual match.
+{%- endcomment -%}
+
+<div class="hyq" id="hyq-root-{{ section.id }}">
+  <div class="hyq-hero {% if section.settings.hero_image != blank %}hyq-hero-img{% endif %}" {% if section.settings.hero_image != blank %}style="--hyq-hero-img: url('{{ section.settings.hero_image | image_url: width: 2000 }}')"{% endif %}>
+    <div class="hyq-eyebrow">
+      <span class="hyq-rule"></span>
+      <span class="hyq-eyebrow-text">Online fitting</span>
+    </div>
+    <h1 class="hyq-display">
+      <span class="hyq-line">Your specs.</span>
+      <span class="hyq-line hyq-strike"><span class="hyq-strike-text">Guesswork.</span></span>
+      <span class="hyq-line">Our build.</span>
+    </h1>
+    <p class="hyq-lede">Six questions. One configuration built to your swing — head, shaft, length, lie, grip. Honest inputs in, dialled-in build out.</p>
+    <p class="hyq-disc">
+      A solid starting point. For a precise fit, visit
+      <a href="/pages/booking" target="_blank" rel="noopener">Fitting HQ</a>, a
+      <a href="/pages/store-locator" target="_blank" rel="noopener">Fitting Dealer</a>, or
+      <a href="mailto:support@haywoodgolf.com">email us</a>.
+    </p>
+    <button class="hyq-restart" id="restart-btn-{{ section.id }}" title="Restart" aria-label="Restart Quiz">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 5V2L7 7l5 5V9c3.31 0 6 2.69 6 6 0 1.01-.25 1.96-.7 2.8l1.48 1.48A7.96 7.96 0 0020 15c0-4.42-3.58-8-8-8zM6.7 8.2A7.96 7.96 0 004 15c0 4.42 3.58 8 8 8v-3c-3.31 0-6-2.69-6-6 0-1.01.25-1.96.7-2.8L5.22 9.72 6.7 8.2z" fill="currentColor"/></svg>
+      <span>Restart</span>
+    </button>
+  </div>
+
+  <div class="hyq-card hyq-wizard" id="hyq-wizard-{{ section.id }}"></div>
+  <div class="hyq-results" id="hyq-results-{{ section.id }}" style="display:none"></div>
+</div>
+
+<style>
+  /* === FONT IMPORT — swap with licensed Haywood font when ready === */
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+  #hyq-root-{{ section.id }}{
+    --hyq-ink:#0A0A0A;
+    --hyq-cream:#F4EDE0;
+    --hyq-cream-dim:#E8DFD0;
+    --hyq-cream-mute:#D9CFBF;
+    --hyq-gold:#c6a572;
+    --hyq-gold-soft:rgba(198,165,114,0.18);
+    --hyq-muted:#6B7785;
+    --hyq-muted-2:#4A5562;
+    --hyq-bg:#FFFFFF;
+    --hyq-font-body:'DM Sans','Helvetica Neue',Arial,sans-serif;
+    --hyq-font-display:'Space Grotesk','DM Sans','Helvetica Neue',Arial,sans-serif;
+    --hyq-font:var(--hyq-font-body);
+    --hyq-track:0.18em;
+    --hyq-track-tight:0.10em;
+  }
+
+  #hyq-root-{{ section.id }}, #hyq-root-{{ section.id }} *{
+    font-family:var(--hyq-font);
+    box-sizing:border-box;
+  }
+
+  #hyq-root-{{ section.id }} a,
+  #hyq-root-{{ section.id }} a:link,
+  #hyq-root-{{ section.id }} a:visited,
+  #hyq-root-{{ section.id }} a:hover,
+  #hyq-root-{{ section.id }} a:active{
+    display:inline !important;
+    list-style:none !important;
+    margin:0 !important;
+    padding:0 !important;
+    text-indent:0 !important;
+  }
+  #hyq-root-{{ section.id }} a::before,
+  #hyq-root-{{ section.id }} a::marker{
+    display:none !important;
+    content:none !important;
+  }
+
+  #hyq-root-{{ section.id }} .hyq-display,
+  #hyq-root-{{ section.id }} .hyq-step-title,
+  #hyq-root-{{ section.id }} .hyq-persona-title,
+  #hyq-root-{{ section.id }} .hyq-model-name,
+  #hyq-root-{{ section.id }} .hyq-shaft-name,
+  #hyq-root-{{ section.id }} .hyq-bignum,
+  #hyq-root-{{ section.id }} .hyq-fit-pct{
+    font-family:var(--hyq-font-display);
+    font-weight:700;
+  }
+
+  #hyq-root-{{ section.id }}{max-width:1100px;margin:0 auto;padding:0;}
+
+  /* ============ HERO ============ */
+  #hyq-root-{{ section.id }} .hyq-hero{
+    position:relative;
+    padding:64px 40px 44px;
+    background:var(--hyq-ink);
+    color:var(--hyq-cream);
+    overflow:hidden;
+  }
+  #hyq-root-{{ section.id }} .hyq-hero.hyq-hero-img::before{
+    content:"";position:absolute;inset:0;
+    background-image:var(--hyq-hero-img);
+    background-size:cover;background-position:center right;
+    opacity:0.55;filter:contrast(1.05);
+  }
+  #hyq-root-{{ section.id }} .hyq-hero.hyq-hero-img::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.7) 40%, rgba(10,10,10,0.3) 75%, rgba(10,10,10,0.45) 100%);
+  }
+  #hyq-root-{{ section.id }} .hyq-hero > *{position:relative;z-index:1;}
+
+  #hyq-root-{{ section.id }} .hyq-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:32px;}
+  #hyq-root-{{ section.id }} .hyq-rule{display:inline-block;width:24px;height:1px;background:var(--hyq-gold);}
+  #hyq-root-{{ section.id }} .hyq-eyebrow-text{
+    font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--hyq-gold);font-weight:600;
+  }
+
+  #hyq-root-{{ section.id }} .hyq-display{
+    font-size:clamp(40px, 7vw, 72px);
+    line-height:0.95;font-weight:700;
+    letter-spacing:-0.04em;margin:0 0 24px;
+    color:var(--hyq-cream);
+  }
+  #hyq-root-{{ section.id }} .hyq-display .hyq-line{display:block;}
+  #hyq-root-{{ section.id }} .hyq-strike{color:rgba(244,237,224,0.35);}
+  #hyq-root-{{ section.id }} .hyq-strike-text{
+    position:relative;display:inline-block;
+  }
+  #hyq-root-{{ section.id }} .hyq-strike-text::after{
+    content:"";position:absolute;left:-2%;right:-2%;top:52%;height:2px;background:var(--hyq-gold);
+  }
+
+  #hyq-root-{{ section.id }} .hyq-lede{
+    font-size:15px;line-height:1.55;
+    color:rgba(244,237,224,0.7);
+    margin:0 0 16px;max-width:520px;font-weight:400;
+  }
+  #hyq-root-{{ section.id }} .hyq-disc{
+    font-size:12px;line-height:1.5;
+    color:rgba(244,237,224,0.5);margin:0;max-width:520px;
+  }
+  #hyq-root-{{ section.id }} .hyq-disc a,
+  #hyq-root-{{ section.id }} .hyq-disc a:link,
+  #hyq-root-{{ section.id }} .hyq-disc a:visited,
+  #hyq-root-{{ section.id }} .hyq-disc a:hover,
+  #hyq-root-{{ section.id }} .hyq-disc a:active{
+    color:rgba(244,237,224,0.95) !important;
+    text-decoration:underline !important;
+    text-decoration-color:rgba(198,165,114,0.7) !important;
+    text-underline-offset:3px !important;
+    opacity:1 !important;
+    background:transparent !important;
+  }
+
+  #hyq-root-{{ section.id }} .hyq-restart{
+    position:absolute;top:24px;right:32px;z-index:2;
+    display:inline-flex;align-items:center;gap:8px;
+    background:transparent;border:1px solid rgba(244,237,224,0.3);
+    color:rgba(244,237,224,0.8);
+    padding:8px 14px;font-size:10px;font-weight:700;
+    letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;
+    transition:all 0.15s ease;
+  }
+  #hyq-root-{{ section.id }} .hyq-restart:hover{
+    border-color:var(--hyq-gold);color:var(--hyq-gold);
+  }
+
+  /* ============ CARD WRAPPER ============ */
+  #hyq-root-{{ section.id }} .hyq-card{
+    background:var(--hyq-bg);
+  }
+  #hyq-root-{{ section.id }} .hyq-wizard{padding:0;}
+
+  /* ============ PROGRESS BAR ============ */
+  #hyq-root-{{ section.id }} .hyq-progress{
+    display:flex;align-items:flex-start;gap:0;
+    padding:22px 40px;border-bottom:1px solid var(--hyq-cream-dim);
+  }
+  #hyq-root-{{ section.id }} .hyq-progress-step{
+    flex:1;display:flex;flex-direction:column;gap:8px;
+  }
+  #hyq-root-{{ section.id }} .hyq-progress-step + .hyq-progress-step{margin-left:12px;}
+  #hyq-root-{{ section.id }} .hyq-progress-bar{
+    width:100%;height:3px;background:var(--hyq-cream-dim);
+    transition:background 0.2s ease;
+  }
+  #hyq-root-{{ section.id }} .hyq-progress-step.is-done .hyq-progress-bar{background:var(--hyq-ink);}
+  #hyq-root-{{ section.id }} .hyq-progress-step.is-current .hyq-progress-bar{background:var(--hyq-gold);}
+  #hyq-root-{{ section.id }} .hyq-progress-label{
+    font-size:9px;letter-spacing:0.18em;text-transform:uppercase;
+    font-weight:700;color:var(--hyq-cream-mute);
+  }
+  #hyq-root-{{ section.id }} .hyq-progress-step.is-done .hyq-progress-label,
+  #hyq-root-{{ section.id }} .hyq-progress-step.is-current .hyq-progress-label{color:var(--hyq-ink);}
+
+  /* ============ STEP CONTENT ============ */
+  #hyq-root-{{ section.id }} .hyq-step{padding:40px;display:none;}
+  #hyq-root-{{ section.id }} .hyq-step.is-show{display:block;animation:hyqFade 0.18s ease-in;}
+  @keyframes hyqFade{from{opacity:0.4;transform:translateY(4px);}to{opacity:1;transform:none;}}
+
+  #hyq-root-{{ section.id }} .hyq-step-title{
+    font-size:clamp(26px, 4vw, 40px);
+    font-weight:700;letter-spacing:-0.025em;line-height:1;
+    color:var(--hyq-ink);margin:0 0 32px;
+  }
+
+  #hyq-root-{{ section.id }} .hyq-field{margin-bottom:32px;}
+  #hyq-root-{{ section.id }} .hyq-field-label{
+    display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  }
+  #hyq-root-{{ section.id }} .hyq-field-label-rule{width:16px;height:1px;background:var(--hyq-gold);}
+  #hyq-root-{{ section.id }} .hyq-field-label-text{
+    font-size:10px;letter-spacing:var(--hyq-track);text-transform:uppercase;
+    color:var(--hyq-ink);font-weight:700;
+  }
+
+  /* Big numeric input */
+  #hyq-root-{{ section.id }} .hyq-bignum-wrap{
+    display:flex;align-items:baseline;gap:12px;
+    border-bottom:2px solid var(--hyq-ink);padding-bottom:10px;max-width:340px;
+  }
+  #hyq-root-{{ section.id }} .hyq-bignum{
+    font-size:44px;font-weight:700;color:var(--hyq-ink);
+    border:none;outline:none;width:140px;background:transparent;padding:0;
+    letter-spacing:-0.03em;font-family:var(--hyq-font);
+  }
+  #hyq-root-{{ section.id }} .hyq-bignum-suffix{
+    font-size:13px;color:var(--hyq-muted);font-weight:500;
+    letter-spacing:0.05em;text-transform:uppercase;
+  }
+
+  /* Standard text input */
+  #hyq-root-{{ section.id }} .hyq-input{
+    width:100%;border:none;border-bottom:2px solid var(--hyq-ink);
+    background:transparent;padding:10px 0;
+    font-size:18px;font-weight:600;color:var(--hyq-ink);
+    font-family:var(--hyq-font);outline:none;letter-spacing:-0.01em;
+  }
+  #hyq-root-{{ section.id }} .hyq-input::placeholder{color:var(--hyq-cream-mute);font-weight:400;}
+  #hyq-root-{{ section.id }} .hyq-input:focus{border-bottom-color:var(--hyq-gold);}
+
+  /* Native select styled */
+  #hyq-root-{{ section.id }} .hyq-select{
+    width:100%;border:2px solid var(--hyq-ink);background:var(--hyq-bg);
+    padding:14px 16px;font-size:14px;font-weight:600;color:var(--hyq-ink);
+    font-family:var(--hyq-font);outline:none;letter-spacing:0.02em;
+    appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230A0A0A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;
+  }
+
+  /* Segmented control (joined buttons) */
+  #hyq-root-{{ section.id }} .hyq-seg{
+    display:flex;border:2px solid var(--hyq-ink);overflow:hidden;max-width:520px;
+  }
+  #hyq-root-{{ section.id }} .hyq-seg-btn{
+    flex:1;padding:14px 8px;background:var(--hyq-bg);color:var(--hyq-ink);
+    border:none;font-size:11px;font-weight:700;cursor:pointer;
+    letter-spacing:var(--hyq-track-tight);text-transform:uppercase;
+    font-family:var(--hyq-font);transition:all 0.12s ease;
+  }
+  #hyq-root-{{ section.id }} .hyq-seg-btn + .hyq-seg-btn{border-left:2px solid var(--hyq-ink);}
+  #hyq-root-{{ section.id }} .hyq-seg-btn:hover{background:var(--hyq-cream);}
+  #hyq-root-{{ section.id }} .hyq-seg-btn.is-active{background:var(--hyq-ink);color:var(--hyq-cream);}
+
+  /* Tile grid for visual choices (flight, miss) */
+  #hyq-root-{{ section.id }} .hyq-tiles{
+    display:grid;gap:10px;
+  }
+  #hyq-root-{{ section.id }} .hyq-tiles.cols-3{grid-template-columns:repeat(3,1fr);max-width:520px;}
+  #hyq-root-{{ section.id }} .hyq-tiles.cols-5{grid-template-columns:repeat(5,1fr);max-width:600px;}
+  #hyq-root-{{ section.id }} .hyq-tile{
+    border:2px solid var(--hyq-cream-dim);background:var(--hyq-bg);
+    padding:16px 10px;cursor:pointer;text-align:center;
+    transition:all 0.12s ease;font-family:var(--hyq-font);
+  }
+  #hyq-root-{{ section.id }} .hyq-tile:hover{border-color:var(--hyq-muted);}
+  #hyq-root-{{ section.id }} .hyq-tile.is-active{
+    border-color:var(--hyq-ink);background:var(--hyq-cream);
+  }
+  #hyq-root-{{ section.id }} .hyq-tile svg{display:block;margin:0 auto 8px;}
+  #hyq-root-{{ section.id }} .hyq-tile-label{
+    font-size:10px;font-weight:700;color:var(--hyq-ink);
+    letter-spacing:var(--hyq-track-tight);text-transform:uppercase;
+  }
+
+  /* Chip row (used for score brackets, glove sizes) */
+  #hyq-root-{{ section.id }} .hyq-chips{display:flex;flex-wrap:wrap;gap:8px;}
+  #hyq-root-{{ section.id }} .hyq-chip{
+    padding:10px 14px;border:2px solid var(--hyq-cream-dim);background:var(--hyq-bg);
+    color:var(--hyq-ink);font-size:11px;font-weight:700;
+    letter-spacing:var(--hyq-track-tight);text-transform:uppercase;
+    cursor:pointer;font-family:var(--hyq-font);transition:all 0.12s ease;
+  }
+  #hyq-root-{{ section.id }} .hyq-chip:hover{border-color:var(--hyq-muted);}
+  #hyq-root-{{ section.id }} .hyq-chip.is-active{
+    background:var(--hyq-ink);color:var(--hyq-cream);border-color:var(--hyq-ink);
+  }
+
+  /* Two-column grid */
+  #hyq-root-{{ section.id }} .hyq-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+
+  /* Checkbox */
+  #hyq-root-{{ section.id }} .hyq-check{
+    display:flex;align-items:center;gap:10px;cursor:pointer;
+    font-size:13px;color:var(--hyq-muted-2);
+  }
+  #hyq-root-{{ section.id }} .hyq-check input[type="checkbox"]{
+    appearance:auto;-webkit-appearance:auto;
+    width:18px;height:18px;margin:0;accent-color:var(--hyq-ink);
+  }
+
+  /* Action row */
+  #hyq-root-{{ section.id }} .hyq-actions{
+    display:flex;gap:10px;padding-top:24px;
+    border-top:1px solid var(--hyq-cream-dim);margin-top:32px;flex-wrap:wrap;
+  }
+  #hyq-root-{{ section.id }} .hyq-btn{
+    padding:16px 28px;border:2px solid var(--hyq-ink);
+    font-size:11px;font-weight:800;cursor:pointer;
+    letter-spacing:0.15em;text-transform:uppercase;
+    font-family:var(--hyq-font);transition:all 0.12s ease;
+  }
+  #hyq-root-{{ section.id }} .hyq-btn-primary{
+    background:var(--hyq-gold);color:var(--hyq-ink);border-color:var(--hyq-gold);
+    flex:1;max-width:280px;
+  }
+  #hyq-root-{{ section.id }} .hyq-btn-primary:hover{background:var(--hyq-ink);color:var(--hyq-gold);}
+  #hyq-root-{{ section.id }} .hyq-btn-ghost{background:transparent;color:var(--hyq-ink);}
+  #hyq-root-{{ section.id }} .hyq-btn-ghost:hover{background:var(--hyq-ink);color:var(--hyq-cream);}
+  #hyq-root-{{ section.id }} .hyq-btn[disabled]{opacity:0.4;cursor:not-allowed;}
+
+  /* ============ RESULTS ============ */
+  #hyq-root-{{ section.id }} .hyq-results{
+    background:var(--hyq-cream);padding:0 40px 48px;
+  }
+  #hyq-root-{{ section.id }} .hyq-results-divider{
+    padding:40px 0 24px;text-align:center;
+  }
+  #hyq-root-{{ section.id }} .hyq-results-divider-inner{
+    display:inline-flex;align-items:center;gap:12px;
+  }
+  #hyq-root-{{ section.id }} .hyq-results-divider-rule{width:32px;height:1px;background:var(--hyq-gold);}
+  #hyq-root-{{ section.id }} .hyq-results-divider-text{
+    font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--hyq-gold);font-weight:700;
+  }
+
+  /* Persona spotlight */
+  #hyq-root-{{ section.id }} .hyq-persona{
+    background:var(--hyq-ink);color:var(--hyq-cream);
+    padding:32px;margin-bottom:24px;
+  }
+  #hyq-root-{{ section.id }} .hyq-persona-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  #hyq-root-{{ section.id }} .hyq-persona-eyebrow-rule{width:20px;height:1px;background:var(--hyq-gold);}
+  #hyq-root-{{ section.id }} .hyq-persona-eyebrow-text{
+    font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--hyq-gold);font-weight:700;
+  }
+  #hyq-root-{{ section.id }} .hyq-persona-title{
+    font-size:28px;font-weight:700;margin:0 0 14px;
+    line-height:1.05;letter-spacing:-0.025em;color:var(--hyq-cream);
+  }
+  #hyq-root-{{ section.id }} .hyq-persona-body{
+    font-size:14px;line-height:1.55;margin:0;
+    color:rgba(244,237,224,0.7);max-width:560px;font-weight:400;
+  }
+
+  /* Model card */
+  #hyq-root-{{ section.id }} .hyq-model{
+    background:var(--hyq-bg);margin-bottom:28px;border:1px solid var(--hyq-cream-dim);
+    display:grid;grid-template-columns:260px 1fr;
+  }
+  #hyq-root-{{ section.id }} .hyq-model-img-wrap{
+    background:var(--hyq-cream);aspect-ratio:1;
+    display:flex;align-items:center;justify-content:center;
+    padding:32px;position:relative;
+  }
+  #hyq-root-{{ section.id }} .hyq-model-img{
+    width:100%;height:100%;object-fit:contain;
+  }
+  #hyq-root-{{ section.id }} .hyq-model-img-fallback{
+    width:100%;height:100%;background:var(--hyq-cream-dim);display:flex;align-items:center;justify-content:center;
+    font-size:10px;color:var(--hyq-muted);letter-spacing:0.18em;text-transform:uppercase;font-weight:700;
+  }
+  #hyq-root-{{ section.id }} .hyq-model-watermark{display:none;}
+  #hyq-root-{{ section.id }} .hyq-model-body{padding:32px;}
+  #hyq-root-{{ section.id }} .hyq-model-head{
+    display:flex;align-items:center;
+    gap:14px;margin-bottom:4px;flex-wrap:wrap;
+  }
+  #hyq-root-{{ section.id }} .hyq-model-eyebrow{display:flex;align-items:center;gap:10px;}
+  #hyq-root-{{ section.id }} .hyq-model-eyebrow-rule{width:16px;height:1px;background:var(--hyq-gold);}
+  #hyq-root-{{ section.id }} .hyq-model-eyebrow-text{
+    font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--hyq-gold);font-weight:700;
+  }
+  #hyq-root-{{ section.id }} .hyq-best-badge{
+    background:var(--hyq-gold);color:var(--hyq-ink);
+    padding:5px 12px;font-size:9px;font-weight:800;
+    letter-spacing:0.15em;text-transform:uppercase;
+  }
+  #hyq-root-{{ section.id }} .hyq-model-name{
+    font-size:32px;font-weight:700;color:var(--hyq-ink);
+    margin:12px 0 20px;letter-spacing:-0.03em;line-height:1;
+  }
+  #hyq-root-{{ section.id }} .hyq-spec-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+    padding:20px 0;border-top:1px solid var(--hyq-cream-dim);
+    border-bottom:1px solid var(--hyq-cream-dim);margin-bottom:22px;
+  }
+  #hyq-root-{{ section.id }} .hyq-spec{padding:0;}
+  #hyq-root-{{ section.id }} .hyq-spec-label{
+    font-size:9px;letter-spacing:var(--hyq-track);text-transform:uppercase;
+    color:var(--hyq-muted);font-weight:700;margin-bottom:6px;
+  }
+  #hyq-root-{{ section.id }} .hyq-spec-value{
+    font-size:16px;font-weight:700;color:var(--hyq-ink);letter-spacing:-0.01em;
+  }
+  #hyq-root-{{ section.id }} .hyq-model-ctas{display:flex;gap:18px;flex-wrap:wrap;align-items:center;}
+  #hyq-root-{{ section.id }} .hyq-cta{
+    padding:14px 24px;text-decoration:none;
+    font-size:11px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;
+    transition:all 0.12s ease;display:inline-flex;align-items:center;justify-content:center;
+  }
+  #hyq-root-{{ section.id }} .hyq-cta-primary{background:var(--hyq-ink);color:var(--hyq-cream);border:2px solid var(--hyq-ink);}
+  #hyq-root-{{ section.id }} .hyq-cta-primary:hover{background:var(--hyq-gold);color:var(--hyq-ink);border-color:var(--hyq-gold);}
+  #hyq-root-{{ section.id }} .hyq-cta-ghost{
+    background:transparent;color:var(--hyq-ink);border:none;
+    padding:14px 8px;text-decoration:underline;
+    text-decoration-color:var(--hyq-gold);text-decoration-thickness:1.5px;
+    text-underline-offset:5px;
+  }
+  #hyq-root-{{ section.id }} .hyq-cta-ghost:hover{color:var(--hyq-gold);}
+
+  #hyq-root-{{ section.id }} .hyq-near-note{
+    font-size:12px;color:var(--hyq-muted-2);margin:12px 0 0;
+    padding-left:12px;border-left:2px solid var(--hyq-gold);
+  }
+
+  /* Shaft section */
+  #hyq-root-{{ section.id }} .hyq-shafts-head{display:flex;align-items:center;gap:10px;margin:0 0 16px;}
+  #hyq-root-{{ section.id }} .hyq-shafts-rule{width:24px;height:1px;background:var(--hyq-gold);}
+  #hyq-root-{{ section.id }} .hyq-shafts-title{
+    font-size:11px;font-weight:800;color:var(--hyq-ink);margin:0;
+    letter-spacing:0.22em;text-transform:uppercase;
+  }
+  #hyq-root-{{ section.id }} .hyq-shaft{
+    background:var(--hyq-bg);padding:24px 26px;margin-bottom:10px;
+    border:1px solid var(--hyq-cream-dim);
+  }
+  #hyq-root-{{ section.id }} .hyq-shaft.is-best{border-left:4px solid var(--hyq-gold);}
+  #hyq-root-{{ section.id }} .hyq-shaft-row{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    gap:16px;margin-bottom:12px;
+  }
+  #hyq-root-{{ section.id }} .hyq-shaft-img{
+    width:64px;height:64px;object-fit:contain;background:var(--hyq-cream);
+    border:1px solid var(--hyq-cream-dim);flex-shrink:0;
+  }
+  #hyq-root-{{ section.id }} .hyq-shaft-main{flex:1;min-width:0;}
+  #hyq-root-{{ section.id }} .hyq-shaft-eyebrow{
+    font-size:9px;letter-spacing:0.22em;text-transform:uppercase;
+    font-weight:800;margin-bottom:6px;
+  }
+  #hyq-root-{{ section.id }} .hyq-shaft.is-best .hyq-shaft-eyebrow{color:var(--hyq-gold);}
+  #hyq-root-{{ section.id }} .hyq-shaft:not(.is-best) .hyq-shaft-eyebrow{color:var(--hyq-muted);font-weight:700;}
+  #hyq-root-{{ section.id }} .hyq-shaft-name{
+    font-size:18px;font-weight:700;color:var(--hyq-ink);
+    margin:0 0 10px;letter-spacing:-0.02em;line-height:1.1;
+  }
+  #hyq-root-{{ section.id }} .hyq-shaft.is-best .hyq-shaft-name{font-size:22px;}
+  #hyq-root-{{ section.id }} .hyq-shaft-flex{
+    color:var(--hyq-muted);font-weight:500;font-size:13px;letter-spacing:0;
+  }
+  #hyq-root-{{ section.id }} .hyq-shaft-pills{display:flex;gap:6px;flex-wrap:wrap;}
+  #hyq-root-{{ section.id }} .hyq-pill{
+    padding:4px 10px;font-size:10px;font-weight:700;
+    letter-spacing:var(--hyq-track-tight);text-transform:uppercase;
+    background:var(--hyq-cream);color:var(--hyq-ink);
+  }
+  #hyq-root-{{ section.id }} .hyq-pill.is-stock{background:var(--hyq-gold);color:var(--hyq-ink);font-weight:800;}
+  #hyq-root-{{ section.id }} .hyq-pill.is-upcharge{background:var(--hyq-bg);color:var(--hyq-muted);border:1px solid var(--hyq-cream-mute);}
+  #hyq-root-{{ section.id }} .hyq-fit{text-align:right;flex-shrink:0;}
+  #hyq-root-{{ section.id }} .hyq-fit-pct{
+    font-weight:700;color:var(--hyq-ink);line-height:1;letter-spacing:-0.02em;padding-left:2px;
+  }
+  #hyq-root-{{ section.id }} .hyq-shaft.is-best .hyq-fit-pct{font-size:44px;}
+  #hyq-root-{{ section.id }} .hyq-shaft:not(.is-best) .hyq-fit-pct{font-size:36px;}
+  #hyq-root-{{ section.id }} .hyq-fit-pct .pct{font-size:0.4em;color:var(--hyq-muted);font-weight:700;}
+  #hyq-root-{{ section.id }} .hyq-fit-label{
+    font-size:9px;letter-spacing:var(--hyq-track);text-transform:uppercase;
+    color:var(--hyq-muted);font-weight:700;margin-top:4px;
+  }
+  #hyq-root-{{ section.id }} .hyq-shaft-bar{
+    height:4px;background:var(--hyq-cream);margin:14px 0;overflow:hidden;
+  }
+  #hyq-root-{{ section.id }} .hyq-shaft.is-best .hyq-shaft-bar-fill{background:var(--hyq-gold);}
+  #hyq-root-{{ section.id }} .hyq-shaft:not(.is-best) .hyq-shaft-bar-fill{background:var(--hyq-muted);}
+  #hyq-root-{{ section.id }} .hyq-shaft-bar-fill{height:100%;}
+  #hyq-root-{{ section.id }} .hyq-why{
+    font-size:13px;line-height:1.55;color:var(--hyq-muted-2);
+    margin:0;padding-left:14px;border-left:2px solid var(--hyq-cream-dim);font-weight:400;
+  }
+  #hyq-root-{{ section.id }} .hyq-why-label{
+    font-weight:800;color:var(--hyq-ink);font-size:10px;
+    letter-spacing:0.1em;text-transform:uppercase;display:block;margin-bottom:4px;
+  }
+
+  /* Toast */
+  #hyq-root-{{ section.id }} ~ .hyq-toast,
+  .hyq-toast{
+    position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+    background:var(--hyq-ink, #0A0A0A);color:var(--hyq-cream, #F4EDE0);
+    padding:14px 20px;font-size:12px;font-weight:700;
+    letter-spacing:0.1em;text-transform:uppercase;
+    z-index:9999;opacity:0;animation:hyqToastIn 0.2s ease forwards;
+    border-left:3px solid #c6a572;font-family:'Inter',system-ui,sans-serif;
+  }
+  @keyframes hyqToastIn{from{transform:translateX(-50%) translateY(8px);opacity:0;}to{transform:translateX(-50%) translateY(0);opacity:1;}}
+
+  /* Mobile */
+  @media (max-width:760px){
+    #hyq-root-{{ section.id }} .hyq-hero{padding:36px 24px 28px;}
+    #hyq-root-{{ section.id }} .hyq-restart{top:16px;right:16px;padding:6px 10px;}
+    #hyq-root-{{ section.id }} .hyq-display{font-size:38px;}
+    #hyq-root-{{ section.id }} .hyq-progress{padding:18px 20px;}
+    #hyq-root-{{ section.id }} .hyq-progress-step + .hyq-progress-step{margin-left:6px;}
+    #hyq-root-{{ section.id }} .hyq-progress-label{font-size:8px;letter-spacing:0.12em;}
+    #hyq-root-{{ section.id }} .hyq-step{padding:28px 20px;}
+    #hyq-root-{{ section.id }} .hyq-step-title{font-size:24px;}
+    #hyq-root-{{ section.id }} .hyq-grid-2{grid-template-columns:1fr;gap:18px;}
+    #hyq-root-{{ section.id }} .hyq-tiles.cols-5{grid-template-columns:repeat(3,1fr);}
+    #hyq-root-{{ section.id }} .hyq-results{padding:0 20px 32px;}
+    #hyq-root-{{ section.id }} .hyq-persona{padding:24px 20px;}
+    #hyq-root-{{ section.id }} .hyq-persona-title{font-size:22px;}
+    #hyq-root-{{ section.id }} .hyq-model{grid-template-columns:1fr;margin-bottom:36px;}
+    #hyq-root-{{ section.id }} .hyq-model-img-wrap{aspect-ratio:16/10;}
+    #hyq-root-{{ section.id }} .hyq-model-body{padding:24px 20px;}
+    #hyq-root-{{ section.id }} .hyq-model-name{font-size:26px;}
+    #hyq-root-{{ section.id }} .hyq-spec-grid{grid-template-columns:1fr 1fr;gap:18px 24px;}
+    #hyq-root-{{ section.id }} .hyq-shaft{padding:18px 18px;}
+    #hyq-root-{{ section.id }} .hyq-shaft-row{flex-direction:column;gap:12px;}
+    #hyq-root-{{ section.id }} .hyq-fit{text-align:left;}
+    #hyq-root-{{ section.id }} .hyq-shaft.is-best .hyq-fit-pct{font-size:36px;}
+    #hyq-root-{{ section.id }} .hyq-shaft.is-best .hyq-shaft-name{font-size:18px;}
+  }
+
+</style>
+
+<script>
+  /* ================= CATALOG (TRUE NORTH) — UNCHANGED ================= */
+  window.HAYWOOD_CATALOG = {
+    driver: [
+      {b:'Project X',m:'HZRDUS Gen4 Black 60',id:'px-g4b-60',w:60,flex:['R','S','XS'],L:'low',S:'low',tip:'stiff',mat:'graphite',stock:true},
+      {b:'Project X',m:'HZRDUS Gen4 Black 70',id:'px-g4b-70',w:70,flex:['S','XS'],L:'low',S:'low',tip:'stiff',mat:'graphite',stock:true},
+      {b:'Project X',m:'Denali Blue 50',id:'px-denali-b50',w:50,flex:['SR','R','S'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:true},
+      {b:'Project X',m:'Denali Blue 60',id:'px-denali-b60',w:60,flex:['R','S','XS'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:true},
+      {b:'Project X',m:'Denali Black 60',id:'px-denali-blk60',w:60,flex:['S','XS'],L:'low',S:'low',tip:'stiff',mat:'graphite',stock:true},
+      {b:'Project X',m:'Cypher 2.0',id:'px-cypher2',weights:{L:45,SR:50,R:50,S:55},flex:['L','SR','R','S'],L:'high',S:'high',tip:'soft',mat:'graphite',stock:true},
+      {b:'Fujikura',m:'Vista Pro 45',id:'fuj-vp45',w:45,flex:['L','SR','R'],L:'high',S:'high',tip:'soft',mat:'graphite',stock:true},
+      {b:'Fujikura',m:'Vista Pro 55',id:'fuj-vp55',w:55,flex:['SR','R','S'],L:'high',S:'high',tip:'soft',mat:'graphite',stock:true},
+      {b:'Fujikura',m:'Vista Pro 65',id:'fuj-vp65',w:65,flex:['R','S','XS'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:true},
+      {b:'Fujikura',m:'Ventus TD Red 5 Velocore',id:'fuj-vtr5',weights:{SR:56,R:57,S:58},flex:['SR','R','S'],L:'mid',S:'low',tip:'stiff',mat:'graphite',stock:false},
+      {b:'Fujikura',m:'Ventus TR Blue Velocore 6',id:'fuj-vtblue6',w:60,flex:['R','S','XS'],L:'mid',S:'low',tip:'stiff',mat:'graphite',stock:false},
+      {b:'Fujikura',m:'Ventus TR Black Velocore 6',id:'fuj-vtblack6',w:60,flex:['S','XS'],L:'low',S:'low',tip:'stiff',mat:'graphite',stock:false}
+    ],
+    fairway: [
+      {b:'Project X',m:'HZRDUS Gen4 Black 70',id:'px-g4b-70-fw',w:70,flex:['R','S','XS'],L:'low',S:'low',tip:'stiff',mat:'graphite',stock:true},
+      {b:'Project X',m:'HZRDUS Gen4 Black 80',id:'px-g4b-80-fw',w:80,flex:['S','XS'],L:'low',S:'low',tip:'stiff',mat:'graphite',stock:true},
+      {b:'Project X',m:'Denali Blue 60',id:'px-denali-b60-fw',w:60,flex:['R','S'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:true},
+      {b:'Project X',m:'Denali Blue 70',id:'px-denali-b70-fw',w:70,flex:['S','XS'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:true},
+      {b:'Project X',m:'Denali Black 70',id:'px-denali-blk70-fw',w:70,flex:['S','XS'],L:'low',S:'low',tip:'stiff',mat:'graphite',stock:true},
+      {b:'Project X',m:'Cypher 2.0',id:'px-cypher2-fw',weights:{L:45,A:50,R:50,S:55},flex:['L','A','R','S'],L:'high',S:'high',tip:'soft',mat:'graphite',stock:true},
+      {b:'Fujikura',m:'Vista Pro 45',id:'fuj-vp45-fw',w:45,flex:['L'],L:'high',S:'high',tip:'soft',mat:'graphite',stock:true},
+      {b:'Fujikura',m:'Vista Pro 55',id:'fuj-vp55-fw',w:55,flex:['A','R'],L:'high',S:'mid',tip:'soft',mat:'graphite',stock:true},
+      {b:'Fujikura',m:'Vista Pro 65',id:'fuj-vp65-fw2',w:65,flex:['S'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:true},
+      {b:'Fujikura',m:'Vista Pro 75',id:'fuj-vp75-fw',w:75,flex:['S','XS'],L:'mid',S:'mid',tip:'stiff',mat:'graphite',stock:true},
+      {b:'Fujikura',m:'Ventus TR Red Velocore 7',id:'fuj-vtr-red7-fw',w:70,flex:['S','XS'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:false},
+      {b:'Fujikura',m:'Ventus TR Blue Velocore 7',id:'fuj-vtr-blue7-fw',w:70,flex:['S','XS'],L:'mid',S:'mid',tip:'stiff',mat:'graphite',stock:false},
+      {b:'Fujikura',m:'Ventus TR Black Velocore 7',id:'fuj-vtr-black7-fw',w:70,flex:['S'],L:'low',S:'low',tip:'stiff',mat:'graphite',stock:false}
+    ],
+    hybrid: [
+      {b:'Project X',m:'Cypher 2.0',id:'px-cypher2-hb',weights:{L:45,A:50,R:50,S:55},flex:['L','A','R','S'],L:'high',S:'high',tip:'soft',mat:'graphite',stock:true},
+      {b:'Project X',m:'HZRDUS Smoke Red 70',id:'px-smokered70-hb',w:70,flex:['R'],L:'mid',S:'mid',tip:'soft',mat:'graphite',stock:true},
+      {b:'Project X',m:'HZRDUS Smoke Red 80',id:'px-smokered80-hb',w:80,flex:['S','XS'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:true},
+      {b:'Project X',m:'HZRDUS Gen4 Black 80',id:'px-g4b-80-hb',w:80,flex:['R','S','XS'],L:'low',S:'low',tip:'stiff',mat:'graphite',stock:true},
+      {b:'Project X',m:'HZRDUS Gen4 Black 90',id:'px-g4b-90-hb',w:90,flex:['S','XS'],L:'low',S:'low',tip:'stiff',mat:'graphite',stock:true},
+      {b:'Fujikura',m:'Vista Pro 40',id:'fuj-vp40-hb',w:40,flex:['L'],L:'high',S:'high',tip:'soft',mat:'graphite',stock:true},
+      {b:'Fujikura',m:'Vista Pro 50',id:'fuj-vp50-hb',w:50,flex:['A'],L:'high',S:'high',tip:'soft',mat:'graphite',stock:true},
+      {b:'Fujikura',m:'Vista Pro 60',id:'fuj-vp60-hb',w:60,flex:['R','S'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:true},
+      {b:'Fujikura',m:'Vista Pro 70',id:'fuj-vp70-hb',w:70,flex:['S'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:true},
+      {b:'Fujikura',m:'Ventus Blue HB Velocore 8',id:'fuj-vtblue8-hb',w:85,flex:['S','XS'],L:'mid',S:'mid',tip:'stiff',mat:'graphite',stock:false},
+      {b:'Fujikura',m:'Ventus Black HB Velocore 9',id:'fuj-vtblack9-hb',w:95,flex:['XS'],L:'low',S:'low',tip:'stiff',mat:'graphite',stock:false},
+      {b:'Aerotech',m:'Steelfiber HLS 780',id:'aero-hls780-hb',w:85,flex:['A','R','S'],L:'mid',S:'mid',tip:'mid',mat:'composite',stock:false},
+      {b:'Aerotech',m:'Steelfiber HLS 880',id:'aero-hls880-hb',w:95,flex:['S','XS'],L:'mid',S:'mid',tip:'stiff',mat:'composite',stock:false},
+      {b:'Mitsubishi',m:'MMT Hybrid 70',id:'mmt-hb70',w:70,flex:['A','R'],L:'mid-high',S:'mid',tip:'soft',mat:'graphite',stock:false},
+      {b:'Mitsubishi',m:'MMT Hybrid 80',id:'mmt-hb80',w:80,flex:['R','S','XS'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:false},
+      {b:'Mitsubishi',m:'MMT Hybrid 90',id:'mmt-hb90',w:90,flex:['S','XS'],L:'mid-low',S:'low',tip:'stiff',mat:'graphite',stock:false},
+      {b:'Nippon',m:'N.S. Modus³ Hybrid',id:'nippon-modus-hb',weights:{S:89,X:90},flex:['S','XS'],L:'mid',S:'mid',tip:'stiff',mat:'steel',stock:false}
+    ],
+    driving_iron: [
+      {b:'True Temper',m:'Dynamic Gold',id:'tt-dg-di',weights:{R:127,S:129,X:130},flex:['R','S','X'],L:'low',S:'low',tip:'stiff',mat:'steel',stock:true},
+      {b:'True Temper',m:'Dynamic Gold Tour Issue',id:'tt-dg-ti-di',weights:{S:130,X:132},flex:['S','X'],L:'low',S:'low',tip:'stiff',mat:'steel',stock:false},
+      {b:'Aerotech',m:'Steelfiber HLS 780',id:'aero-hls780',w:85,flex:['A','R','S'],L:'mid',S:'mid',tip:'mid',mat:'composite',stock:false},
+      {b:'Project X',m:'Cypher 2.0',id:'px-cypher2-di',weights:{L:45,A:50,R:50,S:55},flex:['L','A','R','S'],L:'high',S:'high',tip:'mid',mat:'graphite',stock:true},
+      {b:'Project X',m:'HZRDUS Gen4 Black 80',id:'px-g4b-80-di',w:80,flex:['R','S','X'],L:'low',S:'low',tip:'stiff',mat:'graphite',stock:true},
+      {b:'Project X',m:'U',id:'px-u-di',w:90,flex:['R','S','X'],L:'mid',S:'mid',tip:'stiff',mat:'steel',stock:false},
+      {b:'Project X',m:'LS',id:'px-ls-di',weights:{S:120,X:125},flex:['S','X'],L:'low',S:'low',tip:'stiff',mat:'steel',stock:false},
+      {b:'Fujikura',m:'Ventus HB Blue Velocore 6R2',id:'fuj-vtblue6r2-di',w:65,flex:['A'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:false},
+      {b:'Fujikura',m:'Ventus HB Blue Velocore 7R',id:'fuj-vtblue7r-di',w:75,flex:['R'],L:'mid',S:'mid',tip:'stiff',mat:'graphite',stock:false},
+      {b:'Fujikura',m:'Ventus HB Blue Velocore 8S',id:'fuj-vtblue8s-di',w:85,flex:['S'],L:'mid',S:'mid',tip:'stiff',mat:'graphite',stock:false},
+      {b:'Fujikura',m:'Ventus HB Blue Velocore 9X',id:'fuj-vtblue9x-di',w:95,flex:['X'],L:'mid',S:'low',tip:'stiff',mat:'graphite',stock:false},
+      {b:'Fujikura',m:'Ventus HB Black Velocore 10TX',id:'fuj-vtblack10tx-di',w:105,flex:['XS'],L:'low',S:'low',tip:'stiff',mat:'graphite',stock:false},
+      {b:'Nippon',m:'N.S. Modus³ Hybrid',id:'nippon-modus-hb-di',weights:{S:89,X:90},flex:['S','X'],L:'mid',S:'mid',tip:'stiff',mat:'steel',stock:false},
+      {b:'Mitsubishi',m:'MMT Hybrid 70',id:'mmt-hb70-di',w:70,flex:['A','R'],L:'mid',S:'mid',tip:'soft',mat:'graphite',stock:false},
+      {b:'Mitsubishi',m:'MMT Hybrid 80',id:'mmt-hb80-di',w:80,flex:['S','X'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:false},
+      {b:'Mitsubishi',m:'MMT Hybrid 90',id:'mmt-hb90-di',w:90,flex:['S','X'],L:'mid-low',S:'low',tip:'stiff',mat:'graphite',stock:false}
+    ],
+    iron: [
+      {b:'KBS',m:'Tour',id:'kbs-tour',family:'KBS Tour',weights:{R:110,S:120,X:130},flex:['R','S','X'],L:'mid',S:'mid',tip:'mid',mat:'steel',stock:true},
+      {b:'KBS',m:'Custom Black Tour',id:'kbs-black-tour',family:'KBS Tour',w:120,flex:['R','S','X'],L:'mid',S:'low',tip:'mid',mat:'steel',stock:false},
+      {b:'KBS',m:'Tour Lite',id:'kbs-tour-lite',weights:{R:95,S:100},flex:['R','S'],L:'high',S:'mid',tip:'soft',mat:'steel',stock:true},
+      {b:'KBS',m:'Max 80',id:'kbs-max-80',weights:{R:80,S:80,X:80},flex:['R','S','X'],L:'high',S:'high',tip:'soft',mat:'steel',stock:true},
+      {b:'KBS',m:'C-Taper Lite',id:'kbs-c-taper-lite',weights:{R:105,S:110,X:115},flex:['R','S','X'],L:'mid-high',S:'low',tip:'stiff',mat:'steel',stock:false},
+      {b:'KBS',m:'Max Graphite',id:'kbs-max-graphite',family:'KBS Max',weights:{L:45,A:55,R:65,S:85},flex:['L','A','R','S'],L:'high',S:'high',tip:'soft',mat:'graphite',stock:false},
+      {b:'KBS',m:'TGI Tour Graphite',id:'kbs-tgi',family:'KBS TGI',weights:{L:50,A:60,R:70,S:80,X:90},flex:['L','A','R','S','X'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:false},
+      {b:'Project X',m:'Cypher 2.0',id:'px-cypher-iron',weights:{L:45,SR:50,R:50,S:55},flex:['L','SR','R','S'],L:'high',S:'high',tip:'soft',mat:'graphite',stock:true},
+      {b:'True Temper',m:'Dynamic Gold',id:'tt-dg',weights:{R:127,S:129,X:130},flex:['R','S','X'],L:'low',S:'low',tip:'stiff',mat:'steel',stock:true},
+      {b:'True Temper',m:'Dynamic Gold 105',id:'tt-dg-105',weights:{R300:103,S300:105,X100:105},flex:['R300','S300','X100'],L:'mid',S:'mid',tip:'stiff',mat:'steel',stock:true},
+      {b:'True Temper',m:'Dynamic Gold Mid 115',id:'tt-dg-mid115',w:115,flex:['R300','S300','X100'],L:'mid',S:'mid',tip:'mid',mat:'steel',stock:true},
+      {b:'True Temper',m:'Dynamic Gold 120',id:'tt-dg-120',weights:{R:116,S:118,X:120},flex:['R','S','X'],L:'low',S:'low',tip:'stiff',mat:'steel',stock:true},
+      {b:'Aerotech',m:'Steelfiber i70',id:'aero-i70',w:70,flex:['L','A','R','S'],L:'mid-high',S:'mid',tip:'soft',mat:'composite',stock:false},
+      {b:'Aerotech',m:'Steelfiber i80',id:'aero-i80',w:80,flex:['R','S','X'],L:'mid',S:'mid',tip:'mid',mat:'composite',stock:false},
+      {b:'Aerotech',m:'Steelfiber i95',id:'aero-i95',w:95,flex:['R','S','X'],L:'mid',S:'mid',tip:'mid',mat:'composite',stock:false},
+      {b:'Aerotech',m:'Steelfiber i110',id:'aero-i110',w:110,flex:['R','S','X'],L:'mid-low',S:'mid-low',tip:'stiff',mat:'composite',stock:false},
+      {b:'Aerotech',m:'Steelfiber i125',id:'aero-i125',w:125,flex:['S','X'],L:'mid-low',S:'mid-low',tip:'stiff',mat:'composite',stock:false},
+      {b:'Project X',m:'Project X',id:'px-px',weights:{R:115,S:120,X:125},flex:['R','S','X'],L:'low',S:'low',tip:'stiff',mat:'steel',stock:false},
+      {b:'Project X',m:'LZ',id:'px-lz',weights:{R:110,S:115,X:120},flex:['R','S','X'],L:'mid',S:'mid',tip:'mid',mat:'steel',stock:false},
+      {b:'UST',m:'Recoil DART 65',id:'recoil-dart-65',family:'Recoil DART',weights:{L:55,A:61,R:64,S:68},flex:['L','A','R','S'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:false},
+      {b:'UST',m:'Recoil DART 75',id:'recoil-dart-75',family:'Recoil DART',weights:{A:70,R:72,S:78},flex:['A','R','S'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:false},
+      {b:'Nippon',m:'N.S. Pro Modus 3 105',id:'nippon-105',w:106,flex:['R','S','X'],L:'mid',S:'mid',tip:'mid',mat:'steel',stock:false},
+      {b:'Nippon',m:'N.S. Pro Modus 3 120',id:'nippon-120',w:114,flex:['S','X'],L:'mid',S:'low',tip:'stiff',mat:'steel',stock:false}
+    ],
+    wedge: [
+      {b:'True Temper',m:'Dynamic Gold (Wedge)',id:'tt-dg-w',weights:{R:127,S:129,X:130},flex:['R','S','X'],L:'low',S:'low',tip:'stiff',mat:'steel',stock:true},
+      {b:'True Temper',m:'Dynamic Gold Mid 115',id:'tt-dg-mid115-w',w:115,flex:['R300','S300','X100'],L:'mid',S:'mid',tip:'mid',mat:'steel',stock:true},
+      {b:'True Temper',m:'Elevate 95',id:'tt-elev-95-w',weights:{R:96,S:98},flex:['R','S'],L:'high',S:'mid-high',tip:'stiff',mat:'steel',stock:true},
+      {b:'KBS',m:'Hi-Rev 2.0',id:'kbs-hi-rev',weights:{R:115,S:125,X:135},flex:['R','S','X'],L:'high',S:'high',tip:'soft',mat:'steel',stock:true},
+      {b:'KBS',m:'Tour Lite',id:'kbs-tour-lite-w',weights:{R:95,S:100},flex:['R','S'],L:'high',S:'high',tip:'soft',mat:'steel',stock:true},
+      {b:'Project X',m:'Cypher 2.0',id:'px-cypher-2-w',weights:{L:45,SR:50,R:50,S:55},flex:['L','SR','R','S'],L:'high',S:'high',tip:'soft',mat:'graphite',stock:true},
+      {b:'True Temper',m:'DG Tour Issue',id:'tt-dg-ti-w',weights:{S400:130,X100:132},flex:['S400','X100'],L:'low',S:'low',tip:'stiff',mat:'steel',stock:false},
+      {b:'True Temper',m:'DG Tour Issue Black Onyx',id:'tt-dg-ti-onyx',weights:{S400:130,X100:132},flex:['S400','X100'],L:'low',S:'low',tip:'stiff',mat:'steel',stock:false},
+      {b:'KBS',m:'Custom Black Tour',id:'kbs-black-tour-w',w:120,flex:['R','S','X'],L:'mid',S:'mid',tip:'mid',mat:'steel',stock:false},
+      {b:'Nippon',m:'Modus Wedge',id:'nippon-w',weights:{R:111,S:122,X:133},flex:['R','S','X'],L:'low',S:'low',tip:'stiff',mat:'steel',stock:false},
+      {b:'UST',m:'Recoil Wedge Proto',id:'recoil-proto',w:113,flex:['R','S','X'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:false},
+      {b:'UST',m:'Recoil 95',id:'recoil-95',weights:{R:93,S:96},flex:['R','S'],L:'mid',S:'mid',tip:'mid',mat:'graphite',stock:false},
+      {b:'Project X',m:'Project X Wedge',id:'px-wedge',weights:{R:115,S:120,X:125},flex:['R','S','X'],L:'low-mid',S:'low-mid',tip:'mid',mat:'steel',stock:false}
+    ]
+  };
+
+  /* Iron / club media — UNCHANGED */
+  window.HAYWOOD_IRON_MEDIA = {
+    "haywoodmb-irons": {img:"https://www.haywoodgolf.com/cdn/shop/products/MB-Hero.png?v=1635829570",url:"/products/haywoodmb-irons",name:"Haywood MB's"},
+    "haywood-cb-mb-combo": {img:"https://cdn.shopify.com/s/files/1/0066/1202/5428/products/MBCB.png?v=1635832186",url:"/products/haywood-cb-mb-combo",name:"Haywood CB/MB Combo"},
+    "haywood-cbs": {img:"https://www.haywoodgolf.com/cdn/shop/products/CBHero.png?v=1635820503",url:"/products/haywood-cbs",name:"Haywood CB's"},
+    "pd-1s": {img:"https://cdn.shopify.com/s/files/1/0066/1202/5428/files/Haywood_PD_-_Back.png?v=1720678999",url:"/products/pd-1s",name:"PD.1 Irons (Players Distance)"},
+    "sv-2-pd-1-combo-set": {img:"https://cdn.shopify.com/s/files/1/0066/1202/5428/files/SV.2PD.1_combo_Irons.png?v=1720661704",url:"/products/sv-2-pd-1-combo-set",name:"SV.2 | PD.1 Combo Set"},
+    "sv-2s": {img:"https://www.haywoodgolf.com/cdn/shop/files/HaywoodSV2-Back2.png?v=1720471903",url:"/products/sv-2s",name:"SV.2 Irons (Game Improvement)"}
+  };
+
+  window.HAYWOOD_CLUB_MEDIA = {
+    driver: {img:"https://cdn.shopify.com/s/files/1/0066/1202/5428/products/Driver-crown_1.png?v=1675445600",url:"/products/driver",name:"Driver"},
+    fairway: {img:"https://cdn.shopify.com/s/files/1/0066/1202/5428/products/D5463EB6-CA7E-4501-B9A1-A3A416AEFBFB.png?v=1677018947",url:"/products/fairway-woods",name:"Fairway Woods"},
+    hybrid: {img:"https://cdn.shopify.com/s/files/1/0066/1202/5428/products/Hybrid-crown.png?v=1674222273",url:"/products/hybrid",name:"Hybrid"},
+    driving_iron: {img:"https://cdn.shopify.com/s/files/1/0066/1202/5428/files/DI.2back.png?v=1736197496",url:"/products/signature-driving-iron-2",name:"Driving Iron"},
+    wedge: {img:"https://cdn.shopify.com/s/files/1/0066/1202/5428/files/67.png?v=1736196830",url:"/products/signature-wedges",name:"Signature Wedges"},
+    putter: {img:"https://cdn.shopify.com/s/files/1/0066/1202/5428/products/haywood-signature-wedges.jpg?v=1595288005",url:"/collections/putters",name:"Putters"}
+  };
+
+  /* Optional shaft/head image map merge — UNCHANGED */
+  try {
+    const MAP_STR = '{{ section.settings.shaft_image_map | strip_newlines | escape }}';
+    if (MAP_STR) {
+      const MAP = JSON.parse(MAP_STR.replace(/&quot;/g,'"'));
+      const types = ['driver','fairway','hybrid','driving_iron','iron','wedge'];
+      types.forEach(t => {
+        (window.HAYWOOD_CATALOG[t] || []).forEach(s => {
+          if (MAP[s.id]) s.img = MAP[s.id];
+        });
+      });
+      Object.keys(window.HAYWOOD_IRON_MEDIA).forEach(key => {
+        if (MAP[key]) window.HAYWOOD_IRON_MEDIA[key].img = MAP[key];
+      });
+      Object.keys(window.HAYWOOD_CLUB_MEDIA).forEach(key => {
+        if (MAP[key]) window.HAYWOOD_CLUB_MEDIA[key].img = MAP[key];
+      });
+    }
+  } catch (e) {
+    console.warn('Image map JSON invalid', e);
+  }
+
+  /* Email helpers */
+  function normalizeEmail(v) {
+    return String(v||'').trim().replace(/^mailto[:\.\s]*/i,'').replace(/^<|>$/g,'').replace(/\s+/g,'');
+  }
+  function isValidEmail(v) {
+    const s = String(v||'').trim();
+    if (!s) return false;
+    return /^\S+@\S+\.[A-Za-z]{2,}$/.test(s) && s.length <= 254;
+  }
+</script>
+
+<script>
+(() => {
+  const INIT_KEY = '__HAYWOOD_FIT__{{ section.id }}';
+  if (window[INIT_KEY]) return; window[INIT_KEY] = true;
+
+  function showToast(msg){
+    const t=document.createElement('div'); t.className='hyq-toast'; t.textContent=msg;
+    document.body.appendChild(t);
+    setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .2s'; setTimeout(()=>t.remove(),220); }, 2400);
+  }
+
+  const CAT = window.HAYWOOD_CATALOG || {driver:[],fairway:[],hybrid:[],driving_iron:[],iron:[],wedge:[]};
+  const IRON_MEDIA = window.HAYWOOD_IRON_MEDIA;
+  const CLUB_MEDIA = window.HAYWOOD_CLUB_MEDIA;
+
+  function pickIronHead(strike,score,slot){
+    const M={
+      "excellent":{"<76":{first:"haywoodmb-irons",second:"haywood-cb-mb-combo"},"77-82":{first:"haywood-cb-mb-combo",second:"haywood-cbs"},"83-86":{first:"haywood-cbs",second:"pd-1s"},"87-90":{first:"sv-2-pd-1-combo-set",second:"sv-2s"},"90>=":{first:"sv-2s",second:"sv-2s"}},
+      "above average":{"<76":{first:"haywood-cb-mb-combo",second:"haywood-cbs"},"77-82":{first:"haywood-cbs",second:"pd-1s"},"83-86":{first:"pd-1s",second:"sv-2-pd-1-combo-set"},"87-90":{first:"sv-2-pd-1-combo-set",second:"sv-2s"},"90>=":{first:"sv-2s",second:"sv-2s"}},
+      "average":{"<76":{first:"haywood-cbs",second:"pd-1s"},"77-82":{first:"pd-1s",second:"sv-2-pd-1-combo-set"},"83-86":{first:"sv-2-pd-1-combo-set",second:"sv-2s"},"87-90":{first:"sv-2s",second:"sv-2-pd-1-combo-set"},"90>=":{first:"sv-2s",second:"sv-2s"}},
+      "below average":{"<76":{first:"pd-1s",second:"pd-1s"},"77-82":{first:"sv-2-pd-1-combo-set",second:"sv-2-pd-1-combo-set"},"83-86":{first:"sv-2s",second:"sv-2s"},"87-90":{first:"sv-2s",second:"sv-2s"},"90>=":{first:"sv-2s",second:"sv-2s"}}
+    };
+    const key=(strike||'Average').toLowerCase(), sc=(score||'83-86').toLowerCase();
+    const handle=(M[key]&&M[key][sc]&&M[key][sc][slot||'first'])||'sv-2s';
+    const media=IRON_MEDIA[handle]||{img:'',url:'#',name:'Irons'};
+    return { handle, ...media };
+  }
+
+  /* ============ STEP DEFS ============ */
+  const STEP_LABELS = ['Start','Club','Swing','Skill','Body','Send'];
+
+  /* SVG snippets for flight + miss */
+  const FLIGHT_SVG = {
+    Lower:  '<svg width="56" height="32" viewBox="0 0 56 32"><path d="M3 26 Q28 18 53 26" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="3" cy="26" r="2.5" fill="currentColor"/></svg>',
+    Mid:    '<svg width="56" height="32" viewBox="0 0 56 32"><path d="M3 28 Q28 6 53 28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="3" cy="28" r="2.5" fill="currentColor"/></svg>',
+    Higher: '<svg width="56" height="32" viewBox="0 0 56 32"><path d="M3 30 Q14 0 53 30" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="3" cy="30" r="2.5" fill="currentColor"/></svg>'
+  };
+  const MISS_SVG = {
+    none:  '<svg width="36" height="24" viewBox="0 0 36 24"><circle cx="18" cy="12" r="3" fill="currentColor"/></svg>',
+    left:  '<svg width="36" height="24" viewBox="0 0 36 24"><circle cx="7" cy="12" r="2.5" fill="currentColor"/><circle cx="16" cy="14" r="1.8" fill="currentColor" opacity="0.4"/></svg>',
+    right: '<svg width="36" height="24" viewBox="0 0 36 24"><circle cx="29" cy="12" r="2.5" fill="currentColor"/><circle cx="20" cy="14" r="1.8" fill="currentColor" opacity="0.4"/></svg>',
+    short: '<svg width="36" height="24" viewBox="0 0 36 24"><circle cx="18" cy="17" r="2.5" fill="currentColor"/><circle cx="18" cy="9" r="1.8" fill="currentColor" opacity="0.4"/></svg>',
+    thin:  '<svg width="36" height="24" viewBox="0 0 36 24"><path d="M9 12 L27 12" stroke="currentColor" stroke-width="2" stroke-dasharray="3 2"/></svg>'
+  };
+
+  function progressHtml(currentIdx){
+    return `<div class="hyq-progress">${
+      STEP_LABELS.map((label, i) => {
+        const cls = i < currentIdx ? 'is-done' : (i === currentIdx ? 'is-current' : '');
+        const num = String(i+1).padStart(2,'0');
+        return `<div class="hyq-progress-step ${cls}">
+          <div class="hyq-progress-bar"></div>
+          <div class="hyq-progress-label">${num} / ${label}</div>
+        </div>`;
+      }).join('')
+    }</div>`;
+  }
+
+  function fieldLabel(text){
+    return `<div class="hyq-field-label"><span class="hyq-field-label-rule"></span><span class="hyq-field-label-text">${text}</span></div>`;
+  }
+
+  function tile(value, svg, label, isActive){
+    return `<div class="hyq-tile ${isActive?'is-active':''}" data-v="${value}">${svg}<div class="hyq-tile-label">${label}</div></div>`;
+  }
+
+  /* ============ STEPS ============ */
+  const steps = [
+    // 0: Disclaimer
+    s => `
+      <div class="hyq-step is-show">
+        <h2 class="hyq-step-title">Before we start.</h2>
+        <p style="font-size:14px;line-height:1.6;color:var(--hyq-muted-2);margin:0 0 20px;max-width:560px;">Built on standard inputs and your honest answers. The more honest you are, the better the fit — and a real <a href="/pages/booking" target="_blank" style="color:var(--hyq-ink);text-decoration:underline;text-decoration-color:var(--hyq-gold);text-underline-offset:3px;">in-person fitting</a> will always sharpen it further.</p>
+        <label class="hyq-check">
+          <input id="disclaimer" type="checkbox" ${s.accept?'checked':''}>
+          <span>I understand</span>
+        </label>
+        <div class="hyq-actions">
+          <button class="hyq-btn hyq-btn-primary" id="next" ${s.accept?'':'disabled'}>I'm ready →</button>
+        </div>
+      </div>`,
+
+    // 1: Club + Gender + (conditional) shaft prefs
+    s => `
+      <div class="hyq-step is-show">
+        <h2 class="hyq-step-title">What are we<br>building?</h2>
+        <div class="hyq-grid-2">
+          <div class="hyq-field">
+            ${fieldLabel('Club to fit')}
+            <select id="club" class="hyq-select">
+              <option value="iron" ${s.club==='iron'?'selected':''}>Irons</option>
+              <option value="wedge" ${s.club==='wedge'?'selected':''}>Wedges</option>
+              <option value="hybrid" ${s.club==='hybrid'?'selected':''}>Hybrid</option>
+              <option value="driving_iron" ${s.club==='driving_iron'?'selected':''}>Driving Iron</option>
+              <option value="fairway" ${s.club==='fairway'?'selected':''}>Fairway Wood</option>
+              <option value="driver" ${s.club==='driver'?'selected':''}>Driver</option>
+            </select>
+          </div>
+          <div class="hyq-field">
+            ${fieldLabel('Gender')}
+            <div class="hyq-seg" id="gender">
+              <button class="hyq-seg-btn ${s.gender==='male'?'is-active':''}" data-v="male">Male</button>
+              <button class="hyq-seg-btn ${s.gender==='female'?'is-active':''}" data-v="female">Female</button>
+            </div>
+          </div>
+        </div>
+        ${(['iron','wedge','driving_iron'].includes(s.club)) ? `
+        <div class="hyq-grid-2" style="margin-top:8px">
+          <div class="hyq-field">
+            ${fieldLabel('Shaft material preference')}
+            <div class="hyq-seg" id="matpref">
+              <button class="hyq-seg-btn ${s.matpref==='graphite'?'is-active':''}" data-v="graphite">Graphite</button>
+              <button class="hyq-seg-btn ${s.matpref==='steel'?'is-active':''}" data-v="steel">Steel</button>
+              <button class="hyq-seg-btn ${s.matpref==='either'?'is-active':''}" data-v="either">Either</button>
+            </div>
+          </div>
+          <div class="hyq-field">
+            ${fieldLabel('Weight feel preference')}
+            <div class="hyq-chips" id="wtpref">
+              <button class="hyq-chip ${s.wtpref==='light'?'is-active':''}" data-v="light">Light</button>
+              <button class="hyq-chip ${s.wtpref==='mid'?'is-active':''}" data-v="mid">Medium</button>
+              <button class="hyq-chip ${s.wtpref==='heavy'?'is-active':''}" data-v="heavy">Heavy</button>
+              <button class="hyq-chip ${s.wtpref==='any'?'is-active':''}" data-v="any">Any</button>
+            </div>
+          </div>
+        </div>` : ''}
+        <div class="hyq-actions">
+          <button class="hyq-btn hyq-btn-ghost" id="back">← Back</button>
+          <button class="hyq-btn hyq-btn-primary" id="next">Next →</button>
+        </div>
+      </div>`,
+
+    // 2: Swing
+    s => {
+      const isIronFam = ['iron','wedge','driving_iron'].includes(s.club);
+      const carryLabel = isIronFam ? '7-iron carry' : 'Driver carry';
+      const carryPlaceholder = isIronFam ? '150' : '240';
+      return `
+      <div class="hyq-step is-show">
+        <h2 class="hyq-step-title">How does the ball<br>come off?</h2>
+
+        <div class="hyq-field">
+          ${fieldLabel(carryLabel)}
+          <div class="hyq-bignum-wrap">
+            <input id="speed" type="number" class="hyq-bignum" placeholder="${carryPlaceholder}" value="${s.speed||''}">
+            <span class="hyq-bignum-suffix">Yards</span>
+          </div>
+        </div>
+
+        <div class="hyq-field">
+          ${fieldLabel('Swing tempo')}
+          <div class="hyq-seg" id="tempo">
+            <button class="hyq-seg-btn ${s.tempo==='smooth'?'is-active':''}" data-v="smooth">Smooth</button>
+            <button class="hyq-seg-btn ${s.tempo==='moderate'?'is-active':''}" data-v="moderate">Moderate</button>
+            <button class="hyq-seg-btn ${s.tempo==='aggressive'?'is-active':''}" data-v="aggressive">Aggressive</button>
+          </div>
+        </div>
+
+        <div class="hyq-field">
+          ${fieldLabel('Desired ball flight')}
+          <div class="hyq-tiles cols-3" id="flight">
+            ${tile('Lower', FLIGHT_SVG.Lower, 'Lower', s.flight==='Lower')}
+            ${tile('Mid', FLIGHT_SVG.Mid, 'Mid', s.flight==='Mid')}
+            ${tile('Higher', FLIGHT_SVG.Higher, 'Higher', s.flight==='Higher')}
+          </div>
+        </div>
+
+        <div class="hyq-field">
+          ${fieldLabel('Typical miss')}
+          <div class="hyq-tiles cols-5" id="miss">
+            ${tile('none', MISS_SVG.none, 'None', s.miss==='none')}
+            ${tile('left', MISS_SVG.left, 'Left', s.miss==='left')}
+            ${tile('right', MISS_SVG.right, 'Right', s.miss==='right')}
+            ${tile('short', MISS_SVG.short, 'Short', s.miss==='short')}
+            ${tile('thin', MISS_SVG.thin, 'Thin', s.miss==='thin')}
+          </div>
+        </div>
+
+        <div class="hyq-actions">
+          <button class="hyq-btn hyq-btn-ghost" id="back">← Back</button>
+          <button class="hyq-btn hyq-btn-primary" id="next">Next →</button>
+        </div>
+      </div>`;
+    },
+
+    // 3: Skill
+    s => `
+      <div class="hyq-step is-show">
+        <h2 class="hyq-step-title">How's your game?</h2>
+        <div class="hyq-field">
+          ${fieldLabel('Ball-striking')}
+          <div class="hyq-chips" id="striking">
+            <button class="hyq-chip ${s.striking==='Excellent'?'is-active':''}" data-v="Excellent">Excellent</button>
+            <button class="hyq-chip ${s.striking==='Above Average'?'is-active':''}" data-v="Above Average">Above Avg</button>
+            <button class="hyq-chip ${s.striking==='Average'?'is-active':''}" data-v="Average">Average</button>
+            <button class="hyq-chip ${s.striking==='Below Average'?'is-active':''}" data-v="Below Average">Below Avg</button>
+          </div>
+        </div>
+        <div class="hyq-field">
+          ${fieldLabel('Average score')}
+          <div class="hyq-chips" id="score">
+            <button class="hyq-chip ${s.score=='<76'?'is-active':''}" data-v="<76">&lt; 76</button>
+            <button class="hyq-chip ${s.score==='77-82'?'is-active':''}" data-v="77-82">77 – 82</button>
+            <button class="hyq-chip ${s.score==='83-86'?'is-active':''}" data-v="83-86">83 – 86</button>
+            <button class="hyq-chip ${s.score==='87-90'?'is-active':''}" data-v="87-90">87 – 90</button>
+            <button class="hyq-chip ${s.score==='90>='?'is-active':''}" data-v="90>=">90+</button>
+          </div>
+        </div>
+        <div class="hyq-grid-2">
+          <div class="hyq-field">
+            ${fieldLabel('Age (optional)')}
+            <input id="age" class="hyq-input" type="number" min="12" max="100" placeholder="e.g. 45" value="${s.age||''}">
+          </div>
+          <div></div>
+        </div>
+        <div class="hyq-actions">
+          <button class="hyq-btn hyq-btn-ghost" id="back">← Back</button>
+          <button class="hyq-btn hyq-btn-primary" id="next">Next →</button>
+        </div>
+      </div>`,
+
+    // 4: Body
+    s => `
+      <div class="hyq-step is-show">
+        <h2 class="hyq-step-title">A few measurements.</h2>
+        <div class="hyq-grid-2">
+          <div class="hyq-field">
+            ${fieldLabel('Height (with shoes)')}
+            <div class="hyq-grid-2">
+              <input id="hft" class="hyq-input" type="number" min="4" max="7" placeholder="ft" value="${s.hft||''}">
+              <input id="hin" class="hyq-input" type="number" min="0" max="11" placeholder="in" value="${s.hin||''}">
+            </div>
+          </div>
+          <div class="hyq-field">
+            ${fieldLabel('Wrist to floor (with shoes)')}
+            <input id="wtf" class="hyq-input" type="number" min="29" max="42" step="0.25" placeholder="inches" value="${s.wtf||''}">
+          </div>
+        </div>
+        <div class="hyq-grid-2" style="margin-top:8px">
+          <div class="hyq-field">
+            ${fieldLabel('Glove size')}
+            <div class="hyq-chips" id="glove">
+              ${['Small','Small-Medium','Medium','Medium-Large','Large','XL'].map(g=>`<button class="hyq-chip ${s.glove===g?'is-active':''}" data-v="${g}">${g}</button>` ).join('')}
+            </div>
+          </div>
+          <div class="hyq-field">
+            ${fieldLabel('Hand')}
+            <div class="hyq-seg" id="hand">
+              <button class="hyq-seg-btn ${s.hand==='Right'?'is-active':''}" data-v="Right">Right</button>
+              <button class="hyq-seg-btn ${s.hand==='Left'?'is-active':''}" data-v="Left">Left</button>
+            </div>
+          </div>
+        </div>
+        <div class="hyq-actions">
+          <button class="hyq-btn hyq-btn-ghost" id="back">← Back</button>
+          <button class="hyq-btn hyq-btn-primary" id="next">Next →</button>
+        </div>
+      </div>`,
+
+    // 5: Contact
+    s => `
+      <div class="hyq-step is-show">
+        <h2 class="hyq-step-title">Where should we<br>send it?</h2>
+        <div class="hyq-grid-2">
+          <div class="hyq-field">
+            ${fieldLabel('Your name')}
+            <input id="name" class="hyq-input" type="text" autocomplete="name" placeholder="Jane Golfer" value="${s.name||''}">
+          </div>
+          <div class="hyq-field">
+            ${fieldLabel('Email')}
+            <input id="email" class="hyq-input" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" value="${s.email||''}">
+          </div>
+        </div>
+        <input id="company" name="company" type="text" autocomplete="organization" style="position:absolute;left:-9999px;opacity:0;height:0;width:0" tabindex="-1" aria-hidden="true">
+        <label class="hyq-check" style="margin-top:8px">
+          <input id="consent_email" type="checkbox" ${s.consent_email?'checked':''}>
+          <span>Email me my fitting results</span>
+        </label>
+        <label class="hyq-check" style="margin-top:10px">
+          <input id="optin_marketing" type="checkbox" ${s.optin_marketing?'checked':''}>
+          <span>Send me product updates and promotions (optional)</span>
+        </label>
+        <p style="font-size:11px;color:var(--hyq-muted);margin-top:14px;line-height:1.5;max-width:520px;">We use your information to send your fitting results. Marketing is optional. See our <a href="/policies/privacy-policy" target="_blank" rel="noopener" style="color:var(--hyq-ink);text-decoration:underline;text-decoration-color:var(--hyq-gold);text-underline-offset:3px;">Privacy Policy</a>.</p>
+        <div class="hyq-actions">
+          <button class="hyq-btn hyq-btn-ghost" id="back">← Back</button>
+          <button class="hyq-btn hyq-btn-primary" id="finish">Send & see results →</button>
+        </div>
+      </div>`
+  ];
+
+  /* ============ STATE ============ */
+  const INITIAL = {accept:false,club:'iron',gender:'male',matpref:'either',wtpref:'any',tempo:'moderate',miss:'none',flight:'Mid',striking:'Above Average',score:'77-82',age:'',speed:'',hft:'',hin:'',wtf:'',glove:'Medium',hand:'Right',name:'',email:'',consent_email:false,optin_marketing:false};
+  let state = {...INITIAL};
+  let idx = 0;
+  const root = document.getElementById('hyq-wizard-{{ section.id }}');
+  const results = document.getElementById('hyq-results-{{ section.id }}');
+  const restart = document.getElementById('restart-btn-{{ section.id }}');
+  if (restart) {
+    restart.addEventListener('click', ()=>{
+      state = {...INITIAL}; idx = 0;
+      results.style.display='none'; results.innerHTML='';
+      render();
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  }
+  render();
+
+  function render(){
+    root.innerHTML = progressHtml(idx) + steps[idx](state);
+
+    const disclaimer = root.querySelector('#disclaimer');
+    const nextBtn = root.querySelector('#next');
+    if (disclaimer) {
+      disclaimer.onchange = e => { state.accept = e.target.checked; if (nextBtn) nextBtn.disabled = !state.accept; };
+    }
+
+    const selClub = root.querySelector('#club');
+    if (selClub) selClub.onchange = e => { state.club = e.target.value; render(); };
+
+    seg('gender', v=>state.gender=v, state.gender);
+    seg('matpref', v=>state.matpref=v, state.matpref);
+    seg('tempo', v=>state.tempo=v, state.tempo);
+    seg('hand', v=>state.hand=v, state.hand);
+
+    chip('wtpref', v=>state.wtpref=v, state.wtpref);
+    chip('striking', v=>state.striking=v, state.striking);
+    chip('score', v=>state.score=v, state.score);
+    chip('glove', v=>state.glove=v, state.glove);
+
+    tilesGroup('flight', v=>state.flight=v, state.flight);
+    tilesGroup('miss', v=>state.miss=v, state.miss);
+
+    bind('#speed','speed'); bind('#age','age'); bind('#hft','hft'); bind('#hin','hin'); bind('#wtf','wtf');
+    bind('#name','name'); bind('#email','email');
+
+    const consent = root.querySelector('#consent_email');
+    if (consent) consent.onchange = e => state.consent_email = e.target.checked;
+    const marketing = root.querySelector('#optin_marketing');
+    if (marketing) marketing.onchange = e => state.optin_marketing = e.target.checked;
+
+    const back = root.querySelector('#back');
+    if (back) back.onclick = ()=>{ idx = Math.max(0, idx-1); render(); };
+
+    const next = root.querySelector('#next');
+    if (next) next.onclick = () => {
+      if (idx === 2) {
+        const speedEl = root.querySelector('#speed');
+        const val = Number(speedEl?.value || 0);
+        if (!val || val <= 0) {
+          alert('Please enter your carry distance before continuing.');
+          return;
+        }
+        state.speed = val;
+      }
+      if (idx === 4) {
+        const hft = root.querySelector('#hft')?.value.trim();
+        const hin = root.querySelector('#hin')?.value.trim();
+        const wtf = root.querySelector('#wtf')?.value.trim();
+        if (!hft || !hin || !wtf) {
+          alert('Please fill in your height (ft + in) and wrist-to-floor before continuing.');
+          return;
+        }
+        state.hft = hft; state.hin = hin; state.wtf = wtf;
+      }
+      idx = Math.min(steps.length-1, idx+1);
+      render();
+    };
+
+    const finish = root.querySelector('#finish');
+    if (finish) finish.onclick = onFinish;
+  }
+
+  function seg(id, setter, current){
+    const el = root.querySelector(`#${id}`);
+    if (!el) return;
+    el.addEventListener('click', e=>{
+      const btn = e.target.closest('.hyq-seg-btn');
+      if (!btn) return;
+      [...el.children].forEach(c=>c.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      setter(btn.dataset.v);
+    });
+  }
+  function chip(id, setter, current){
+    const el = root.querySelector(`#${id}`);
+    if (!el) return;
+    el.addEventListener('click', e=>{
+      const btn = e.target.closest('.hyq-chip');
+      if (!btn) return;
+      [...el.children].forEach(c=>c.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      setter(btn.dataset.v);
+    });
+  }
+  function tilesGroup(id, setter, current){
+    const el = root.querySelector(`#${id}`);
+    if (!el) return;
+    el.addEventListener('click', e=>{
+      const btn = e.target.closest('.hyq-tile');
+      if (!btn) return;
+      [...el.children].forEach(c=>c.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      setter(btn.dataset.v);
+    });
+  }
+  function bind(sel, key){
+    const el = root.querySelector(sel);
+    if (el) el.oninput = e => state[key] = e.target.value;
+  }
+
+  function onFinish(){
+    const nameEl = root.querySelector('#name');
+    const emailEl = root.querySelector('#email');
+    const consentEl = root.querySelector('#consent_email');
+    const marketingEl = root.querySelector('#optin_marketing');
+    if (emailEl || nameEl) {
+      const name = (nameEl?.value||'').trim();
+      const email = (emailEl?.value||'').trim();
+      const consent = !!(consentEl && consentEl.checked);
+      state.name = name;
+      state.email = email;
+      state.consent_email = consent;
+      state.optin_marketing = !!(marketingEl && marketingEl.checked);
+      const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!name) { alert('Please enter your name.'); return; }
+      if (!validEmail) { alert('Please enter a valid email.'); return; }
+      if (!consent) { alert('Please check the box to email your fitting results.'); return; }
+    }
+    runFit();
+  }
+
+  /* ============ HELPERS / RULES (UNCHANGED LOGIC) ============ */
+  const FLEX_ALIAS = {A:'SR',X:'XS',XS:'X'};
+  const FLEX_TT = {R300:'R',S200:'S',S300:'S',S400:'S',X100:'X'};
+  const normFlex = f => (FLEX_TT[f]||f||'').toUpperCase();
+  function displayFlexLong(f){f=normFlex(f);if(f==='R')return'Regular';if(f==='S')return'Stiff';if(f==='X'||f==='XS')return'Extra Stiff';if(f==='A'||f==='SR')return'Senior';if(f==='L')return'Ladies';return f;}
+  function matDisplay(m){return (m==='composite')?'graphite':m;}
+  function flexFromIronCarry(d){const x=Number(d||0);if(x<119)return'L';if(x<=134)return'A';if(x<=149)return'R';if(x<=164)return'S';return'X';}
+  function flexFromDriverCarry(d){const x=Number(d||0);if(x<=199)return'L';if(x<=225)return'A';if(x<=254)return'R';if(x<=285)return'S';return'X';}
+  function nearFlexNote(club,carry){const d=Number(carry||0);const edges=(club==='iron'||club==='wedge'||club==='driving_iron')?[119,134,149,164]:[199,225,254,285];const labels=['L','A','R','S','X'];for(let i=0;i<edges.length;i++){if(Math.abs(d-edges[i])<=3)return`You're between ${labels[i]} and ${labels[i+1]} based on your carry — a fitting can dial it in.`;}return'';}
+  function weightFor(shaft,desiredFlex){const f=normFlex(desiredFlex);if(shaft.weights&&shaft.weights[f]!=null)return Number(shaft.weights[f]);if(shaft.weights&&shaft.weights[desiredFlex]!=null)return Number(shaft.weights[desiredFlex]);return Number(shaft.w||0);}
+  function weightedRange(base,tempo,delta){let lo=base-delta,hi=base+delta;if(tempo==='smooth'){lo-=3;hi-=3}if(tempo==='aggressive'){lo+=3;hi+=3}return[lo,hi];}
+  function targetWeight(club,flex,tempo){
+    if(['iron','wedge','driving_iron'].includes(club)){const map={L:85,A:95,SR:100,R:105,S:115,X:125,XS:130};return weightedRange(map[flex]||105,tempo,8);}
+    if(club==='hybrid'){const map={L:55,A:65,SR:70,R:75,S:85,X:95,XS:100};return weightedRange(map[flex]||80,tempo,7);}
+    const map={L:45,A:50,SR:52,R:55,S:60,X:65,XS:70};return weightedRange(map[flex]||60,tempo,6);
+  }
+  function shaftOffersFlex(shaft,desiredFlex){const want=normFlex(desiredFlex);const offered=(shaft.flex||[]).map(x=>normFlex(x));return offered.includes(want)||(FLEX_ALIAS[want]&&offered.includes(FLEX_ALIAS[want]));}
+  function gripFromGlove(g){g=(g||'').toLowerCase();if(g.includes('xl'))return'Jumbo';if(g.includes('large'))return'Midsize';return'Standard';}
+  function lenLie(hft,hin,wtf){const h=(parseInt(hft)||0)*12+(parseInt(hin)||0);const w=parseFloat(wtf)||0;let length='Standard',lie='Standard',adj=0;
+    if((h>=73&&w>=37)||w>=39){length='+1.0"';adj=2}else if(h>=73||w>=37){length='+0.5"';adj=1}
+    else if((h<=66&&w<=33)||w<=31){length='-1.0"';adj=-2}else if(h<=66||w<=33){length='-0.5"';adj=-1}
+    if(adj>0)lie=`${adj}° upright`;else if(adj<0)lie=`${Math.abs(adj)}° flat`;return{length,lie,adj};}
+
+  const W = {FLEX:30,WEIGHT:15,FLIGHT:15,MISS:5,STOCK:2,MAT_PREF:18,WT_PREF:15};
+  function flightScore(desired,L){if(desired==='Higher'&&/high/.test(L||''))return W.FLIGHT;if(desired==='Lower'&&/low/.test(L||''))return W.FLIGHT;if(desired==='Mid'&&/mid/.test(L||''))return Math.round(W.FLIGHT*0.8);return 0;}
+  function missScore(miss,S){if(miss==='left'&&(S||'')==='low')return W.MISS;if(miss==='right'&&(S||'')!=='low')return Math.round(W.MISS*0.6);return 0;}
+  function weightPrefScore(pref,w){if(pref==='any')return Math.round(W.WT_PREF*0.4);const band=pref==='light'?[0,95]:pref==='mid'?[96,110]:[111,999];return (w>=band[0]&&w<=band[1])?W.WT_PREF:0;}
+  function scoreShaft(shaft,p){let s=0;const offered=(shaft.flex||[]).map(x=>normFlex(x));const want=normFlex(p.flex);
+    s+=offered.includes(want)?W.FLEX:Math.round(W.FLEX*0.7);
+    const sw=weightFor(shaft,p.flex)||0; if(sw){const d=Math.abs(sw-p.wMid); s+=(sw>=p.w[0]&&sw<=p.w[1])?Math.max(0,W.WEIGHT-Math.min(18,d)):Math.max(0,W.WEIGHT-(d*0.8));}
+    s+=flightScore(p.flight,shaft.L||''); s+=missScore(p.miss,shaft.S||''); if(shaft.stock)s+=W.STOCK;
+    if(['iron','wedge','driving_iron'].includes(p.club)){ s+=weightPrefScore(p.wtpref,sw); }
+    return {score:s,sw};
+  }
+  function dedupeByFamily(items){const seen=new Map();for(const it of items){const fam=it.shaft.family||`${it.shaft.b} ${it.shaft.m}`;const prev=seen.get(fam);
+    if(!prev||it.score>prev.score+1||(Math.abs(it.score-prev.score)<=1&&it.shaft.stock&&!prev.shaft.stock))seen.set(fam,it);}return[...seen.values()];}
+  function pickTop(scored){const sorted=[...scored].sort((a,b)=>b.score-a.score);if(!sorted.length)return{best:null,alts:[]};let[best,...rest]=sorted;let alts=rest.slice(0,2);
+    if(![best,...alts].some(x=>x?.shaft.stock)){const firstStock=sorted.find(x=>x.shaft.stock);if(firstStock){if(!alts[1])alts[1]=firstStock;else if(!alts[0])alts[0]=firstStock;else if(!best.shaft.stock)best=firstStock;}}return{best,alts:alts.filter(Boolean).slice(0,2)};}
+  function labelFor(pct){return pct>=90?'Excellent fit':pct>=80?'Great fit':pct>=70?'Good fit':'Solid match';}
+  function whyText(shaft,p,sw){
+    const bits=[`${displayFlexLong(p.flex)} flex matches your numbers`];
+    if(sw&&(sw>=p.w[0]&&sw<=p.w[1]))bits.push(`${sw}g lands in your ${p.w[0]}–${p.w[1]}g window`);
+    if(shaft.stock)bits.push('Available as a stock build, no upcharge');
+    if(['iron','wedge','driving_iron'].includes(p.club)&&p.matpref!=='either'){
+      bits.push(`Matches your ${matDisplay(p.matpref)} preference`);
+    }
+    return bits.join(' · ');
+  }
+
+  /* ============ RUN FIT & RENDER RESULTS ============ */
+  function runFit(){
+    const isIronFam = ['iron','wedge','driving_iron'].includes(state.club);
+    const flex = isIronFam ? flexFromIronCarry(state.speed||0) : flexFromDriverCarry(state.speed||0);
+    const finalFlex = (state.gender!=='female' && flex==='L') ? 'A' : flex;
+
+    const w = targetWeight(state.club, finalFlex, state.tempo);
+    const wMid = Math.round((w[0]+w[1])/2);
+    const nearNote = nearFlexNote(state.club, state.speed);
+
+    let pool = (CAT[state.club]||[]).filter(s => shaftOffersFlex(s, finalFlex));
+    if (isIronFam && state.matpref !== 'either') {
+      pool = pool.filter(s => (s.mat==='composite'?'graphite':s.mat) === state.matpref);
+      if (pool.length === 0) { pool = (CAT[state.club]||[]).filter(s => shaftOffersFlex(s, finalFlex)); }
+    }
+
+    const prefs = {club:state.club,flex:finalFlex,w,wMid,miss:state.miss,flight:state.flight,tempo:state.tempo,matpref:state.matpref,wtpref:state.wtpref};
+    let scored = pool.map(s => { const {score, sw} = scoreShaft(s, prefs); return {shaft:s, score, sw}; });
+    scored = dedupeByFamily(scored);
+    const picks = pickTop(scored);
+
+    const {length, lie} = lenLie(state.hft, state.hin, state.wtf);
+
+    if (state.email) state.email = normalizeEmail(state.email);
+
+    const grip = gripFromGlove(state.glove);
+    const head = (state.club==='iron')
+      ? pickIronHead(state.striking, state.score, 'first')
+      : (CLUB_MEDIA[state.club] || {img:'',url:'#',name:state.club.replace('_',' ')});
+
+    /* ============ BUILD RESULTS DOM ============ */
+    results.style.display = 'block';
+    results.innerHTML = '';
+
+    // Divider
+    const divider = document.createElement('div');
+    divider.className = 'hyq-results-divider';
+    divider.innerHTML = `<div class="hyq-results-divider-inner">
+      <span class="hyq-results-divider-rule"></span>
+      <span class="hyq-results-divider-text">Your fit</span>
+      <span class="hyq-results-divider-rule"></span>
+    </div>`;
+    results.appendChild(divider);
+
+    // Persona spotlight
+    const personaTitle = `${state.tempo.charAt(0).toUpperCase()+state.tempo.slice(1)} tempo. ${state.flight} flight.<br>${state.miss==='none'?'Neutral miss.':state.miss.charAt(0).toUpperCase()+state.miss.slice(1)+' miss.'}`;
+    const fitLine = (function(){
+      const f = displayFlexLong(finalFlex); const wtxt = `${w[0]}–${w[1]}g`;
+      if (state.flight==='Higher') return `A ${f} profile in the ${wtxt} window helps you launch it higher without giving up control.`;
+      if (state.flight==='Lower') return `A ${f} profile in the ${wtxt} window flights it down and tightens dispersion.`;
+      return `A ${f} profile in the ${wtxt} window complements your tempo for a stable, mid-flight result.`;
+    })();
+    const persona = document.createElement('div');
+    persona.className = 'hyq-persona';
+    persona.innerHTML = `
+      <div class="hyq-persona-eyebrow">
+        <span class="hyq-persona-eyebrow-rule"></span>
+        <span class="hyq-persona-eyebrow-text">Your fit profile</span>
+      </div>
+      <h3 class="hyq-persona-title">${personaTitle}</h3>
+      <p class="hyq-persona-body">${fitLine}</p>`;
+    results.appendChild(persona);
+
+    // Model card
+    const showLength = !(state.club==='driver' || state.club==='fairway');
+    const showLie = !(state.club==='driver' || state.club==='fairway' || state.club==='hybrid');
+    const specs = [];
+    if (showLength) specs.push({label:'Length', value:length});
+    if (showLie) specs.push({label:'Lie', value:lie});
+    specs.push({label:'Flex', value:displayFlexLong(finalFlex)});
+    specs.push({label:'Grip', value:grip});
+    specs.push({label:'Hand', value:state.hand});
+    while (specs.length < 4) specs.push({label:'', value:''});
+    const specsHtml = specs.slice(0,4).map(sp => sp.label
+      ? `<div class="hyq-spec"><div class="hyq-spec-label">${sp.label}</div><div class="hyq-spec-value">${sp.value}</div></div>`
+      : `<div class="hyq-spec"></div>`
+    ).join('');
+
+    const imgHtml = head.img
+      ? `<img class="hyq-model-img" src="${head.img}" alt="${head.name}" loading="lazy">`
+      : `<div class="hyq-model-img-fallback">${head.name||'Haywood'}</div>`;
+
+    const model = document.createElement('div');
+    model.className = 'hyq-model';
+    model.innerHTML = `
+      <div class="hyq-model-img-wrap">
+        ${imgHtml}
+      </div>
+      <div class="hyq-model-body">
+        <div class="hyq-model-head">
+          <div class="hyq-model-eyebrow">
+            <span class="hyq-model-eyebrow-rule"></span>
+            <span class="hyq-model-eyebrow-text">Your model</span>
+          </div>
+          <span class="hyq-best-badge">Best match</span>
+        </div>
+        <h3 class="hyq-model-name">${head.name}</h3>
+        <div class="hyq-spec-grid">${specsHtml}</div>
+        ${nearNote ? `<p class="hyq-near-note">${nearNote}</p>` : ''}
+        <div class="hyq-model-ctas" style="margin-top:${nearNote?'16px':'0'}">
+          <a class="hyq-cta hyq-cta-primary" href="${head.url}" target="_blank" rel="noopener">View product →</a>
+          <a class="hyq-cta hyq-cta-ghost" href="/pages/booking" target="_blank" rel="noopener">Book a fitting</a>
+        </div>
+      </div>`;
+    results.appendChild(model);
+
+    // Shafts header
+    const shaftsHead = document.createElement('div');
+    shaftsHead.className = 'hyq-shafts-head';
+    shaftsHead.innerHTML = `<span class="hyq-shafts-rule"></span><h3 class="hyq-shafts-title">Shaft Recommendations</h3>`;
+    results.appendChild(shaftsHead);
+
+    if (!picks.best) {
+      const empty = document.createElement('div');
+      empty.className = 'hyq-shaft';
+      empty.innerHTML = `<div class="hyq-shaft-name">No shafts found.</div><p class="hyq-why">Try adjusting your flex, material, or weight preferences.</p>`;
+      results.appendChild(empty);
+    } else {
+      renderShaftRow('Best overall', picks.best, picks.best.score, true);
+      if (picks.alts[0]) renderShaftRow('Alternative', picks.alts[0], picks.best.score, false);
+      if (picks.alts[1]) renderShaftRow('Alternative', picks.alts[1], picks.best.score, false);
+    }
+
+    function renderShaftRow(kind, item, bestScore, isBest){
+      if (!item) return;
+      const {shaft, score, sw} = item;
+      const pct = Math.max(1, Math.min(100, Math.round((score / (bestScore||1)) * 100)));
+      const div = document.createElement('div');
+      div.className = 'hyq-shaft' + (isBest ? ' is-best' : '');
+      const pillsArr = [
+        `<span class="hyq-pill">${matDisplay(shaft.mat||'')}</span>`,
+        sw ? `<span class="hyq-pill">${sw}g</span>` : '',
+        shaft.stock ? `<span class="hyq-pill is-stock">In stock</span>` : `<span class="hyq-pill is-upcharge">Upcharge</span>`
+      ].filter(Boolean).join('');
+      const imgHtml = shaft.img ? `<img class="hyq-shaft-img" src="${shaft.img}" alt="${shaft.b} ${shaft.m}" loading="lazy">` : '';
+
+      div.innerHTML = `
+        <div class="hyq-shaft-row">
+          ${imgHtml}
+          <div class="hyq-shaft-main">
+            <div class="hyq-shaft-eyebrow">${kind}</div>
+            <h4 class="hyq-shaft-name">${shaft.b} ${shaft.m} <span class="hyq-shaft-flex">/ ${displayFlexLong(prefs.flex)}</span></h4>
+            <div class="hyq-shaft-pills">${pillsArr}</div>
+          </div>
+          <div class="hyq-fit">
+            <div class="hyq-fit-pct">${pct}<span class="pct">%</span></div>
+            ${isBest ? `<div class="hyq-fit-label">${labelFor(pct)}</div>` : ''}
+          </div>
+        </div>
+        <div class="hyq-shaft-bar"><div class="hyq-shaft-bar-fill" style="width:${pct}%"></div></div>
+        ${isBest ? `<p class="hyq-why"><span class="hyq-why-label">Why this shaft</span>${whyText(shaft, prefs, sw)}</p>` : ''}
+      `;
+      results.appendChild(div);
+    }
+
+    // Email send
+    try {
+      const payload = buildResultsPayload({picks, prefs, head, adjustments:{length,lie,grip,hand:state.hand}, state, finalFlex});
+      if (!isValidEmail(state.email)) {
+        showToast('Please enter a valid email');
+      } else {
+        sendResultsEmail(payload);
+      }
+    } catch(err) { console.warn('Email not sent:', err); }
+
+    window.scrollTo({top: results.offsetTop - 12, behavior:'smooth'});
+  }
+
+  /* ============ EMAIL PAYLOAD + SEND (UNCHANGED) ============ */
+  function buildResultsPayload({picks, prefs, head, adjustments, state, finalFlex}) {
+    const best = picks.best?.shaft;
+    const alt1 = picks.alts?.[0]?.shaft;
+    const alt2 = picks.alts?.[1]?.shaft;
+    const base = "https://www.haywoodgolf.com";
+    const absoluteUrl = head.url.startsWith("http") ? head.url : base + head.url;
+
+    const summary = {
+      name: state.name,
+      email: state.email,
+      consent_email: !!state.consent_email,
+      optin_marketing: !!state.optin_marketing,
+      timestamp: new Date().toISOString(),
+      club: state.club, gender: state.gender, matpref: state.matpref, wtpref: state.wtpref,
+      speed: state.speed, tempo: state.tempo, flight: state.flight, miss: state.miss,
+      striking: state.striking, score: state.score, age: state.age,
+      hft: state.hft, hin: state.hin, wtf: state.wtf, glove: state.glove, hand: state.hand,
+      flex: finalFlex,
+      adjustments: {length: adjustments.length, lie: adjustments.lie, grip: adjustments.grip, hand: state.hand},
+      model: {name: head.name, url: absoluteUrl},
+      shafts: [best, alt1, alt2].filter(Boolean).map(s => ({brand: s.b, model: s.m, material: s.mat, stock: !!s.stock}))
+    };
+
+    const message_html = `
+      <h2 style="margin:0 0 8px">Your Haywood Fit Results</h2>
+      <p><strong>Model:</strong> ${head.name} — <a href="${absoluteUrl}" target="_blank">${absoluteUrl}</a></p>
+      <ul>
+        ${adjustments.length ? `<li><strong>Length:</strong> ${adjustments.length}</li>` : ""}
+        ${adjustments.lie ? `<li><strong>Lie:</strong> ${adjustments.lie}</li>` : ""}
+        <li><strong>Flex:</strong> ${displayFlexLong(prefs.flex)}</li>
+        <li><strong>Grip size:</strong> ${adjustments.grip}</li>
+        <li><strong>Hand:</strong> ${adjustments.hand}</li>
+      </ul>
+      <h3>Shaft Recommendations</h3>
+      <ol>
+        ${best ? `<li>${best.b} ${best.m}</li>` : ""}
+        ${alt1 ? `<li>${alt1.b} ${alt1.m}</li>` : ""}
+        ${alt2 ? `<li>${alt2.b} ${alt2.m}</li>` : ""}
+      </ol>
+      <p style="margin-top:12px">Thanks for using Haywood Find Your Fit.</p>
+    `;
+    return { summary, message_html };
+  }
+
+  function sendResultsEmail(payload) {
+    // Endpoint URL is read from the section setting "Email endpoint URL".
+    // Default fallback below — replace with your Vercel function URL.
+    const ENDPOINT = ({{ section.settings.endpoint_url | json }}) || "https://YOUR-VERCEL-URL.vercel.app/api/send-fit";
+    if (!ENDPOINT || ENDPOINT.includes("YOUR-VERCEL-URL")) {
+      console.warn("[HYQ] No endpoint configured. Set the Email endpoint URL in section settings.");
+      showToast("Email not configured");
+      return;
+    }
+    const resolvedEmail = normalizeEmail(payload.summary.email || "");
+    const resolvedName = String(payload.summary.name || "").trim();
+    if (!isValidEmail(resolvedEmail)) {
+      showToast("Please enter a valid email");
+      return;
+    }
+    payload.summary.email = resolvedEmail;
+    payload.summary.name = resolvedName;
+    fetch(ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    })
+    .then(async (resp) => {
+      if (resp.ok) {
+        showToast("Results sent — check your inbox");
+      } else {
+        const text = await resp.text().catch(() => "");
+        console.error("[HYQ] Email send failed:", resp.status, text);
+        showToast("Email failed — try again");
+      }
+    })
+    .catch(err => { console.error("[HYQ] Email error:", err); showToast("Email failed — try again"); });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Find Your Fit (Haywood)",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image (optional, will be tinted dark)"
+    },
+    {
+      "type": "text",
+      "id": "endpoint_url",
+      "label": "Email endpoint URL",
+      "info": "POST JSON to this endpoint to send results email."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_emailjs",
+      "label": "Use EmailJS (client-side)",
+      "default": false
+    },
+    {"type":"text","id":"emailjs_service_id","label":"EmailJS Service ID"},
+    {"type":"text","id":"emailjs_template_id","label":"EmailJS Template ID"},
+    {"type":"text","id":"emailjs_public_key","label":"EmailJS Public Key"},
+    {
+      "type": "textarea",
+      "id": "shaft_image_map",
+      "label": "Shaft image map (JSON: id -> image URL)",
+      "info": "Paste a JSON object mapping shaft IDs to image URLs."
+    }
+  ],
+  "presets": [
+    { "name": "Find Your Fit" }
+  ]
+}
+{% endschema %}

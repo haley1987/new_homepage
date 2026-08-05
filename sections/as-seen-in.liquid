@@ -1,0 +1,80 @@
+{% comment %}
+  sections/as-seen-in.liquid
+  “As Seen In” — logos carousel styled like vintage theme
+{% endcomment %}
+
+<section id="shopify-section-{{ section.id }}" class="as-seen-in-section">
+  <div class="as-seen-in__inner">
+    {% if section.settings.heading != blank %}
+      <h4 class="as-seen-in__heading">
+        {{ section.settings.heading }}
+      </h4>
+    {% endif %}
+
+    <div class="as-seen-in__logos">
+      {% for block in section.blocks %}
+        {% if block.type == 'logo' %}
+          <div class="as-seen-in__logo" {{ block.shopify_attributes }}>
+            {% if block.settings.image_url != blank %}
+              <a href="{{ block.settings.image_url }}"
+                 target="_blank" rel="noreferrer noopener">
+<img
+  src="{{ block.settings.image | image_url: width: 300 }}"
+  alt="{{ block.settings.alt }}"
+  loading="lazy"
+  class="as-seen-in__logo-image"
+/>
+
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "As Seen In",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "As Seen In"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Logo Image"
+        },
+        {
+          "id": "image_url",
+          "type": "url",
+          "label": "Logo URL"
+        },
+        {
+          "id": "alt",
+          "type": "text",
+          "label": "Alt Text",
+          "default": "Alt"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "As Seen In",
+      "category": "Press"
+    }
+  ]
+}
+{% endschema %}

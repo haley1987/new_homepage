@@ -1,0 +1,162 @@
+{%- comment -%}
+  Press (list) — Dawn-friendly
+  - Optional big hero message at the top
+  - Text left, logo/image right (uniform crop)
+  - No paginate (shows up to 50 posts)
+{%- endcomment -%}
+
+{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  /* Keep Dawn’s adjustable section padding */
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  /* Hero (big message) */
+  .press-hero {
+    margin: 0 0 1.25rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -.01em;
+    /* large but responsive; tweak if you like */
+    font-size: clamp(2rem, 4vw + 1rem, 5rem);
+  }
+  .press-hero :where(p){ margin: 0; }
+{%- endstyle -%}
+
+<style>
+  /* Right-column image + uniform crop (tweakable via settings) */
+  .press-list {
+    --thumb-width: {{ section.settings.thumb_width }}px;
+    --thumb-ratio: {{ section.settings.thumb_ratio }};
+    display: grid;
+    gap: 2rem;
+  }
+  .press-list__item {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) var(--thumb-width); /* text | image */
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .press-list__item--no-image { grid-template-columns: 1fr; }
+
+  .press-list__thumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: var(--thumb-ratio); /* e.g., 16/9, 4/3, 1/1 */
+    overflow: hidden;
+  }
+  .press-list__thumb img {
+    width: 100%; height: 100%; display: block;
+    object-fit: cover; object-position: center; /* crop neatly */
+  }
+
+  .press-list__date { opacity: .7; margin: 0 0 .25rem; }
+  .press-list__title { margin: .1rem 0 .5rem; }
+  .press-list__title a,
+  .press-list__title a:visited { color: inherit; text-decoration: none; }
+
+  @media (max-width: 749px) {
+    .press-list__item { grid-template-columns: 1fr; }
+    .press-list__thumb { grid-row: 1; }
+    .press-list__body  { grid-row: 2; margin-top: .75rem; }
+  }
+</style>
+
+<div class="page-width section-{{ section.id }}-padding">
+
+  {%- if section.settings.hero_richtext != blank -%}
+    <div class="press-hero">{{ section.settings.hero_richtext }}</div>
+  {%- endif -%}
+<br>
+  {%- assign articles = blog.articles -%}
+  {%- if articles.size > 0 -%}
+    <ul class="press-list" role="list">
+      {%- for article in articles -%}
+        {%- liquid
+          assign has_thumb = false
+          if section.settings.show_image and article.image != blank
+            assign has_thumb = true
+          endif
+        -%}
+
+        <li
+          class="press-list__item{% if has_thumb == false %} press-list__item--no-image{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade style="--animation-order: {{ forloop.index }};"
+          {% endif %}
+        >
+          <!-- text (left) -->
+          <div class="press-list__body">
+            {%- if section.settings.show_date -%}
+              <p class="press-list__date">{{ article.published_at | date: "%B %e, %Y" }}</p>
+            {%- endif -%}
+            <h2 class="press-list__title">
+              <a href="{{ article.url }}">{{ article.title }}</a>
+            </h2>
+            {%- if section.settings.show_excerpt -%}
+              <p class="press-list__excerpt">
+                {{ article.excerpt_or_content | strip_html | truncatewords: section.settings.excerpt_words }}
+              </p>
+            {%- endif -%}
+          </div>
+
+          <!-- image/logo (right) -->
+          {%- if has_thumb -%}
+            <a class="press-list__thumb" href="{{ article.url }}">
+              {{ article.image
+                | image_url: width: 1000
+                | image_tag:
+                    loading: 'lazy',
+                    sizes: '(min-width: 990px) 420px, 100vw',
+                    alt: article.image.alt | escape }}
+            </a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- else -%}
+    <p>No posts found. Check back soon.</p>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Press (list)",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "richtext", "id": "hero_richtext", "label": "Hero message (optional)", "default": "<p>For press opportunities please email <strong>info@haywoodgolf.com</strong>.</p>" },
+
+    { "type": "checkbox", "id": "show_image", "label": "Show image/logo", "default": true },
+    { "type": "checkbox", "id": "show_date", "label": "Show date", "default": true },
+    { "type": "checkbox", "id": "show_excerpt", "label": "Show excerpt", "default": false },
+    { "type": "range", "id": "excerpt_words", "label": "Excerpt length", "min": 10, "max": 60, "step": 5, "default": 20 },
+
+    { "type": "range", "id": "thumb_width", "label": "Right image width (px)", "min": 160, "max": 420, "step": 10, "default": 220 },
+    {
+      "type": "select",
+      "id": "thumb_ratio",
+      "label": "Image crop ratio",
+      "options": [
+        { "value": "16/9", "label": "16:9 (wide)" },
+        { "value": "3/2",  "label": "3:2" },
+        { "value": "4/3",  "label": "4:3 (taller)" },
+        { "value": "1/1",  "label": "1:1 (square)" }
+      ],
+      "default": "16/9"
+    },
+
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top padding", "default": 36 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom padding", "default": 36 }
+  ]
+}
+{% endschema %}

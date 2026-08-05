@@ -1,0 +1,82 @@
+{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  /* Make URL-based banner use natural height instead of Dawn’s ratio shim */
+  #Banner-{{ section.id }} .banner__media { position: relative; }
+  #Banner-{{ section.id }} .banner__media::before { content: none; display: none; }
+  #Banner-{{ section.id }} .banner__media .banner__media-image {
+    position: static;
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  h2.specs_banner_title{
+    text-align:center;
+    font-weight: bold;
+    padding-top: 2rem;
+  }
+{%- endstyle -%}
+
+
+{%- liquid
+  assign specs_url = product.metafields['specs-image']['specs-image']
+  assign fetch_priority = 'auto'
+  if section.index == 1
+    assign fetch_priority = 'high'
+  endif
+-%}
+
+{%- comment -%}
+  Renders only when product.metafields['specs-image']['specs-image'] (URL) is present.
+  If empty, the section outputs nothing (self-hiding).
+{%- endcomment -%}
+{%- if specs_url != blank -%}
+<h2 class="specs_banner_title" id="full-specs">Full Specifications</h2>
+<div
+  id="Banner-{{ section.id }}"
+  class="banner banner--content-align-center banner--{{ section.settings.image_height }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+>
+  <div class="banner__media media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+    <img
+      src="{{ specs_url | escape }}"
+      alt="{{ product.title | escape }} Specs"
+      class="banner__media-image"
+      loading="lazy"
+      decoding="async"
+      fetchpriority="{{ fetch_priority }}"
+    >
+  </div>
+
+
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Specs Image Banner",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    {
+      "type": "select",
+      "id": "image_height",
+      "label": "Image height",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [{ "name": "Specs Image Banner (URL metafield)" }]
+}
+{% endschema %}

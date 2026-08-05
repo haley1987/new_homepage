@@ -1,0 +1,286 @@
+
+
+{% comment %}— Count UGC items (images + video URLs + Instagram URLs) —{% endcomment %}
+{% assign ugc_count = 0 %}
+{% for i in (1..5) %}
+  {% assign img_key = "ugc_image_"        | append: i %}
+  {% assign vid_key = "ugc_video_url_"    | append: i %}
+  {% assign ig_key  = "ugc_instagram_"    | append: i %}
+
+  {% if product.metafields.custom[img_key] %}
+    {% assign ugc_count = ugc_count | plus: 1 %}
+  {% endif %}
+  {% if product.metafields.custom[vid_key] %}
+    {% assign ugc_count = ugc_count | plus: 1 %}
+  {% endif %}
+  {% if product.metafields.custom[ig_key] %}
+    {% assign ugc_count = ugc_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+{% if ugc_count > 0 %}
+  <section class="ugc-carousel">
+    <h2 class="ugc-carousel__title">From Our Players</h2>
+    <div class="ugc-carousel__track">
+
+      {% for i in (1..5) %}
+        {% assign img_key = "ugc_image_"     | append: i %}
+        {% assign vid_key = "ugc_video_url_" | append: i %}
+        {% assign ig_key  = "ugc_instagram_" | append: i %}
+
+        {%- comment -%} — IMAGE {{ i }} — {%- endcomment -%}
+        {% assign img = product.metafields.custom[img_key] %}
+        {% if img %}
+<div class="ugc-carousel__slide">
+  <img
+    class="lazyload"
+    src="{{ img | file_url }}"
+    data-src="{{ img | file_url }}"
+    alt="Player using {{ product.title }}"
+    decoding="async" loading="lazy" />
+</div>
+
+        {% endif %}
+
+        {%- comment -%} — YOUTUBE / FB / HTML5 VIDEO {{ i }} — {%- endcomment -%}
+{% comment %}— pull the string out of the URL‐type metafield —{% endcomment %}
+{% assign raw   = product.metafields.custom[vid_key] %}
+{% assign url   = raw.value %}
+
+{% if url %}
+  <div class="ugc-carousel__slide video-slide">
+
+ {% comment %}— determine the YouTube video ID for watch/, youtu.be/ or shorts/ —{% endcomment %}
+      {% assign vid_id = '' %}
+
+      {% if url contains 'youtube.com/watch' %}
+        {% assign vid_id = url | split: 'v='   | last | split: '?' | first %}
+
+      {% elsif url contains 'youtu.be/' %}
+        {% assign vid_id = url | split: '/'   | last %}
+
+      {% elsif url contains '/shorts/' %}
+        {% assign vid_id = url | split: '/shorts/' | last | split: '?' | first %}
+      {% endif %}
+
+      {% comment %}— embed if we have a YouTube ID —{% endcomment %}
+      {% if vid_id != '' %}
+        <iframe
+          src="https://www.youtube.com/embed/{{ vid_id }}"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+
+    {% comment %}— Facebook Reel via iframe plugin —{% endcomment %}
+    {% elsif url contains 'facebook.com' %}
+      {% assign full      = url %}
+      {% assign last_char = full | slice: -1 %}
+      {% if last_char != '/' %}
+        {% assign full = full | append: '/' %}
+      {% endif %}
+      {% assign enc = full | url_encode %}
+
+      <iframe
+        src="https://www.facebook.com/plugins/video.php?href={{ enc }}&show_text=false"
+        width="560" height="315"
+        style="border:none;overflow:hidden"
+        scrolling="no"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+
+    {% comment %}— Self-hosted or other —{% endcomment %}
+    {% else %}
+      <video
+        src="{{ url }}"
+        controls
+        playsinline
+        preload="metadata">
+        Your browser doesn’t support HTML5 video.
+      </video>
+    {% endif %}
+
+  </div>
+{% endif %}
+
+
+        {%- comment -%} — INSTAGRAM REEL {{ i }} — {%- endcomment -%}
+        {% assign ig = product.metafields.custom[ig_key] %}
+        {% if ig %}
+          <div class="ugc-carousel__slide ig-slide">
+            <blockquote
+              class="instagram-media"
+              data-instgrm-permalink="{{ ig }}"
+              data-instgrm-version="14"
+              style="background:#FFF; border:0; margin:0 auto; max-width:540px; width:100%;">
+            </blockquote>
+          </div>
+        {% endif %}
+
+      {% endfor %}
+
+    </div>
+  </section>
+{% endif %}
+<script>
+(function () {
+  var target = document.querySelector('.ugc-carousel');
+  if (!target) return;
+
+  var loaded = false;
+
+  function loadIG(cb) {
+    // Already present?
+    if (window.instgrm && instgrm.Embeds && typeof instgrm.Embeds.process === 'function') {
+      cb && cb();
+      return;
+    }
+    if (loaded) return;
+    loaded = true;
+
+    var s = document.createElement('script');
+    s.src = 'https://www.instagram.com/embed.js';
+    s.async = true;
+    s.onload = function(){ try { instgrm.Embeds.process(); } catch(e){} };
+    document.body.appendChild(s);
+  }
+
+  // JIT load when near viewport
+  var seen = false;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!seen && e.isIntersecting) {
+        seen = true;
+        io.disconnect();
+        loadIG();
+      }
+    });
+  }, { rootMargin: '200px 0px' });
+  io.observe(target);
+
+  // Fallback: if user never scrolls
+  setTimeout(function(){ if (!seen) { seen = true; loadIG(); } }, 5000);
+})();
+</script>
+
+  {%- style -%}
+  /* UGC Carousel */
+
+.ugc-carousel__title {
+  text-align: center;
+  font-weight:bold;
+  margin-bottom: 1.5rem;
+}
+.ugc-carousel {
+    margin: 2rem 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 2rem;
+}
+
+.ugc-carousel__track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+.ugc-carousel__slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+
+/* 1) Make every slide a 16:9 container */
+.ugc-carousel__slide {
+  position: relative;
+  flex: 0 0 80%;               /* or whatever width you're using */
+  scroll-snap-align: center;
+  margin-right: 1rem;
+  padding-bottom: 56.25%;      /* 16 ÷ 9 = 0.5625 */
+  height: 0;                   
+  overflow: hidden;
+}
+
+/* 2) Force all media to fill that container */
+.ugc-carousel__slide img,
+.ugc-carousel__slide video,
+.ugc-carousel__slide iframe,
+.ugc-carousel__slide blockquote.instagram-media {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+
+
+
+@media(min-width: 640px) {
+  .ugc-carousel__slide { width: 45%; max-width: 300px; }
+}
+@media(min-width: 1024px) {
+  .ugc-carousel__slide { width: 30%; max-width: 360px; }
+}
+
+/* UGC — mobile no-crop overrides (wins against stale 16:9 rules) */
+@media (max-width: 749px) {
+  .ugc-carousel__track {
+    height: auto !important;
+    align-items: stretch !important;
+    overflow-y: hidden !important;
+  }
+
+  /* kill any 16:9 hacks on slides */
+  .ugc-carousel .ugc-carousel__slide,
+  .ugc-carousel .ugc-carousel__slide.video-slide,
+  .ugc-carousel .ugc-carousel__slide.ig-slide {
+    height: auto !important;
+    padding: 0 !important;
+    padding-bottom: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* children should not be absolutely positioned */
+  .ugc-carousel .ugc-carousel__slide > *,
+  .ugc-carousel .ugc-carousel__slide .fb_iframe_widget,
+  .ugc-carousel .ugc-carousel__slide iframe,
+  .ugc-carousel .ugc-carousel__slide blockquote.instagram-media {
+    position: static !important;
+    width: 100% !important;
+    
+    max-width: 100% !important;
+    min-width: 0 !important; /* beats IG inline 326px */
+  }
+ 
+
+}
+
+ @media only screen and (min-width: 900px) {
+   .sticky-media {
+    position: sticky;
+    top: 2rem;
+    align-self: flex-start;
+  }
+}
+
+  {%- endstyle -%}
+
+{% schema %}
+{
+  "name": "Haywood • UGC carousel",
+  "tag": "section",
+  "class": "section",
+  "templates": ["product"],
+  "settings": [],
+  "presets": [{ "name": "Haywood • UGC carousel" }]
+}
+{% endschema %}

@@ -1,0 +1,773 @@
+{% doc %}
+  @prompt
+    a holographic product card slider, more padding on top and bottom of banner
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-holographic-slider-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: {{ block.settings.section_padding }}px 0;
+    background: {{ block.settings.background_color }};
+  }
+
+  .ai-holographic-slider__container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-holographic-slider__header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: {{ block.settings.banner_padding }}px 0;
+  }
+
+  .ai-holographic-slider__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 16px;
+    font-weight: 600;
+  }
+
+  .ai-holographic-slider__subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  .ai-holographic-slider__track-container-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+
+  .ai-holographic-slider__track-{{ ai_gen_id }} {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    gap: {{ block.settings.card_gap }}px;
+  }
+
+  .ai-holographic-card-{{ ai_gen_id }} {
+    flex: 0 0 {{ block.settings.card_width }}px;
+    height: {{ block.settings.card_height }}px;
+    position: relative;
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: hidden;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .ai-holographic-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+  }
+
+  .ai-holographic-card__inner-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      {{ block.settings.hologram_color_1 }} 0%,
+      {{ block.settings.hologram_color_2 }} 25%,
+      {{ block.settings.hologram_color_3 }} 50%,
+      {{ block.settings.hologram_color_4 }} 75%,
+      {{ block.settings.hologram_color_1 }} 100%
+    );
+    background-size: 400% 400%;
+    animation: ai-holographic-gradient-{{ ai_gen_id }} 3s ease infinite;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      0 0 40px rgba(255, 255, 255, 0.1);
+  }
+
+  .ai-holographic-card__inner-{{ ai_gen_id }}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    transition: left 0.5s;
+    z-index: 2;
+  }
+
+  .ai-holographic-card-{{ ai_gen_id }}:hover .ai-holographic-card__inner-{{ ai_gen_id }}::before {
+    left: 100%;
+  }
+
+  .ai-holographic-card__image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    height: 60%;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+    z-index: 3;
+  }
+
+  .ai-holographic-card__image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .ai-holographic-card-{{ ai_gen_id }}:hover .ai-holographic-card__image-{{ ai_gen_id }} img {
+    transform: scale(1.05);
+  }
+
+  .ai-holographic-card__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+  }
+
+  .ai-holographic-card__image-placeholder-{{ ai_gen_id }} svg {
+    width: 60px;
+    height: 60px;
+    opacity: 0.5;
+  }
+
+  .ai-holographic-card__content-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    z-index: 3;
+    border-radius: 0 0 {{ block.settings.card_border_radius }}px {{ block.settings.card_border_radius }}px;
+  }
+
+  .ai-holographic-card__title-{{ ai_gen_id }} {
+    font-size: 18px;
+    font-weight: 600;
+    color: #121212;
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+
+  .ai-holographic-card__price-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 700;
+    color: {{ block.settings.price_color }};
+    margin: 0 0 12px;
+  }
+
+  .ai-holographic-card__button-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 10px;
+    background: {{ block.settings.button_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .ai-holographic-card__button-{{ ai_gen_id }}:hover {
+    background: {{ block.settings.button_hover_color }};
+    transform: translateY(-2px);
+  }
+
+  .ai-holographic-slider__controls-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .ai-holographic-slider__nav-{{ ai_gen_id }} {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: {{ block.settings.nav_button_color }};
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: {{ block.settings.nav_button_text_color }};
+  }
+
+  .ai-holographic-slider__nav-{{ ai_gen_id }}:hover {
+    background: {{ block.settings.nav_button_hover_color }};
+    transform: scale(1.1);
+  }
+
+  .ai-holographic-slider__nav-{{ ai_gen_id }}:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .ai-holographic-slider__dots-{{ ai_gen_id }} {
+    display: flex;
+    gap: 8px;
+  }
+
+  .ai-holographic-slider__dot-{{ ai_gen_id }} {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .ai-holographic-slider__dot-{{ ai_gen_id }}.active {
+    background: {{ block.settings.dot_active_color }};
+    transform: scale(1.2);
+  }
+
+  @keyframes ai-holographic-gradient-{{ ai_gen_id }} {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-holographic-card-{{ ai_gen_id }} {
+      flex: 0 0 280px;
+    }
+    
+    .ai-holographic-slider__container-{{ ai_gen_id }} {
+      padding: 0 15px;
+    }
+
+    .ai-holographic-slider__header-{{ ai_gen_id }} {
+      padding: {{ block.settings.banner_padding | times: 0.7 }}px 0;
+    }
+  }
+{% endstyle %}
+
+<holographic-slider-{{ ai_gen_id }}
+  class="ai-holographic-slider-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-holographic-slider__container-{{ ai_gen_id }}">
+    {% if block.settings.title != blank or block.settings.subtitle != blank %}
+      <div class="ai-holographic-slider__header-{{ ai_gen_id }}">
+        {% if block.settings.title != blank %}
+          <h2 class="ai-holographic-slider__title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+        {% endif %}
+        {% if block.settings.subtitle != blank %}
+          <p class="ai-holographic-slider__subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ai-holographic-slider__track-container-{{ ai_gen_id }}">
+      <div class="ai-holographic-slider__track-{{ ai_gen_id }}" data-track>
+        {% if block.settings.products != blank %}
+          {% for product in block.settings.products %}
+            <div class="ai-holographic-card-{{ ai_gen_id }}" data-card="{{ forloop.index0 }}">
+              <div class="ai-holographic-card__inner-{{ ai_gen_id }}">
+                <div class="ai-holographic-card__image-{{ ai_gen_id }}">
+                  {% if product.featured_image %}
+                    <img
+                      src="{{ product.featured_image | image_url: width: 400 }}"
+                      alt="{{ product.featured_image.alt | escape }}"
+                      loading="lazy"
+                      width="400"
+                      height="400"
+                    >
+                  {% else %}
+                    <div class="ai-holographic-card__image-placeholder-{{ ai_gen_id }}">
+                      {{ 'product-1' | placeholder_svg_tag }}
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="ai-holographic-card__content-{{ ai_gen_id }}">
+                  <h3 class="ai-holographic-card__title-{{ ai_gen_id }}">{{ product.title }}</h3>
+                  <div class="ai-holographic-card__price-{{ ai_gen_id }}">{{ product.price | money }}</div>
+                  <a href="{{ product.url }}" class="ai-holographic-card__button-{{ ai_gen_id }}">
+                    {{ block.settings.button_text }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          {% for i in (1..6) %}
+            <div class="ai-holographic-card-{{ ai_gen_id }}" data-card="{{ forloop.index0 }}">
+              <div class="ai-holographic-card__inner-{{ ai_gen_id }}">
+                <div class="ai-holographic-card__image-{{ ai_gen_id }}">
+                  <div class="ai-holographic-card__image-placeholder-{{ ai_gen_id }}">
+                    {{ 'product-1' | placeholder_svg_tag }}
+                  </div>
+                </div>
+                <div class="ai-holographic-card__content-{{ ai_gen_id }}">
+                  <h3 class="ai-holographic-card__title-{{ ai_gen_id }}">Sample Product {{ i }}</h3>
+                  <div class="ai-holographic-card__price-{{ ai_gen_id }}">$99.00</div>
+                  <a href="#" class="ai-holographic-card__button-{{ ai_gen_id }}">
+                    {{ block.settings.button_text }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+    {% if block.settings.show_controls %}
+      <div class="ai-holographic-slider__controls-{{ ai_gen_id }}">
+        <button class="ai-holographic-slider__nav-{{ ai_gen_id }}" data-prev aria-label="Previous slide">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15,18 9,12 15,6"></polyline>
+          </svg>
+        </button>
+        
+        <div class="ai-holographic-slider__dots-{{ ai_gen_id }}" data-dots></div>
+        
+        <button class="ai-holographic-slider__nav-{{ ai_gen_id }}" data-next aria-label="Next slide">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"></polyline>
+          </svg>
+        </button>
+      </div>
+    {% endif %}
+  </div>
+</holographic-slider-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class HolographicSlider{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentSlide = 0;
+        this.slidesPerView = this.getSlidesPerView();
+        this.autoplayInterval = null;
+      }
+
+      connectedCallback() {
+        this.track = this.querySelector('[data-track]');
+        this.cards = this.querySelectorAll('[data-card]');
+        this.prevBtn = this.querySelector('[data-prev]');
+        this.nextBtn = this.querySelector('[data-next]');
+        this.dotsContainer = this.querySelector('[data-dots]');
+        
+        this.totalSlides = Math.max(0, this.cards.length - this.slidesPerView + 1);
+        
+        this.setupDots();
+        this.setupEventListeners();
+        this.updateSlider();
+        
+        if ({{ block.settings.autoplay | json }}) {
+          this.startAutoplay();
+        }
+
+        window.addEventListener('resize', () => {
+          this.slidesPerView = this.getSlidesPerView();
+          this.totalSlides = Math.max(0, this.cards.length - this.slidesPerView + 1);
+          this.currentSlide = Math.min(this.currentSlide, this.totalSlides - 1);
+          this.setupDots();
+          this.updateSlider();
+        });
+      }
+
+      getSlidesPerView() {
+        const cardWidth = {{ block.settings.card_width }};
+        const gap = {{ block.settings.card_gap }};
+        const containerWidth = this.track.parentElement.offsetWidth;
+        return Math.floor((containerWidth + gap) / (cardWidth + gap));
+      }
+
+      setupDots() {
+        if (!this.dotsContainer) return;
+        
+        this.dotsContainer.innerHTML = '';
+        for (let i = 0; i < this.totalSlides; i++) {
+          const dot = document.createElement('button');
+          dot.className = 'ai-holographic-slider__dot-{{ ai_gen_id }}';
+          dot.setAttribute('data-slide', i);
+          dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+          if (i === this.currentSlide) {
+            dot.classList.add('active');
+          }
+          this.dotsContainer.appendChild(dot);
+        }
+      }
+
+      setupEventListeners() {
+        if (this.prevBtn) {
+          this.prevBtn.addEventListener('click', () => this.prevSlide());
+        }
+        
+        if (this.nextBtn) {
+          this.nextBtn.addEventListener('click', () => this.nextSlide());
+        }
+        
+        if (this.dotsContainer) {
+          this.dotsContainer.addEventListener('click', (e) => {
+            if (e.target.hasAttribute('data-slide')) {
+              this.goToSlide(parseInt(e.target.getAttribute('data-slide')));
+            }
+          });
+        }
+
+        this.addEventListener('mouseenter', () => this.stopAutoplay());
+        this.addEventListener('mouseleave', () => {
+          if ({{ block.settings.autoplay | json }}) {
+            this.startAutoplay();
+          }
+        });
+      }
+
+      prevSlide() {
+        this.currentSlide = this.currentSlide > 0 ? this.currentSlide - 1 : this.totalSlides - 1;
+        this.updateSlider();
+      }
+
+      nextSlide() {
+        this.currentSlide = this.currentSlide < this.totalSlides - 1 ? this.currentSlide + 1 : 0;
+        this.updateSlider();
+      }
+
+      goToSlide(index) {
+        this.currentSlide = Math.max(0, Math.min(index, this.totalSlides - 1));
+        this.updateSlider();
+      }
+
+      updateSlider() {
+        const cardWidth = {{ block.settings.card_width }};
+        const gap = {{ block.settings.card_gap }};
+        const translateX = -(this.currentSlide * (cardWidth + gap));
+        
+        this.track.style.transform = `translateX(${translateX}px)`;
+        
+        if (this.prevBtn) {
+          this.prevBtn.disabled = this.currentSlide === 0;
+        }
+        
+        if (this.nextBtn) {
+          this.nextBtn.disabled = this.currentSlide === this.totalSlides - 1;
+        }
+        
+        this.querySelectorAll('.ai-holographic-slider__dot-{{ ai_gen_id }}').forEach((dot, index) => {
+          dot.classList.toggle('active', index === this.currentSlide);
+        });
+      }
+
+      startAutoplay() {
+        this.stopAutoplay();
+        this.autoplayInterval = setInterval(() => {
+          this.nextSlide();
+        }, {{ block.settings.autoplay_speed | times: 1000 }});
+      }
+
+      stopAutoplay() {
+        if (this.autoplayInterval) {
+          clearInterval(this.autoplayInterval);
+          this.autoplayInterval = null;
+        }
+      }
+
+      disconnectedCallback() {
+        this.stopAutoplay();
+      }
+    }
+
+    customElements.define('holographic-slider-{{ ai_gen_id }}', HolographicSlider{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Holographic slider",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Featured Products"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Discover our latest collection"
+    },
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "Products",
+      "limit": 12
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View Product"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "min": 250,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Card width",
+      "default": 320
+    },
+    {
+      "type": "range",
+      "id": "card_height",
+      "min": 350,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Card height",
+      "default": 420
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Card gap",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Section padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "banner_padding",
+      "min": 20,
+      "max": 80,
+      "step": 10,
+      "unit": "px",
+      "label": "Banner padding",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Slider controls"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_controls",
+      "label": "Show navigation controls",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay speed",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Holographic colors"
+    },
+    {
+      "type": "color",
+      "id": "hologram_color_1",
+      "label": "Hologram color 1",
+      "default": "#ff006e"
+    },
+    {
+      "type": "color",
+      "id": "hologram_color_2",
+      "label": "Hologram color 2",
+      "default": "#8338ec"
+    },
+    {
+      "type": "color",
+      "id": "hologram_color_3",
+      "label": "Hologram color 3",
+      "default": "#3a86ff"
+    },
+    {
+      "type": "color",
+      "id": "hologram_color_4",
+      "label": "Hologram color 4",
+      "default": "#06ffa5"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price color",
+      "default": "#ff006e"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_color",
+      "label": "Navigation button color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_text_color",
+      "label": "Navigation button text color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_hover_color",
+      "label": "Navigation button hover color",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "color",
+      "id": "dot_active_color",
+      "label": "Active dot color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle size",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Border radius"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Card border radius",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Holographic slider"
+    }
+  ]
+}
+{% endschema %}

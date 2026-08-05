@@ -1,0 +1,110 @@
+{%- comment -%}
+  Vintage‐style bottom row
+{%- endcomment -%}
+<div class="footer__vintage-bottom page-width vintage-footer__bottom">
+  <ul class="vintage-footer__social list-unstyled">
+ 
+    {%- if settings.social_instagram_link != blank -%}
+      <li>
+        <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener">
+          <span class="svg-wrapper">{{ 'icon-instagram.svg' | inline_asset_content }}</span>
+        </a>
+      </li>
+    {%- endif -%}
+       {%- if settings.social_facebook_link != blank -%}
+      <li>
+        <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener">
+          <span class="svg-wrapper">{{ 'icon-facebook.svg' | inline_asset_content }}</span>
+        </a>
+      </li>
+    {%- endif -%}
+    {%- if settings.social_twitter_link != blank -%}
+      <li>
+        <a href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener">
+          <span class="svg-wrapper">{{ 'icon-twitter.svg' | inline_asset_content }}</span>
+        </a>
+      </li>
+    {%- endif -%}
+  </ul>
+
+  <ul class="vintage-footer__right list-unstyled">
+
+    <li><a href="/pages/terms-of-service">Terms of Service</a></li>
+    <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+        <li>
+      &copy; {{ 'now' | date: '%Y' }}, {{ shop.name | escape }}
+    </li>
+  </ul>
+</div>
+<style>
+/* ------------------------------------
+   Vintage footer bottom row
+------------------------------------ */
+.vintage-footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  gap: 1rem;
+  margin-top: 4rem;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+
+/* shift over for your 240px sidebar on desktop */
+@media screen and (min-width: 990px) {
+  .vintage-footer__bottom {
+     margin-left: 22.5%;
+     margin-right: 2%;
+  }
+}
+
+/* reset list styles & lay them out in a row */
+.vintage-footer__social,
+.vintage-footer__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* left block (social icons) */
+.vintage-footer__social {
+  order: 1;
+}
+
+/* right block (© text + policy links) */
+.vintage-footer__right {
+  order: 2;
+  font-size: 0.875rem;   /* tighter type */
+}
+
+/* link styling */
+.vintage-footer__social a,
+.vintage-footer__right a {
+  color: #666;
+  text-decoration: none;
+}
+
+.vintage-footer__social a:hover,
+.vintage-footer__right a:hover {
+  text-decoration: underline;
+}
+
+/* make sure the © text isn’t too big */
+.vintage-footer__right small {
+  color: #666;
+  display: block;
+}
+
+@media screen and (max-width: 749px) {
+  .vintage-footer__right {
+   font-size: 0.7rem;
+  }
+}
+
+
+</style>
