@@ -1,0 +1,60 @@
+<section
+  class="hw-section hw-featured"
+  style="--hw-section-background: {{ section.settings.background_color | default: '#f2eee5' }}; --hw-heading-color: {{ section.settings.heading_color | default: '#0b2341' }};"
+  aria-label="{{ section.settings.heading | escape }}"
+>
+  <div class="hw-shell hw-featured__inner">
+    {%- if section.settings.heading != blank -%}<h2 class="hw-featured__heading">{{ section.settings.heading | escape }}</h2>{%- endif -%}
+    <ul class="hw-featured__logos" role="list">
+      {%- for block in section.blocks -%}
+        <li class="hw-featured__logo" {{ block.shopify_attributes }}>
+          {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" aria-label="{{ block.settings.label | escape }}">{%- endif -%}
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 500 | image_tag: widths: '160, 240, 360, 500', sizes: '(min-width: 750px) 160px, 38vw', loading: 'lazy', alt: block.settings.label }}
+          {%- else -%}
+            <span>{{ block.settings.label | escape }}</span>
+          {%- endif -%}
+          {%- if block.settings.link != blank -%}</a>{%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Haywood featured in",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "header", "content": "Content colors" },
+    { "type": "color", "id": "background_color", "label": "Background color", "default": "#f2eee5" },
+    { "type": "color", "id": "heading_color", "label": "Text color", "default": "#0b2341" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "As Featured In" }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Publication",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Logo" },
+        { "type": "text", "id": "label", "label": "Publication name", "default": "Publication" },
+        { "type": "url", "id": "link", "label": "Optional link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Haywood featured in",
+      "blocks": [
+        { "type": "logo", "settings": { "label": "TXG" } },
+        { "type": "logo", "settings": { "label": "Forbes" } },
+        { "type": "logo", "settings": { "label": "GOLF.com" } },
+        { "type": "logo", "settings": { "label": "GolfWRX" } },
+        { "type": "logo", "settings": { "label": "The Province" } },
+        { "type": "logo", "settings": { "label": "British Columbia Golf" } },
+        { "type": "logo", "settings": { "label": "MyGolfSpy" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

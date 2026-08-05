@@ -276,7 +276,7 @@
       "settings": {
         "desktop_position": "center center",
         "mobile_position": "center center",
-        "background_color": "#0b0b0a",
+        "background_color": "#0b2341",
         "heading_color": "#ffffff",
         "text_color": "#c8c8c4",
         "eyebrow": "The 7-Iron Purchase Program",
@@ -411,9 +411,9 @@
     "hw_customer_proof": {
       "type": "haywood-phase2-customer-proof",
       "settings": {
-        "background_color": "#0b0b0a",
-        "heading_color": "#ffffff",
-        "text_color": "#adada8",
+        "background_color": "#f2eee5",
+        "heading_color": "#0b2341",
+        "text_color": "#56647a",
         "eyebrow": "Customer proof",
         "heading": "Built for golfers who care about the details.",
         "quote": "",
@@ -534,6 +534,79 @@
         "secondary_label": "",
         "secondary_link": ""
       }
+    },
+    "hw_featured": {
+      "type": "haywood-featured-in",
+      "blocks": {
+        "press_txg": {
+          "type": "logo",
+          "settings": {
+            "label": "TXG"
+          }
+        },
+        "press_forbes": {
+          "type": "logo",
+          "settings": {
+            "label": "Forbes"
+          }
+        },
+        "press_golf": {
+          "type": "logo",
+          "settings": {
+            "label": "GOLF.com"
+          }
+        },
+        "press_golfwrx": {
+          "type": "logo",
+          "settings": {
+            "label": "GolfWRX"
+          }
+        },
+        "press_province": {
+          "type": "logo",
+          "settings": {
+            "label": "The Province"
+          }
+        },
+        "press_bcgolf": {
+          "type": "logo",
+          "settings": {
+            "label": "British Columbia Golf"
+          }
+        },
+        "press_mygolfspy": {
+          "type": "logo",
+          "settings": {
+            "label": "MyGolfSpy"
+          }
+        }
+      },
+      "block_order": [
+        "press_txg",
+        "press_forbes",
+        "press_golf",
+        "press_golfwrx",
+        "press_province",
+        "press_bcgolf",
+        "press_mygolfspy"
+      ],
+      "settings": {
+        "background_color": "#f2eee5",
+        "heading_color": "#0b2341",
+        "heading": "As Featured In"
+      }
+    },
+    "hw_newsletter": {
+      "type": "haywood-newsletter-bar",
+      "settings": {
+        "background_color": "#0b2341",
+        "heading_color": "#f2eee5",
+        "text_color": "#c7cfda",
+        "eyebrow": "From Haywood",
+        "heading": "Better golf, delivered.",
+        "copy": "New releases, fitting knowledge and stories from the workshop—sent occasionally.",
+        "button_label": "Subscribe"
+      }
     }
   },
   "order": [
@@ -546,7 +619,9 @@
     "hw_process",
     "hw_education",
     "hw_customer_proof",
+    "hw_featured",
     "hw_community",
-    "hw_final_cta"
+    "hw_final_cta",
+    "hw_newsletter"
   ]
 }
