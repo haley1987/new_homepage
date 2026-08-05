@@ -12,7 +12,7 @@
   endif
 -%}
 
-<section class="hw-section hw-proof">
+<section class="hw-section hw-proof" style="--hw-section-background: {{ section.settings.background_color | default: '#0b0b0a' }}; --hw-heading-color: {{ section.settings.heading_color | default: '#ffffff' }}; --hw-text-color: {{ section.settings.text_color | default: '#adada8' }};">
   <div class="hw-shell hw-proof__inner{% if has_quote %} hw-proof__inner--quote{% endif %}">
     <div class="hw-proof__intro">
       {%- if section.settings.eyebrow != blank -%}<p class="hw-kicker">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
@@ -50,6 +50,10 @@
 {
   "name": "Haywood customer proof",
   "settings": [
+    { "type": "header", "content": "Content colors" },
+    { "type": "color", "id": "background_color", "label": "Background color", "default": "#0b0b0a" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#ffffff" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#adada8" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Customer proof" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Built for golfers who care about the details." },
     { "type": "textarea", "id": "quote", "label": "Approved quote" },

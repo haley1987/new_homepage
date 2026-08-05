@@ -3,7 +3,7 @@
   assign mobile_image = section.settings.mobile_image | default: desktop_image
 -%}
 
-<section class="hw-section hw-final-cta" style="--hw-overlay: {{ section.settings.overlay | divided_by: 100.0 }}; --hw-final-desktop-position: {{ section.settings.desktop_position }}; --hw-final-mobile-position: {{ section.settings.mobile_position }};">
+<section class="hw-section hw-final-cta" style="--hw-overlay: {{ section.settings.overlay | divided_by: 100.0 }}; --hw-final-desktop-position: {{ section.settings.desktop_position }}; --hw-final-mobile-position: {{ section.settings.mobile_position }}; --hw-heading-color: {{ section.settings.heading_color | default: '#ffffff' }}; --hw-text-color: {{ section.settings.text_color | default: '#c8c8c4' }};">
   <div class="hw-final-cta__media" aria-hidden="true">
     {%- if desktop_image != blank -%}
       <picture>
@@ -58,6 +58,9 @@
       { "value": "left bottom", "label": "Left bottom" }, { "value": "center bottom", "label": "Center bottom" }, { "value": "right bottom", "label": "Right bottom" }
     ], "default": "center center" },
     { "type": "range", "id": "overlay", "min": 0, "max": 80, "step": 5, "unit": "%", "label": "Overlay strength", "default": 45 },
+    { "type": "header", "content": "Content colors" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#ffffff" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#c8c8c4" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Your build starts here" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Build your best golf." },
     { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Explore the lineup or find the models and specifications that fit your game.</p>" },
