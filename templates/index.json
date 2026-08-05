@@ -343,7 +343,8 @@
         "seven_apply"
       ],
       "settings": {
-        "desktop_image": "shopify://shop_images/Haywood-79.jpg",
+        "desktop_image": "shopify://shop_images/ChatGPT_Image_Aug_5_2026_03_55_52_PM.png",
+        "mobile_image": "shopify://shop_images/ChatGPT_Image_Aug_5_2026_03_56_40_PM.png",
         "desktop_position": "center center",
         "mobile_position": "center center",
         "background_color": "#0b2341",
