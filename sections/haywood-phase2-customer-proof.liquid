@@ -1,22 +1,27 @@
-<section class="hw-section hw-proof">
+{%- assign has_quote = false -%}
+{%- if section.settings.quote != blank -%}{%- assign has_quote = true -%}{%- endif -%}
+
+<section class="hw-section hw-proof{% unless has_quote %} hw-proof--compact{% endunless %}">
   <div class="hw-shell hw-proof__grid">
     <div class="hw-proof__content">
       {%- if section.settings.eyebrow != blank -%}<p class="hw-kicker">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
       {%- if section.settings.heading != blank -%}<h2 class="hw-title hw-title--medium">{{ section.settings.heading | escape }}</h2>{%- endif -%}
-      {%- if section.settings.quote != blank -%}<blockquote class="hw-proof__quote">“{{ section.settings.quote | escape }}”</blockquote>{%- endif -%}
-      <cite class="hw-proof__cite">
-        {{ section.settings.customer_name | escape }}
-        {%- if section.settings.product_purchased != blank -%}<span class="hw-proof__product">{{ section.settings.product_purchased | escape }}</span>{%- endif -%}
-      </cite>
+      {%- if has_quote -%}
+        <blockquote class="hw-proof__quote">“{{ section.settings.quote | escape }}”</blockquote>
+        {%- if section.settings.customer_name != blank or section.settings.product_purchased != blank -%}
+          <cite class="hw-proof__cite">
+            {{ section.settings.customer_name | escape }}
+            {%- if section.settings.product_purchased != blank -%}<span class="hw-proof__product">{{ section.settings.product_purchased | escape }}</span>{%- endif -%}
+          </cite>
+        {%- endif -%}
+      {%- endif -%}
       {%- if section.settings.link_label != blank and section.settings.link != blank -%}<div class="hw-actions"><a class="hw-button" href="{{ section.settings.link }}">{{ section.settings.link_label | escape }}</a></div>{%- endif -%}
     </div>
-    <div class="hw-proof__media">
-      {%- if section.settings.image != blank -%}
+    {%- if has_quote and section.settings.image != blank -%}
+      <div class="hw-proof__media">
         {{ section.settings.image | image_url: width: 1600 | image_tag: widths: '550, 750, 1100, 1400, 1600', sizes: '(min-width: 750px) 50vw, 100vw', loading: 'lazy' }}
-      {%- else -%}
-        <div class="hw-media-placeholder">{{ 'lifestyle-2' | placeholder_svg_tag }}</div>
-      {%- endif -%}
-    </div>
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -26,9 +31,9 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Customer proof" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Built for golfers who care about the details." },
-    { "type": "textarea", "id": "quote", "label": "Quote", "default": "Placeholder testimonial — replace with an approved customer quote before launch." },
-    { "type": "text", "id": "customer_name", "label": "Customer name", "default": "Customer name" },
-    { "type": "text", "id": "product_purchased", "label": "Product purchased", "default": "Product purchased" },
+    { "type": "textarea", "id": "quote", "label": "Approved quote" },
+    { "type": "text", "id": "customer_name", "label": "Customer name" },
+    { "type": "text", "id": "product_purchased", "label": "Product purchased" },
     { "type": "image_picker", "id": "image", "label": "Image" },
     { "type": "text", "id": "link_label", "label": "Link label" },
     { "type": "url", "id": "link", "label": "Link" }

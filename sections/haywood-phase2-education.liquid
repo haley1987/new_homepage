@@ -5,7 +5,7 @@
       {%- if section.settings.heading != blank -%}<h2 class="hw-title hw-title--medium">{{ section.settings.heading | escape }}</h2>{%- endif -%}
     </header>
 
-    <div class="hw-education__grid">
+    <div class="hw-education__layout">
       {%- for block in section.blocks -%}
         {%- liquid
           assign card_article = block.settings.article
@@ -17,19 +17,23 @@
           endif
           assign card_link = block.settings.link | default: card_article.url
         -%}
-        <article class="hw-education-card" {{ block.shopify_attributes }}>
-          {%- if card_link != blank -%}<a class="hw-education-card__link" href="{{ card_link }}">{%- endif -%}
+        {%- if forloop.index == 2 -%}<div class="hw-education__supporting" aria-label="More journal articles">{%- endif -%}
+        <article class="hw-education-card {% if forloop.first %}hw-education-card--featured{% else %}hw-education-card--supporting{% endif %}" {{ block.shopify_attributes }}>
+          {%- if card_link != blank -%}<a class="hw-education-card__inner hw-education-card__link" href="{{ card_link }}">{%- else -%}<div class="hw-education-card__inner">{%- endif -%}
             <div class="hw-education-card__media">
               {%- if card_image != blank -%}
                 {{ card_image | image_url: width: 1600 | image_tag: widths: '550, 750, 1100, 1400, 1600', sizes: '(min-width: 990px) 55vw, (min-width: 750px) 50vw, 100vw', loading: 'lazy' }}
               {%- else -%}
-                {{ 'lifestyle-1' | placeholder_svg_tag }}
+                <div class="hw-education-card__placeholder" aria-hidden="true"></div>
               {%- endif -%}
             </div>
-            {%- if card_title != blank -%}<h3 class="hw-education-card__title">{{ card_title | escape }}</h3>{%- endif -%}
-            {%- if card_excerpt != blank -%}<p class="hw-education-card__excerpt">{{ card_excerpt | escape }}</p>{%- endif -%}
-          {%- if card_link != blank -%}</a>{%- endif -%}
+            <div class="hw-education-card__content">
+              {%- if card_title != blank -%}<h3 class="hw-education-card__title">{{ card_title | escape }}</h3>{%- endif -%}
+              {%- if card_excerpt != blank -%}<p class="hw-education-card__excerpt">{{ card_excerpt | escape }}</p>{%- endif -%}
+            </div>
+          {%- if card_link != blank -%}</a>{%- else -%}</div>{%- endif -%}
         </article>
+        {%- if forloop.last and forloop.index > 1 -%}</div>{%- endif -%}
       {%- endfor -%}
     </div>
   </div>

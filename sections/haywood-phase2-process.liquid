@@ -9,8 +9,14 @@
       {%- for block in section.blocks -%}
         <article class="hw-process__step" {{ block.shopify_attributes }}>
           <span class="hw-process__number">0{{ forloop.index }}</span>
+          <div class="hw-process__visual">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 900 | image_tag: class: 'hw-process__image', widths: '400, 600, 900', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 50vw, 80vw', loading: 'lazy' }}
+            {%- else -%}
+              <div class="hw-process__image-placeholder" aria-hidden="true">0{{ forloop.index }}</div>
+            {%- endif -%}
+          </div>
           <div>
-            {%- if block.settings.image != blank -%}{{ block.settings.image | image_url: width: 900 | image_tag: class: 'hw-process__image', widths: '400, 600, 900', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 50vw, 100vw', loading: 'lazy' }}{%- endif -%}
             <h3 class="hw-process__title">{{ block.settings.title | escape }}</h3>
             {%- if block.settings.copy != blank -%}<p class="hw-process__copy">{{ block.settings.copy | escape }}</p>{%- endif -%}
           </div>

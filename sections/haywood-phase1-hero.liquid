@@ -5,7 +5,7 @@
 
 <section
   class="hw-section hw-hero"
-  style="--hw-overlay-top: {{ section.settings.overlay_top | divided_by: 100.0 }}; --hw-overlay-middle: {{ section.settings.overlay_middle | divided_by: 100.0 }}; --hw-overlay-bottom: {{ section.settings.overlay_bottom | divided_by: 100.0 }};"
+  style="--hw-overlay-top: {{ section.settings.overlay_top | divided_by: 100.0 }}; --hw-overlay-middle: {{ section.settings.overlay_middle | divided_by: 100.0 }}; --hw-overlay-bottom: {{ section.settings.overlay_bottom | divided_by: 100.0 }}; --hw-desktop-position: {{ section.settings.desktop_position }}; --hw-mobile-position: {{ section.settings.mobile_position }};"
 >
   <div class="hw-hero__media" aria-hidden="true">
     {%- if section.settings.desktop_video != blank or section.settings.mobile_video != blank -%}
@@ -65,6 +65,16 @@
   "settings": [
     { "type": "image_picker", "id": "desktop_image", "label": "Desktop image" },
     { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
+    { "type": "select", "id": "desktop_position", "label": "Desktop image position", "options": [
+      { "value": "left top", "label": "Left top" }, { "value": "center top", "label": "Center top" }, { "value": "right top", "label": "Right top" },
+      { "value": "left center", "label": "Left center" }, { "value": "center center", "label": "Center" }, { "value": "right center", "label": "Right center" },
+      { "value": "left bottom", "label": "Left bottom" }, { "value": "center bottom", "label": "Center bottom" }, { "value": "right bottom", "label": "Right bottom" }
+    ], "default": "center center" },
+    { "type": "select", "id": "mobile_position", "label": "Mobile image position", "options": [
+      { "value": "left top", "label": "Left top" }, { "value": "center top", "label": "Center top" }, { "value": "right top", "label": "Right top" },
+      { "value": "left center", "label": "Left center" }, { "value": "center center", "label": "Center" }, { "value": "right center", "label": "Right center" },
+      { "value": "left bottom", "label": "Left bottom" }, { "value": "center bottom", "label": "Center bottom" }, { "value": "right bottom", "label": "Right bottom" }
+    ], "default": "center center" },
     { "type": "video", "id": "desktop_video", "label": "Desktop video" },
     { "type": "video", "id": "mobile_video", "label": "Mobile video" },
     { "type": "range", "id": "overlay_top", "min": 0, "max": 90, "step": 5, "unit": "%", "label": "Overlay at top", "default": 20 },

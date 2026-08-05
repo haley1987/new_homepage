@@ -23,7 +23,7 @@
           assign card_image = block.settings.collection.featured_image
         endif
       -%}
-      <article class="hw-product-card" {{ block.shopify_attributes }}>
+      <article class="hw-product-card" style="--hw-card-fit: {{ block.settings.image_fit }}; --hw-card-position: {{ block.settings.image_position }};" {{ block.shopify_attributes }}>
         <div class="hw-product-card__media">
           {%- if card_image != blank -%}
             {{ card_image | image_url: width: 1400 | image_tag: widths: '550, 750, 1000, 1200, 1400', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 50vw, 82vw', loading: 'lazy' }}
@@ -57,6 +57,14 @@
       { "type": "text", "id": "category", "label": "Category", "default": "Players cavity" },
       { "type": "textarea", "id": "fit", "label": "Golfer-fit context", "default": "Forgiveness and control without losing the feedback better players expect." },
       { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "select", "id": "image_fit", "label": "Image fit", "options": [
+        { "value": "cover", "label": "Crop to fill" }, { "value": "contain", "label": "Show complete image" }
+      ], "default": "cover" },
+      { "type": "select", "id": "image_position", "label": "Image position", "options": [
+        { "value": "left top", "label": "Left top" }, { "value": "center top", "label": "Center top" }, { "value": "right top", "label": "Right top" },
+        { "value": "left center", "label": "Left center" }, { "value": "center center", "label": "Center" }, { "value": "right center", "label": "Right center" },
+        { "value": "left bottom", "label": "Left bottom" }, { "value": "center bottom", "label": "Center bottom" }, { "value": "right bottom", "label": "Right bottom" }
+      ], "default": "center center" },
       { "type": "product", "id": "product", "label": "Product" },
       { "type": "collection", "id": "collection", "label": "Collection" },
       { "type": "url", "id": "manual_link", "label": "Manual link" }

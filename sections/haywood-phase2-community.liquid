@@ -1,11 +1,8 @@
 <section class="hw-section hw-community" aria-label="{{ section.settings.accessibility_label | escape }}">
   <div class="hw-shell">
     <header class="hw-community__header">
-      <div>
-        {%- if section.settings.eyebrow != blank -%}<p class="hw-kicker">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
-        {%- if section.settings.heading != blank -%}<h2 class="hw-title hw-title--medium">{{ section.settings.heading | escape }}</h2>{%- endif -%}
-      </div>
-      {%- if section.settings.link_label != blank and section.settings.link != blank -%}<a class="hw-image-break__link" href="{{ section.settings.link }}">{{ section.settings.link_label | escape }}</a>{%- endif -%}
+      {%- if section.settings.eyebrow != blank -%}<p class="hw-kicker">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="hw-title hw-title--medium">{{ section.settings.heading | escape }}</h2>{%- endif -%}
     </header>
 
     <div class="hw-community__grid">
@@ -14,12 +11,15 @@
           {%- if block.settings.image != blank -%}
             {{ block.settings.image | image_url: width: 1600 | image_tag: widths: '400, 600, 900, 1200, 1600', sizes: '(min-width: 750px) 50vw, 50vw', loading: 'lazy' }}
           {%- else -%}
-            {{ 'lifestyle-1' | placeholder_svg_tag }}
+            <div class="hw-community__placeholder" aria-hidden="true"></div>
           {%- endif -%}
           {%- if block.settings.caption != blank -%}<figcaption class="hw-community__caption">{{ block.settings.caption | escape }}</figcaption>{%- endif -%}
         </figure>
       {%- endfor -%}
     </div>
+    {%- if section.settings.link_label != blank and section.settings.link != blank -%}
+      <div class="hw-community__footer"><a class="hw-community__link" href="{{ section.settings.link }}">{{ section.settings.link_label | escape }}</a></div>
+    {%- endif -%}
   </div>
 </section>
 
