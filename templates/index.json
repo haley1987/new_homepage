@@ -243,56 +243,12 @@
         "accessibility_label": "Explore Haywood golf clubs"
       }
     },
-    "hw_seven_iron": {
-      "type": "haywood-seven-iron-program",
-      "blocks": {
-        "seven_build": {
-          "type": "step",
-          "settings": {
-            "title": "Build it.",
-            "copy": "Choose your model, shaft, grip and adjustments."
-          }
-        },
-        "seven_play": {
-          "type": "step",
-          "settings": {
-            "title": "Play it.",
-            "copy": "Test a brand-new club built exactly as ordered."
-          }
-        },
-        "seven_apply": {
-          "type": "step",
-          "settings": {
-            "title": "Apply it.",
-            "copy": "Put the 7-iron purchase price toward your full set."
-          }
-        }
-      },
-      "block_order": [
-        "seven_build",
-        "seven_play",
-        "seven_apply"
-      ],
-      "settings": {
-        "desktop_position": "center center",
-        "mobile_position": "center center",
-        "background_color": "#0b2341",
-        "heading_color": "#ffffff",
-        "text_color": "#c8c8c4",
-        "eyebrow": "The 7-Iron Purchase Program",
-        "heading": "Try one. Then build the set.",
-        "body": "<p>Order a brand-new 7-iron built to your exact specs. When you’re ready for the full set, its purchase price is credited toward your order.</p>",
-        "cta_label": "Build Your 7-Iron",
-        "cta_link": "https://www.haywoodgolf.com/products/7-iron-purchase-program",
-        "note": "Custom-built 7-irons are non-refundable and non-returnable."
-      }
-    },
     "hw_find_fit": {
       "type": "haywood-phase2-find-fit",
       "settings": {
         "color_scheme": "scheme-2",
         "image": "shopify://shop_images/ChatGPT_Image_Aug_5_2026_01_58_29_PM.png",
-        "mobile_image": "shopify://shop_images/ChatGPT_Image_Aug_5_2026_02_00_37_PM.png",
+        "mobile_image": "shopify://shop_images/ChatGPT_Image_Aug_5_2026_03_49_00_PM.png",
         "image_fit": "contain",
         "desktop_position": "center center",
         "mobile_position": "center center",
@@ -354,6 +310,51 @@
         "eyebrow": "The Haywood process",
         "heading": "",
         "body": ""
+      }
+    },
+    "hw_seven_iron": {
+      "type": "haywood-seven-iron-program",
+      "blocks": {
+        "seven_build": {
+          "type": "step",
+          "settings": {
+            "title": "Build it.",
+            "copy": "Choose your model, shaft, grip and adjustments."
+          }
+        },
+        "seven_play": {
+          "type": "step",
+          "settings": {
+            "title": "Play it.",
+            "copy": "Test a brand-new club built exactly as ordered."
+          }
+        },
+        "seven_apply": {
+          "type": "step",
+          "settings": {
+            "title": "Apply it.",
+            "copy": "Put the 7-iron purchase price toward your full set."
+          }
+        }
+      },
+      "block_order": [
+        "seven_build",
+        "seven_play",
+        "seven_apply"
+      ],
+      "settings": {
+        "desktop_image": "shopify://shop_images/Haywood-79.jpg",
+        "desktop_position": "center center",
+        "mobile_position": "center center",
+        "background_color": "#0b2341",
+        "heading_color": "#ffffff",
+        "text_color": "#c8c8c4",
+        "eyebrow": "The 7-Iron Purchase Program",
+        "heading": "Try one. Then build the set.",
+        "body": "<p>Order a brand-new 7-iron built to your exact specs. When you’re ready for the full set, its purchase price is credited toward your order.</p>",
+        "cta_label": "Build Your 7-Iron",
+        "cta_link": "https://www.haywoodgolf.com/products/7-iron-purchase-program",
+        "note": "Custom-built 7-irons are non-refundable and non-returnable."
       }
     },
     "hw_education": {
@@ -422,6 +423,74 @@
         "summary": "Trusted by golfers worldwide",
         "link_label": "Read Customer Reviews",
         "link": "/pages/customer-reviews"
+      }
+    },
+    "hw_featured": {
+      "type": "haywood-featured-in",
+      "blocks": {
+        "press_txg": {
+          "type": "logo",
+          "settings": {
+            "label": "TXG",
+            "link": ""
+          }
+        },
+        "press_forbes": {
+          "type": "logo",
+          "settings": {
+            "label": "Forbes",
+            "link": ""
+          }
+        },
+        "press_golf": {
+          "type": "logo",
+          "settings": {
+            "label": "GOLF.com",
+            "link": ""
+          }
+        },
+        "press_golfwrx": {
+          "type": "logo",
+          "settings": {
+            "label": "GolfWRX",
+            "link": ""
+          }
+        },
+        "press_province": {
+          "type": "logo",
+          "settings": {
+            "label": "The Province",
+            "link": ""
+          }
+        },
+        "press_bcgolf": {
+          "type": "logo",
+          "settings": {
+            "label": "British Columbia Golf",
+            "link": ""
+          }
+        },
+        "press_mygolfspy": {
+          "type": "logo",
+          "settings": {
+            "label": "MyGolfSpy",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "press_txg",
+        "press_forbes",
+        "press_golf",
+        "press_golfwrx",
+        "press_province",
+        "press_bcgolf",
+        "press_mygolfspy"
+      ],
+      "settings": {
+        "background_color": "#f2eee5",
+        "heading_color": "#0b2341",
+        "heading": "As Featured In"
       }
     },
     "hw_community": {
@@ -535,67 +604,6 @@
         "secondary_link": ""
       }
     },
-    "hw_featured": {
-      "type": "haywood-featured-in",
-      "blocks": {
-        "press_txg": {
-          "type": "logo",
-          "settings": {
-            "label": "TXG"
-          }
-        },
-        "press_forbes": {
-          "type": "logo",
-          "settings": {
-            "label": "Forbes"
-          }
-        },
-        "press_golf": {
-          "type": "logo",
-          "settings": {
-            "label": "GOLF.com"
-          }
-        },
-        "press_golfwrx": {
-          "type": "logo",
-          "settings": {
-            "label": "GolfWRX"
-          }
-        },
-        "press_province": {
-          "type": "logo",
-          "settings": {
-            "label": "The Province"
-          }
-        },
-        "press_bcgolf": {
-          "type": "logo",
-          "settings": {
-            "label": "British Columbia Golf"
-          }
-        },
-        "press_mygolfspy": {
-          "type": "logo",
-          "settings": {
-            "label": "MyGolfSpy"
-          }
-        }
-      },
-      "block_order": [
-        "press_txg",
-        "press_forbes",
-        "press_golf",
-        "press_golfwrx",
-        "press_province",
-        "press_bcgolf",
-        "press_mygolfspy"
-      ],
-      "settings": {
-        "background_color": "#f2eee5",
-        "heading_color": "#0b2341",
-        "heading": "As Featured In"
-      }
-    },
     "hw_newsletter": {
       "type": "haywood-newsletter-bar",
       "settings": {
@@ -614,9 +622,9 @@
     "hw_trust",
     "hw_story",
     "hw_products",
-    "hw_seven_iron",
     "hw_find_fit",
     "hw_process",
+    "hw_seven_iron",
     "hw_education",
     "hw_customer_proof",
     "hw_featured",
