@@ -335,6 +335,10 @@ body.hw-homepage .vintage-footer__bottom { margin-right: 5% !important; margin-l
 .hw-community__caption { display: none; }
 .hw-community__footer { display: none; }
 
+/* Mobile scroll affordance */
+.hw-scroll-cue { display: none; }
+.hw-scroll-cue[hidden] { display: none !important; }
+
 /* Final CTA */
 .hw-final-cta { min-height: 24rem; color: var(--hw-white); background: #080808; }
 .hw-final-cta__media,
@@ -375,6 +379,11 @@ body.hw-homepage .vintage-footer__bottom { margin-right: 5% !important; margin-l
 @keyframes hw-arc-drift {
   from { transform: translate3d(0, 0, 0) rotate(0); }
   to { transform: translate3d(0, -.6rem, 0) rotate(1.5deg); }
+}
+
+@keyframes hw-swipe-cue {
+  0%, 20% { transform: translateX(0); }
+  70%, 100% { transform: translateX(2.7rem); }
 }
 
 @media (hover: hover) {
@@ -447,6 +456,26 @@ body.hw-homepage .vintage-footer__bottom { margin-right: 5% !important; margin-l
   .hw-proof__inner { min-height: 0; gap: 2.8rem; padding-block: 4.5rem; }
   .hw-proof__rating .hw-button { width: 100%; }
   .hw-community__grid { width: calc(100% + var(--hw-gutter)); padding-right: var(--hw-gutter); }
+  .hw-scroll-cue {
+    display: flex;
+    min-height: 2.4rem;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .7rem;
+    margin: .8rem var(--hw-gutter) 0;
+    color: var(--hw-navy);
+    font-size: .9rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    line-height: 1;
+    text-transform: uppercase;
+    transition: opacity 240ms ease, transform 240ms ease, visibility 240ms ease;
+  }
+  .hw-scroll-cue__track { position: relative; width: 4.2rem; height: 1px; overflow: visible; background: rgba(11,35,65,.26); }
+  .hw-scroll-cue__track i { position: absolute; top: -.2rem; left: 0; width: .5rem; height: .5rem; border-radius: 50%; background: var(--hw-gold); animation: hw-swipe-cue 1.6s cubic-bezier(.4,0,.2,1) infinite alternate; }
+  .hw-scroll-cue__arrow { color: var(--hw-gold); font-size: 1.4rem; letter-spacing: 0; }
+  .hw-scroll-cue--used { visibility: hidden; opacity: 0; transform: translateX(.8rem); }
+  .hw-trust .hw-scroll-cue { margin-bottom: .8rem; }
   .hw-final-cta { min-height: 47rem; }
   .hw-final-cta__content { min-height: 47rem; align-content: end; }
   .hw-final-cta__points { grid-template-columns: repeat(3, minmax(0,1fr)); gap: .8rem; }

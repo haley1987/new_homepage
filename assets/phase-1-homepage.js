@@ -38,10 +38,42 @@
     });
   };
 
+  const setupScrollCues = (root = document) => {
+    const railSelector = [
+      '.hw-trust__list',
+      '.hw-product-explorer__grid',
+      '.hw-process__grid',
+      '.hw-education__grid',
+      '.hw-community__grid'
+    ].join(',');
+    const rails = root.matches?.(railSelector) ? [root] : root.querySelectorAll(railSelector);
+
+    rails.forEach((rail) => {
+      if (rail.dataset.hwScrollCue === 'true') return;
+      rail.dataset.hwScrollCue = 'true';
+
+      const cue = document.createElement('div');
+      cue.className = 'hw-scroll-cue';
+      cue.setAttribute('aria-hidden', 'true');
+      cue.innerHTML = '<span>Swipe</span><span class="hw-scroll-cue__track"><i></i></span><span class="hw-scroll-cue__arrow">→</span>';
+      rail.insertAdjacentElement('afterend', cue);
+
+      const updateCue = () => {
+        cue.hidden = rail.scrollWidth <= rail.clientWidth + 8;
+        if (Math.abs(rail.scrollLeft) > 8) cue.classList.add('hw-scroll-cue--used');
+      };
+
+      rail.addEventListener('scroll', updateCue, { passive: true });
+      if ('ResizeObserver' in window) new ResizeObserver(updateCue).observe(rail);
+      requestAnimationFrame(updateCue);
+    });
+  };
+
   const init = (root = document) => {
     updateHeader();
     protectVideo(root);
     revealSections(root);
+    setupScrollCues(root);
   };
 
   window.HaywoodHomepage = { init };
