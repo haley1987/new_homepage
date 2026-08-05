@@ -11,8 +11,19 @@
   background: var(--hw-white);
 }
 
+body.hw-homepage { overflow-x: clip; }
+
+body.hw-homepage #MainContent,
+body.hw-homepage main.content-for-layout {
+  width: 100%;
+  max-width: none;
+  margin-left: 0 !important;
+}
+
+body.hw-homepage footer.footer { margin-left: 0 !important; }
+body.hw-homepage .vintage-footer__bottom { margin-right: 5% !important; margin-left: 5% !important; }
 .hw-homepage .content-for-layout { overflow: clip; }
-.hw-section { position: relative; background: var(--hw-white); }
+.hw-homepage .hw-section { position: relative; padding-right: 0 !important; padding-left: 0 !important; background: var(--hw-white); }
 .hw-shell { width: min(100%, var(--hw-content)); margin-inline: auto; padding-inline: var(--hw-gutter); }
 
 .hw-kicker {
