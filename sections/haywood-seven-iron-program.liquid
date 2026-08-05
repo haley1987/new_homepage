@@ -1,0 +1,110 @@
+{%- liquid
+  assign desktop_image = section.settings.desktop_image
+  assign mobile_image = section.settings.mobile_image | default: desktop_image
+-%}
+
+<section
+  class="hw-section hw-seven"
+  style="--hw-seven-desktop-position: {{ section.settings.desktop_position }}; --hw-seven-mobile-position: {{ section.settings.mobile_position }};"
+>
+  <div class="hw-shell">
+    <div class="hw-seven__panel">
+      <div class="hw-seven__media">
+        {%- if desktop_image != blank -%}
+          <picture>
+            {%- if mobile_image != blank -%}
+              <source
+                media="(max-width: 749px)"
+                srcset="{{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 900 }} 900w"
+                sizes="100vw"
+              >
+            {%- endif -%}
+            {{ desktop_image | image_url: width: 1800 | image_tag: widths: '750, 1100, 1400, 1800', sizes: '(min-width: 750px) 54vw, 100vw', loading: 'lazy' }}
+          </picture>
+        {%- else -%}
+          <div class="hw-seven__placeholder" data-image-purpose="7-IRON PROGRAM PHOTOGRAPHY">
+            <span class="hw-seven__placeholder-number" aria-hidden="true">7</span>
+            <span>7-IRON PROGRAM PHOTOGRAPHY</span>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="hw-seven__content">
+        <span class="hw-seven__watermark" aria-hidden="true">7</span>
+        <div class="hw-seven__message">
+          {%- if section.settings.eyebrow != blank -%}<p class="hw-kicker">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+          {%- if section.settings.heading != blank -%}<h2 class="hw-title hw-title--medium">{{ section.settings.heading | escape }}</h2>{%- endif -%}
+          {%- if section.settings.body != blank -%}<div class="hw-copy">{{ section.settings.body }}</div>{%- endif -%}
+        </div>
+
+        {%- if section.blocks.size > 0 -%}
+          <ol class="hw-seven__steps" role="list">
+            {%- for block in section.blocks -%}
+              <li class="hw-seven__step" {{ block.shopify_attributes }}>
+                <span class="hw-seven__step-number">{{ forloop.index | prepend: '0' }}</span>
+                <div>
+                  {%- if block.settings.title != blank -%}<h3>{{ block.settings.title | escape }}</h3>{%- endif -%}
+                  {%- if block.settings.copy != blank -%}<p>{{ block.settings.copy | escape }}</p>{%- endif -%}
+                </div>
+              </li>
+            {%- endfor -%}
+          </ol>
+        {%- endif -%}
+
+        <div class="hw-seven__footer">
+          {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+            <a class="hw-button hw-button--light" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label | escape }}</a>
+          {%- endif -%}
+          {%- if section.settings.note != blank -%}<p class="hw-seven__note">{{ section.settings.note | escape }}</p>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Haywood 7-Iron Program",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "image_picker", "id": "desktop_image", "label": "Desktop image" },
+    { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
+    { "type": "select", "id": "desktop_position", "label": "Desktop image position", "options": [
+      { "value": "left top", "label": "Left top" }, { "value": "center top", "label": "Center top" }, { "value": "right top", "label": "Right top" },
+      { "value": "left center", "label": "Left center" }, { "value": "center center", "label": "Center" }, { "value": "right center", "label": "Right center" },
+      { "value": "left bottom", "label": "Left bottom" }, { "value": "center bottom", "label": "Center bottom" }, { "value": "right bottom", "label": "Right bottom" }
+    ], "default": "center center" },
+    { "type": "select", "id": "mobile_position", "label": "Mobile image position", "options": [
+      { "value": "left top", "label": "Left top" }, { "value": "center top", "label": "Center top" }, { "value": "right top", "label": "Right top" },
+      { "value": "left center", "label": "Left center" }, { "value": "center center", "label": "Center" }, { "value": "right center", "label": "Right center" },
+      { "value": "left bottom", "label": "Left bottom" }, { "value": "center bottom", "label": "Center bottom" }, { "value": "right bottom", "label": "Right bottom" }
+    ], "default": "center center" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The 7-Iron Purchase Program" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Try one. Then build the set." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Order a brand-new 7-iron built to your exact specs. When you’re ready for the full set, its purchase price is credited toward your order.</p>" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Build Your 7-Iron" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "text", "id": "note", "label": "Program note", "default": "Custom-built 7-irons are non-refundable and non-returnable." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Program step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Build it." },
+        { "type": "text", "id": "copy", "label": "Copy", "default": "Choose your model, shaft, grip and adjustments." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Haywood 7-Iron Program",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Build it.", "copy": "Choose your model, shaft, grip and adjustments." } },
+        { "type": "step", "settings": { "title": "Play it.", "copy": "Test a brand-new club built exactly as ordered." } },
+        { "type": "step", "settings": { "title": "Apply it.", "copy": "Put the 7-iron purchase price toward your full set." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
