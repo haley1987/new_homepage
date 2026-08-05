@@ -62,4 +62,53 @@
       </div>
     </div>
   </section>
+
+  <section class="hwb__alternatives" aria-labelledby="hwb-alternatives-title">
+    <div class="hwb__shell">
+      <div class="hwb__alternatives-heading">
+        <p class="hwb__eyebrow hwb__eyebrow--dark"><span></span> More ways to get fitted</p>
+        <h2 id="hwb-alternatives-title">Not able to visit Haywood HQ?</h2>
+        <p>Start wherever you are. We’ll help you find the clearest path to the right build.</p>
+      </div>
+
+      <div class="hwb__alternative-grid">
+        <a class="hwb__alternative-card" href="/pages/store-locator">
+          <span class="hwb__alternative-number">01</span>
+          <div>
+            <h3>Find a dealer near you.</h3>
+            <p>Get hands-on help at a Haywood dealer or fitting location.</p>
+          </div>
+          <span class="hwb__alternative-arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="hwb__alternative-card" href="/pages/fitting-tool">
+          <span class="hwb__alternative-number">02</span>
+          <div>
+            <h3>Try Find My Fit.</h3>
+            <p>Can’t get to an in-person fitting? Use our online tool to narrow down your ideal clubs.</p>
+          </div>
+          <span class="hwb__alternative-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <button class="hwb__alternative-card hwb__alternative-card--chat" type="button" data-hwb-chat>
+          <span class="hwb__alternative-number">03</span>
+          <div>
+            <h3>Need more help?</h3>
+            <p>Chat with our team and we’ll point you in the right direction.</p>
+          </div>
+          <span class="hwb__alternative-arrow" aria-hidden="true">↗</span>
+        </button>
+      </div>
+    </div>
+  </section>
 </div>
+
+<script>
+  document.addEventListener('click', function (event) {
+    const chatTrigger = event.target.closest('[data-hwb-chat]');
+    if (!chatTrigger) return;
+
+    window.$crisp = window.$crisp || [];
+    window.$crisp.push(['do', 'chat:open']);
+  });
+</script>
