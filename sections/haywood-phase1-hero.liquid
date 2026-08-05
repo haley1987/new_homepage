@@ -1,0 +1,84 @@
+{%- liquid
+  assign desktop_image = section.settings.desktop_image
+  assign mobile_image = section.settings.mobile_image | default: desktop_image
+-%}
+
+<section
+  class="hw-section hw-hero"
+  style="--hw-overlay-top: {{ section.settings.overlay_top | divided_by: 100.0 }}; --hw-overlay-middle: {{ section.settings.overlay_middle | divided_by: 100.0 }}; --hw-overlay-bottom: {{ section.settings.overlay_bottom | divided_by: 100.0 }};"
+>
+  <div class="hw-hero__media" aria-hidden="true">
+    {%- if section.settings.desktop_video != blank or section.settings.mobile_video != blank -%}
+      {%- if section.settings.desktop_video != blank -%}
+        {{ section.settings.desktop_video | video_tag: class: 'hw-hero__video hw-hero__video--desktop', autoplay: true, loop: true, muted: true, controls: false, preload: 'metadata' }}
+      {%- endif -%}
+      {%- if section.settings.mobile_video != blank -%}
+        {{ section.settings.mobile_video | video_tag: class: 'hw-hero__video hw-hero__video--mobile', autoplay: true, loop: true, muted: true, controls: false, preload: 'metadata' }}
+      {%- endif -%}
+    {%- elsif desktop_image != blank -%}
+      <picture>
+        {%- if mobile_image != blank -%}
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 900 }} 900w"
+            sizes="100vw"
+          >
+        {%- endif -%}
+        {{ desktop_image | image_url: width: 2400 | image_tag: class: 'hw-hero__image', widths: '900, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high' }}
+      </picture>
+    {%- else -%}
+      <div class="hw-media-placeholder">{{ 'lifestyle-1' | placeholder_svg_tag }}</div>
+    {%- endif -%}
+  </div>
+  <div class="hw-hero__overlay" aria-hidden="true"></div>
+
+  <div class="hw-shell hw-hero__content">
+    {%- if section.settings.eyebrow != blank -%}<p class="hw-kicker">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h1 class="hw-title">{{ section.settings.heading | escape }}</h1>{%- endif -%}
+    {%- if section.settings.body != blank -%}<div class="hw-copy">{{ section.settings.body }}</div>{%- endif -%}
+    <div class="hw-actions">
+      {%- if section.settings.primary_label != blank and section.settings.primary_link != blank -%}
+        <a class="hw-button hw-button--light" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label | escape }}</a>
+      {%- endif -%}
+      {%- if section.settings.secondary_label != blank and section.settings.secondary_link != blank -%}
+        <a class="hw-button" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label | escape }}</a>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.trust_line != blank -%}<p class="hw-hero__trust">{{ section.settings.trust_line | escape }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .hw-hero__video--mobile { display: block; }
+  .hw-hero__video--desktop { display: none; }
+  @media screen and (min-width: 750px) {
+    .hw-hero__video--mobile { display: none; }
+    .hw-hero__video--desktop { display: block; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Haywood hero",
+  "tag": "section",
+  "class": "section-haywood-hero",
+  "settings": [
+    { "type": "image_picker", "id": "desktop_image", "label": "Desktop image" },
+    { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
+    { "type": "video", "id": "desktop_video", "label": "Desktop video" },
+    { "type": "video", "id": "mobile_video", "label": "Mobile video" },
+    { "type": "range", "id": "overlay_top", "min": 0, "max": 90, "step": 5, "unit": "%", "label": "Overlay at top", "default": 20 },
+    { "type": "range", "id": "overlay_middle", "min": 0, "max": 90, "step": 5, "unit": "%", "label": "Overlay at middle", "default": 20 },
+    { "type": "range", "id": "overlay_bottom", "min": 0, "max": 90, "step": 5, "unit": "%", "label": "Overlay at bottom", "default": 70 },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "CB2 & MB2" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Forged for golfers who care where the ball finishes." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Pure feel. Precise feedback. Built to your specifications.</p>" },
+    { "type": "text", "id": "primary_label", "label": "Primary CTA label", "default": "Shop Irons" },
+    { "type": "url", "id": "primary_link", "label": "Primary CTA link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary CTA label", "default": "Find My Fit" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary CTA link" },
+    { "type": "text", "id": "trust_line", "label": "Trust line", "default": "Designed in Canada · Built to your specs" }
+  ],
+  "presets": [{ "name": "Haywood hero" }]
+}
+{% endschema %}
