@@ -1,0 +1,65 @@
+<div class="hwb" data-haywood-booking>
+  <section class="hwb__hero" aria-labelledby="hwb-title">
+    <div class="hwb__shell hwb__hero-grid">
+      <div class="hwb__hero-copy">
+        <p class="hwb__eyebrow"><span></span> Haywood HQ · Burnaby, BC</p>
+        <h1 id="hwb-title" class="hwb__title">Fit the clubs<br>to the golfer.</h1>
+        <p class="hwb__lead">A one-hour, data-led fitting built around your swing—not a sales script.</p>
+
+        <a class="hwb__button" href="#book-your-fitting">Choose a time <span aria-hidden="true">↓</span></a>
+      </div>
+
+      <aside class="hwb__session-card" aria-label="Fitting session details">
+        {%- render 'haywood-arc-mark', variant: 'booking' -%}
+        <p class="hwb__session-label">In-person club fitting</p>
+        <p class="hwb__session-statement">Numbers first.<br>Then feel.</p>
+        <dl class="hwb__facts">
+          <div><dt>Duration</dt><dd>60 minutes</dd></div>
+          <div><dt>Session</dt><dd>$50 CAD</dd></div>
+          <div><dt>Location</dt><dd>Haywood HQ</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="hwb__process" aria-labelledby="hwb-process-title">
+    <div class="hwb__shell">
+      <div class="hwb__process-heading">
+        <p class="hwb__eyebrow hwb__eyebrow--dark"><span></span> What to expect</p>
+        <h2 id="hwb-process-title">One session.<br>A clearer build.</h2>
+      </div>
+      <ol class="hwb__steps">
+        <li><span>01</span><div><h3>Capture</h3><p>We measure your delivery and ball flight using a Foresight launch monitor.</p></div></li>
+        <li><span>02</span><div><h3>Compare</h3><p>Test head, shaft and adjustment options against real performance data.</p></div></li>
+        <li><span>03</span><div><h3>Configure</h3><p>Leave with a clear recommendation for your head, shaft, length, lie and grip.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="book-your-fitting" class="hwb__booking" aria-labelledby="hwb-booking-title">
+    <div class="hwb__shell hwb__booking-grid">
+      <div class="hwb__booking-intro">
+        <p class="hwb__eyebrow hwb__eyebrow--dark"><span></span> Book Haywood HQ</p>
+        <h2 id="hwb-booking-title">Choose your time.</h2>
+        <p>Select an available appointment below. The Burnaby address and visit details are provided with your confirmation.</p>
+
+        <div class="hwb__booking-notes">
+          <p><strong>Bring your current clubs.</strong><br>They give us a useful performance baseline.</p>
+          <p><strong>Fitting fee: $50 CAD.</strong><br>The fitting fee is non-reimbursable.</p>
+        </div>
+
+        <a class="hwb__text-link" href="https://calendly.com/haywoodhq/fitting" target="_blank" rel="noopener">Open scheduler in a new window <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="hwb__scheduler" aria-label="Haywood HQ appointment calendar">
+        <div class="hwb__scheduler-top"><span></span><p>Live availability</p></div>
+        <iframe
+          src="https://calendly.com/haywoodhq/fitting?embed_domain={{ request.host | url_encode }}&amp;embed_type=Inline"
+          title="Book a Haywood HQ club fitting"
+          loading="lazy"
+          allow="fullscreen"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</div>
