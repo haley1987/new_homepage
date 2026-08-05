@@ -4,7 +4,9 @@
       {%- if section.settings.image != blank -%}
         {{ section.settings.image | image_url: width: 1600 | image_tag: widths: '550, 750, 1100, 1400, 1600', sizes: '(min-width: 750px) 52vw, 100vw', loading: 'lazy' }}
       {%- else -%}
-        <div class="hw-media-placeholder">{{ 'lifestyle-2' | placeholder_svg_tag }}</div>
+        <div class="hw-purpose-placeholder hw-purpose-placeholder--editorial" data-image-purpose="Why Haywood editorial photography">
+          <span>Editorial photography</span>
+        </div>
       {%- endif -%}
     </div>
     <div class="hw-story__intro">

@@ -11,7 +11,9 @@
         {{ desktop_image | image_url: width: 2400 | image_tag: widths: '900, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'lazy' }}
       </picture>
     {%- else -%}
-      <div class="hw-media-placeholder">{{ 'lifestyle-2' | placeholder_svg_tag }}</div>
+      <div class="hw-purpose-placeholder hw-purpose-placeholder--final" data-image-purpose="Final cinematic photography">
+        <span>Final cinematic photography</span>
+      </div>
     {%- endif -%}
   </div>
   <div class="hw-final-cta__overlay" aria-hidden="true"></div>

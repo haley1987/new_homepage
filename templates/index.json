@@ -3,65 +3,64 @@
     "hw_hero": {
       "type": "haywood-phase1-hero",
       "settings": {
-        "desktop_image": "shopify://shop_images/MBCB.png",
-        "mobile_image": "shopify://shop_images/MBCB.png",
+        "desktop_image": "",
+        "mobile_image": "",
         "desktop_position": "center center",
         "mobile_position": "center center",
-        "overlay_top": 45,
-        "overlay_middle": 50,
-        "overlay_bottom": 80,
-        "eyebrow": "CB2 & MB2",
-        "heading": "Forged for golfers who care where the ball finishes.",
-        "body": "<p>Pure feel. Precise feedback. Built to your specifications.</p>",
-        "primary_label": "Shop Irons",
+        "overlay_top": 35,
+        "overlay_middle": 40,
+        "overlay_bottom": 75,
+        "eyebrow": "CB2 / MB2",
+        "heading": "Forged feel. Built for your game.",
+        "body": "<p>Two forged profiles. One precise build.</p>",
+        "primary_label": "Explore the irons",
         "primary_link": "shopify://collections/irons",
         "secondary_label": "Find My Fit",
         "secondary_link": "shopify://pages/fitting-tool",
-        "trust_line": "Designed in Canada · Built to your specs"
+        "trust_line": "Built to your specs · Assembled in Vancouver"
       }
     },
     "hw_trust": {
       "type": "haywood-phase1-trust-strip",
       "blocks": {
-        "trust_canada": { "type": "item", "settings": { "show_icon": true, "icon": "maple", "title": "Designed in Canada", "copy": "Purposeful design from Vancouver." } },
-        "trust_specs": { "type": "item", "settings": { "show_icon": true, "icon": "tools", "title": "Built to Your Specs", "copy": "Configured for the way you play." } },
-        "trust_components": { "type": "item", "settings": { "show_icon": true, "icon": "star", "title": "Premium Components", "copy": "Materials selected without shortcuts." } },
-        "trust_quality": { "type": "item", "settings": { "show_icon": true, "icon": "box", "title": "Quality Checked", "copy": "Inspected before it leaves our shop." } },
-        "trust_golfers": { "type": "item", "settings": { "show_icon": true, "icon": "globe", "title": "Trusted by Golfers", "copy": "Built for players who notice details." } }
+        "trust_specs": { "type": "item", "settings": { "show_icon": false, "icon": "tools", "title": "Built to Your Specs", "copy": "Length, loft, lie, shaft and grip." } },
+        "trust_components": { "type": "item", "settings": { "show_icon": false, "icon": "star", "title": "Premium Components", "copy": "Materials selected without shortcuts." } },
+        "trust_recommendations": { "type": "item", "settings": { "show_icon": false, "icon": "globe", "title": "Transparent Recommendations", "copy": "Clear tradeoffs. No manufacturer agenda." } },
+        "trust_assembled": { "type": "item", "settings": { "show_icon": false, "icon": "box", "title": "Assembled for Your Game", "copy": "Checked before it leaves our shop." } }
       },
-      "block_order": ["trust_canada", "trust_specs", "trust_components", "trust_quality", "trust_golfers"],
+      "block_order": ["trust_specs", "trust_components", "trust_recommendations", "trust_assembled"],
       "settings": { "accessibility_label": "Why golfers choose Haywood" }
     },
     "hw_story": {
       "type": "haywood-phase1-story",
       "blocks": {
-        "story_objective": { "type": "row", "settings": { "title": "Objective Before Opinion", "copy": "Recommendations are earned through data, not manufacturer preference." } },
-        "story_explain": { "type": "row", "settings": { "title": "Explain Every Recommendation", "copy": "We make the tradeoffs clear so you can choose with confidence." } },
-        "story_specs": { "type": "row", "settings": { "title": "Built to Your Specs", "copy": "Length, loft, lie, shaft and grip are configured around your build." } },
-        "story_value": { "type": "row", "settings": { "title": "No Retail Markup", "copy": "A direct relationship keeps the focus on the club, not the retail layer." } }
+        "story_objective": { "type": "row", "settings": { "title": "Objective Before Opinion", "copy": "Recommendations earned through data." } },
+        "story_explain": { "type": "row", "settings": { "title": "Every Tradeoff, Made Clear", "copy": "Choose with confidence, not guesswork." } },
+        "story_specs": { "type": "row", "settings": { "title": "Built Around You", "copy": "Length, loft, lie, shaft and grip—precisely configured." } },
+        "story_value": { "type": "row", "settings": { "title": "Vancouver, by Design", "copy": "Designed here. Built for golfers everywhere." } }
       },
       "block_order": ["story_objective", "story_explain", "story_specs", "story_value"],
       "settings": {
-        "image": "shopify://shop_images/DI.2_back.png",
+        "image": "",
         "image_position": "center center",
         "eyebrow": "Why Haywood",
         "heading": "Advice without an agenda.",
-        "intro": "<p>We explain the tradeoffs, build to your specifications, and let performance guide the decision.</p>"
+        "intro": "<p>Clear tradeoffs. Thoughtful recommendations. Clubs built around you.</p>"
       }
     },
     "hw_products": {
       "type": "haywood-phase1-product-explorer",
       "blocks": {
-        "product_cb": { "type": "card", "settings": { "title": "CB2", "category": "Players cavity", "fit": "Forgiveness and control without losing the feedback better players expect.", "image": "shopify://shop_images/CB_Hero.png", "image_fit": "cover", "image_position": "center top", "manual_link": "shopify://products/cb-players-cavity-back-irons" } },
-        "product_mb": { "type": "card", "settings": { "title": "MB2", "category": "Muscle back", "fit": "A compact profile for golfers who want control, feel and honest feedback.", "image": "shopify://shop_images/MB_-_Hero.png", "image_fit": "cover", "image_position": "center top", "manual_link": "shopify://products/mb-muscle-back-blade-irons" } },
-        "product_pd": { "type": "card", "settings": { "title": "PD.1", "category": "Players distance", "fit": "Speed and playability in a shape designed for confident ball strikers.", "image": "shopify://shop_images/Haywood_PD_-_Back_5b00d2ef-4fd1-447a-a8f2-61244228cce2.png", "image_fit": "cover", "image_position": "center top", "manual_link": "shopify://products/pd-1-players-distance-irons" } },
-        "product_sv": { "type": "card", "settings": { "title": "SV.2", "category": "Game improvement", "fit": "Easy launch and dependable forgiveness without an oversized look.", "image": "shopify://shop_images/Haywood_SV2_-_Back_2.png", "image_fit": "cover", "image_position": "center top", "manual_link": "shopify://products/sv-2-game-improvement-irons" } }
+        "product_cb": { "type": "card", "settings": { "title": "CB2", "category": "Players cavity", "fit": "Control with added forgiveness.", "image": "shopify://shop_images/CB_Hero.png", "image_fit": "cover", "image_position": "center top", "manual_link": "shopify://products/cb-players-cavity-back-irons" } },
+        "product_mb": { "type": "card", "settings": { "title": "MB2", "category": "Muscle back", "fit": "Compact, precise and honest.", "image": "shopify://shop_images/MB_-_Hero.png", "image_fit": "cover", "image_position": "center top", "manual_link": "shopify://products/mb-muscle-back-blade-irons" } },
+        "product_pd": { "type": "card", "settings": { "title": "PD.1", "category": "Players distance", "fit": "Speed in a confident shape.", "image": "shopify://shop_images/Haywood_PD_-_Back_5b00d2ef-4fd1-447a-a8f2-61244228cce2.png", "image_fit": "cover", "image_position": "center top", "manual_link": "shopify://products/pd-1-players-distance-irons" } },
+        "product_sv": { "type": "card", "settings": { "title": "SV.2", "category": "Game improvement", "fit": "Easy launch. Dependable forgiveness.", "image": "shopify://shop_images/Haywood_SV2_-_Back_2.png", "image_fit": "cover", "image_position": "center top", "manual_link": "shopify://products/sv-2-game-improvement-irons" } }
       },
       "block_order": ["product_cb", "product_mb", "product_pd", "product_sv"],
       "settings": {
         "eyebrow": "Explore the lineup",
         "heading": "Built around the way you play.",
-        "copy": "<p>Four profiles. One commitment to feel and precision.</p>",
+        "copy": "<p>Four profiles. One standard.</p>",
         "accessibility_label": "Explore Haywood golf clubs"
       }
     },
@@ -86,25 +85,27 @@
     "hw_process": {
       "type": "haywood-phase2-process",
       "blocks": {
-        "process_design": { "type": "step", "settings": { "title": "Designed", "copy": "Every shape and material choice is made for performance." } },
-        "process_build": { "type": "step", "settings": { "title": "Built to Your Specs", "copy": "Length, loft, lie, shaft and grip are assembled to your specs." } },
-        "process_check": { "type": "step", "settings": { "title": "Quality Checked", "copy": "Loft, lie, length, swing weight and finish are verified." } },
-        "process_deliver": { "type": "step", "settings": { "title": "Delivered", "copy": "Your finished set is packed to arrive ready for the course." } }
+        "process_design": { "type": "step", "settings": { "title": "Designed", "copy": "Purpose shaped by performance." } },
+        "process_build": { "type": "step", "settings": { "title": "Specified", "copy": "Built around your measurements." } },
+        "process_check": { "type": "step", "settings": { "title": "Checked", "copy": "Loft, lie and swing weight verified." } },
+        "process_deliver": { "type": "step", "settings": { "title": "Packed", "copy": "Protected for the journey." } }
       },
       "block_order": ["process_design", "process_build", "process_check", "process_deliver"],
       "settings": {
+        "workshop_image": "",
+        "workshop_mobile_image": "",
         "eyebrow": "The process",
-        "heading": "Built for you, not pulled from a shelf.",
-        "body": "<p>From specification to final inspection, every set follows one deliberate path.</p>"
+        "heading": "Made one set at a time.",
+        "body": ""
       }
     },
     "hw_education": {
       "type": "haywood-phase2-education",
       "blocks": {
-        "education_1": { "type": "card", "settings": { "title": "CB2 vs. MB2", "excerpt": "Two forged profiles for different preferences in flight, forgiveness and feedback." } },
-        "education_2": { "type": "card", "settings": { "title": "Blade or Cavity Back?", "excerpt": "How shape, mass and feedback change the way an iron performs." } },
-        "education_3": { "type": "card", "settings": { "title": "How Forged Irons Are Made", "excerpt": "A closer look at the material, forming and machining behind a precise iron." } },
-        "education_4": { "type": "card", "settings": { "title": "What Shaft Fits Your Swing?", "excerpt": "Why weight, profile and feel matter more than a single flex label." } }
+        "education_1": { "type": "card", "settings": { "title": "CB2 vs. MB2", "excerpt": "Two forged profiles. Two distinct intentions." } },
+        "education_2": { "type": "card", "settings": { "title": "Blade or Cavity Back?", "excerpt": "Shape, mass and feedback explained." } },
+        "education_3": { "type": "card", "settings": { "title": "How Forged Irons Are Made", "excerpt": "Material. Forming. Machining." } },
+        "education_4": { "type": "card", "settings": { "title": "What Shaft Fits Your Swing?", "excerpt": "Weight, profile and feel." } }
       },
       "block_order": ["education_1", "education_2", "education_3", "education_4"],
       "settings": { "eyebrow": "The journal", "heading": "Learn before you choose." }
@@ -113,7 +114,7 @@
       "type": "haywood-phase2-customer-proof",
       "settings": {
         "eyebrow": "Customer proof",
-        "heading": "Built for golfers who care about the details.",
+        "heading": "The details are the difference.",
         "quote": "",
         "customer_name": "",
         "product_purchased": "",
@@ -135,11 +136,11 @@
     "hw_community": {
       "type": "haywood-phase2-community",
       "blocks": {
-        "community_1": { "type": "image", "settings": { "image": "shopify://shop_images/HAYWOOD-6_resized.jpg", "caption": "Built with intent." } },
-        "community_2": { "type": "image", "settings": { "caption": "" } },
-        "community_3": { "type": "image", "settings": { "caption": "" } },
-        "community_4": { "type": "image", "settings": { "caption": "" } },
-        "community_5": { "type": "image", "settings": { "caption": "" } }
+        "community_1": { "type": "image", "settings": { "image_purpose": "On-course lifestyle", "caption": "" } },
+        "community_2": { "type": "image", "settings": { "image_purpose": "Customer portrait", "caption": "" } },
+        "community_3": { "type": "image", "settings": { "image_purpose": "Golf travel", "caption": "" } },
+        "community_4": { "type": "image", "settings": { "image_purpose": "Macro club detail", "caption": "" } },
+        "community_5": { "type": "image", "settings": { "image_purpose": "Workshop moment", "caption": "" } }
       },
       "block_order": ["community_1", "community_2", "community_3", "community_4", "community_5"],
       "settings": {
@@ -153,15 +154,15 @@
     "hw_final_cta": {
       "type": "haywood-phase2-final-cta",
       "settings": {
-        "desktop_image": "shopify://shop_images/putters.png",
-        "mobile_image": "shopify://shop_images/putters.png",
+        "desktop_image": "",
+        "mobile_image": "",
         "desktop_position": "center center",
         "mobile_position": "center center",
-        "overlay": 75,
+        "overlay": 70,
         "eyebrow": "Your build starts here",
         "heading": "Build your best golf.",
-        "body": "<p>Explore the lineup or find the specifications that fit your game.</p>",
-        "primary_label": "Shop Clubs",
+        "body": "<p>Start with the profile that fits your game.</p>",
+        "primary_label": "Explore the lineup",
         "primary_link": "shopify://collections/irons",
         "secondary_label": "Find My Fit",
         "secondary_link": "shopify://pages/fitting-tool"

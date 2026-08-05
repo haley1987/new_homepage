@@ -11,7 +11,9 @@
           {%- if block.settings.image != blank -%}
             {{ block.settings.image | image_url: width: 1600 | image_tag: widths: '400, 600, 900, 1200, 1600', sizes: '(min-width: 750px) 50vw, 50vw', loading: 'lazy' }}
           {%- else -%}
-            <div class="hw-community__placeholder" aria-hidden="true"></div>
+            <div class="hw-community__placeholder" data-image-purpose="{{ block.settings.image_purpose | escape }}">
+              <span>{{ block.settings.image_purpose | escape }}</span>
+            </div>
           {%- endif -%}
           {%- if block.settings.caption != blank -%}<figcaption class="hw-community__caption">{{ block.settings.caption | escape }}</figcaption>{%- endif -%}
         </figure>
@@ -36,6 +38,7 @@
   "blocks": [
     { "type": "image", "name": "Image", "settings": [
       { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "image_purpose", "label": "Placeholder purpose", "default": "Lifestyle photography" },
       { "type": "text", "id": "caption", "label": "Caption" }
     ] }
   ],

@@ -24,7 +24,9 @@
               {%- if card_image != blank -%}
                 {{ card_image | image_url: width: 1600 | image_tag: widths: '550, 750, 1100, 1400, 1600', sizes: '(min-width: 990px) 55vw, (min-width: 750px) 50vw, 100vw', loading: 'lazy' }}
               {%- else -%}
-                <div class="hw-education-card__placeholder" aria-hidden="true"></div>
+                <div class="hw-education-card__placeholder" data-image-purpose="{% if forloop.first %}Featured editorial photography{% else %}Supporting editorial photography{% endif %}">
+                  <span>{% if forloop.first %}Featured editorial{% else %}Editorial image{% endif %}</span>
+                </div>
               {%- endif -%}
             </div>
             <div class="hw-education-card__content">
