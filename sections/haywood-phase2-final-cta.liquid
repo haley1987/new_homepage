@@ -17,6 +17,7 @@
     {%- endif -%}
   </div>
   <div class="hw-final-cta__overlay" aria-hidden="true"></div>
+  {% render 'haywood-arc-mark', variant: 'final' %}
   <div class="hw-shell hw-final-cta__content">
     <div class="hw-final-cta__message">
       {%- if section.settings.eyebrow != blank -%}<p class="hw-kicker">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}

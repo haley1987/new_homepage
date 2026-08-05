@@ -33,6 +33,7 @@
     {%- endif -%}
   </div>
   <div class="hw-hero__overlay" aria-hidden="true"></div>
+  {% render 'haywood-arc-mark', variant: 'hero' %}
 
   <div class="hw-shell hw-hero__content">
     {%- if section.settings.eyebrow != blank -%}<p class="hw-kicker">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}

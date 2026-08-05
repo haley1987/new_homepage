@@ -1,0 +1,5 @@
+{%- if settings.favicon != blank -%}
+  <span class="hw-arc-mark hw-arc-mark--{{ variant | default: 'stamp' }}" aria-hidden="true">
+    {{ settings.favicon | image_url: width: 360 | image_tag: widths: '90, 180, 360', sizes: '180px', loading: 'lazy', alt: '' }}
+  </span>
+{%- endif -%}
