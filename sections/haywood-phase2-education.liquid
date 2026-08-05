@@ -5,7 +5,7 @@
       {%- if section.settings.heading != blank -%}<h2 class="hw-title hw-title--medium">{{ section.settings.heading | escape }}</h2>{%- endif -%}
     </header>
 
-    <div class="hw-education__layout">
+    <div class="hw-education__grid">
       {%- for block in section.blocks -%}
         {%- liquid
           assign card_article = block.settings.article
@@ -17,25 +17,24 @@
           endif
           assign card_link = block.settings.link | default: card_article.url
         -%}
-        {%- if forloop.index == 2 -%}<div class="hw-education__supporting" aria-label="More journal articles">{%- endif -%}
-        <article class="hw-education-card {% if forloop.first %}hw-education-card--featured{% else %}hw-education-card--supporting{% endif %}" {{ block.shopify_attributes }}>
+        <article class="hw-education-card" {{ block.shopify_attributes }}>
           {%- if card_link != blank -%}<a class="hw-education-card__inner hw-education-card__link" href="{{ card_link }}">{%- else -%}<div class="hw-education-card__inner">{%- endif -%}
             <div class="hw-education-card__media">
               {%- if card_image != blank -%}
                 {{ card_image | image_url: width: 1600 | image_tag: widths: '550, 750, 1100, 1400, 1600', sizes: '(min-width: 990px) 55vw, (min-width: 750px) 50vw, 100vw', loading: 'lazy' }}
               {%- else -%}
-                <div class="hw-education-card__placeholder" data-image-purpose="{% if forloop.first %}Featured editorial photography{% else %}Supporting editorial photography{% endif %}">
-                  <span>{% if forloop.first %}Featured editorial{% else %}Editorial image{% endif %}</span>
+                <div class="hw-education-card__placeholder" data-image-purpose="JOURNAL IMAGE">
+                  <span>JOURNAL IMAGE</span>
                 </div>
               {%- endif -%}
             </div>
             <div class="hw-education-card__content">
               {%- if card_title != blank -%}<h3 class="hw-education-card__title">{{ card_title | escape }}</h3>{%- endif -%}
               {%- if card_excerpt != blank -%}<p class="hw-education-card__excerpt">{{ card_excerpt | escape }}</p>{%- endif -%}
+              <span class="hw-education-card__more">{{ section.settings.read_more_label | escape }} <span aria-hidden="true">→</span></span>
             </div>
           {%- if card_link != blank -%}</a>{%- else -%}</div>{%- endif -%}
         </article>
-        {%- if forloop.last and forloop.index > 1 -%}</div>{%- endif -%}
       {%- endfor -%}
     </div>
   </div>
@@ -46,7 +45,8 @@
   "name": "Haywood education",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The journal" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Learn before you choose." }
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Learn before you choose." },
+    { "type": "text", "id": "read_more_label", "label": "Read more label", "default": "Read More" }
   ],
   "blocks": [
     { "type": "card", "name": "Editorial card", "settings": [

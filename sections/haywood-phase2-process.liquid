@@ -1,8 +1,3 @@
-{%- liquid
-  assign workshop_image = section.settings.workshop_image
-  assign workshop_mobile_image = section.settings.workshop_mobile_image | default: workshop_image
--%}
-
 <section class="hw-section hw-process">
   <div class="hw-shell">
     <header class="hw-process__header">
@@ -11,33 +6,25 @@
       {%- if section.settings.body != blank -%}<div class="hw-copy">{{ section.settings.body }}</div>{%- endif -%}
     </header>
 
-    <div class="hw-process__composition">
-      <div class="hw-process__lead">
-        {%- if workshop_image != blank -%}
-          <picture>
-            {%- if workshop_mobile_image != blank -%}
-              <source media="(max-width: 749px)" srcset="{{ workshop_mobile_image | image_url: width: 900 }}" sizes="100vw">
-            {%- endif -%}
-            {{ workshop_image | image_url: width: 2000 | image_tag: class: 'hw-process__lead-image', widths: '750, 1100, 1400, 1800, 2000', sizes: '(min-width: 990px) 66vw, 100vw', loading: 'lazy' }}
-          </picture>
-        {%- else -%}
-          <div class="hw-purpose-placeholder hw-purpose-placeholder--workshop" data-image-purpose="Workshop photography">
-            <span>Workshop photography</span>
-          </div>
-        {%- endif -%}
-      </div>
-
-      <div class="hw-process__steps">
-        {%- for block in section.blocks -%}
-          <article class="hw-process__step" {{ block.shopify_attributes }}>
+    <div class="hw-process__grid">
+      {%- for block in section.blocks -%}
+        <article class="hw-process__step" {{ block.shopify_attributes }}>
+          <div class="hw-process__text">
             <span class="hw-process__number">0{{ forloop.index }}</span>
-            <div>
-              <h3 class="hw-process__title">{{ block.settings.title | escape }}</h3>
-              {%- if block.settings.copy != blank -%}<p class="hw-process__copy">{{ block.settings.copy | escape }}</p>{%- endif -%}
-            </div>
-          </article>
-        {%- endfor -%}
-      </div>
+            <h3 class="hw-process__title">{{ block.settings.title | escape }}</h3>
+            {%- if block.settings.copy != blank -%}<p class="hw-process__copy">{{ block.settings.copy | escape }}</p>{%- endif -%}
+          </div>
+          <div class="hw-process__media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 900 | image_tag: class: 'hw-process__image', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 13vw, 46vw', loading: 'lazy' }}
+            {%- else -%}
+              <div class="hw-process__placeholder" data-image-purpose="{{ block.settings.image_purpose | escape }}">
+                <span>{{ block.settings.image_purpose | escape }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
     </div>
   </div>
 </section>
@@ -56,7 +43,8 @@
     { "type": "step", "name": "Process step", "settings": [
       { "type": "text", "id": "title", "label": "Title", "default": "Designed" },
       { "type": "textarea", "id": "copy", "label": "Copy", "default": "Purpose shaped by performance." },
-      { "type": "image_picker", "id": "image", "label": "Legacy step image" }
+      { "type": "image_picker", "id": "image", "label": "Step image" },
+      { "type": "text", "id": "image_purpose", "label": "Placeholder label", "default": "PROCESS PHOTOGRAPHY" }
     ] }
   ],
   "max_blocks": 6,

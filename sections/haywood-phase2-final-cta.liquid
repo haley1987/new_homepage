@@ -11,19 +11,32 @@
         {{ desktop_image | image_url: width: 2400 | image_tag: widths: '900, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'lazy' }}
       </picture>
     {%- else -%}
-      <div class="hw-purpose-placeholder hw-purpose-placeholder--final" data-image-purpose="Final cinematic photography">
-        <span>Final cinematic photography</span>
+      <div class="hw-purpose-placeholder hw-purpose-placeholder--final" data-image-purpose="FINAL CTA PHOTOGRAPHY">
+        <span>FINAL CTA PHOTOGRAPHY</span>
       </div>
     {%- endif -%}
   </div>
   <div class="hw-final-cta__overlay" aria-hidden="true"></div>
   <div class="hw-shell hw-final-cta__content">
-    {%- if section.settings.eyebrow != blank -%}<p class="hw-kicker">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
-    {%- if section.settings.heading != blank -%}<h2 class="hw-title">{{ section.settings.heading | escape }}</h2>{%- endif -%}
-    {%- if section.settings.body != blank -%}<div class="hw-copy">{{ section.settings.body }}</div>{%- endif -%}
-    <div class="hw-actions">
-      {%- if section.settings.primary_label != blank and section.settings.primary_link != blank -%}<a class="hw-button hw-button--light" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label | escape }}</a>{%- endif -%}
-      {%- if section.settings.secondary_label != blank and section.settings.secondary_link != blank -%}<a class="hw-button" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label | escape }}</a>{%- endif -%}
+    <div class="hw-final-cta__message">
+      {%- if section.settings.eyebrow != blank -%}<p class="hw-kicker">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="hw-title">{{ section.settings.heading | escape }}</h2>{%- endif -%}
+      {%- if section.settings.body != blank -%}<div class="hw-copy">{{ section.settings.body }}</div>{%- endif -%}
+      <div class="hw-actions">
+        {%- if section.settings.primary_label != blank and section.settings.primary_link != blank -%}<a class="hw-button hw-button--light" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label | escape }}</a>{%- endif -%}
+        {%- if section.settings.secondary_label != blank and section.settings.secondary_link != blank -%}<a class="hw-button" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label | escape }}</a>{%- endif -%}
+      </div>
+    </div>
+    <div class="hw-final-cta__points">
+      {%- for block in section.blocks -%}
+        <div class="hw-final-cta__point" {{ block.shopify_attributes }}>
+          <span class="hw-final-cta__point-icon" aria-hidden="true">◇</span>
+          <div>
+            <h3>{{ block.settings.title | escape }}</h3>
+            {%- if block.settings.copy != blank -%}<p>{{ block.settings.copy | escape }}</p>{%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
     </div>
   </div>
 </section>
@@ -53,6 +66,13 @@
     { "type": "text", "id": "secondary_label", "label": "Secondary CTA label", "default": "Find My Fit" },
     { "type": "url", "id": "secondary_link", "label": "Secondary CTA link" }
   ],
-  "presets": [{ "name": "Haywood final CTA" }]
+  "blocks": [
+    { "type": "point", "name": "Trust point", "settings": [
+      { "type": "text", "id": "title", "label": "Title", "default": "Built to Your Specs" },
+      { "type": "text", "id": "copy", "label": "Supporting copy", "default": "Every time." }
+    ] }
+  ],
+  "max_blocks": 3,
+  "presets": [{ "name": "Haywood final CTA", "blocks": [{ "type": "point" }, { "type": "point" }, { "type": "point" }] }]
 }
 {% endschema %}

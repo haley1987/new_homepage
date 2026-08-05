@@ -15,7 +15,9 @@
           {{ desktop_image | image_url: width: 1600 | image_tag: widths: '550, 750, 1100, 1400, 1600', sizes: '(min-width: 750px) 50vw, 100vw', loading: 'lazy' }}
         </picture>
       {%- else -%}
-        <div class="hw-media-placeholder">{{ 'lifestyle-2' | placeholder_svg_tag }}</div>
+        <div class="hw-fit-placeholder" data-image-purpose="FIND MY FIT INTERFACE">
+          <span>FIND MY FIT INTERFACE</span>
+        </div>
       {%- endif -%}
     </div>
     <div class="hw-split__content">

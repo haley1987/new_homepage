@@ -28,13 +28,16 @@
           {%- if card_image != blank -%}
             {{ card_image | image_url: width: 1400 | image_tag: widths: '550, 750, 1000, 1200, 1400', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 50vw, 82vw', loading: 'lazy' }}
           {%- else -%}
-            {{ 'product-1' | placeholder_svg_tag }}
+            <div class="hw-product-card__placeholder" data-image-purpose="{{ block.settings.title | escape }} PRODUCT IMAGE">
+              <span>{{ block.settings.title | escape }} PRODUCT IMAGE</span>
+            </div>
           {%- endif -%}
         </div>
         <div class="hw-product-card__content">
-          {%- if block.settings.category != blank -%}<p class="hw-product-card__category">{{ block.settings.category | escape }}</p>{%- endif -%}
           <h3 class="hw-product-card__title">{{ block.settings.title | escape }}</h3>
+          {%- if block.settings.category != blank -%}<p class="hw-product-card__category">{{ block.settings.category | escape }}</p>{%- endif -%}
           {%- if block.settings.fit != blank -%}<p class="hw-product-card__fit">{{ block.settings.fit | escape }}</p>{%- endif -%}
+          <span class="hw-product-card__arrow" aria-hidden="true">→</span>
         </div>
         {%- if card_link != blank -%}<a class="hw-card-link" href="{{ card_link }}"><span class="visually-hidden">Explore {{ block.settings.title | escape }}</span></a>{%- endif -%}
       </article>
@@ -71,6 +74,6 @@
     ] }
   ],
   "max_blocks": 8,
-  "presets": [{ "name": "Haywood product explorer", "blocks": [{ "type": "card" }, { "type": "card" }, { "type": "card" }, { "type": "card" }] }]
+  "presets": [{ "name": "Haywood product explorer", "blocks": [{ "type": "card" }, { "type": "card" }, { "type": "card" }, { "type": "card" }, { "type": "card" }, { "type": "card" }] }]
 }
 {% endschema %}
