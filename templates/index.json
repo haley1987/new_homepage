@@ -426,6 +426,72 @@
         "link": "/pages/customer-reviews"
       }
     },
+    "hw_community": {
+      "type": "haywood-phase2-community",
+      "blocks": {
+        "community_1": {
+          "type": "image",
+          "settings": {
+            "image_purpose": "COMMUNITY IMAGE 01",
+            "caption": ""
+          }
+        },
+        "community_2": {
+          "type": "image",
+          "settings": {
+            "image_purpose": "COMMUNITY IMAGE 02",
+            "caption": ""
+          }
+        },
+        "community_3": {
+          "type": "image",
+          "settings": {
+            "image_purpose": "COMMUNITY IMAGE 03",
+            "caption": ""
+          }
+        },
+        "community_4": {
+          "type": "image",
+          "settings": {
+            "image_purpose": "COMMUNITY IMAGE 04",
+            "caption": ""
+          }
+        },
+        "community_5": {
+          "type": "image",
+          "settings": {
+            "image_purpose": "COMMUNITY IMAGE 05",
+            "caption": ""
+          }
+        },
+        "community_6": {
+          "type": "image",
+          "settings": {
+            "image_purpose": "COMMUNITY IMAGE 06",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "community_1",
+        "community_2",
+        "community_3",
+        "community_4",
+        "community_5",
+        "community_6"
+      ],
+      "settings": {
+        "background_color": "#ffffff",
+        "heading_color": "#0b0b0a",
+        "text_color": "#5b5a55",
+        "eyebrow": "",
+        "heading": "Join our community.",
+        "handle": "@HAYWOODGOLF",
+        "link_label": "Follow Haywood",
+        "link": "https://www.instagram.com/haywoodgolf/",
+        "accessibility_label": "Haywood golfers, workshop and community"
+      }
+    },
     "hw_featured": {
       "type": "haywood-featured-in",
       "blocks": {
@@ -494,72 +560,6 @@
         "heading": "As Featured In"
       }
     },
-    "hw_community": {
-      "type": "haywood-phase2-community",
-      "blocks": {
-        "community_1": {
-          "type": "image",
-          "settings": {
-            "image_purpose": "COMMUNITY IMAGE 01",
-            "caption": ""
-          }
-        },
-        "community_2": {
-          "type": "image",
-          "settings": {
-            "image_purpose": "COMMUNITY IMAGE 02",
-            "caption": ""
-          }
-        },
-        "community_3": {
-          "type": "image",
-          "settings": {
-            "image_purpose": "COMMUNITY IMAGE 03",
-            "caption": ""
-          }
-        },
-        "community_4": {
-          "type": "image",
-          "settings": {
-            "image_purpose": "COMMUNITY IMAGE 04",
-            "caption": ""
-          }
-        },
-        "community_5": {
-          "type": "image",
-          "settings": {
-            "image_purpose": "COMMUNITY IMAGE 05",
-            "caption": ""
-          }
-        },
-        "community_6": {
-          "type": "image",
-          "settings": {
-            "image_purpose": "COMMUNITY IMAGE 06",
-            "caption": ""
-          }
-        }
-      },
-      "block_order": [
-        "community_1",
-        "community_2",
-        "community_3",
-        "community_4",
-        "community_5",
-        "community_6"
-      ],
-      "settings": {
-        "background_color": "#ffffff",
-        "heading_color": "#0b0b0a",
-        "text_color": "#5b5a55",
-        "eyebrow": "",
-        "heading": "Join our community.",
-        "handle": "@HAYWOODGOLF",
-        "link_label": "Follow Haywood",
-        "link": "https://www.instagram.com/haywoodgolf/",
-        "accessibility_label": "Haywood golfers, workshop and community"
-      }
-    },
     "hw_final_cta": {
       "type": "haywood-phase2-final-cta",
       "blocks": {
@@ -591,6 +591,8 @@
         "point_performance"
       ],
       "settings": {
+        "desktop_image": "shopify://shop_images/TzrxH.jpg",
+        "mobile_image": "shopify://shop_images/TzrxH.jpg",
         "desktop_position": "center center",
         "mobile_position": "center center",
         "overlay": 70,
@@ -628,8 +630,8 @@
     "hw_seven_iron",
     "hw_education",
     "hw_customer_proof",
-    "hw_featured",
     "hw_community",
+    "hw_featured",
     "hw_final_cta",
     "hw_newsletter"
   ]
