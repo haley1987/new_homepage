@@ -144,7 +144,7 @@ body.hw-homepage .vintage-footer__bottom { margin-right: 5% !important; margin-l
 .hw-purpose-placeholder--hero { align-items: center; justify-items: end; padding: 8rem 20% 3rem 3rem; color: rgba(255,255,255,.38); background: radial-gradient(circle at 68% 50%, #272727 0, #111 38%, #050505 76%); }
 .hw-hero__overlay { background: linear-gradient(90deg, rgba(0,0,0,.83) 0, rgba(0,0,0,.48) 38%, rgba(0,0,0,.06) 76%), linear-gradient(0deg, rgba(0,0,0,.42), transparent 42%); }
 .hw-hero__content { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-top: 8rem; }
-.hw-hero .hw-kicker { display: none; }
+.hw-hero .hw-kicker { margin-bottom: 1.2rem; }
 .hw-hero .hw-title { max-width: 8ch; font-size: clamp(4.8rem, 5.3vw, 7rem); }
 .hw-hero .hw-copy { max-width: 35rem; margin-top: 1.4rem; color: rgba(255,255,255,.88); font-size: 1.8rem; line-height: 1.45; }
 .hw-hero .hw-actions { margin-top: 2.6rem; }
