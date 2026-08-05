@@ -1,33 +1,46 @@
-{%- assign has_quote = false -%}
-{%- if section.settings.quote != blank -%}{%- assign has_quote = true -%}{%- endif -%}
+{%- liquid
+  assign has_quote = false
+  if section.settings.quote != blank
+    assign has_quote = true
+  endif
 
-<section class="hw-section hw-proof{% unless has_quote %} hw-proof--placeholder-copy{% endunless %}">
-  <div class="hw-proof__grid">
-    <div class="hw-proof__media">
-      {%- if section.settings.image != blank -%}
-        {{ section.settings.image | image_url: width: 1600 | image_tag: widths: '550, 750, 1100, 1400, 1600', sizes: '(min-width: 750px) 30vw, 100vw', loading: 'lazy' }}
-      {%- else -%}
-        <div class="hw-proof__placeholder" data-image-purpose="CUSTOMER PROOF PHOTOGRAPHY"><span>CUSTOMER PROOF PHOTOGRAPHY</span></div>
-      {%- endif -%}
-    </div>
-    <div class="hw-proof__content">
+  assign review_rating = shop.metafields.judgeme.all_reviews_rating.value | default: shop.metafields.judgeme.all_reviews_rating
+  assign review_count = shop.metafields.judgeme.all_reviews_count.value | default: shop.metafields.judgeme.all_reviews_count
+  assign has_live_rating = false
+  if review_rating != blank and review_count != blank
+    assign has_live_rating = true
+  endif
+-%}
+
+<section class="hw-section hw-proof">
+  <div class="hw-shell hw-proof__inner{% if has_quote %} hw-proof__inner--quote{% endif %}">
+    <div class="hw-proof__intro">
       {%- if section.settings.eyebrow != blank -%}<p class="hw-kicker">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
       {%- if section.settings.heading != blank -%}<h2 class="hw-title hw-title--medium">{{ section.settings.heading | escape }}</h2>{%- endif -%}
-      {%- if has_quote -%}
+    </div>
+
+    {%- if has_quote -%}
+      <figure class="hw-proof__featured">
         <blockquote class="hw-proof__quote">“{{ section.settings.quote | escape }}”</blockquote>
         {%- if section.settings.customer_name != blank or section.settings.product_purchased != blank -%}
-          <cite class="hw-proof__cite">
+          <figcaption class="hw-proof__cite">
             {{ section.settings.customer_name | escape }}
             {%- if section.settings.product_purchased != blank -%}<span class="hw-proof__product">{{ section.settings.product_purchased | escape }}</span>{%- endif -%}
-          </cite>
+          </figcaption>
         {%- endif -%}
+      </figure>
+    {%- endif -%}
+
+    <div class="hw-proof__rating">
+      {%- if has_live_rating -%}
+        <div class="hw-proof__stars" role="img" aria-label="{{ review_rating | round: 1 }} out of 5 stars from {{ review_count }} customer reviews">★★★★★</div>
+        <p class="hw-proof__score">
+          <strong>{{ review_rating | round: 1 }}</strong>
+          <span>from {{ review_count }} customer reviews</span>
+        </p>
+      {%- elsif section.settings.summary != blank -%}
+        <p class="hw-proof__summary">{{ section.settings.summary | escape }}</p>
       {%- endif -%}
-      {%- unless has_quote -%}
-        {%- if section.settings.placeholder_copy != blank -%}<p class="hw-proof__empty">{{ section.settings.placeholder_copy | escape }}</p>{%- endif -%}
-      {%- endunless -%}
-    </div>
-    <div class="hw-proof__summary">
-      {%- if section.settings.summary != blank -%}<p>{{ section.settings.summary | escape }}</p>{%- endif -%}
       {%- if section.settings.link_label != blank and section.settings.link != blank -%}<a class="hw-button hw-button--light" href="{{ section.settings.link }}">{{ section.settings.link_label | escape }}</a>{%- endif -%}
     </div>
   </div>
@@ -40,12 +53,10 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Customer proof" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Built for golfers who care about the details." },
     { "type": "textarea", "id": "quote", "label": "Approved quote" },
-    { "type": "text", "id": "placeholder_copy", "label": "Unapproved quote placeholder", "default": "Approved customer review will appear here." },
     { "type": "text", "id": "customer_name", "label": "Customer name" },
     { "type": "text", "id": "product_purchased", "label": "Product purchased" },
-    { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "summary", "label": "Review summary", "default": "Customer reviews" },
-    { "type": "text", "id": "link_label", "label": "Link label", "default": "Read Reviews" },
+    { "type": "text", "id": "summary", "label": "Fallback review summary", "default": "Trusted by golfers worldwide" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Read Customer Reviews" },
     { "type": "url", "id": "link", "label": "Link" }
   ],
   "presets": [{ "name": "Haywood customer proof" }]

@@ -140,25 +140,12 @@
         "eyebrow": "Customer proof",
         "heading": "Built for golfers who care about the details.",
         "quote": "",
-        "placeholder_copy": "Approved customer review will appear here.",
         "customer_name": "",
         "product_purchased": "",
-        "image": "",
-        "summary": "Customer reviews",
-        "link_label": "Read Reviews",
-        "link": "/pages/reviews"
+        "summary": "Trusted by golfers worldwide",
+        "link_label": "Read Customer Reviews",
+        "link": "/pages/customer-reviews"
       }
-    },
-    "1754521978e7a53c13": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_featured_carousel_iiwGt8": {
-          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": { "maxwidth": 1080 }
-        }
-      },
-      "block_order": ["judge_me_reviews_featured_carousel_iiwGt8"],
-      "settings": { "include_margins": true }
     },
     "hw_community": {
       "type": "haywood-phase2-community",
@@ -214,7 +201,6 @@
     "hw_process",
     "hw_education",
     "hw_customer_proof",
-    "1754521978e7a53c13",
     "hw_community",
     "hw_final_cta"
   ]
