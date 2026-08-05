@@ -1,110 +1,221 @@
-{%- comment -%}
-  Vintage‐style bottom row
-{%- endcomment -%}
-<div class="footer__vintage-bottom page-width vintage-footer__bottom">
-  <ul class="vintage-footer__social list-unstyled">
- 
-    {%- if settings.social_instagram_link != blank -%}
-      <li>
-        <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener">
-          <span class="svg-wrapper">{{ 'icon-instagram.svg' | inline_asset_content }}</span>
-        </a>
-      </li>
-    {%- endif -%}
-       {%- if settings.social_facebook_link != blank -%}
-      <li>
-        <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener">
-          <span class="svg-wrapper">{{ 'icon-facebook.svg' | inline_asset_content }}</span>
-        </a>
-      </li>
-    {%- endif -%}
-    {%- if settings.social_twitter_link != blank -%}
-      <li>
-        <a href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener">
-          <span class="svg-wrapper">{{ 'icon-twitter.svg' | inline_asset_content }}</span>
-        </a>
-      </li>
-    {%- endif -%}
-  </ul>
+{%- liquid
+  assign fallback_menu = linklists['footer-new']
+  assign shop_menu = section.settings.shop_menu
+  assign support_menu = section.settings.support_menu
+  assign company_menu = section.settings.company_menu
+  assign terms_url = shop.terms_of_service.url | default: '/policies/terms-of-service'
+  assign privacy_url = shop.privacy_policy.url | default: '/policies/privacy-policy'
+-%}
 
-  <ul class="vintage-footer__right list-unstyled">
+<footer class="hw-site-footer" aria-labelledby="hw-footer-title">
+  <div class="hw-site-footer__main">
+    <div class="hw-site-footer__brand">
+      {%- render 'haywood-arc-mark', variant: 'footer' -%}
+      <p class="hw-site-footer__eyebrow">Haywood Golf</p>
+      <h2 id="hw-footer-title">Built for the<br>way you play.</h2>
+      <p class="hw-site-footer__statement">Premium components. Built to your specs. No unnecessary markup.</p>
+    </div>
 
-    <li><a href="/pages/terms-of-service">Terms of Service</a></li>
-    <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+    <div class="hw-site-footer__menus">
+      <nav class="hw-site-footer__menu" aria-labelledby="hw-footer-shop">
+        <h3 id="hw-footer-shop">{{ section.settings.shop_heading | default: 'Shop' }}</h3>
+        <ul>
+          {%- if shop_menu != blank -%}
+            {%- for link in shop_menu.links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for link in fallback_menu.links -%}
+              {%- if link.title == 'Dealer Locator' or link.title == 'Gift Cards' -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </nav>
+
+      <nav class="hw-site-footer__menu" aria-labelledby="hw-footer-support">
+        <h3 id="hw-footer-support">{{ section.settings.support_heading | default: 'Support' }}</h3>
+        <ul>
+          {%- if support_menu != blank -%}
+            {%- for link in support_menu.links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for link in fallback_menu.links -%}
+              {%- if link.title == 'Sign in' or link.title == 'FAQs' or link.title == 'Return, Shipping, Club Policy' or link.title == 'Contact' -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </nav>
+
+      <nav class="hw-site-footer__menu" aria-labelledby="hw-footer-company">
+        <h3 id="hw-footer-company">{{ section.settings.company_heading | default: 'Company' }}</h3>
+        <ul>
+          {%- if company_menu != blank -%}
+            {%- for link in company_menu.links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for link in fallback_menu.links -%}
+              {%- if link.title == 'About Us' or link.title == 'Careers' or link.title == 'Press' or link.title == 'Rep Haywood' or link.title == 'Blog' -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <div class="hw-site-footer__bottom">
+    <ul class="hw-site-footer__social" aria-label="Social media">
+      {%- if settings.social_instagram_link != blank -%}
         <li>
-      &copy; {{ 'now' | date: '%Y' }}, {{ shop.name | escape }}
-    </li>
-  </ul>
-</div>
-<style>
-/* ------------------------------------
-   Vintage footer bottom row
------------------------------------- */
-.vintage-footer__bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-  gap: 1rem;
-  margin-top: 4rem;
-  margin-right: 5%;
-  margin-left: 5%;
-}
+          <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" aria-label="Haywood Golf on Instagram">
+            <span class="svg-wrapper">{{ 'icon-instagram.svg' | inline_asset_content }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+      {%- if settings.social_facebook_link != blank -%}
+        <li>
+          <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" aria-label="Haywood Golf on Facebook">
+            <span class="svg-wrapper">{{ 'icon-facebook.svg' | inline_asset_content }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+      {%- if settings.social_twitter_link != blank -%}
+        <li>
+          <a href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener" aria-label="Haywood Golf on X">
+            <span class="svg-wrapper">{{ 'icon-twitter.svg' | inline_asset_content }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+    </ul>
 
+    <ul class="hw-site-footer__legal">
+      <li><a href="{{ terms_url }}">Terms of Service</a></li>
+      <li><a href="{{ privacy_url }}">Privacy Policy</a></li>
+      <li>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | escape }}</li>
+    </ul>
+  </div>
+</footer>
 
-/* shift over for your 240px sidebar on desktop */
-@media screen and (min-width: 990px) {
-  .vintage-footer__bottom {
-     margin-left: 22.5%;
-     margin-right: 2%;
+{% style %}
+  .hw-site-footer {
+    --hw-footer-navy: #0b2341;
+    --hw-footer-gold: #c9a66b;
+    --hw-footer-white: #fff;
+    --hw-footer-serif: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+    width: 100%;
+    color: var(--hw-footer-white);
+    background: var(--hw-footer-navy);
   }
-}
 
-/* reset list styles & lay them out in a row */
-.vintage-footer__social,
-.vintage-footer__right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+  .hw-site-footer *,
+  .hw-site-footer *::before,
+  .hw-site-footer *::after { box-sizing: border-box; }
 
-/* left block (social icons) */
-.vintage-footer__social {
-  order: 1;
-}
+  .hw-site-footer :is(h2, h3, p, ul) { margin: 0; }
+  .hw-site-footer ul { padding: 0; list-style: none; }
 
-/* right block (© text + policy links) */
-.vintage-footer__right {
-  order: 2;
-  font-size: 0.875rem;   /* tighter type */
-}
-
-/* link styling */
-.vintage-footer__social a,
-.vintage-footer__right a {
-  color: #666;
-  text-decoration: none;
-}
-
-.vintage-footer__social a:hover,
-.vintage-footer__right a:hover {
-  text-decoration: underline;
-}
-
-/* make sure the © text isn’t too big */
-.vintage-footer__right small {
-  color: #666;
-  display: block;
-}
-
-@media screen and (max-width: 749px) {
-  .vintage-footer__right {
-   font-size: 0.7rem;
+  .hw-site-footer__main,
+  .hw-site-footer__bottom {
+    width: min(100%, 144rem);
+    margin-inline: auto;
+    padding-inline: clamp(2rem, 5vw, 7rem);
   }
+
+  .hw-site-footer__main {
+    display: grid;
+    gap: clamp(5rem, 8vw, 11rem);
+    padding-block: clamp(6rem, 8vw, 9rem);
+  }
+
+  .hw-site-footer__brand { position: relative; min-width: 0; overflow: hidden; }
+  .hw-site-footer .hw-arc-mark--footer { position: absolute; top: -3rem; right: 0; width: 18rem; opacity: .07; filter: invert(1); pointer-events: none; }
+  .hw-site-footer .hw-arc-mark--footer img { display: block; width: 100%; height: auto; }
+  .hw-site-footer__eyebrow { color: var(--hw-footer-gold); font-size: 1rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+  .hw-site-footer__brand h2 { max-width: 9ch; margin-top: 1.8rem; color: var(--hw-footer-white); font-family: var(--hw-footer-serif); font-size: clamp(4.5rem, 6vw, 7rem); font-weight: 400; letter-spacing: -.055em; line-height: .9; }
+  .hw-site-footer__statement { max-width: 38rem; margin-top: 2.4rem !important; color: rgba(255,255,255,.62); font-size: 1.3rem; line-height: 1.55; }
+
+  .hw-site-footer__menus { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4rem 2.5rem; }
+  .hw-site-footer__menu h3 { padding-bottom: 1.3rem; border-bottom: 1px solid rgba(255,255,255,.2); color: var(--hw-footer-gold); font-size: .95rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+  .hw-site-footer__menu ul { display: grid; gap: 1.05rem; margin-top: 1.8rem; }
+  .hw-site-footer__menu a { display: inline-block; color: rgba(255,255,255,.78); font-size: 1.3rem; line-height: 1.35; text-decoration: none; transition: color 160ms ease, transform 160ms ease; }
+  .hw-site-footer__menu a:hover { color: var(--hw-footer-white); transform: translateX(.3rem); }
+  .hw-site-footer__menu a:focus-visible,
+  .hw-site-footer__bottom a:focus-visible { outline: 2px solid var(--hw-footer-gold); outline-offset: 4px; }
+
+  .hw-site-footer__bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2rem; padding-block: 2.2rem; border-top: 1px solid rgba(255,255,255,.18); }
+  .hw-site-footer__social,
+  .hw-site-footer__legal { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; }
+  .hw-site-footer__social a { display: grid; width: 3.8rem; height: 3.8rem; place-items: center; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; color: var(--hw-footer-white); transition: color 160ms ease, border-color 160ms ease, background 160ms ease; }
+  .hw-site-footer__social a:hover { border-color: var(--hw-footer-gold); color: var(--hw-footer-navy); background: var(--hw-footer-gold); }
+  .hw-site-footer__social .svg-wrapper { width: 1.5rem; height: 1.5rem; }
+  .hw-site-footer__legal { color: rgba(255,255,255,.48); font-size: .9rem; }
+  .hw-site-footer__legal a { color: inherit; text-decoration: none; }
+  .hw-site-footer__legal a:hover { color: var(--hw-footer-white); }
+
+  @media screen and (min-width: 750px) {
+    .hw-site-footer__main { grid-template-columns: minmax(28rem, .85fr) minmax(44rem, 1.15fr); }
+    .hw-site-footer__menus { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  @media screen and (max-width: 749px) {
+    .hw-site-footer__main { padding-block: 5rem; }
+    .hw-site-footer__brand h2 { font-size: clamp(4.5rem, 14vw, 6.2rem); }
+    .hw-site-footer__bottom { align-items: flex-start; flex-direction: column; }
+    .hw-site-footer__legal { gap: .8rem 1.4rem; }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Haywood site footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Footer menus"
+    },
+    {
+      "type": "text",
+      "id": "shop_heading",
+      "label": "Shop heading",
+      "default": "Shop"
+    },
+    {
+      "type": "link_list",
+      "id": "shop_menu",
+      "label": "Shop menu",
+      "info": "Leave blank to use Dealer Locator and Gift Cards from footer-new."
+    },
+    {
+      "type": "text",
+      "id": "support_heading",
+      "label": "Support heading",
+      "default": "Support"
+    },
+    {
+      "type": "link_list",
+      "id": "support_menu",
+      "label": "Support menu",
+      "info": "Leave blank to use the existing support links from footer-new."
+    },
+    {
+      "type": "text",
+      "id": "company_heading",
+      "label": "Company heading",
+      "default": "Company"
+    },
+    {
+      "type": "link_list",
+      "id": "company_menu",
+      "label": "Company menu",
+      "info": "Leave blank to use the existing company links from footer-new."
+    }
+  ]
 }
-
-
-</style>
+{% endschema %}
