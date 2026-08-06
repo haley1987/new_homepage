@@ -12,15 +12,15 @@
     "hw_hero": {
       "type": "haywood-phase1-hero",
       "settings": {
-        "desktop_image": "shopify://shop_images/ChatGPT_Image_Aug_5_2026_02_42_58_PM.png",
+        "desktop_image": "shopify://shop_images/ChatGPT_Image_Aug_5_2026_04_57_52_PM_1.png",
         "mobile_image": "shopify://shop_images/ChatGPT_Image_Aug_5_2026_02_42_33_PM.png",
         "desktop_position": "center center",
         "mobile_position": "center center",
         "overlay_top": 35,
         "overlay_middle": 40,
         "overlay_bottom": 75,
-        "heading_color": "#ffffff",
-        "text_color": "#e3e3e0",
+        "heading_color": "#000000",
+        "text_color": "#000000",
         "eyebrow": "Meet Our Newest",
         "heading": "CB2 & MB2",
         "body": "<p>Forged for golfers who care where the ball finishes.</p>",
