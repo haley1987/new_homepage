@@ -23,12 +23,12 @@
         "text_color": "#000000",
         "eyebrow": "Meet Our Newest",
         "heading": "CB2 & MB2",
-        "body": "<p>Two distinct profiles. Forged for feel, precision and control. Meet the new CB2 and MB2.</p>",
+        "body": "<p>Two distinct profiles. Forged for feel, precision and control. </p><p>Meet the new CB2 and MB2.</p>",
         "primary_label": "Shop All Irons",
         "primary_link": "shopify://collections/irons",
         "secondary_label": "Find My Fit",
         "secondary_link": "shopify://pages/fitting-tool",
-        "trust_line": "Customer reviews · Trusted by golfers"
+        "trust_line": "Forged · Fully milled · Built to your specs"
       }
     },
     "hw_trust": {
