@@ -104,7 +104,7 @@ body.hw-homepage .vintage-footer__bottom { margin-right: 5% !important; margin-l
 .hw-arc-mark--final { position: absolute; z-index: 1; filter: invert(1); }
 .hw-arc-mark--hero { top: 18%; right: 7%; width: clamp(12rem, 18vw, 26rem); opacity: .085; }
 .hw-arc-mark--stamp { position: absolute; top: 4rem; right: var(--hw-gutter); width: 4.2rem; opacity: .9; }
-.hw-arc-mark--final { top: 50%; right: 7%; width: clamp(12rem, 16vw, 22rem); opacity: .08; transform: translateY(-50%); }
+.hw-arc-mark--final { right: 5%; bottom: 2rem; width: clamp(30rem, 40vw, 62rem); opacity: .1; }
 
 .hw-purpose-placeholder,
 .hw-product-card__placeholder,
@@ -548,6 +548,7 @@ body.hw-homepage .vintage-footer__bottom { margin-right: 5% !important; margin-l
   .hw-newsletter__fields button { width: 100%; }
   .hw-final-cta { min-height: 47rem; }
   .hw-final-cta__content { min-height: 47rem; align-content: end; }
+  .hw-arc-mark--final { right: 6%; bottom: 2rem; width: min(72vw, 42rem); }
   .hw-final-cta__points { grid-template-columns: repeat(3, minmax(0,1fr)); gap: .8rem; }
   .hw-final-cta__point { display: block; }
   .hw-final-cta__point-icon { margin-bottom: .8rem; }
