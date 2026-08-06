@@ -4757,3 +4757,34 @@ div.non-apo-buybox-container > div.buybox-grid > div.buybox-button > form > butt
   }
 
 }
+
+/* Modern header layout: retire the legacy fixed desktop-sidebar offsets. */
+@media screen and (min-width: 990px) {
+  .sidebar-drawer {
+    display: none !important;
+  }
+
+  main,
+  #MainContent,
+  .content-for-layout,
+  .page-wrapper,
+  .section-wrapper,
+  footer.footer {
+    width: 100%;
+    max-width: none;
+    margin-left: 0 !important;
+  }
+
+  div.search-modal__content.search-modal__content-bottom,
+  .header__brand-with-breadcrumbs {
+    margin-left: 0 !important;
+  }
+
+  header.drawer-menu .header__heading-logo-wrapper {
+    display: block !important;
+  }
+
+  header-drawer {
+    visibility: visible;
+  }
+}
