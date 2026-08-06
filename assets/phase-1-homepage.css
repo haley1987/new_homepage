@@ -477,14 +477,14 @@ body.hw-homepage .vintage-footer__bottom { margin-right: 5% !important; margin-l
   .hw-homepage .section-header .header__icons { justify-self: end; }
 }
 
-@media screen and (min-width: 990px) and (max-width: 1499px) {
+@media screen and (min-width: 990px) and (max-width: 1279px) {
   .hw-homepage .section-header .header__inline-menu { display: none !important; }
   .hw-homepage .section-header header-drawer { display: block !important; grid-area: navigation; }
   .hw-homepage .section-header .header--top-left { grid-template-areas: 'navigation heading icons' !important; }
   .hw-homepage .section-header .header__heading { justify-self: center; }
 }
 
-@media screen and (min-width: 1500px) {
+@media screen and (min-width: 1280px) {
   .hw-homepage .section-header .header { width: min(100%, 172rem); max-width: 172rem; margin-inline: auto; padding-inline: 2.8rem; }
   .hw-homepage .section-header .header--top-left { grid-template-columns: minmax(20rem,1fr) auto minmax(20rem,1fr); column-gap: 2.6rem; }
   .hw-homepage .section-header .header__heading-logo-wrapper { width: 15rem; }
