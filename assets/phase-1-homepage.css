@@ -102,7 +102,7 @@ body.hw-homepage .vintage-footer__bottom { margin-right: 5% !important; margin-l
 .hw-arc-mark img { display: block; width: 100%; height: auto; }
 .hw-arc-mark--hero,
 .hw-arc-mark--final { position: absolute; z-index: 1; filter: invert(1); }
-.hw-arc-mark--hero { top: 18%; right: 7%; width: clamp(12rem, 18vw, 26rem); opacity: .085; }
+.hw-arc-mark--hero { right: 4%; bottom: 4rem; width: clamp(32rem, 28vw, 52rem); opacity: .18; }
 .hw-arc-mark--stamp { position: absolute; top: 4rem; right: var(--hw-gutter); width: 4.2rem; opacity: .9; }
 .hw-arc-mark--final { right: 5%; bottom: 2rem; width: clamp(30rem, 40vw, 62rem); opacity: .1; }
 
@@ -494,6 +494,7 @@ body.hw-homepage .vintage-footer__bottom { margin-right: 5% !important; margin-l
 
 @media screen and (max-width: 749px) {
   .hw-homepage .section-header .header { min-height: 6rem; padding-inline: 1.6rem; }
+  .hw-arc-mark--hero { right: 1.6rem; bottom: 12rem; width: min(48vw, 21rem); opacity: .12; }
   .hw-hero,
   .hw-hero__content { min-height: 60rem; }
   .hw-hero__content { justify-content: flex-end; padding-top: 10rem; padding-bottom: 4rem; }
