@@ -134,9 +134,10 @@
     padding-block: clamp(6rem, 8vw, 9rem);
   }
 
-  .hw-site-footer__brand { position: relative; min-width: 0; overflow: hidden; }
-  .hw-site-footer .hw-arc-mark--footer { position: absolute; top: -3rem; right: 0; width: 18rem; opacity: .07; filter: invert(1); pointer-events: none; }
+  .hw-site-footer__brand { position: relative; min-width: 0; overflow: visible; }
+  .hw-site-footer .hw-arc-mark--footer { position: absolute; z-index: 0; top: 0; right: 1rem; width: min(16rem, 34vw); opacity: .07; filter: invert(1); pointer-events: none; }
   .hw-site-footer .hw-arc-mark--footer img { display: block; width: 100%; height: auto; }
+  .hw-site-footer__brand > :not(.hw-arc-mark) { position: relative; z-index: 1; }
   .hw-site-footer__eyebrow { color: var(--hw-footer-gold); font-size: 1rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
   .hw-site-footer__brand h2 { max-width: 9ch; margin-top: 1.8rem; color: var(--hw-footer-white); font-family: var(--hw-footer-serif); font-size: clamp(4.5rem, 6vw, 7rem); font-weight: 400; letter-spacing: -.055em; line-height: .9; }
   .hw-site-footer__statement { max-width: 38rem; margin-top: 2.4rem !important; color: rgba(255,255,255,.62); font-size: 1.3rem; line-height: 1.55; }
