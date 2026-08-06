@@ -137,8 +137,15 @@
 
     .header--top-left header-drawer {
       display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
       grid-area: navigation;
       justify-self: start;
+    }
+
+    .header--top-left header-drawer .header__icon--menu {
+      display: flex !important;
+      color: inherit;
     }
 
     .header--top-left .header__inline-menu { display: none !important; }
