@@ -98,6 +98,50 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Keep the desktop header to one intentional row across every template. */
+  @media screen and (min-width: 1300px) {
+    .header {
+      width: 100%;
+      max-width: none;
+      min-height: 6.8rem;
+      grid-template-columns: minmax(15rem, 1fr) auto minmax(15rem, 1fr);
+      padding-inline: 3.2rem;
+    }
+
+    .header--top-left {
+      grid-template-areas: 'heading navigation icons';
+      grid-template-columns: minmax(15rem, 1fr) auto minmax(15rem, 1fr);
+      column-gap: 2rem;
+    }
+
+    .header--top-left .header__heading,
+    .header--top-left > .header__heading-link { justify-self: start; }
+    .header--top-left .header__icons { justify-self: end; }
+    .header:not(.header--middle-left, .header--middle-center) .header__inline-menu { margin-top: 0; }
+    .header--top-left .header__heading-logo-wrapper { width: 11.5rem; }
+    .header--top-left .header__menu-item { padding-inline: .25rem; font-size: .85rem; }
+  }
+
+  /* The complete menu is too wide for smaller laptops, so use the drawer there. */
+  @media screen and (min-width: 990px) and (max-width: 1299px) {
+    .header--top-left {
+      grid-template-areas: 'navigation heading icons';
+      grid-template-columns: 1fr auto 1fr;
+      column-gap: 1rem;
+    }
+
+    .header--top-left header-drawer {
+      display: block !important;
+      grid-area: navigation;
+      justify-self: start;
+    }
+
+    .header--top-left .header__inline-menu { display: none !important; }
+    .header--top-left .header__heading,
+    .header--top-left > .header__heading-link { justify-self: center; }
+    .header--top-left .header__icons { justify-self: end; }
+  }
 {%- endstyle -%}
 
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
