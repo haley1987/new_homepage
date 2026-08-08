@@ -1,0 +1,63 @@
+{%- liquid
+  assign locator_eyebrow = page_settings.locator_eyebrow | default: 'FIND HAYWOOD NEAR YOU'
+  assign locator_heading = page_settings.locator_heading | default: 'Try Haywood in person.'
+  assign locator_intro = page_settings.locator_intro | default: 'Find a Haywood dealer or fitting partner near you. Explore available locations, get fit and experience our clubs before you order.'
+  assign note_heading = page_settings.locator_note_heading | default: 'Before you visit'
+  assign note_copy = page_settings.locator_note_copy | default: 'Haywood product availability, fitting services and pricing vary by location. Some partners carry select models or offer different fitting experiences. Please contact the location directly to confirm available products, appointment requirements and current pricing before visiting.'
+  assign fit_eyebrow = page_settings.locator_fit_eyebrow | default: 'NO FITTER NEARBY?'
+  assign fit_heading = page_settings.locator_fit_heading | default: 'Find your fit online.'
+  assign fit_copy = page_settings.locator_fit_copy | default: 'Answer a few questions about your swing, game and preferences. Our Find My Fit tool will help narrow down the right Haywood model and provide a recommended build starting point.'
+  assign fit_label = page_settings.locator_fit_label | default: 'FIND MY FIT'
+  assign fit_link = page_settings.locator_fit_link | default: '/pages/fitting-tool'
+  assign dealer_eyebrow = page_settings.locator_dealer_eyebrow | default: 'BECOME A HAYWOOD DEALER'
+  assign dealer_heading = page_settings.locator_dealer_heading | default: 'Interested in carrying Haywood?'
+  assign dealer_copy = page_settings.locator_dealer_copy | default: 'We’re growing our network of trusted dealers and fitting partners. If you’re interested in carrying Haywood products, email our team to introduce yourself.'
+  assign dealer_label = page_settings.locator_dealer_label | default: 'EMAIL OUR TEAM'
+  assign dealer_email = page_settings.locator_dealer_email | default: 'info@haywoodgolf.com'
+  assign dealer_href = 'mailto:' | append: dealer_email
+-%}
+
+<div class="hwl">
+  <section class="hwl__hero" aria-labelledby="hwl-title">
+    <div class="hwl__shell hwl__hero-inner">
+      <p class="hwl__eyebrow"><span></span>{{ locator_eyebrow | escape }}</p>
+      <h1 id="hwl-title" class="hwl__title">{{ locator_heading | escape }}</h1>
+      <p class="hwl__intro">{{ locator_intro | escape }}</p>
+    </div>
+    {%- render 'haywood-arc-mark', variant: 'locator' -%}
+  </section>
+
+  <section class="hwl__visit" aria-labelledby="hwl-visit-title">
+    <div class="hwl__shell hwl__visit-inner">
+      <div class="hwl__visit-heading">
+        <span aria-hidden="true">01</span>
+        <h2 id="hwl-visit-title">{{ note_heading | escape }}</h2>
+      </div>
+      <p>{{ note_copy | escape }}</p>
+    </div>
+  </section>
+
+  <section class="hwl__locator" aria-label="Haywood dealer and fitting partner locations">
+    <div class="hwl__locator-frame">
+      {{ page.content }}
+    </div>
+  </section>
+
+  <section class="hwl__next" aria-label="More ways to connect with Haywood">
+    <div class="hwl__shell hwl__card-grid">
+      <article class="hwl__card hwl__card--fit">
+        <p class="hwl__card-eyebrow">{{ fit_eyebrow | escape }}</p>
+        <h2>{{ fit_heading | escape }}</h2>
+        <p class="hwl__card-copy">{{ fit_copy | escape }}</p>
+        <a class="hwl__button" href="{{ fit_link }}">{{ fit_label | escape }} <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="hwl__card hwl__card--dealer">
+        <p class="hwl__card-eyebrow">{{ dealer_eyebrow | escape }}</p>
+        <h2>{{ dealer_heading | escape }}</h2>
+        <p class="hwl__card-copy">{{ dealer_copy | escape }}</p>
+        <a class="hwl__button hwl__button--light" href="{{ dealer_href }}">{{ dealer_label | escape }} <span aria-hidden="true">↗</span></a>
+      </article>
+    </div>
+  </section>
+</div>
