@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "sidebar-drawer": {
+      "type": "sidebar-drawer",
+      "settings": {
+        "menu": "new-menu",
+        "sidebar_second_menu": "footer-new",
+        "menu_color_scheme": "1"
+      }
+    },
+    "main": {
+      "type": "haywood-store-locator",
+      "settings": {
+        "locator_eyebrow": "FIND HAYWOOD NEAR YOU",
+        "locator_heading": "Try Haywood in person.",
+        "locator_intro": "Find a Haywood dealer or fitting partner near you. Explore available locations, get fit and experience our clubs before you order.",
+        "locator_note_heading": "Before you visit",
+        "locator_note_copy": "Haywood product availability, fitting services and pricing vary by location. Some partners carry select models or offer different fitting experiences. Please contact the location directly to confirm available products, appointment requirements and current pricing before visiting.",
+        "locator_fit_eyebrow": "NO FITTER NEARBY?",
+        "locator_fit_heading": "Find your fit online.",
+        "locator_fit_copy": "Answer a few questions about your swing, game and preferences. Our Find My Fit tool will help narrow down the right Haywood model and provide a recommended build starting point.",
+        "locator_fit_label": "FIND MY FIT",
+        "locator_fit_link": "shopify://pages/fitting-tool",
+        "locator_dealer_eyebrow": "BECOME A HAYWOOD DEALER",
+        "locator_dealer_heading": "Interested in carrying Haywood?",
+        "locator_dealer_copy": "We’re growing our network of trusted dealers and fitting partners. If you’re interested in carrying Haywood products, email our team to introduce yourself.",
+        "locator_dealer_label": "EMAIL OUR TEAM",
+        "locator_dealer_email": "info@haywoodgolf.com"
+      }
+    }
+  },
+  "order": [
+    "sidebar-drawer",
+    "main"
+  ]
+}
