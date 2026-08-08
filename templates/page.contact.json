@@ -19,6 +19,7 @@
 },
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 36,
         "padding_bottom": 36
@@ -27,6 +28,15 @@
     "form": {
       "type": "contact-form",
       "settings": {
+        "contact_eyebrow": "CONTACT HAYWOOD",
+        "contact_title": "Let’s get you an answer.",
+        "contact_intro": "Questions about our clubs, an existing order, fittings or anything else? Tell us what you need and our team will point you in the right direction.",
+        "contact_form_eyebrow": "SEND A MESSAGE",
+        "contact_form_heading": "Tell us what you need.",
+        "contact_form_copy": "Choose the closest topic and include any useful details. If your question is about an order, add the order number so we can help faster.",
+        "contact_email": "info@haywoodgolf.com",
+        "contact_phone_display": "1-844-794-0004",
+        "contact_phone_link": "+18447940004",
         "heading": "",
         "heading_size": "h1",
         "color_scheme": "scheme-1",
