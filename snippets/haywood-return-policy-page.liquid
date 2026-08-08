@@ -1,7 +1,7 @@
 {%- liquid
-  assign policy_eyebrow = page_settings.policy_eyebrow | default: 'POLICIES & SUPPORT'
-  assign policy_heading = page_settings.policy_heading | default: 'Clear policies. No surprises.'
-  assign policy_intro = page_settings.policy_intro | default: 'A straightforward guide to returns, custom orders, production timing and shipping.'
+  assign policy_eyebrow = page_settings.policy_eyebrow | default: 'RETURNS, ORDERS & SHIPPING'
+  assign policy_heading = page_settings.policy_heading | default: 'What to know before you order.'
+  assign policy_intro = page_settings.policy_intro | default: 'Straight answers about returns, custom builds, order changes, production times and shipping.'
   assign contact_eyebrow = page_settings.policy_contact_eyebrow | default: 'NEED A HAND?'
   assign contact_heading = page_settings.policy_contact_heading | default: 'Questions about your order?'
   assign contact_copy = page_settings.policy_contact_copy | default: 'Our team can confirm eligibility, explain the return process or help with an existing order.'
@@ -23,20 +23,20 @@
   <section class="hwrp__summary" aria-label="Policy at a glance">
     <div class="hwrp__summary-grid">
       <article class="hwrp__fact">
-        <span class="hwrp__fact-number">30</span>
-        <div><strong>Days</strong><p>Eligible stock-item return window</p></div>
-      </article>
-      <article class="hwrp__fact">
-        <span class="hwrp__fact-number">10%</span>
-        <div><strong>Restocking</strong><p>Applies to approved returns</p></div>
-      </article>
-      <article class="hwrp__fact">
-        <span class="hwrp__fact-number">2.5–4</span>
-        <div><strong>Weeks</strong><p>Typical order assembly time</p></div>
+        <span class="hwrp__fact-number">30 DAYS</span>
+        <div><strong>Stock returns</strong><p>Eligible unused stock products may be returned within 30 days. Approved returns are subject to a 10% restocking fee.</p></div>
       </article>
       <article class="hwrp__fact hwrp__fact--text">
-        <span class="hwrp__fact-number">Built</span>
-        <div><strong>To order</strong><p>Custom and limited items may be final sale</p></div>
+        <span class="hwrp__fact-number">FINAL SALE</span>
+        <div><strong>Custom orders</strong><p>Custom-built and limited-edition products cannot be returned.</p></div>
+      </article>
+      <article class="hwrp__fact">
+        <span class="hwrp__fact-number">2.5–4 WEEKS</span>
+        <div><strong>Typical build time</strong><p>Custom orders are assembled in the order they are received.</p></div>
+      </article>
+      <article class="hwrp__fact hwrp__fact--text">
+        <span class="hwrp__fact-number">TRACKED</span>
+        <div><strong>Insured shipping</strong><p>Estimated delivery is 1–8 business days after dispatch. A signature is required.</p></div>
       </article>
     </div>
   </section>
