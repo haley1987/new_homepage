@@ -1,0 +1,29 @@
+/* Alternating full-bleed and contained desktop composition. */
+.hw-homepage {
+  --hw-content: 160rem;
+  --hw-content-reading: 138rem;
+  --hw-content-band: 150rem;
+}
+
+@media screen and (min-width: 750px) {
+  /* A full-width campaign moment between contained sections. */
+  .hw-homepage .hw-seven .hw-shell {
+    width: 100%;
+    max-width: none;
+    padding-inline: 0;
+  }
+
+  /* Reading-heavy content remains comfortably contained. */
+  .hw-homepage .hw-process > .hw-shell {
+    width: min(100%, var(--hw-content-reading));
+  }
+
+  /* Full-width backgrounds with deliberately contained content. */
+  .hw-homepage :is(
+    .hw-proof__inner,
+    .hw-newsletter__inner,
+    .hw-final-cta__content
+  ) {
+    width: min(100%, var(--hw-content-band));
+  }
+}
