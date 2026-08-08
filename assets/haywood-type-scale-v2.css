@@ -1,0 +1,125 @@
+/* Cache-safe Haywood readability scale. Loaded after the core theme styles. */
+body {
+  font-size: 1.6rem;
+}
+
+.text-body {
+  font-size: 1.6rem;
+}
+
+/* Homepage reading copy */
+.hw-homepage .hw-copy {
+  font-size: 1.7rem !important;
+  line-height: 1.6 !important;
+}
+
+.hw-homepage .hw-hero .hw-copy {
+  font-size: 1.8rem !important;
+}
+
+.hw-homepage :is(
+  .hw-story__row p,
+  .hw-newsletter__message > p:last-child
+) {
+  font-size: 1.6rem !important;
+  line-height: 1.6 !important;
+}
+
+.hw-homepage :is(
+  .hw-trust__copy,
+  .hw-product-card__category,
+  .hw-seven__step p,
+  .hw-process__copy,
+  .hw-education-card__excerpt,
+  .hw-proof__summary
+) {
+  font-size: 1.4rem !important;
+  line-height: 1.55 !important;
+}
+
+.hw-homepage :is(.hw-hero__trust, .hw-newsletter__status) {
+  font-size: 1.4rem !important;
+}
+
+.hw-homepage :is(.hw-button, .hw-kicker, .hw-featured__heading, .hw-newsletter__fields button) {
+  font-size: 1.1rem !important;
+}
+
+.hw-homepage .hw-newsletter__fields input {
+  font-size: 1.6rem !important;
+}
+
+/* Redesigned information pages */
+.hw-return-policy-page .hwrp__intro,
+.hw-faq-page .hwfaq__intro,
+.hw-contact-page .hwcontact__intro,
+.hw-booking-page .hwb__lead,
+.hw-locator-page .hwl__intro {
+  font-size: clamp(1.7rem, 1.7vw, 2rem) !important;
+  line-height: 1.6 !important;
+}
+
+.hw-return-policy-page .hwrp__policy :is(p, li),
+.hw-faq-page .hwfaq__panel :is(p, li) {
+  font-size: 1.65rem !important;
+  line-height: 1.75 !important;
+}
+
+.hw-contact-page :is(
+  .hwcontact__routes-heading > p:last-child,
+  .hwcontact__form-intro
+) {
+  font-size: 1.65rem !important;
+  line-height: 1.65 !important;
+}
+
+.hw-contact-page .hwcontact__route p,
+.hw-booking-page :is(.hwb__steps p, .hwb__alternative-card p) {
+  font-size: 1.55rem !important;
+  line-height: 1.6 !important;
+}
+
+.hw-booking-page :is(
+  .hwb__booking-intro > p:not(.hwb__eyebrow),
+  .hwb__alternatives-heading > p:last-child
+),
+.hw-locator-page :is(.hwl__visit-inner > p, .hwl__card-copy),
+.hw-return-policy-page .hwrp__contact-inner > div > p:last-child,
+.hw-faq-page .hwfaq__contact-inner > div > p:last-child {
+  font-size: 1.6rem !important;
+  line-height: 1.65 !important;
+}
+
+.hw-return-policy-page .hwrp__fact p {
+  font-size: 1.5rem !important;
+  line-height: 1.55 !important;
+}
+
+.hw-contact-page .hwcontact__field :is(input, select, textarea),
+.hw-faq-page .hwfaq__search-field input {
+  font-size: 1.6rem !important;
+}
+
+/* Shared footer */
+.hw-site-footer__statement {
+  font-size: 1.6rem !important;
+  line-height: 1.6 !important;
+}
+
+.hw-site-footer__menu a {
+  font-size: 1.5rem !important;
+  line-height: 1.45 !important;
+}
+
+@media screen and (min-width: 750px) {
+  body {
+    font-size: 1.7rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .hw-homepage .hw-hero .hw-copy,
+  .hw-homepage .hw-copy {
+    font-size: 1.6rem !important;
+  }
+}
