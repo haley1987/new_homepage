@@ -1,0 +1,161 @@
+<div class="hwcontact" data-haywood-contact>
+  <section class="hwcontact__hero" aria-labelledby="hwcontact-title">
+    <div class="hwcontact__shell hwcontact__hero-inner">
+      <p class="hwcontact__eyebrow"><span></span>{{ section.settings.contact_eyebrow | escape }}</p>
+      <h1 id="hwcontact-title" class="hwcontact__title">{{ section.settings.contact_title | escape }}</h1>
+      <p class="hwcontact__intro">{{ section.settings.contact_intro | escape }}</p>
+    </div>
+    {%- render 'haywood-arc-mark', variant: 'contact' -%}
+  </section>
+
+  <section class="hwcontact__routes" aria-labelledby="hwcontact-routes-title">
+    <div class="hwcontact__shell">
+      <div class="hwcontact__routes-heading">
+        <p class="hwcontact__eyebrow hwcontact__eyebrow--dark"><span></span>START HERE</p>
+        <h2 id="hwcontact-routes-title">You may not need to wait.</h2>
+        <p>These pages answer the questions our team receives most often.</p>
+      </div>
+
+      <div class="hwcontact__route-grid">
+        <a class="hwcontact__route" href="/pages/faqs">
+          <span class="hwcontact__route-number">01</span>
+          <div><h3>Frequently asked questions</h3><p>Club selection, specifications, trials, shipping and more.</p></div>
+          <span class="hwcontact__route-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="hwcontact__route" href="/pages/return-policy">
+          <span class="hwcontact__route-number">02</span>
+          <div><h3>Orders, shipping and returns</h3><p>Build times, order changes, delivery and return eligibility.</p></div>
+          <span class="hwcontact__route-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="hwcontact__route hwcontact__route--navy" href="/pages/booking">
+          <span class="hwcontact__route-number">03</span>
+          <div><h3>Fittings and club selection</h3><p>Book Haywood HQ, find a fitting partner or start online.</p></div>
+          <span class="hwcontact__route-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="hwcontact__message" aria-labelledby="hwcontact-form-title">
+    <div class="hwcontact__shell hwcontact__message-grid">
+      <aside class="hwcontact__aside">
+        <p class="hwcontact__eyebrow hwcontact__eyebrow--dark"><span></span>{{ section.settings.contact_form_eyebrow | escape }}</p>
+        <h2 id="hwcontact-form-title">{{ section.settings.contact_form_heading | escape }}</h2>
+        <p class="hwcontact__form-intro">{{ section.settings.contact_form_copy | escape }}</p>
+
+        <dl class="hwcontact__details">
+          <div>
+            <dt>Email</dt>
+            <dd><a href="mailto:{{ section.settings.contact_email | escape }}">{{ section.settings.contact_email | escape }}</a></dd>
+          </div>
+          <div>
+            <dt>Toll-free</dt>
+            <dd><a href="tel:{{ section.settings.contact_phone_link | escape }}">{{ section.settings.contact_phone_display | escape }}</a></dd>
+          </div>
+        </dl>
+
+        <button class="hwcontact__chat" type="button" data-hwcontact-chat>
+          Chat with our team <span aria-hidden="true">↗</span>
+        </button>
+      </aside>
+
+      <div class="hwcontact__form-wrap">
+        {%- form 'contact', id: 'HaywoodContactForm', class: 'hwcontact__form' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="hwcontact__status hwcontact__status--success" role="status" tabindex="-1" autofocus>
+              {{- 'icon-success.svg' | inline_asset_content -}}
+              <div><strong>Message sent.</strong><p>Thanks for contacting Haywood. A member of our team will follow up using the email address you provided.</p></div>
+            </div>
+          {%- elsif form.errors -%}
+            <div class="hwcontact__status hwcontact__status--error" role="alert" tabindex="-1" autofocus>
+              {{- 'icon-error.svg' | inline_asset_content -}}
+              <div><strong>Please check the form.</strong>{{ form.errors | default_errors }}</div>
+            </div>
+          {%- endif -%}
+
+          <div class="hwcontact__field-grid">
+            <div class="hwcontact__field">
+              <label for="HaywoodContact-name">Name <span aria-hidden="true">*</span></label>
+              <input
+                id="HaywoodContact-name"
+                type="text"
+                name="contact[Name]"
+                autocomplete="name"
+                value="{% if form.name %}{{ form.name | escape }}{% elsif customer %}{{ customer.name | escape }}{% endif %}"
+                required
+              >
+            </div>
+
+            <div class="hwcontact__field">
+              <label for="HaywoodContact-email">Email <span aria-hidden="true">*</span></label>
+              <input
+                id="HaywoodContact-email"
+                type="email"
+                name="contact[email]"
+                autocomplete="email"
+                spellcheck="false"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email | escape }}{% elsif customer %}{{ customer.email | escape }}{% endif %}"
+                aria-required="true"
+                {% if form.errors contains 'email' %}aria-invalid="true"{% endif %}
+                required
+              >
+            </div>
+          </div>
+
+          <div class="hwcontact__field-grid">
+            <div class="hwcontact__field">
+              <label for="HaywoodContact-topic">What can we help with? <span aria-hidden="true">*</span></label>
+              <div class="hwcontact__select-wrap">
+                <select id="HaywoodContact-topic" name="contact[Topic]" required>
+                  <option value="" selected disabled>Choose a topic</option>
+                  <option value="Product or specifications">Product or specifications</option>
+                  <option value="Existing order">Existing order</option>
+                  <option value="Fitting help">Fitting help</option>
+                  <option value="Returns or shipping">Returns or shipping</option>
+                  <option value="Dealer enquiry">Dealer enquiry</option>
+                  <option value="Press or partnership">Press or partnership</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span aria-hidden="true">⌄</span>
+              </div>
+            </div>
+
+            <div class="hwcontact__field">
+              <label for="HaywoodContact-order">Order number <span>optional</span></label>
+              <input id="HaywoodContact-order" type="text" name="contact[Order number]" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="hwcontact__field">
+            <label for="HaywoodContact-phone">Phone number <span>optional</span></label>
+            <input
+              id="HaywoodContact-phone"
+              type="tel"
+              name="contact[Phone number]"
+              autocomplete="tel"
+              value="{% if form.phone %}{{ form.phone | escape }}{% elsif customer %}{{ customer.phone | escape }}{% endif %}"
+            >
+          </div>
+
+          <div class="hwcontact__field">
+            <label for="HaywoodContact-body">Message <span aria-hidden="true">*</span></label>
+            <textarea id="HaywoodContact-body" name="contact[body]" rows="8" required>{{ form.body | escape }}</textarea>
+          </div>
+
+          <button class="hwcontact__submit" type="submit">
+            Send message <span aria-hidden="true">→</span>
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  document.addEventListener('click', function (event) {
+    if (!event.target.closest('[data-hwcontact-chat]')) return;
+    window.$crisp = window.$crisp || [];
+    window.$crisp.push(['do', 'chat:open']);
+  });
+</script>
