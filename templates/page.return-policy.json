@@ -11,9 +11,9 @@
     "main": {
       "type": "haywood-return-policy",
       "settings": {
-        "policy_eyebrow": "POLICIES & SUPPORT",
-        "policy_heading": "Clear policies. No surprises.",
-        "policy_intro": "A straightforward guide to returns, custom orders, production timing and shipping.",
+        "policy_eyebrow": "RETURNS, ORDERS & SHIPPING",
+        "policy_heading": "What to know before you order.",
+        "policy_intro": "Straight answers about returns, custom builds, order changes, production times and shipping.",
         "policy_contact_eyebrow": "NEED A HAND?",
         "policy_contact_heading": "Questions about your order?",
         "policy_contact_copy": "Our team can confirm eligibility, explain the return process or help with an existing order.",
