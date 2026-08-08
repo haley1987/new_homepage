@@ -485,11 +485,13 @@ body.hw-homepage .vintage-footer__bottom { margin-right: 5% !important; margin-l
 }
 
 @media screen and (min-width: 1280px) {
-  .hw-homepage .section-header .header { width: min(100%, 172rem); max-width: 172rem; margin-inline: auto; padding-inline: 2.8rem; }
+  .hw-homepage .section-header .header { width: min(100%, 172rem); max-width: 172rem; min-height: clamp(8rem, 4.6vw, 9.2rem); margin-inline: auto; padding-inline: clamp(2.8rem, 2.4vw, 4.8rem); }
   .hw-homepage .section-header .header--top-left { grid-template-columns: minmax(20rem,1fr) auto minmax(20rem,1fr); column-gap: 2.6rem; }
-  .hw-homepage .section-header .header__heading-logo-wrapper { width: 15rem; }
+  .hw-homepage .section-header .header__heading-logo-wrapper { width: clamp(16.5rem, 9vw, 18.5rem); }
   .hw-homepage .section-header .list-menu--inline { column-gap: clamp(.25rem, .45vw, .85rem); }
-  .hw-homepage .section-header .header__menu-item { padding-inline: .35rem; font-size: 1.05rem; letter-spacing: .045em; }
+  .hw-homepage .section-header .header__menu-item { padding-inline: .35rem; font-size: clamp(1.05rem, .59vw, 1.2rem); letter-spacing: .045em; }
+  .hw-homepage .section-header .header__icon { width: 4.6rem; min-width: 4.6rem; height: 4.6rem; }
+  .hw-homepage .section-header .header__icon .icon { width: 2.2rem; height: 2.2rem; }
 }
 
 @media screen and (max-width: 749px) {
