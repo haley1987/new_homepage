@@ -27,7 +27,7 @@
 .hwcontact *::after { box-sizing: border-box; }
 .hwcontact :is(h1,h2,h3,p,dl,dd) { margin: 0; }
 .hwcontact__shell { width: min(100%, 144rem); margin-inline: auto; padding-inline: clamp(2rem,5vw,7rem); }
-.hwcontact__eyebrow { display: flex; align-items: center; gap: 1rem; color: rgba(255,255,255,.76); font-size: 1.1rem; font-weight: 700; letter-spacing: .16em; line-height: 1.2; text-transform: uppercase; }
+.hwcontact__eyebrow { display: flex; align-items: center; gap: 1rem; color: rgba(255,255,255,.7); font-size: 1rem; font-weight: 700; letter-spacing: .16em; line-height: 1.2; text-transform: uppercase; }
 .hwcontact__eyebrow span { width: 3.4rem; height: 1px; flex: 0 0 auto; background: var(--hwcontact-gold); }
 .hwcontact__eyebrow--dark { color: var(--hwcontact-navy); }
 
@@ -36,13 +36,13 @@
 .hwcontact__hero::after { position: absolute; right: 0; bottom: 0; width: 36%; height: 1px; background: var(--hwcontact-gold); content: ""; }
 .hwcontact__hero-inner { position: relative; z-index: 2; display: flex; min-height: 44rem; flex-direction: column; justify-content: center; padding-block: clamp(6rem,9vw,10rem); }
 .hwcontact__title { max-width: 10ch; margin-top: 2rem !important; color: var(--hwcontact-white); font-family: var(--hwcontact-serif); font-size: clamp(5rem,7.4vw,9.2rem); font-weight: 400; letter-spacing: -.055em; line-height: .9; }
-.hwcontact__intro { max-width: 65rem; margin-top: 2.8rem !important; color: rgba(255,255,255,.78); font-size: clamp(1.7rem,1.7vw,2rem); line-height: 1.6; }
+.hwcontact__intro { max-width: 62rem; margin-top: 2.8rem !important; color: rgba(255,255,255,.74); font-size: clamp(1.55rem,1.7vw,1.9rem); line-height: 1.55; }
 .hwcontact .hw-arc-mark--contact { position: absolute; z-index: 1; right: clamp(1rem,6vw,8rem); bottom: -6rem; width: clamp(32rem,33vw,52rem); opacity: .09; filter: invert(1); }
 
 .hwcontact__routes { padding-block: clamp(6rem,9vw,10rem); }
 .hwcontact__routes-heading { display: grid; max-width: 92rem; }
 .hwcontact__routes-heading h2 { max-width: 13ch; margin-top: 1.6rem; color: var(--hwcontact-navy); font-family: var(--hwcontact-serif); font-size: clamp(4rem,5.8vw,7rem); font-weight: 400; letter-spacing: -.05em; line-height: .94; }
-.hwcontact__routes-heading > p:last-child { max-width: 52rem; margin-top: 2rem; color: var(--hwcontact-muted); font-size: 1.65rem; line-height: 1.6; }
+.hwcontact__routes-heading > p:last-child { max-width: 48rem; margin-top: 2rem; color: var(--hwcontact-muted); font-size: 1.45rem; line-height: 1.55; }
 .hwcontact__route-grid { display: grid; margin-top: clamp(4rem,6vw,6rem); border-top: 1px solid var(--hwcontact-line); border-left: 1px solid var(--hwcontact-line); }
 .hwcontact__route { position: relative; display: grid; min-height: 25rem; grid-template-rows: auto 1fr auto; gap: 2.2rem; padding: clamp(2.4rem,3vw,3.5rem); border-right: 1px solid var(--hwcontact-line); border-bottom: 1px solid var(--hwcontact-line); color: var(--hwcontact-navy); background: rgba(255,255,255,.42); text-decoration: none; transition: color 180ms ease,background 180ms ease,transform 180ms ease; }
 .hwcontact__route:nth-child(2) { background: var(--hwcontact-white); }
@@ -53,39 +53,39 @@
 .hwcontact__route-number { color: var(--hwcontact-gold); font-family: var(--hwcontact-serif); font-size: 1.4rem; }
 .hwcontact__route--navy:hover .hwcontact__route-number { color: var(--hwcontact-navy); }
 .hwcontact__route h3 { max-width: 15ch; color: currentColor; font-family: var(--hwcontact-serif); font-size: clamp(2.6rem,3vw,3.7rem); font-weight: 400; letter-spacing: -.04em; line-height: 1; }
-.hwcontact__route p { max-width: 36rem; margin-top: 1.3rem; color: currentColor; font-size: 1.55rem; line-height: 1.6; opacity: .76; }
+.hwcontact__route p { max-width: 34rem; margin-top: 1.3rem; color: currentColor; font-size: 1.25rem; line-height: 1.5; opacity: .72; }
 .hwcontact__route-arrow { justify-self: end; font-size: 1.8rem; line-height: 1; }
 
 .hwcontact__message { padding-block: clamp(6rem,9vw,11rem); border-top: 1px solid var(--hwcontact-line); background: var(--hwcontact-white); }
 .hwcontact__message-grid { display: grid; gap: clamp(5rem,9vw,13rem); }
 .hwcontact__aside h2 { max-width: 11ch; margin-top: 1.7rem; color: var(--hwcontact-navy); font-family: var(--hwcontact-serif); font-size: clamp(4rem,5.4vw,6.8rem); font-weight: 400; letter-spacing: -.05em; line-height: .95; }
-.hwcontact__form-intro { max-width: 50rem; margin-top: 2rem !important; color: var(--hwcontact-muted); font-size: 1.65rem; line-height: 1.65; }
+.hwcontact__form-intro { max-width: 46rem; margin-top: 2rem !important; color: var(--hwcontact-muted); font-size: 1.45rem; line-height: 1.6; }
 .hwcontact__details { display: grid; gap: 2rem; margin-top: 3.5rem; padding-top: 2.8rem; border-top: 1px solid var(--hwcontact-line); }
-.hwcontact__details dt { color: var(--hwcontact-muted); font-size: 1.05rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.hwcontact__details dt { color: var(--hwcontact-muted); font-size: .95rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .hwcontact__details dd { margin-top: .6rem; color: var(--hwcontact-navy); font-family: var(--hwcontact-serif); font-size: 2rem; }
 .hwcontact__details a { color: inherit; text-decoration-color: var(--hwcontact-gold); text-underline-offset: .25em; }
-.hwcontact__chat { display: inline-flex; gap: 1rem; align-items: center; margin-top: 3rem; padding: 0 0 .6rem; border: 0; border-bottom: 1px solid var(--hwcontact-gold); color: var(--hwcontact-navy); background: transparent; font: inherit; font-size: 1.1rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
+.hwcontact__chat { display: inline-flex; gap: 1rem; align-items: center; margin-top: 3rem; padding: 0 0 .6rem; border: 0; border-bottom: 1px solid var(--hwcontact-gold); color: var(--hwcontact-navy); background: transparent; font: inherit; font-size: 1rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
 .hwcontact__chat:focus-visible { outline: 2px solid var(--hwcontact-navy); outline-offset: 4px; }
 
 .hwcontact__form-wrap { min-width: 0; padding: clamp(2.5rem,4vw,5rem); border: 1px solid var(--hwcontact-line); background: var(--hwcontact-paper); box-shadow: 0 2.4rem 6rem rgba(11,35,65,.08); }
 .hwcontact__form { display: grid; gap: 2rem; }
 .hwcontact__field-grid { display: grid; gap: 2rem; }
 .hwcontact__field { min-width: 0; }
-.hwcontact__field label { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: .8rem; color: var(--hwcontact-navy); font-size: 1.1rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-.hwcontact__field label span:not([aria-hidden]) { color: var(--hwcontact-muted); font-size: 1rem; font-weight: 500; letter-spacing: .04em; }
-.hwcontact__field :is(input,select,textarea) { display: block; width: 100%; min-height: 5.6rem; padding: 1.4rem 1.5rem; border: 1px solid var(--hwcontact-line); border-radius: 0; outline: 0; color: var(--hwcontact-navy); background: rgba(255,255,255,.78); font: inherit; font-size: 1.6rem; }
+.hwcontact__field label { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: .8rem; color: var(--hwcontact-navy); font-size: 1rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.hwcontact__field label span:not([aria-hidden]) { color: var(--hwcontact-muted); font-size: .9rem; font-weight: 500; letter-spacing: .04em; }
+.hwcontact__field :is(input,select,textarea) { display: block; width: 100%; min-height: 5.6rem; padding: 1.4rem 1.5rem; border: 1px solid var(--hwcontact-line); border-radius: 0; outline: 0; color: var(--hwcontact-navy); background: rgba(255,255,255,.78); font: inherit; font-size: 1.45rem; }
 .hwcontact__field textarea { min-height: 18rem; resize: vertical; }
 .hwcontact__field :is(input,select,textarea):focus { border-color: var(--hwcontact-navy); box-shadow: 0 0 0 1px var(--hwcontact-navy); }
 .hwcontact__select-wrap { position: relative; }
 .hwcontact__select-wrap select { padding-right: 4.5rem; appearance: none; -webkit-appearance: none; }
 .hwcontact__select-wrap > span { position: absolute; top: 50%; right: 1.6rem; color: var(--hwcontact-navy); font-size: 1.5rem; pointer-events: none; transform: translateY(-56%); }
-.hwcontact__submit { display: inline-flex; width: min(100%,24rem); min-height: 5.6rem; align-items: center; justify-content: space-between; gap: 2rem; margin-top: .6rem; padding: 1.5rem 1.8rem; border: 1px solid var(--hwcontact-navy); color: var(--hwcontact-white); background: var(--hwcontact-navy); font: inherit; font-size: 1.1rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; transition: color 180ms ease,background 180ms ease,transform 180ms ease; }
+.hwcontact__submit { display: inline-flex; width: min(100%,24rem); min-height: 5.6rem; align-items: center; justify-content: space-between; gap: 2rem; margin-top: .6rem; padding: 1.5rem 1.8rem; border: 1px solid var(--hwcontact-navy); color: var(--hwcontact-white); background: var(--hwcontact-navy); font: inherit; font-size: 1rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; transition: color 180ms ease,background 180ms ease,transform 180ms ease; }
 .hwcontact__submit:hover { color: var(--hwcontact-navy); background: var(--hwcontact-gold); transform: translateY(-2px); }
 .hwcontact__submit:focus-visible { outline: 2px solid var(--hwcontact-navy); outline-offset: 4px; }
 .hwcontact__status { display: grid; grid-template-columns: 2.4rem minmax(0,1fr); gap: 1.4rem; align-items: start; margin-bottom: 1rem; padding: 1.8rem; border: 1px solid var(--hwcontact-line); color: var(--hwcontact-navy); background: var(--hwcontact-white); }
 .hwcontact__status svg { width: 2.2rem; height: 2.2rem; }
 .hwcontact__status strong { font-size: 1.25rem; }
-.hwcontact__status p,.hwcontact__status li { margin-top: .5rem; color: var(--hwcontact-muted); font-size: 1.4rem; line-height: 1.55; }
+.hwcontact__status p,.hwcontact__status li { margin-top: .5rem; color: var(--hwcontact-muted); font-size: 1.2rem; line-height: 1.5; }
 .hwcontact__status--success { border-left: .4rem solid var(--hwcontact-gold); }
 .hwcontact__status--error { border-left: .4rem solid #9e342f; }
 

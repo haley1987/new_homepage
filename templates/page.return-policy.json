@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "sidebar-drawer": {
@@ -11,9 +20,9 @@
     "main": {
       "type": "haywood-return-policy",
       "settings": {
-        "policy_eyebrow": "RETURNS, ORDERS & SHIPPING",
-        "policy_heading": "What to know before you order.",
-        "policy_intro": "Straight answers about returns, custom builds, order changes, production times and shipping.",
+        "policy_eyebrow": "POLICIES & SUPPORT",
+        "policy_heading": "Clear policies. No surprises.",
+        "policy_intro": "A straightforward guide to returns, custom orders, production timing and shipping.",
         "policy_contact_eyebrow": "NEED A HAND?",
         "policy_contact_heading": "Questions about your order?",
         "policy_contact_copy": "Our team can confirm eligibility, explain the return process or help with an existing order.",
