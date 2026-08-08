@@ -265,6 +265,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     {%- if request.page_type == 'index' -%}
       {{ 'phase-1-homepage.css' | asset_url | stylesheet_tag }}
+      {{ 'haywood-layout-rhythm-v1.css' | asset_url | stylesheet_tag }}
       <script src="{{ 'phase-1-homepage.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
     {{ 'haywood-type-scale-v3.css' | asset_url | stylesheet_tag }}
