@@ -1,6 +1,10 @@
 {%- if page.handle == 'store-locator' -%}
   {{ 'haywood-store-locator.css' | asset_url | stylesheet_tag }}
   {%- render 'haywood-store-locator-page', page_settings: section.settings -%}
+{%- elsif page.handle == 'return-policy' -%}
+  {{ 'haywood-return-policy.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'haywood-return-policy.js' | asset_url }}" defer="defer"></script>
+  {%- render 'haywood-return-policy-page', page_settings: section.settings -%}
 {%- elsif page.handle == 'booking' -%}
   {{ 'haywood-booking.css' | asset_url | stylesheet_tag }}
   {%- render 'haywood-booking-page' -%}
