@@ -1,4 +1,7 @@
-{%- if page.handle == 'booking' -%}
+{%- if page.handle == 'store-locator' -%}
+  {{ 'haywood-store-locator.css' | asset_url | stylesheet_tag }}
+  {%- render 'haywood-store-locator-page', page_settings: section.settings -%}
+{%- elsif page.handle == 'booking' -%}
   {{ 'haywood-booking.css' | asset_url | stylesheet_tag }}
   {%- render 'haywood-booking-page' -%}
 {%- else -%}
@@ -34,6 +37,99 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Store locator page"
+    },
+    {
+      "type": "text",
+      "id": "locator_eyebrow",
+      "label": "Introduction eyebrow",
+      "default": "FIND HAYWOOD NEAR YOU"
+    },
+    {
+      "type": "text",
+      "id": "locator_heading",
+      "label": "Introduction heading",
+      "default": "Try Haywood in person."
+    },
+    {
+      "type": "textarea",
+      "id": "locator_intro",
+      "label": "Introduction copy",
+      "default": "Find a Haywood dealer or fitting partner near you. Explore available locations, get fit and experience our clubs before you order."
+    },
+    {
+      "type": "text",
+      "id": "locator_note_heading",
+      "label": "Visit note heading",
+      "default": "Before you visit"
+    },
+    {
+      "type": "textarea",
+      "id": "locator_note_copy",
+      "label": "Visit note copy",
+      "default": "Haywood product availability, fitting services and pricing vary by location. Some partners carry select models or offer different fitting experiences. Please contact the location directly to confirm available products, appointment requirements and current pricing before visiting."
+    },
+    {
+      "type": "text",
+      "id": "locator_fit_eyebrow",
+      "label": "Online fitting eyebrow",
+      "default": "NO FITTER NEARBY?"
+    },
+    {
+      "type": "text",
+      "id": "locator_fit_heading",
+      "label": "Online fitting heading",
+      "default": "Find your fit online."
+    },
+    {
+      "type": "textarea",
+      "id": "locator_fit_copy",
+      "label": "Online fitting copy",
+      "default": "Answer a few questions about your swing, game and preferences. Our Find My Fit tool will help narrow down the right Haywood model and provide a recommended build starting point."
+    },
+    {
+      "type": "text",
+      "id": "locator_fit_label",
+      "label": "Online fitting button",
+      "default": "FIND MY FIT"
+    },
+    {
+      "type": "url",
+      "id": "locator_fit_link",
+      "label": "Online fitting link"
+    },
+    {
+      "type": "text",
+      "id": "locator_dealer_eyebrow",
+      "label": "Dealer enquiry eyebrow",
+      "default": "BECOME A HAYWOOD DEALER"
+    },
+    {
+      "type": "text",
+      "id": "locator_dealer_heading",
+      "label": "Dealer enquiry heading",
+      "default": "Interested in carrying Haywood?"
+    },
+    {
+      "type": "textarea",
+      "id": "locator_dealer_copy",
+      "label": "Dealer enquiry copy",
+      "default": "We’re growing our network of trusted dealers and fitting partners. If you’re interested in carrying Haywood products, email our team to introduce yourself."
+    },
+    {
+      "type": "text",
+      "id": "locator_dealer_label",
+      "label": "Dealer enquiry button",
+      "default": "EMAIL OUR TEAM"
+    },
+    {
+      "type": "text",
+      "id": "locator_dealer_email",
+      "label": "Dealer enquiry email",
+      "default": "info@haywoodgolf.com"
+    },
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
