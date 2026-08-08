@@ -1,0 +1,75 @@
+{{ 'haywood-return-policy.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'haywood-return-policy.js' | asset_url }}" defer="defer"></script>
+
+{%- render 'haywood-return-policy-page', page_settings: section.settings -%}
+
+{% schema %}
+{
+  "name": "Haywood return policy",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Introduction"
+    },
+    {
+      "type": "text",
+      "id": "policy_eyebrow",
+      "label": "Eyebrow",
+      "default": "POLICIES & SUPPORT"
+    },
+    {
+      "type": "text",
+      "id": "policy_heading",
+      "label": "Heading",
+      "default": "Clear policies. No surprises."
+    },
+    {
+      "type": "textarea",
+      "id": "policy_intro",
+      "label": "Copy",
+      "default": "A straightforward guide to returns, custom orders, production timing and shipping."
+    },
+    {
+      "type": "header",
+      "content": "Contact call to action"
+    },
+    {
+      "type": "text",
+      "id": "policy_contact_eyebrow",
+      "label": "Eyebrow",
+      "default": "NEED A HAND?"
+    },
+    {
+      "type": "text",
+      "id": "policy_contact_heading",
+      "label": "Heading",
+      "default": "Questions about your order?"
+    },
+    {
+      "type": "textarea",
+      "id": "policy_contact_copy",
+      "label": "Copy",
+      "default": "Our team can confirm eligibility, explain the return process or help with an existing order."
+    },
+    {
+      "type": "text",
+      "id": "policy_contact_label",
+      "label": "Button label",
+      "default": "EMAIL OUR TEAM"
+    },
+    {
+      "type": "text",
+      "id": "policy_contact_email",
+      "label": "Email address",
+      "default": "info@haywoodgolf.com"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Haywood return policy"
+    }
+  ]
+}
+{% endschema %}
