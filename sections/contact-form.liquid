@@ -1,3 +1,7 @@
+{%- if request.page_type == 'page' and page.handle == 'contact' -%}
+  {{ 'haywood-contact.css' | asset_url | stylesheet_tag }}
+  {%- render 'haywood-contact-page', section: section -%}
+{%- else -%}
 {{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
@@ -185,6 +189,7 @@
     {%- endform -%}
   </div>
 </div>
+{%- endif -%}
 
 {% schema %}
 {
@@ -195,6 +200,64 @@
     "groups": ["header", "footer"]
   },
   "settings": [
+    {
+      "type": "header",
+      "content": "Haywood contact page"
+    },
+    {
+      "type": "text",
+      "id": "contact_eyebrow",
+      "label": "Hero eyebrow",
+      "default": "CONTACT HAYWOOD"
+    },
+    {
+      "type": "text",
+      "id": "contact_title",
+      "label": "Hero heading",
+      "default": "Let’s get you an answer."
+    },
+    {
+      "type": "textarea",
+      "id": "contact_intro",
+      "label": "Hero introduction",
+      "default": "Questions about our clubs, an existing order, fittings or anything else? Tell us what you need and our team will point you in the right direction."
+    },
+    {
+      "type": "text",
+      "id": "contact_form_eyebrow",
+      "label": "Form eyebrow",
+      "default": "SEND A MESSAGE"
+    },
+    {
+      "type": "text",
+      "id": "contact_form_heading",
+      "label": "Form heading",
+      "default": "Tell us what you need."
+    },
+    {
+      "type": "textarea",
+      "id": "contact_form_copy",
+      "label": "Form introduction",
+      "default": "Choose the closest topic and include any useful details. If your question is about an order, add the order number so we can help faster."
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Email address",
+      "default": "info@haywoodgolf.com"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone_display",
+      "label": "Phone number displayed",
+      "default": "1-844-794-0004"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone_link",
+      "label": "Phone number for link",
+      "default": "+18447940004"
+    },
     {
       "type": "inline_richtext",
       "id": "heading",
