@@ -39,24 +39,60 @@
         </div>
       </div>
 
-      <div class="hwfaq__list" role="list" data-hwfaq-list>
-        {%- for block in section.blocks -%}
-          <details
-            class="hwfaq__item"
-            data-hwfaq-item
-            data-search-text="{{ block.settings.heading | append: ' ' | append: block.settings.body | strip_html | downcase | escape }}"
-            {% if block.settings.open_by_default %}open data-open-by-default{% endif %}
-            {{ block.shopify_attributes }}
-          >
-            <summary>
-              <span class="hwfaq__number" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
-              <span class="hwfaq__question">{{ block.settings.heading | escape }}</span>
-              <span class="hwfaq__toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="hwfaq__panel">
-              <div class="rte">{{ block.settings.body }}</div>
-            </div>
-          </details>
+      <div class="hwfaq__list" data-hwfaq-list>
+        {%- assign category_keys = 'choosing|fitting|trying|orders' | split: '|' -%}
+        {%- assign faq_index = 0 -%}
+        {%- for category_key in category_keys -%}
+          {%- case category_key -%}
+            {%- when 'choosing' -%}
+              {%- assign category_title = 'Choosing your clubs' -%}
+            {%- when 'fitting' -%}
+              {%- assign category_title = 'Custom fitting and specifications' -%}
+            {%- when 'trying' -%}
+              {%- assign category_title = 'Trying and ordering' -%}
+            {%- when 'orders' -%}
+              {%- assign category_title = 'Orders, shipping and returns' -%}
+          {%- endcase -%}
+
+          {%- assign category_count = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.settings.category == category_key -%}
+              {%- assign category_count = category_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if category_count > 0 -%}
+            <section class="hwfaq__group" data-hwfaq-group aria-labelledby="FaqCategory-{{ section.id }}-{{ category_key }}">
+              <div class="hwfaq__group-heading">
+                <p>{{ forloop.index | prepend: '0' | slice: -2, 2 }}</p>
+                <h3 id="FaqCategory-{{ section.id }}-{{ category_key }}">{{ category_title }}</h3>
+              </div>
+
+              <div class="hwfaq__group-items">
+                {%- for block in section.blocks -%}
+                  {%- if block.settings.category == category_key -%}
+                    {%- assign faq_index = faq_index | plus: 1 -%}
+                    <details
+                      class="hwfaq__item"
+                      data-hwfaq-item
+                      data-search-text="{{ category_title | append: ' ' | append: block.settings.heading | append: ' ' | append: block.settings.body | strip_html | downcase | escape }}"
+                      {% if block.settings.open_by_default %}open data-open-by-default{% endif %}
+                      {{ block.shopify_attributes }}
+                    >
+                      <summary>
+                        <span class="hwfaq__number" aria-hidden="true">{{ faq_index | prepend: '0' | slice: -2, 2 }}</span>
+                        <span class="hwfaq__question">{{ block.settings.heading | escape }}</span>
+                        <span class="hwfaq__toggle" aria-hidden="true"></span>
+                      </summary>
+                      <div class="hwfaq__panel">
+                        <div class="rte">{{ block.settings.body }}</div>
+                      </div>
+                    </details>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </section>
+          {%- endif -%}
         {%- endfor -%}
       </div>
 
@@ -77,6 +113,27 @@
     </div>
   </div>
 </section>
+
+{%- if section.blocks.size > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for block in section.blocks -%}
+          {
+            "@type": "Question",
+            "name": {{ block.settings.heading | strip | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ block.settings.body | strip_html | strip | json }}
+            }
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -148,6 +205,30 @@
       "type": "faq",
       "name": "FAQ item",
       "settings": [
+        {
+          "type": "select",
+          "id": "category",
+          "label": "Category",
+          "options": [
+            {
+              "value": "choosing",
+              "label": "Choosing your clubs"
+            },
+            {
+              "value": "fitting",
+              "label": "Custom fitting and specifications"
+            },
+            {
+              "value": "trying",
+              "label": "Trying and ordering"
+            },
+            {
+              "value": "orders",
+              "label": "Orders, shipping and returns"
+            }
+          ],
+          "default": "choosing"
+        },
         {
           "type": "text",
           "id": "heading",
