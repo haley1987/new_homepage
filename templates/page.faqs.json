@@ -19,69 +19,245 @@
     "faq_accordion_jgwhNf": {
       "type": "faq-accordion",
       "blocks": {
-        "faq_YfMMca": {
+        "faq_iron_match": {
           "type": "faq",
           "settings": {
-            "heading": "Do you have a demo program?",
-            "body": "<p>We offer a 7-iron purchase program that lets you order a single iron in the model and specifications you want to test. If you decide to complete the set, we’ll invoice you for the remaining clubs with the 7-iron purchase applied.<\/p><p><a href=\"\/products\/7-iron-purchase-program\">Explore the 7-iron purchase program<\/a> or email <a href=\"mailto:info@haywoodgolf.com\">info@haywoodgolf.com<\/a> for help.<\/p>",
+            "category": "choosing",
+            "heading": "Which Haywood iron is right for me?",
+            "body": "<p>Haywood offers several iron profiles for different players. The SV.2 provides the most forgiveness and easiest launch. The PD.1 combines distance with a more compact players shape. The CB2 offers forged feel and control with added stability, while the MB2 is designed for golfers who prioritize feedback, precision and workability.<\/p><p>If you are unsure where to start, use <a href=\"\/pages\/fitting-tool\">Find My Fit<\/a>, compare our <a href=\"\/collections\/golf-irons\">golf irons<\/a> or <a href=\"\/pages\/booking\">book a fitting<\/a>.<\/p>",
+            "open_by_default": true
+          }
+        },
+        "faq_cb2_mb2": {
+          "type": "faq",
+          "settings": {
+            "category": "choosing",
+            "heading": "What is the difference between the Haywood CB2 and MB2 irons?",
+            "body": "<p>The CB2 is a forged players cavity designed to provide control and feedback with more support on slight misses. The MB2 is a traditional forged muscle back for skilled ball strikers seeking maximum feedback and shot control. Both use forged 1020 carbon steel, precision CNC milling and Haywood’s V-Sole design.<\/p><p><a href=\"\/pages\/cb2-mb2\">Compare the CB2 and MB2 irons<\/a>.<\/p>",
             "open_by_default": false
           }
         },
-        "faq_eC4UXT": {
+        "faq_combo": {
           "type": "faq",
           "settings": {
-            "heading": "Where can I get fit for Haywood clubs?",
-            "body": "<p>View our current <a href=\"\/pages\/store-locator\">dealer and fitting partner list<\/a>. We’re consistently adding locations, so check back for the nearest option.<\/p>",
+            "category": "choosing",
+            "heading": "Can I combine CB2 and MB2 irons in one set?",
+            "body": "<p>Yes. A CB2 and MB2 combo set places the more forgiving CB2 in the longer irons and the more workable MB2 in the scoring irons. Multiple configurations are available so you can choose where the transition occurs.<\/p><p><a href=\"\/products\/cb2-mb2-forged-combo-irons\">Explore CB2 and MB2 combo sets<\/a>.<\/p>",
             "open_by_default": false
           }
         },
-        "faq_BYRpjb": {
+        "faq_sv_pd": {
           "type": "faq",
           "settings": {
-            "heading": "What kind of customizations do you offer?",
-            "body": "<p>We can accommodate many custom requests, including coatings, stamping, engraving, etching, copper plating and torching. Customizations incur additional charges. Email <a href=\"mailto:info@haywoodgolf.com\">info@haywoodgolf.com<\/a> to discuss your project.<\/p><p>Our <a href=\"https:\/\/www.instagram.com\/haywoodgolf\/\">Instagram<\/a> showcases past custom builds if you need inspiration.<\/p>",
+            "category": "choosing",
+            "heading": "What is the difference between the SV.2 and PD.1 irons?",
+            "body": "<p>The SV.2 is a game-improvement and distance iron with a larger sweet spot, lower centre of gravity and more forgiveness. The PD.1 has a more compact players-distance profile with less offset and added workability. Golfers can also combine SV.2 long irons with PD.1 scoring irons.<\/p><p><a href=\"\/products\/sv-2-pd-1-combo-iron-set\">Explore the SV.2 and PD.1 combo set<\/a>.<\/p>",
             "open_by_default": false
           }
         },
-        "faq_r9aGWH": {
+        "faq_di_hybrid": {
           "type": "faq",
           "settings": {
-            "heading": "Where are Haywood clubs manufactured?",
-            "body": "<p>Haywood heads are manufactured at some of the same factories used by major equipment brands. Components are sourced directly from their manufacturers, and Haywood clubs are hand-assembled on demand in Vancouver, Canada.<\/p>",
+            "category": "choosing",
+            "heading": "Should I choose a driving iron or a hybrid?",
+            "body": "<p>A driving iron generally produces a more penetrating flight and can provide tighter dispersion for players who strike irons consistently. A hybrid typically launches higher and offers more forgiveness. The Haywood DI.2 is available in 18° and 21° lofts for use from the tee or turf.<\/p><p><a href=\"\/products\/signature-driving-iron-2\">Explore the DI.2 driving iron<\/a>.<\/p>",
             "open_by_default": false
           }
         },
-        "faq_FFieJW": {
+        "faq_wedge_lofts": {
           "type": "faq",
           "settings": {
-            "heading": "Are the clubs eligible for returns?",
-            "body": "<p>Eligibility depends on the product and whether it was customized. Please review our complete <a href=\"\/pages\/return-policy\">return, order and shipping policy<\/a> before ordering.<\/p>",
+            "category": "choosing",
+            "heading": "How do I choose the right wedge lofts?",
+            "body": "<p>Start with the loft of your pitching wedge or approach wedge, then build consistent loft and distance gaps through the bottom of the bag. Your playing conditions, preferred short-game shots and full-swing distances should also influence the setup. A fitting can confirm the best combination for your game.<\/p><p><a href=\"\/products\/forged-golf-wedges\">Explore Haywood Signature Wedges<\/a>.<\/p>",
             "open_by_default": false
           }
         },
-        "faq_gFnPkQ": {
+        "faq_specs": {
           "type": "faq",
           "settings": {
-            "heading": "What currency do you charge in?",
-            "body": "<p>We operate one global site—haywoodgolf.com—and pricing automatically adjusts based on your location.<\/p>",
+            "category": "fitting",
+            "heading": "Can Haywood clubs be built to my specifications?",
+            "body": "<p>Yes. Available custom options include shaft model and flex, grip, club length, loft and lie adjustments. Options vary by club and are shown in the configurator on each product page. Contact us before ordering if you need a specification that is not listed.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_shaft": {
+          "type": "faq",
+          "settings": {
+            "category": "fitting",
+            "heading": "How do I know which golf shaft is right for me?",
+            "body": "<p>The right golf shaft depends on your swing speed, tempo, ball flight, preferred weight and feel. You can complete <a href=\"\/pages\/fitting-tool\">Find My Fit<\/a>, visit a <a href=\"\/pages\/store-locator\">Haywood fitting partner<\/a> or provide specifications from a fitter you already trust.<\/p><p>For more background, read our <a href=\"\/blogs\/news\/finding-the-perfect-golf-shaft-why-it-matters-for-your-swing-speed\">guide to choosing a golf shaft<\/a>.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_other_fitter": {
+          "type": "faq",
+          "settings": {
+            "category": "fitting",
+            "heading": "Can I order Haywood clubs using specifications from another fitter?",
+            "body": "<p>Yes. If you already have recommended length, loft, lie, shaft, flex and grip specifications, use them when configuring your clubs online. Contact our team before ordering if your specifications require an option that is not shown in the product configurator.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_left_hand": {
+          "type": "faq",
+          "settings": {
+            "category": "fitting",
+            "heading": "Are left-handed Haywood clubs available?",
+            "body": "<p>Left-handed availability varies by model and loft. Select your preferred handedness on the relevant product page to see current options. If a configuration is not listed, contact our team before ordering.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_heads_only": {
+          "type": "faq",
+          "settings": {
+            "category": "fitting",
+            "heading": "Can I purchase Haywood golf club heads only?",
+            "body": "<p>Yes. Selected iron, wedge, driving iron, driver, fairway wood and hybrid heads are available without shafts or grips for golfers and club builders who prefer to complete the build independently. Availability varies by model.<\/p><p><a href=\"\/collections\/heads-only\">Shop Haywood heads only<\/a>.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_fit_tool": {
+          "type": "faq",
+          "settings": {
+            "category": "fitting",
+            "heading": "What is the Haywood Find My Fit tool?",
+            "body": "<p>Find My Fit is an online golf club fitting tool that uses information about your swing, game and preferences to recommend a Haywood head, shaft, length, lie and grip as a starting point. It is useful when you do not have a Haywood fitter nearby, although an in-person fitting can provide greater precision.<\/p><p><a href=\"\/pages\/fitting-tool\">Start Find My Fit<\/a>.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_manufactured": {
+          "type": "faq",
+          "settings": {
+            "category": "fitting",
+            "heading": "Where are Haywood golf clubs designed and built?",
+            "body": "<p>Haywood designs its golf clubs and works with specialized manufacturing partners to produce heads and components. Custom orders are assembled and quality checked by Haywood’s build team. Orders may be fulfilled from Vancouver, Canada, or Northern Ireland depending on the destination.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_special_custom": {
+          "type": "faq",
+          "settings": {
+            "category": "fitting",
+            "heading": "Can I request a special finish, stamping or engraving?",
+            "body": "<p>Special projects may include custom stamping, engraving, etching, coatings, copper plating or torching, subject to availability and additional charges. Email <a href=\"mailto:info@haywoodgolf.com\">info@haywoodgolf.com<\/a> before ordering to discuss what is possible.<\/p><p>Visit <a href=\"https:\/\/www.instagram.com\/haywoodgolf\/\">@haywoodgolf on Instagram<\/a> for examples of past custom builds.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_try_iron": {
+          "type": "faq",
+          "settings": {
+            "category": "trying",
+            "heading": "Can I try a Haywood iron before purchasing a full set?",
+            "body": "<p>Yes. The 7-Iron Purchase Program lets you order a brand-new 7-iron built with your selected model, shaft, grip and adjustments. If you later purchase a complete set, Haywood provides a discount code for the full purchase price of the 7-iron. Because each trial iron is custom built, it is non-refundable and non-returnable.<\/p><p><a href=\"\/products\/7-iron-purchase-program\">Explore the 7-Iron Purchase Program<\/a>.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_where_fit": {
+          "type": "faq",
+          "settings": {
+            "category": "trying",
+            "heading": "Where can I try or get fitted for Haywood golf clubs?",
+            "body": "<p>Use the <a href=\"\/pages\/store-locator\">Haywood dealer and fitting locator<\/a> to find participating locations. Product availability, fitting services, appointment requirements and pricing vary, so contact the location directly before visiting.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_dealer_models": {
+          "type": "faq",
+          "settings": {
+            "category": "trying",
+            "heading": "Do Haywood dealers carry every model?",
+            "body": "<p>Not necessarily. Dealers and fitting partners may carry different Haywood models and offer different fitting services. Contact the location directly to confirm which clubs are available to try, whether an appointment is required and what the fitting will cost.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_direct": {
+          "type": "faq",
+          "settings": {
+            "category": "trying",
+            "heading": "Are Haywood golf clubs sold directly to golfers?",
+            "body": "<p>Yes. Haywood is a direct-to-consumer golf company. Clubs are designed by Haywood and custom orders are built to your selected specifications. Selling directly lets Haywood offer extensive fitting and component options without a traditional retail markup.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_build_time": {
+          "type": "faq",
+          "settings": {
+            "category": "orders",
+            "heading": "How long do custom Haywood golf clubs take to build?",
+            "body": "<p>Typical assembly time is approximately 2.5 to 4 weeks, depending on order volume and component availability. Custom orders are assembled in the order received. Shipping time begins after the order has been completed and dispatched.<\/p><p>Read the current <a href=\"\/pages\/return-policy\">order and shipping policy<\/a> before purchasing.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_international": {
+          "type": "faq",
+          "settings": {
+            "category": "orders",
+            "heading": "Does Haywood ship golf clubs internationally?",
+            "body": "<p>Yes. Haywood ships to many international destinations. Orders may ship from Vancouver, Canada, or Northern Ireland depending on the destination. Delivery timing and any applicable taxes or duties vary by country and are separate from the custom-build period.<\/p><p>Review the <a href=\"\/pages\/return-policy\">shipping policy<\/a> for current details.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_returns": {
+          "type": "faq",
+          "settings": {
+            "category": "orders",
+            "heading": "Can custom Haywood golf clubs be returned?",
+            "body": "<p>Custom-built clubs and limited-edition products are final sale once production has started. Eligible unused stock products may be returned within 30 days, subject to the conditions and fees in the full policy.<\/p><p>Read the complete <a href=\"\/pages\/return-policy\">return, order and shipping policy<\/a> before ordering.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_order_change": {
+          "type": "faq",
+          "settings": {
+            "category": "orders",
+            "heading": "Can I change my Haywood order after placing it?",
+            "body": "<p>Email <a href=\"mailto:info@haywoodgolf.com\">info@haywoodgolf.com<\/a> as soon as possible. Changes can only be made before production begins and may affect pricing or production timing. Once a custom build has entered production, it cannot be changed or cancelled.<\/p>",
+            "open_by_default": false
+          }
+        },
+        "faq_currency": {
+          "type": "faq",
+          "settings": {
+            "category": "orders",
+            "heading": "What currency will I be charged in?",
+            "body": "<p>Haywood operates one global website, and displayed pricing adjusts based on your selected location. Confirm the currency shown in the storefront and at checkout before completing your order.<\/p>",
             "open_by_default": false
           }
         }
       },
       "block_order": [
-        "faq_YfMMca",
-        "faq_eC4UXT",
-        "faq_BYRpjb",
-        "faq_r9aGWH",
-        "faq_FFieJW",
-        "faq_gFnPkQ"
+        "faq_iron_match",
+        "faq_cb2_mb2",
+        "faq_combo",
+        "faq_sv_pd",
+        "faq_di_hybrid",
+        "faq_wedge_lofts",
+        "faq_specs",
+        "faq_shaft",
+        "faq_other_fitter",
+        "faq_left_hand",
+        "faq_heads_only",
+        "faq_fit_tool",
+        "faq_manufactured",
+        "faq_special_custom",
+        "faq_try_iron",
+        "faq_where_fit",
+        "faq_dealer_models",
+        "faq_direct",
+        "faq_build_time",
+        "faq_international",
+        "faq_returns",
+        "faq_order_change",
+        "faq_currency"
       ],
       "name": "FAQ Accordion",
       "settings": {
         "eyebrow": "HELP & SUPPORT",
         "title": "Questions, answered.",
-        "intro": "Quick answers about fittings, custom builds, returns and ordering.",
-        "search_placeholder": "Search by topic or question",
+        "intro": "Straight answers about choosing Haywood golf clubs, custom fitting, specifications, ordering, shipping and returns.",
+        "search_placeholder": "Search golf clubs, fitting, orders or returns",
         "contact_eyebrow": "STILL NEED HELP?",
         "contact_heading": "Talk to a real person.",
         "contact_copy": "Use the chat in the corner or email our team. We’ll help you find the right answer.",
