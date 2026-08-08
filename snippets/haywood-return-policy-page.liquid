@@ -1,0 +1,74 @@
+{%- liquid
+  assign policy_eyebrow = page_settings.policy_eyebrow | default: 'POLICIES & SUPPORT'
+  assign policy_heading = page_settings.policy_heading | default: 'Clear policies. No surprises.'
+  assign policy_intro = page_settings.policy_intro | default: 'A straightforward guide to returns, custom orders, production timing and shipping.'
+  assign contact_eyebrow = page_settings.policy_contact_eyebrow | default: 'NEED A HAND?'
+  assign contact_heading = page_settings.policy_contact_heading | default: 'Questions about your order?'
+  assign contact_copy = page_settings.policy_contact_copy | default: 'Our team can confirm eligibility, explain the return process or help with an existing order.'
+  assign contact_label = page_settings.policy_contact_label | default: 'EMAIL OUR TEAM'
+  assign contact_email = page_settings.policy_contact_email | default: 'info@haywoodgolf.com'
+  assign contact_href = 'mailto:' | append: contact_email
+-%}
+
+<div class="hwrp" data-hwrp>
+  <section class="hwrp__hero" aria-labelledby="hwrp-title">
+    <div class="hwrp__shell hwrp__hero-inner">
+      <p class="hwrp__eyebrow"><span></span>{{ policy_eyebrow | escape }}</p>
+      <h1 id="hwrp-title" class="hwrp__title">{{ policy_heading | escape }}</h1>
+      <p class="hwrp__intro">{{ policy_intro | escape }}</p>
+    </div>
+    {%- render 'haywood-arc-mark', variant: 'return-policy' -%}
+  </section>
+
+  <section class="hwrp__summary" aria-label="Policy at a glance">
+    <div class="hwrp__summary-grid">
+      <article class="hwrp__fact">
+        <span class="hwrp__fact-number">30</span>
+        <div><strong>Days</strong><p>Eligible stock-item return window</p></div>
+      </article>
+      <article class="hwrp__fact">
+        <span class="hwrp__fact-number">10%</span>
+        <div><strong>Restocking</strong><p>Applies to approved returns</p></div>
+      </article>
+      <article class="hwrp__fact">
+        <span class="hwrp__fact-number">2.5–4</span>
+        <div><strong>Weeks</strong><p>Typical order assembly time</p></div>
+      </article>
+      <article class="hwrp__fact hwrp__fact--text">
+        <span class="hwrp__fact-number">Built</span>
+        <div><strong>To order</strong><p>Custom and limited items may be final sale</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="hwrp__details" aria-labelledby="hwrp-details-title">
+    <div class="hwrp__shell">
+      <div class="hwrp__details-heading">
+        <p class="hwrp__section-label">POLICY DETAILS</p>
+        <h2 id="hwrp-details-title">Everything you need to know.</h2>
+      </div>
+
+      <div class="hwrp__details-grid">
+        <aside class="hwrp__nav-wrap">
+          <p class="hwrp__nav-label">ON THIS PAGE</p>
+          <nav class="hwrp__nav" data-hwrp-nav aria-label="Return policy sections"></nav>
+        </aside>
+
+        <div class="hwrp__policy rte" data-hwrp-policy>
+          {{ page.content }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hwrp__contact" aria-labelledby="hwrp-contact-title">
+    <div class="hwrp__shell hwrp__contact-inner">
+      <div>
+        <p class="hwrp__contact-eyebrow">{{ contact_eyebrow | escape }}</p>
+        <h2 id="hwrp-contact-title">{{ contact_heading | escape }}</h2>
+        <p>{{ contact_copy | escape }}</p>
+      </div>
+      <a class="hwrp__button" href="{{ contact_href }}">{{ contact_label | escape }} <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+</div>
