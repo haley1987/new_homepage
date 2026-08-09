@@ -22,6 +22,7 @@
   --press-shell: 146rem;
   color: var(--press-ink);
   background: #fff;
+  overflow-x: clip;
 }
 
 .hw-press__shell {
