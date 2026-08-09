@@ -12,6 +12,10 @@
   background: #fff;
 }
 
+.shopify-section:has(> .hw-compare) {
+  padding-inline: 0;
+}
+
 .hw-compare *,
 .hw-compare *::before,
 .hw-compare *::after {
@@ -140,6 +144,7 @@
 
 .hw-compare__section {
   padding-block: clamp(6rem, 8vw, 11rem);
+  padding-inline: 0;
 }
 
 .hw-compare__section--paper {
@@ -569,6 +574,10 @@
 
   .hw-compare-card__media {
     min-height: 32rem;
+  }
+
+  .hw-compare-card__media img {
+    object-fit: contain;
   }
 
   .hw-compare-card__body {
