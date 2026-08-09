@@ -1,0 +1,104 @@
+{%- liquid
+  assign careers_eyebrow = page_settings.careers_eyebrow | default: 'WORK WITH HAYWOOD'
+  assign careers_heading = page_settings.careers_heading | default: 'Different ways to be part of Haywood.'
+  assign careers_intro = page_settings.careers_intro | default: 'We are not hiring for any roles right now. But if you fit golfers, run a retail business or create thoughtful golf content, there may still be a way for us to work together.'
+  assign status_eyebrow = page_settings.careers_status_eyebrow | default: 'CURRENT OPPORTUNITIES'
+  assign status_heading = page_settings.careers_status_heading | default: 'No open roles right now.'
+  assign status_copy = page_settings.careers_status_copy | default: 'When a position becomes available, we will post the complete role and application details here. We do not keep general employment applications on file between openings.'
+  assign paths_eyebrow = page_settings.careers_paths_eyebrow | default: 'OTHER WAYS TO WORK TOGETHER'
+  assign paths_heading = page_settings.careers_paths_heading | default: 'A job is not the only way in.'
+  assign fit_heading = page_settings.careers_fit_heading | default: 'Fit Haywood.'
+  assign fit_copy = page_settings.careers_fit_copy | default: 'If you are a professional fitter or fitting facility interested in working with Haywood products, introduce yourself and tell us about your fitting experience.'
+  assign fit_label = page_settings.careers_fit_label | default: 'FITTING PARTNER INQUIRY'
+  assign fit_email = page_settings.careers_fit_email | default: 'info@haywoodgolf.com'
+  assign fit_link = 'mailto:' | append: fit_email | append: '?subject=Haywood%20Fitting%20Partner%20Inquiry'
+  assign retail_heading = page_settings.careers_retail_heading | default: 'Carry Haywood.'
+  assign retail_copy = page_settings.careers_retail_copy | default: 'Retailers and golf businesses interested in carrying Haywood can contact our team to discuss products, territory and partnership fit.'
+  assign retail_label = page_settings.careers_retail_label | default: 'RETAILER INQUIRY'
+  assign retail_email = page_settings.careers_retail_email | default: 'info@haywoodgolf.com'
+  assign retail_link = 'mailto:' | append: retail_email | append: '?subject=Haywood%20Retailer%20Inquiry'
+  assign creator_heading = page_settings.careers_creator_heading | default: 'Create with Haywood.'
+  assign creator_copy = page_settings.careers_creator_copy | default: 'Rep Haywood is our creator program for golfers with a point of view and an audience that is listening. We choose partners by fit, not follower count.'
+  assign creator_label = page_settings.careers_creator_label | default: 'EXPLORE REP HAYWOOD'
+  assign creator_link = page_settings.careers_creator_link | default: '/pages/rep-haywood'
+  assign contact_eyebrow = page_settings.careers_contact_eyebrow | default: 'NOT SURE WHERE YOU FIT?'
+  assign contact_heading = page_settings.careers_contact_heading | default: 'Start with a conversation.'
+  assign contact_copy = page_settings.careers_contact_copy | default: 'Tell us what you have in mind and our team will point you in the right direction.'
+  assign contact_label = page_settings.careers_contact_label | default: 'CONTACT HAYWOOD'
+  assign contact_link = page_settings.careers_contact_link | default: '/pages/contact'
+-%}
+
+<div class="hw-careers">
+  <section class="hw-careers__hero" aria-labelledby="hw-careers-title">
+    <div class="hw-careers__shell hw-careers__hero-grid">
+      <div>
+        <p class="hw-careers__eyebrow"><span></span>{{ careers_eyebrow | escape }}</p>
+        <h1 id="hw-careers-title">{{ careers_heading | escape }}</h1>
+        <p class="hw-careers__intro">{{ careers_intro | escape }}</p>
+      </div>
+      <div class="hw-careers__hero-mark" aria-hidden="true">
+        <span>WORK</span>
+        {%- render 'haywood-arc-mark', variant: 'careers' -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="hw-careers__status" aria-labelledby="hw-careers-status-title">
+    <div class="hw-careers__shell hw-careers__status-grid">
+      <p class="hw-careers__section-label">{{ status_eyebrow | escape }}</p>
+      <div>
+        <div class="hw-careers__status-heading">
+          <span class="hw-careers__status-dot" aria-hidden="true"></span>
+          <h2 id="hw-careers-status-title">{{ status_heading | escape }}</h2>
+        </div>
+        <p>{{ status_copy | escape }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hw-careers__paths" aria-labelledby="hw-careers-paths-title">
+    <div class="hw-careers__shell">
+      <div class="hw-careers__paths-head">
+        <p class="hw-careers__section-label">{{ paths_eyebrow | escape }}</p>
+        <h2 id="hw-careers-paths-title">{{ paths_heading | escape }}</h2>
+      </div>
+
+      <div class="hw-careers__grid">
+        <article class="hw-careers-card hw-careers-card--fit">
+          <span class="hw-careers-card__number">01</span>
+          <p class="hw-careers-card__type">Fitting partners</p>
+          <h3>{{ fit_heading | escape }}</h3>
+          <p>{{ fit_copy | escape }}</p>
+          <a href="{{ fit_link }}">{{ fit_label | escape }} <span aria-hidden="true">↗</span></a>
+        </article>
+
+        <article class="hw-careers-card hw-careers-card--retail">
+          <span class="hw-careers-card__number">02</span>
+          <p class="hw-careers-card__type">Retail partners</p>
+          <h3>{{ retail_heading | escape }}</h3>
+          <p>{{ retail_copy | escape }}</p>
+          <a href="{{ retail_link }}">{{ retail_label | escape }} <span aria-hidden="true">↗</span></a>
+        </article>
+
+        <article class="hw-careers-card hw-careers-card--creator">
+          <span class="hw-careers-card__number">03</span>
+          <p class="hw-careers-card__type">Content creators</p>
+          <h3>{{ creator_heading | escape }}</h3>
+          <p>{{ creator_copy | escape }}</p>
+          <a href="{{ creator_link }}">{{ creator_label | escape }} <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="hw-careers__contact" aria-labelledby="hw-careers-contact-title">
+    <div class="hw-careers__shell hw-careers__contact-grid">
+      <div>
+        <p class="hw-careers__eyebrow"><span></span>{{ contact_eyebrow | escape }}</p>
+        <h2 id="hw-careers-contact-title">{{ contact_heading | escape }}</h2>
+        <p>{{ contact_copy | escape }}</p>
+      </div>
+      <a class="hw-careers__button" href="{{ contact_link }}">{{ contact_label | escape }} <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</div>
