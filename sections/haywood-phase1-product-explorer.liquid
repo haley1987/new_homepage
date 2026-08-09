@@ -1,7 +1,9 @@
 <section class="hw-section hw-product-explorer" aria-label="{{ section.settings.accessibility_label | escape }}">
   <div class="hw-shell hw-product-explorer__header">
-    {%- if section.settings.eyebrow != blank -%}<p class="hw-kicker">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
-    {%- if section.settings.heading != blank -%}<h2 class="hw-title hw-title--medium">{{ section.settings.heading | escape }}</h2>{%- endif -%}
+    <div>
+      {%- if section.settings.eyebrow != blank -%}<p class="hw-kicker">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="hw-title hw-title--medium">{{ section.settings.heading | escape }}</h2>{%- endif -%}
+    </div>
     {%- if section.settings.copy != blank -%}<div class="hw-copy">{{ section.settings.copy }}</div>{%- endif -%}
   </div>
 
@@ -9,6 +11,10 @@
     {%- for block in section.blocks -%}
       {%- liquid
         assign card_link = block.settings.manual_link
+        assign card_sizes = '(min-width: 990px) 25vw, (min-width: 750px) 50vw, 50vw'
+        if forloop.index <= 2
+          assign card_sizes = '(min-width: 990px) 50vw, 100vw'
+        endif
         if card_link == blank and block.settings.product != blank
           assign card_link = block.settings.product.url
         endif
@@ -23,10 +29,10 @@
           assign card_image = block.settings.collection.featured_image
         endif
       -%}
-      <article class="hw-product-card" style="--hw-card-fit: {{ block.settings.image_fit }}; --hw-card-position: {{ block.settings.image_position }};" {{ block.shopify_attributes }}>
+      <article class="hw-product-card{% if forloop.index <= 2 %} hw-product-card--featured{% else %} hw-product-card--supporting{% endif %}" style="--hw-card-fit: {{ block.settings.image_fit }}; --hw-card-position: {{ block.settings.image_position }};" {{ block.shopify_attributes }}>
         <div class="hw-product-card__media">
           {%- if card_image != blank -%}
-            {{ card_image | image_url: width: 1400 | image_tag: widths: '550, 750, 1000, 1200, 1400', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 50vw, 82vw', loading: 'lazy' }}
+            {{ card_image | image_url: width: 1800 | image_tag: widths: '400, 550, 750, 1000, 1200, 1400, 1800', sizes: card_sizes, loading: 'lazy' }}
           {%- else -%}
             <div class="hw-product-card__placeholder" data-image-purpose="{{ block.settings.title | escape }} PRODUCT IMAGE">
               <span>{{ block.settings.title | escape }} PRODUCT IMAGE</span>
@@ -37,11 +43,18 @@
           <h3 class="hw-product-card__title">{{ block.settings.title | escape }}</h3>
           {%- if block.settings.category != blank -%}<p class="hw-product-card__category">{{ block.settings.category | escape }}</p>{%- endif -%}
           {%- if block.settings.fit != blank -%}<p class="hw-product-card__fit">{{ block.settings.fit | escape }}</p>{%- endif -%}
-          <span class="hw-product-card__arrow" aria-hidden="true">→</span>
+          <span class="hw-product-card__cta">Explore {{ block.settings.title | escape }} <span aria-hidden="true">→</span></span>
         </div>
         {%- if card_link != blank -%}<a class="hw-card-link" href="{{ card_link }}"><span class="visually-hidden">Explore {{ block.settings.title | escape }}</span></a>{%- endif -%}
       </article>
     {%- endfor -%}
+  </div>
+
+  <div class="hw-shell hw-product-explorer__footer">
+    <div class="hw-actions">
+      {%- if section.settings.primary_label != blank and section.settings.primary_link != blank -%}<a class="hw-button hw-button--solid" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label | escape }}</a>{%- endif -%}
+      {%- if section.settings.secondary_label != blank and section.settings.secondary_link != blank -%}<a class="hw-button" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label | escape }}</a>{%- endif -%}
+    </div>
   </div>
 </section>
 
@@ -52,6 +65,10 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Explore the lineup" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Built around the way you play." },
     { "type": "richtext", "id": "copy", "label": "Supporting copy", "default": "<p>Different shapes. Different flights. The same commitment to feel and precision.</p>" },
+    { "type": "text", "id": "primary_label", "label": "Primary CTA label", "default": "Shop All Clubs" },
+    { "type": "url", "id": "primary_link", "label": "Primary CTA link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary CTA label", "default": "Find My Fit" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary CTA link" },
     { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Explore Haywood golf clubs" }
   ],
   "blocks": [
