@@ -2,6 +2,21 @@
 {% assign points = product.metafields.custom.why_players_list.value %}
 {% assign total  = points.size %}
 {% assign display_title = product.title | remove: ' (Game Improvement Model)' | remove: ' (Players Distance Model)' | remove: ' (Players Cavity Model)' | remove: ' (Muscle Back Model)' | remove: ' Irons' | strip %}
+{% if product.title contains 'CB2' and product.title contains 'MB2' %}
+  {% assign display_title = 'CB2 + MB2 Combo' %}
+{% elsif product.title contains 'CB2' %}
+  {% assign display_title = 'CB2' %}
+{% elsif product.title contains 'MB2' %}
+  {% assign display_title = 'MB2' %}
+{% elsif product.title contains 'SV.2' and product.title contains 'PD.1' %}
+  {% assign display_title = 'SV.2 + PD.1 Combo' %}
+{% elsif product.title contains 'PD.1' %}
+  {% assign display_title = 'PD.1' %}
+{% elsif product.title contains 'SV.2' %}
+  {% assign display_title = 'SV.2' %}
+{% elsif product.handle == '7-iron-purchase-program' %}
+  {% assign display_title = 'the 7-Iron Program' %}
+{% endif %}
 
 {% if points and total > 1 %}
   <section class="why-players" aria-labelledby="WhyPlayers-{{ section.id }}">
