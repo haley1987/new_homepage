@@ -1,0 +1,51 @@
+{{ 'haywood-careers.css' | asset_url | stylesheet_tag }}
+
+{%- render 'haywood-careers-page', page_settings: section.settings -%}
+
+{% schema %}
+{
+  "name": "Haywood careers",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "header", "content": "Introduction" },
+    { "type": "text", "id": "careers_eyebrow", "label": "Eyebrow", "default": "WORK WITH HAYWOOD" },
+    { "type": "text", "id": "careers_heading", "label": "Heading", "default": "Different ways to be part of Haywood." },
+    { "type": "textarea", "id": "careers_intro", "label": "Introduction", "default": "We are not hiring for any roles right now. But if you fit golfers, run a retail business or create thoughtful golf content, there may still be a way for us to work together." },
+
+    { "type": "header", "content": "Current opportunities" },
+    { "type": "text", "id": "careers_status_eyebrow", "label": "Eyebrow", "default": "CURRENT OPPORTUNITIES" },
+    { "type": "text", "id": "careers_status_heading", "label": "Heading", "default": "No open roles right now." },
+    { "type": "textarea", "id": "careers_status_copy", "label": "Copy", "default": "When a position becomes available, we will post the complete role and application details here. We do not keep general employment applications on file between openings." },
+
+    { "type": "header", "content": "Partnership paths" },
+    { "type": "text", "id": "careers_paths_eyebrow", "label": "Section eyebrow", "default": "OTHER WAYS TO WORK TOGETHER" },
+    { "type": "text", "id": "careers_paths_heading", "label": "Section heading", "default": "A job is not the only way in." },
+
+    { "type": "text", "id": "careers_fit_heading", "label": "Fitting heading", "default": "Fit Haywood." },
+    { "type": "textarea", "id": "careers_fit_copy", "label": "Fitting copy", "default": "If you are a professional fitter or fitting facility interested in working with Haywood products, introduce yourself and tell us about your fitting experience." },
+    { "type": "text", "id": "careers_fit_label", "label": "Fitting button", "default": "FITTING PARTNER INQUIRY" },
+    { "type": "text", "id": "careers_fit_email", "label": "Fitting email", "default": "info@haywoodgolf.com" },
+
+    { "type": "text", "id": "careers_retail_heading", "label": "Retail heading", "default": "Carry Haywood." },
+    { "type": "textarea", "id": "careers_retail_copy", "label": "Retail copy", "default": "Retailers and golf businesses interested in carrying Haywood can contact our team to discuss products, territory and partnership fit." },
+    { "type": "text", "id": "careers_retail_label", "label": "Retail button", "default": "RETAILER INQUIRY" },
+    { "type": "text", "id": "careers_retail_email", "label": "Retail email", "default": "info@haywoodgolf.com" },
+
+    { "type": "text", "id": "careers_creator_heading", "label": "Creator heading", "default": "Create with Haywood." },
+    { "type": "textarea", "id": "careers_creator_copy", "label": "Creator copy", "default": "Rep Haywood is our creator program for golfers with a point of view and an audience that is listening. We choose partners by fit, not follower count." },
+    { "type": "text", "id": "careers_creator_label", "label": "Creator button", "default": "EXPLORE REP HAYWOOD" },
+    { "type": "url", "id": "careers_creator_link", "label": "Creator link" },
+
+    { "type": "header", "content": "Closing contact" },
+    { "type": "text", "id": "careers_contact_eyebrow", "label": "Eyebrow", "default": "NOT SURE WHERE YOU FIT?" },
+    { "type": "text", "id": "careers_contact_heading", "label": "Heading", "default": "Start with a conversation." },
+    { "type": "textarea", "id": "careers_contact_copy", "label": "Copy", "default": "Tell us what you have in mind and our team will point you in the right direction." },
+    { "type": "text", "id": "careers_contact_label", "label": "Button", "default": "CONTACT HAYWOOD" },
+    { "type": "url", "id": "careers_contact_link", "label": "Button link" }
+  ],
+  "presets": [
+    { "name": "Haywood careers" }
+  ]
+}
+{% endschema %}
