@@ -1,0 +1,137 @@
+{%- liquid
+  assign story_eyebrow = page_settings.story_eyebrow | default: 'OUR STORY'
+  assign story_heading = page_settings.story_heading | default: 'Built from a better idea.'
+  assign story_intro = page_settings.story_intro | default: 'Haywood began in Vancouver with a simple belief: golfers should not have to choose between considered design, custom specifications and fair pricing.'
+  assign origin_eyebrow = page_settings.story_origin_eyebrow | default: 'VANCOUVER · 2018'
+  assign origin_heading = page_settings.story_origin_heading | default: 'Frustration became a blueprint.'
+  assign origin_copy = page_settings.story_origin_copy | default: 'After a disappointing experience at a major golf retailer, we started asking better questions. What if we designed the clubs ourselves, worked directly with trusted manufacturing partners and built every order around the golfer receiving it?'
+  assign origin_copy_2 = page_settings.story_origin_copy_2 | default: 'We began with wedges—sourcing, prototyping and testing until the product met our standards for feel, performance and durability. That same process now guides every Haywood club.'
+  assign people_eyebrow = page_settings.story_people_eyebrow | default: 'WHY WE BUILD'
+  assign people_heading = page_settings.story_people_heading | default: 'Golf is personal. Your equipment should be too.'
+  assign people_copy = page_settings.story_people_copy | default: 'Every Haywood club is built to order. That lets us focus on the details that matter—head, shaft, length, lie and grip—while staying close to the golfers who play our equipment.'
+  assign cta_eyebrow = page_settings.story_cta_eyebrow | default: 'THE STORY CONTINUES'
+  assign cta_heading = page_settings.story_cta_heading | default: 'See what we are building now.'
+  assign cta_copy = page_settings.story_cta_copy | default: 'Explore the current Haywood lineup or visit the Journal for equipment insight, fitting knowledge and stories from the workshop.'
+  assign primary_label = page_settings.story_primary_label | default: 'SHOP ALL CLUBS'
+  assign primary_link = page_settings.story_primary_link | default: '/collections/all'
+  assign secondary_label = page_settings.story_secondary_label | default: 'VISIT THE JOURNAL'
+  assign secondary_link = page_settings.story_secondary_link | default: '/blogs/news'
+-%}
+
+<div class="hw-story">
+  <section class="hw-story__hero" aria-labelledby="hw-story-title">
+    <div class="hw-story__hero-copy">
+      <div class="hw-story__hero-copy-inner">
+        <p class="hw-story__eyebrow"><span></span>{{ story_eyebrow | escape }}</p>
+        <h1 id="hw-story-title" class="hw-story__title">{{ story_heading | escape }}</h1>
+        <p class="hw-story__intro">{{ story_intro | escape }}</p>
+      </div>
+      <span class="hw-story__year" aria-hidden="true">2018</span>
+    </div>
+    <div class="hw-story__hero-media">
+      {%- if page_settings.story_hero_image != blank -%}
+        {{ page_settings.story_hero_image | image_url: width: 1800 | image_tag:
+          widths: '600, 900, 1200, 1600, 1800',
+          sizes: '(min-width: 900px) 52vw, 100vw',
+          loading: 'eager',
+          fetchpriority: 'high',
+          alt: page_settings.story_hero_image.alt | default: 'Haywood golfers heading to the course'
+        }}
+      {%- else -%}
+        <img src="https://cdn.shopify.com/s/files/1/0081/4068/5397/files/Haywood_Golf_WebSize-046_1024x1024.jpg?v=1586919897" width="1024" height="683" alt="Haywood golfers heading to the course" loading="eager" fetchpriority="high">
+      {%- endif -%}
+    </div>
+    {%- render 'haywood-arc-mark', variant: 'story' -%}
+  </section>
+
+  <section class="hw-story__origin" aria-labelledby="hw-story-origin-title">
+    <div class="hw-story__shell hw-story__origin-grid">
+      <div class="hw-story__origin-media">
+        {%- if page_settings.story_origin_image != blank -%}
+          {{ page_settings.story_origin_image | image_url: width: 1600 | image_tag:
+            widths: '500, 800, 1100, 1400, 1600',
+            sizes: '(min-width: 900px) 50vw, 100vw',
+            loading: 'lazy',
+            alt: page_settings.story_origin_image.alt | default: 'The early Haywood story on the golf course'
+          }}
+        {%- else -%}
+          <img src="https://cdn.shopify.com/s/files/1/0355/4757/8506/files/IMG_7243_1024x1024.jpg?v=1586635406" width="1024" height="683" alt="The early Haywood story on the golf course" loading="lazy">
+        {%- endif -%}
+        <span class="hw-story__origin-caption">Richmond, British Columbia</span>
+      </div>
+      <div class="hw-story__origin-copy">
+        <p class="hw-story__section-label">{{ origin_eyebrow | escape }}</p>
+        <h2 id="hw-story-origin-title">{{ origin_heading | escape }}</h2>
+        <p>{{ origin_copy | escape }}</p>
+        <p>{{ origin_copy_2 | escape }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hw-story__principles" aria-labelledby="hw-story-principles-title">
+    <div class="hw-story__shell">
+      <div class="hw-story__principles-head">
+        <p class="hw-story__section-label">BUILT DIFFERENTLY</p>
+        <h2 id="hw-story-principles-title">The ideas that still guide every build.</h2>
+      </div>
+      <div class="hw-story__principles-grid">
+        <article>
+          <span>01</span>
+          <h3>Designed with purpose.</h3>
+          <p>Every shape, material and detail has a job to do.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Built to your specs.</h3>
+          <p>Your clubs are assembled around the way you play.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Priced with intent.</h3>
+          <p>Premium components without unnecessary retail markup.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="hw-story__people" aria-labelledby="hw-story-people-title">
+    <div class="hw-story__people-copy">
+      <div>
+        <p class="hw-story__section-label">{{ people_eyebrow | escape }}</p>
+        <h2 id="hw-story-people-title">{{ people_heading | escape }}</h2>
+        <p>{{ people_copy | escape }}</p>
+      </div>
+      <div class="hw-story__people-proof" aria-label="Haywood milestones">
+        <div><strong>2018</strong><span>Founded in Vancouver</span></div>
+        <div><strong>WEDGES</strong><span>Where the first lineup began</span></div>
+        <div><strong>BUILT TO ORDER</strong><span>How every club leaves us</span></div>
+      </div>
+    </div>
+    <div class="hw-story__people-media">
+      {%- if page_settings.story_people_image != blank -%}
+        {{ page_settings.story_people_image | image_url: width: 1600 | image_tag:
+          widths: '500, 800, 1100, 1400, 1600',
+          sizes: '(min-width: 900px) 50vw, 100vw',
+          loading: 'lazy',
+          alt: page_settings.story_people_image.alt | default: 'Sharing the game of golf'
+        }}
+      {%- else -%}
+        <img src="https://cdn.shopify.com/s/files/1/0081/4068/5397/files/Haywood_Golf_WebSize-063_1024x1024.jpg?v=1586919758" width="1024" height="683" alt="Sharing the game of golf" loading="lazy">
+      {%- endif -%}
+    </div>
+  </section>
+
+  <section class="hw-story__cta" aria-labelledby="hw-story-cta-title">
+    <div class="hw-story__shell hw-story__cta-inner">
+      <div>
+        <p class="hw-story__eyebrow"><span></span>{{ cta_eyebrow | escape }}</p>
+        <h2 id="hw-story-cta-title">{{ cta_heading | escape }}</h2>
+        <p>{{ cta_copy | escape }}</p>
+      </div>
+      <div class="hw-story__cta-actions">
+        <a class="hw-story__button hw-story__button--gold" href="{{ primary_link }}">{{ primary_label | escape }}</a>
+        <a class="hw-story__button" href="{{ secondary_link }}">{{ secondary_label | escape }}</a>
+      </div>
+    </div>
+  </section>
+</div>
