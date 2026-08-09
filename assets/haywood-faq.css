@@ -107,3 +107,24 @@
 @media (prefers-reduced-motion: reduce) {
   .hwfaq * { scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+
+/* Utility-page rhythm: keep search and FAQ content prominent, not the hero. */
+.hwfaq__hero,
+.hwfaq__hero-inner { min-height: 0; }
+.hwfaq__hero-inner { padding-block: clamp(5rem, 6vw, 7rem); }
+.hwfaq__title { max-width: 13ch; margin-top: 1.6rem !important; font-size: clamp(5rem, 5.4vw, 7.2rem); line-height: .93; }
+.hwfaq__intro { margin-top: 2rem !important; }
+.hwfaq__body { padding-block: clamp(5rem, 7vw, 8rem); }
+.hwfaq__toolbar { gap: 2.4rem; padding-bottom: clamp(3rem, 4vw, 4.5rem); }
+.hwfaq__list { margin-top: clamp(3rem, 4vw, 4.5rem); }
+.hwfaq__group + .hwfaq__group { margin-top: clamp(4rem, 6vw, 6rem); }
+.hwfaq__item summary { min-height: 8rem; padding-block: 1.8rem; }
+
+@media screen and (max-width: 749px) {
+  .hwfaq__hero-inner { padding-block: 3.8rem 4.2rem; }
+  .hwfaq__title { font-size: clamp(4.4rem, 12vw, 5.2rem); line-height: .94; }
+  .hwfaq__intro { font-size: 1.7rem !important; line-height: 1.55 !important; }
+  .hwfaq__body { padding-block: 4.5rem 5.5rem; }
+  .hwfaq__toolbar { padding-bottom: 3.2rem; }
+  .hwfaq__item summary { min-height: 7.4rem; padding-block: 1.6rem; }
+}
