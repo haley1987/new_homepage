@@ -38,10 +38,11 @@
           <strong>{{ review_rating | round: 1 }}</strong>
           <span>from {{ review_count }} customer reviews</span>
         </p>
+        {%- if section.settings.source_label != blank -%}<p class="hw-proof__source">{{ section.settings.source_label | escape }}</p>{%- endif -%}
       {%- elsif section.settings.summary != blank -%}
         <p class="hw-proof__summary">{{ section.settings.summary | escape }}</p>
       {%- endif -%}
-      {%- if section.settings.link_label != blank and section.settings.link != blank -%}<a class="hw-button hw-button--light" href="{{ section.settings.link }}">{{ section.settings.link_label | escape }}</a>{%- endif -%}
+      {%- if section.settings.link_label != blank and section.settings.link != blank -%}<a class="hw-button hw-button--solid" href="{{ section.settings.link }}">{{ section.settings.link_label | escape }}</a>{%- endif -%}
     </div>
   </div>
 </section>
@@ -60,6 +61,7 @@
     { "type": "text", "id": "customer_name", "label": "Customer name" },
     { "type": "text", "id": "product_purchased", "label": "Product purchased" },
     { "type": "text", "id": "summary", "label": "Fallback review summary", "default": "Trusted by golfers worldwide" },
+    { "type": "text", "id": "source_label", "label": "Rating source", "default": "Verified customer reviews via Judge.me" },
     { "type": "text", "id": "link_label", "label": "Link label", "default": "Read Customer Reviews" },
     { "type": "url", "id": "link", "label": "Link" }
   ],
