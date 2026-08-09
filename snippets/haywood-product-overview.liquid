@@ -15,7 +15,58 @@
 
   assign overview_heading = 'Built around the way you play.'
   assign overview_summary = overview_intro | strip_html | truncatewords: 58
-  if product.title contains 'SV.2'
+
+  assign is_seven_iron_program = false
+  if product.handle == '7-iron-purchase-program'
+    assign is_seven_iron_program = true
+  endif
+
+  assign is_heads_only = false
+  if product.tags contains 'headsonly' or product.title contains 'Heads Only' or product.title contains 'Head Only'
+    assign is_heads_only = true
+  endif
+
+  assign is_complete_set = false
+  if product.title contains 'Complete Set'
+    assign is_complete_set = true
+  endif
+
+  assign is_driving_iron = false
+  if product.title contains 'Driving Iron' or product.title contains 'DI.2'
+    assign is_driving_iron = true
+  endif
+
+  assign is_wedge = false
+  if product.title contains 'Wedge'
+    assign is_wedge = true
+  endif
+
+  assign is_wood = false
+  if product.title contains 'Driver' or product.title contains 'Fairway' or product.title contains 'Hybrid'
+    assign is_wood = true
+  endif
+
+  assign is_putter = false
+  if product.title contains 'Putter'
+    assign is_putter = true
+  endif
+
+  if is_seven_iron_program
+    assign overview_heading = 'Try one before you build the set.'
+    assign overview_summary = 'Choose your model, shaft, grip and adjustments, then put your custom-built 7-iron into play. When you are ready to order a qualifying full set, the 7-iron purchase price is applied to that build.'
+  elsif is_complete_set
+    assign overview_heading = 'One coordinated set. Built around you.'
+  elsif is_heads_only
+    assign overview_heading = 'Haywood performance, ready for your build.'
+  elsif is_driving_iron
+    assign overview_heading = 'Controlled flight. Confident distance.'
+  elsif is_wedge
+    assign overview_heading = 'Versatility where scoring happens.'
+  elsif is_wood
+    assign overview_heading = 'Launch, speed and stability—dialled in.'
+  elsif is_putter
+    assign overview_heading = 'Milled feel. Purposeful alignment.'
+  elsif product.title contains 'SV.2'
     assign overview_heading = 'Distance and forgiveness, refined.'
     assign overview_summary = 'SV.2 blends game-improvement forgiveness with a more refined profile. A 431 body, S450 face and injected foam are engineered for faster ball speed, softer feel and more consistent sound. Progressive offset adds confidence in the long irons without sacrificing control in the scoring clubs.'
   elsif product.title contains 'PD.1'
@@ -29,6 +80,11 @@
   assign is_iron = false
   if product.type contains 'Iron' or product.title contains 'Iron' or product.title contains 'CB' or product.title contains 'MB' or product.title contains 'PD.1' or product.title contains 'SV.2'
     assign is_iron = true
+  endif
+
+  assign show_iron_compare = is_iron
+  if is_seven_iron_program or is_heads_only or is_complete_set or is_driving_iron
+    assign show_iron_compare = false
   endif
 -%}
 
@@ -52,7 +108,7 @@
       </div>
     {%- endif -%}
 
-    {%- if is_iron and overview_compare != blank -%}
+    {%- if show_iron_compare -%}
       <div class="hw-product-overview__compare">
         <div class="hw-product-overview__compare-copy">
           <p class="hw-product-overview__eyebrow">Compare the lineup</p>
@@ -61,7 +117,11 @@
           <a href="/pages/iron-selection">Compare all irons <span aria-hidden="true">→</span></a>
         </div>
         <div class="hw-product-overview__compare-art rte">
-          {{ overview_compare }}
+          {%- if overview_compare != blank -%}
+            {{ overview_compare }}
+          {%- else -%}
+            {% render 'haywood-arc-mark', variant: 'product-compare' %}
+          {%- endif -%}
         </div>
       </div>
     {%- endif -%}
