@@ -4,7 +4,7 @@
 -%}
 
 <section
-  class="hw-section hw-hero"
+  class="hw-section hw-hero hw-hero--overlay-{{ section.settings.overlay_tone }}"
   style="--hw-overlay-top: {{ section.settings.overlay_top | divided_by: 100.0 }}; --hw-overlay-middle: {{ section.settings.overlay_middle | divided_by: 100.0 }}; --hw-overlay-bottom: {{ section.settings.overlay_bottom | divided_by: 100.0 }}; --hw-desktop-position: {{ section.settings.desktop_position }}; --hw-mobile-position: {{ section.settings.mobile_position }}; --hw-heading-color: {{ section.settings.heading_color | default: '#ffffff' }}; --hw-text-color: {{ section.settings.text_color | default: '#e3e3e0' }};"
 >
   <div class="hw-hero__media" aria-hidden="true">
@@ -83,6 +83,10 @@
     { "type": "range", "id": "overlay_top", "min": 0, "max": 90, "step": 5, "unit": "%", "label": "Overlay at top", "default": 20 },
     { "type": "range", "id": "overlay_middle", "min": 0, "max": 90, "step": 5, "unit": "%", "label": "Overlay at middle", "default": 20 },
     { "type": "range", "id": "overlay_bottom", "min": 0, "max": 90, "step": 5, "unit": "%", "label": "Overlay at bottom", "default": 70 },
+    { "type": "select", "id": "overlay_tone", "label": "Overlay tone", "options": [
+      { "value": "dark", "label": "Dark for light text" },
+      { "value": "light", "label": "Light for dark text" }
+    ], "default": "dark" },
     { "type": "header", "content": "Content colors" },
     { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#ffffff" },
     { "type": "color", "id": "text_color", "label": "Text color", "default": "#e3e3e0" },
