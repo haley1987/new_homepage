@@ -1,9 +1,13 @@
 {% assign points = product.metafields.custom.why_players_list.value %}
 {% assign total  = points.size %}
+{% assign display_title = product.title | remove: ' (Game Improvement Model)' | remove: ' (Players Distance Model)' | remove: ' (Players Cavity Model)' | remove: ' (Muscle Back Model)' | remove: ' Irons' | strip %}
 
 {% if points and total > 1 %}
-  <div class="why-players">
-    <h2 class="why-players__title font-bold">Why Players Choose Our {{ product.title }}</h2>
+  <section class="why-players" aria-labelledby="WhyPlayers-{{ section.id }}">
+    <div class="why-players__header">
+      <p class="why-players__eyebrow">Why this model</p>
+      <h2 class="why-players__title" id="WhyPlayers-{{ section.id }}">Why players choose {{ display_title }}.</h2>
+    </div>
     <div class="why-players__grid">
       {% for point in points %}
         {% assign idx = forloop.index0 %}
@@ -17,19 +21,18 @@
             {% assign parts = heading_raw | split: ' ' %}
             {% assign emoji = parts[0] %}
             {% assign title = heading_raw | remove_first: emoji | strip %}
+            {% assign pair_index = idx | divided_by: 2 | plus: 1 %}
 
-            <div class="why-point">
-              <div class="why-point__header">
-                <span class="why-point__emoji">{{ emoji }}</span>
-                <h3 class="why-point__title">{{ title }}</h3>
-              </div>
+            <article class="why-point">
+              <span class="why-point__index" aria-hidden="true">{% if pair_index < 10 %}0{% endif %}{{ pair_index }}</span>
+              <h3 class="why-point__title">{{ title }}</h3>
               <p class="why-point__text">{{ desc }}</p>
-            </div>
+            </article>
           {% endif %}
         {% endif %}
       {% endfor %}
     </div>
-  </div>
+  </section>
 {% endif %}
 
 {% schema %}
