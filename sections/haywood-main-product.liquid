@@ -1,6 +1,6 @@
 <product-info
   id="MainProduct-{{ section.id }}"
-  class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
+  class="hw-commerce hw-product-main section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
   data-update-url="true"
@@ -296,6 +296,7 @@ div.product__description, div.product-description {
 
 
   {%- endstyle -%}
+  {{ 'haywood-commerce.css' | asset_url | stylesheet_tag }}
   {% liquid
   assign has_apo = true
   if product.type == 'Gift Card' or product.type == 'Merch'
@@ -306,6 +307,39 @@ div.product__description, div.product-description {
   endif
   if product.tags contains 'force-apo'
     assign has_apo = true
+  endif
+
+  assign hw_display_title = product.title
+  assign hw_display_title = hw_display_title | replace: "Haywood CB's", "Haywood CB"
+  assign hw_display_title = hw_display_title | replace: "Haywood MB's", "Haywood MB"
+  assign hw_display_title = hw_display_title | replace: ' (Game Improvement Model)', ''
+  assign hw_display_title = hw_display_title | replace: ' (Players Distance Model)', ''
+
+  assign hw_product_eyebrow = 'Haywood Golf'
+  if product.type contains 'Iron' or product.title contains 'Iron' or product.title contains 'CB' or product.title contains 'MB' or product.title contains 'PD.1' or product.title contains 'SV.2'
+    assign hw_product_eyebrow = 'Forged irons'
+  elsif product.title contains 'Driver' or product.title contains 'Fairway' or product.title contains 'Hybrid'
+    assign hw_product_eyebrow = 'Woods and hybrids'
+  elsif product.title contains 'Wedge'
+    assign hw_product_eyebrow = 'Wedges'
+  elsif product.title contains 'Putter'
+    assign hw_product_eyebrow = 'Putters'
+  endif
+
+  assign hw_product_summary = product.metafields.custom.product_subtitle.value
+  if hw_product_summary == blank
+    assign hw_product_summary = product.metafields.custom.short_description.value
+  endif
+  if product.title contains 'CB'
+    assign hw_product_summary = 'A compact cavity profile balancing forged feel, control and forgiveness.'
+  elsif product.title contains 'MB'
+    assign hw_product_summary = 'A muscle-back profile created for feedback, precision and workability.'
+  elsif product.title contains 'PD.1'
+    assign hw_product_summary = 'Players distance performance in a clean, confidence-inspiring profile.'
+  elsif product.title contains 'SV.2'
+    assign hw_product_summary = 'Forgiveness, launch and speed for golfers who want help without excess bulk.'
+  elsif hw_product_summary == blank
+    assign hw_product_summary = 'Purpose-built performance, configured around the way you play.'
   endif
 %}
 
@@ -343,7 +377,7 @@ div.product__description, div.product-description {
   {%- endif -%}
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
-  <div class="page-width">
+  <div class="page-width hw-product-shell">
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper">
         {% render 'product-media-gallery', variant_images: variant_images %}
@@ -368,12 +402,9 @@ div.product__description, div.product-description {
                 </p>
               {%- when 'title' -%}
                 <div class="product__title" {{ block.shopify_attributes }}>
-                  <h1>{{ product.title | escape }}</h1>
-                  <a href="{{ product.url }}" class="product__title">
-                    <h2 class="h1">
-                      {{ product.title | escape }}
-                    </h2>
-                  </a>
+                  <p class="hw-product-eyebrow">{{ hw_product_eyebrow }}</p>
+                  <h1>{{ hw_display_title | escape }}</h1>
+                  <p class="hw-product-summary">{{ hw_product_summary | escape }}</p>
                 </div>
               {%- when 'price' -%}
                 {% unless has_apo %}
@@ -453,17 +484,25 @@ div.product__description, div.product-description {
   {% if has_apo %}
     <section class="hw-objections">
       <ul class="hw-objections__list">
-        <li>✅ <strong>Built in Canada to your specs</strong></li>
-        <li>🛠️ <strong>Designed by us</strong>, not pulled from a catalog</li>
-<li>
-  🚚 
-    {% if product.metafields.custom.build_time %}
-      <strong>Ships in {{ product.metafields.custom.build_time }}</strong>
-    {% else %}
-      <strong>Custom builds ship within 25 days</strong>, not 2 months
-    {% endif %}
-</li>
-        <li>❌ <strong>No dropshipping</strong> — assembled in-house by our team</li>
+        <li>
+          <span class="hw-objections__icon" aria-hidden="true">01</span>
+          <span><strong>Built in Canada</strong>Configured to the specifications you select.</span>
+        </li>
+        <li>
+          <span class="hw-objections__icon" aria-hidden="true">02</span>
+          <span><strong>Designed by Haywood</strong>Original equipment developed by our own team.</span>
+        </li>
+        <li>
+          <span class="hw-objections__icon" aria-hidden="true">03</span>
+          <span>
+            {% if product.metafields.custom.build_time %}
+              <strong>Ships in {{ product.metafields.custom.build_time }}</strong>
+            {% else %}
+              <strong>Built to order</strong>
+            {% endif %}
+            Assembled and inspected in-house before dispatch.
+          </span>
+        </li>
       </ul>
     </section>
   {% endif %}

@@ -1,5 +1,6 @@
 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
 {{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
+{{ 'haywood-commerce.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   @media screen and (max-width: 749px) {
@@ -9,47 +10,72 @@
   }
 {%- endstyle -%}
 
-<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
-  <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    <div class="collection-hero__text-wrapper">
-      <h1 class="collection-hero__title">
-        <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
-        {{- collection.title | escape -}}
-      </h1>
+<section class="hw-commerce hw-collection-hero" aria-labelledby="CollectionHeading-{{ section.id }}">
+  <div class="hw-collection-hero__inner{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+    <div class="hw-collection-hero__main">
+      <div>
+        <p class="hw-collection-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <h1 class="hw-collection-hero__title" id="CollectionHeading-{{ section.id }}">
+          <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
+          {{- collection.title | escape -}}
+        </h1>
 
-      {%- if section.settings.show_collection_description -%}
-        <div class="collection-hero__description rte">{{ collection.description }}</div>
-      {%- endif -%}
+        {%- if section.settings.show_collection_description -%}
+          <div class="hw-collection-hero__description rte">
+            {%- if collection.description != blank -%}
+              {{ collection.description }}
+            {%- else -%}
+              <p>{{ section.settings.fallback_description | escape }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="hw-collection-hero__aside">
+        <p class="hw-collection-hero__count">{{ collection.products_count }} {% if collection.products_count == 1 %}model{% else %}models{% endif %}</p>
+        <p class="hw-collection-hero__aside-copy">{{ section.settings.aside_copy | escape }}</p>
+      </div>
     </div>
 
-    {%- if section.settings.show_collection_image and collection.image -%}
-      <div class="collection-hero__image-container media gradient">
-        <img
-          srcset="
-            {%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
-            {%- if collection.image.width >= 360 -%}{{ collection.image | image_url: width: 360 }} 360w,{%- endif -%}
-            {%- if collection.image.width >= 535 -%}{{ collection.image | image_url: width: 535 }} 535w,{%- endif -%}
-            {%- if collection.image.width >= 750 -%}{{ collection.image | image_url: width: 750 }} 750w,{%- endif -%}
-            {%- if collection.image.width >= 1070 -%}{{ collection.image | image_url: width: 1070 }} 1070w,{%- endif -%}
-            {%- if collection.image.width >= 1500 -%}{{ collection.image | image_url: width: 1500 }} 1500w,{%- endif -%}
-            {{ collection.image | image_url }} {{ collection.image.width }}w
-          "
-          src="{{ collection.image | image_url: width: 750 }}"
-          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px)"
-          alt="{{ collection.image.alt | escape }}"
-          width="{{ collection.image.width }}"
-          height="{{ collection.image.height }}"
-        >
-      </div>
+    {%- if section.settings.show_decision_links -%}
+      <nav class="hw-collection-hero__links" aria-label="Shop and fitting tools">
+        <a class="hw-collection-hero__link" href="{{ routes.all_products_collection_url }}">Shop all clubs</a>
+        <a class="hw-collection-hero__link" href="/pages/fitting-tool">Find My Fit</a>
+        <a class="hw-collection-hero__link" href="/pages/iron-selection">Compare irons</a>
+      </nav>
     {%- endif -%}
   </div>
-</div>
+</section>
 
 {% schema %}
 {
   "name": "t:sections.main-collection-banner.name",
   "class": "section",
   "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Haywood lineup"
+    },
+    {
+      "type": "textarea",
+      "id": "fallback_description",
+      "label": "Fallback description",
+      "default": "Purpose-built golf equipment, configured around the way you play."
+    },
+    {
+      "type": "text",
+      "id": "aside_copy",
+      "label": "Model count supporting copy",
+      "default": "Compare the lineup, then configure the model that fits your game."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_decision_links",
+      "default": true,
+      "label": "Show shopping and fitting links"
+    },
     {
       "type": "paragraph",
       "content": "t:sections.main-collection-banner.settings.paragraph.content"

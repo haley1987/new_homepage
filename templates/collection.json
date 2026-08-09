@@ -1,1 +1,49 @@
-{"sections":{"sidebar-drawer":{"type":"sidebar-drawer","settings":{"sidebar_second_menu":"footer-new","menu":"new-menu","menu_color_scheme":"1"}},"banner":{"type":"main-collection-banner","disabled":true,"settings":{"show_collection_description":true,"show_collection_image":false,"color_scheme":"scheme-1"}},"product-grid":{"type":"main-collection-product-grid","settings":{"products_per_page":20,"columns_desktop":3,"columns_mobile":"2","color_scheme":"scheme-1","image_ratio":"adapt","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":true,"quick_add":"none","enable_filtering":false,"filter_type":"horizontal","enable_sorting":false,"padding_top":0,"padding_bottom":0}}},"order":["sidebar-drawer","banner","product-grid"]}
+{
+  "sections": {
+    "sidebar-drawer": {
+      "type": "sidebar-drawer",
+      "settings": {
+        "sidebar_second_menu": "footer-new",
+        "menu": "new-menu",
+        "menu_color_scheme": "1"
+      }
+    },
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "eyebrow": "The Haywood lineup",
+        "fallback_description": "Purpose-built golf equipment, configured around the way you play.",
+        "aside_copy": "Compare the lineup, then configure the model that fits your game.",
+        "show_decision_links": true,
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 20,
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "padding_top": 0,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "sidebar-drawer",
+    "banner",
+    "product-grid"
+  ]
+}
