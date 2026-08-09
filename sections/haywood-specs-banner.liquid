@@ -115,6 +115,16 @@
 {%- liquid
   assign specs_url = product.metafields['specs-image']['specs-image']
   assign fetch_priority = 'auto'
+  assign specs_copy = 'Review loft, lie, length, offset and head specifications in one place. Open the original chart when you need a closer look.'
+  if product.title contains 'Driver' or product.title contains 'Fairway' or product.title contains 'Hybrid'
+    assign specs_copy = 'Review loft, lie, head profile, length and available setup information in one place.'
+  elsif product.title contains 'Putter'
+    assign specs_copy = 'Review loft, lie, head weight and available length information in one place.'
+  elsif product.title contains 'Wedge'
+    assign specs_copy = 'Review loft, lie, length, bounce and sole specifications in one place.'
+  elsif product.tags contains 'headsonly' or product.title contains 'Heads Only' or product.title contains 'Head Only'
+    assign specs_copy = 'Review available lofts and head specifications before planning your build.'
+  endif
   if section.index == 1
     assign fetch_priority = 'high'
   endif
@@ -129,7 +139,7 @@
   <header class="hw-specs-intro">
     <p class="hw-specs-eyebrow">Technical reference</p>
     <h2 class="specs_banner_title" id="full-specs">Club specifications.</h2>
-    <p class="hw-specs-copy">Review loft, lie, length, offset and head specifications in one place. Open the original chart when you need a closer look.</p>
+    <p class="hw-specs-copy">{{ specs_copy }}</p>
     <a class="hw-specs-link" href="{{ specs_url | escape }}" target="_blank" rel="noopener">
       Open full-size chart <span aria-hidden="true">→</span>
     </a>
