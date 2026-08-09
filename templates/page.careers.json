@@ -1,1 +1,46 @@
-{"sections":{"sidebar-drawer":{"type":"sidebar-drawer","settings":{"sidebar_second_menu":"footer-new","menu":"new-menu","menu_color_scheme":"1"}},"main":{"type":"careers-accordion","blocks":{"select_r6PMqD":{"type":"select","settings":{"heading":"Order Prep Associate \/ Golf Club Builder","sub_head":"<p><strong>Haywood Golf<\/strong><br\/>📍 Vancouver, BC<br\/>⏱ 32 hours per week<\/p><h3><strong>Overview<\/strong><\/h3><p>Haywood Golf is looking for a reliable, detail-oriented <strong>Golf Club Builder \/ Order Prep Associate<\/strong> to join our operations team. This is a hands-on role focused on ensuring every custom-built club meets our quality standards before reaching the customer.<\/p><h3><strong>Primary Responsibilities<\/strong><\/h3><ul><li>Order preparation and packing of custom golf clubs<br\/><\/li><li>Cleaning and finishing clubs prior to shipment<br\/><\/li><li>Quality control checks on completed builds<br\/><\/li><li>Organizing inventory and maintaining a clean work area<br\/><\/li><li>Assisting with basic club builds (training provided)<br\/><\/li><\/ul><h3><strong>Role Scope<\/strong><\/h3><ul><li>Initial focus on <strong>order prep, packing, and cleaning<\/strong><br\/><\/li><li>Responsibilities may expand to include <strong>assisting with club builds<\/strong> as skills develop<br\/><\/li><\/ul><h3><strong>Ideal Candidate<\/strong><\/h3><ul><li>Strong attention to detail<br\/><\/li><li>Reliable and punctual<br\/><\/li><li>Comfortable with hands-on, repetitive tasks<br\/><\/li><li>Interest in golf or golf equipment (preferred, not required)<br\/><\/li><li>Willingness to learn club-building processes<br\/><\/li><\/ul><h3><strong>Schedule & Compensation<\/strong><\/h3><ul><li>32 hours per week<br\/><\/li><li>Competitive hourly wage (based on experience)<\/li><li><\/li><\/ul><h3><strong>What We Offer<\/strong><\/h3><ul><li>Employee discount on Haywood Golf clubs after a 3-month probation period<br\/><\/li><li>Occasional team lunches<br\/><\/li><li>Periodic team golf rounds and outings + weekly simulator golf challenges<br\/><\/li><li>A relaxed, respectful, and detail-driven work environment<br\/><\/li><\/ul><p><br\/><\/p><h3><strong>How to Apply<\/strong><\/h3><p>Email your resume to:<br\/><br\/>📧 <a href=\"mailto:info@haywoodgolf.com\" title=\"mailto:info@haywoodgolf.com\"><strong>info@haywoodgolf.com<\/strong><\/a><\/p>","alignment":"left"}},"select_JmWHpX":{"type":"select","disabled":true,"settings":{"heading":"Check back for updates","sub_head":"<p>Check back for updates<\/p>","alignment":"left"}}},"block_order":["select_r6PMqD","select_JmWHpX"],"settings":{"heading-title":"Careers"}}},"order":["sidebar-drawer","main"]}
+{
+  "sections": {
+    "sidebar-drawer": {
+      "type": "sidebar-drawer",
+      "settings": {
+        "menu": "new-menu",
+        "sidebar_second_menu": "footer-new",
+        "menu_color_scheme": "1"
+      }
+    },
+    "main": {
+      "type": "haywood-careers",
+      "settings": {
+        "careers_eyebrow": "WORK WITH HAYWOOD",
+        "careers_heading": "Different ways to be part of Haywood.",
+        "careers_intro": "We are not hiring for any roles right now. But if you fit golfers, run a retail business or create thoughtful golf content, there may still be a way for us to work together.",
+        "careers_status_eyebrow": "CURRENT OPPORTUNITIES",
+        "careers_status_heading": "No open roles right now.",
+        "careers_status_copy": "When a position becomes available, we will post the complete role and application details here. We do not keep general employment applications on file between openings.",
+        "careers_paths_eyebrow": "OTHER WAYS TO WORK TOGETHER",
+        "careers_paths_heading": "A job is not the only way in.",
+        "careers_fit_heading": "Fit Haywood.",
+        "careers_fit_copy": "If you are a professional fitter or fitting facility interested in working with Haywood products, introduce yourself and tell us about your fitting experience.",
+        "careers_fit_label": "FITTING PARTNER INQUIRY",
+        "careers_fit_email": "info@haywoodgolf.com",
+        "careers_retail_heading": "Carry Haywood.",
+        "careers_retail_copy": "Retailers and golf businesses interested in carrying Haywood can contact our team to discuss products, territory and partnership fit.",
+        "careers_retail_label": "RETAILER INQUIRY",
+        "careers_retail_email": "info@haywoodgolf.com",
+        "careers_creator_heading": "Create with Haywood.",
+        "careers_creator_copy": "Rep Haywood is our creator program for golfers with a point of view and an audience that is listening. We choose partners by fit, not follower count.",
+        "careers_creator_label": "EXPLORE REP HAYWOOD",
+        "careers_creator_link": "shopify://pages/rep-haywood",
+        "careers_contact_eyebrow": "NOT SURE WHERE YOU FIT?",
+        "careers_contact_heading": "Start with a conversation.",
+        "careers_contact_copy": "Tell us what you have in mind and our team will point you in the right direction.",
+        "careers_contact_label": "CONTACT HAYWOOD",
+        "careers_contact_link": "shopify://pages/contact"
+      }
+    }
+  },
+  "order": [
+    "sidebar-drawer",
+    "main"
+  ]
+}
