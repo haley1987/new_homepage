@@ -326,6 +326,12 @@
   font-weight: 400;
   letter-spacing: -.055em;
   line-height: .92;
+  text-wrap: balance;
+}
+
+.hw-product-main .product__title h1.hw-product-title--long {
+  max-width: 16ch;
+  font-size: clamp(4.2rem, 4.65vw, 6.4rem);
 }
 
 .hw-product-summary {
@@ -388,10 +394,23 @@
 }
 
 .hw-product-main .hw-quiz-link {
-  margin-top: .8rem;
+  margin-top: 0;
   color: var(--hw-commerce-navy);
   font-size: 1.4rem;
   text-underline-offset: .3em;
+}
+
+.hw-product-guidance {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem 2.4rem;
+  margin-top: 1.2rem;
+}
+
+.hw-product-guidance .hw-quiz-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
 }
 
 .hw-product-main .hw-objections {
@@ -684,6 +703,17 @@
   max-height: 34rem;
   margin-inline: auto;
   object-fit: contain;
+}
+
+.hw-product-overview__compare-art .hw-arc-mark {
+  display: block;
+  width: min(45%, 20rem);
+  opacity: .16;
+}
+
+.hw-product-overview__compare-art .hw-arc-mark img {
+  width: 100%;
+  filter: invert(1);
 }
 
 /* Product proof: a compact, editorial reason-to-buy sequence. */
