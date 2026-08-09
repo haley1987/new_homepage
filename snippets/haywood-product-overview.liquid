@@ -14,8 +14,10 @@
   endif
 
   assign overview_heading = 'Built around the way you play.'
+  assign overview_summary = overview_intro | strip_html | truncatewords: 58
   if product.title contains 'SV.2'
     assign overview_heading = 'Distance and forgiveness, refined.'
+    assign overview_summary = 'SV.2 blends game-improvement forgiveness with a more refined profile. A 431 body, S450 face and injected foam are engineered for faster ball speed, softer feel and more consistent sound. Progressive offset adds confidence in the long irons without sacrificing control in the scoring clubs.'
   elsif product.title contains 'PD.1'
     assign overview_heading = 'Speed in a player’s profile.'
   elsif product.title contains 'CB'
@@ -36,7 +38,11 @@
       <p class="hw-product-overview__eyebrow">Performance overview</p>
       <h2 id="ProductOverview-{{ product.id }}">{{ overview_heading }}</h2>
       <div class="hw-product-overview__intro rte">
-        {{ overview_intro }}
+        <p>{{ overview_summary }}</p>
+        <details class="hw-product-overview__story">
+          <summary>Read the full product story</summary>
+          <div class="rte">{{ overview_intro }}</div>
+        </details>
       </div>
     </div>
 
