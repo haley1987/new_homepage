@@ -1,0 +1,147 @@
+{%- comment -%}
+  Dedicated Press archive. Routed by blog.handle so Shopify template assignments
+  cannot accidentally make the Press and Journal archives look identical.
+{%- endcomment -%}
+
+<section class="hw-press">
+  <header class="hw-press__hero">
+    <div class="hw-press__shell hw-press__hero-grid">
+      <div class="hw-press__hero-copy">
+        <p class="hw-press__eyebrow">Press &amp; recognition</p>
+        <h1 class="hw-press__title">Haywood in<br>the headlines.</h1>
+        <p class="hw-press__intro">Independent reviews, product coverage and stories about the people building Haywood.</p>
+      </div>
+
+      <div class="hw-press__contact">
+        <span class="hw-press__contact-label">Media inquiries</span>
+        <p>For interviews, product information or press opportunities, contact our team.</p>
+        <a href="mailto:info@haywoodgolf.com">info@haywoodgolf.com <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <span class="hw-press__watermark" aria-hidden="true">PRESS</span>
+  </header>
+
+  <div class="hw-press__recognition" aria-label="Publications that have featured Haywood Golf">
+    <div class="hw-press__shell hw-press__recognition-inner">
+      <span class="hw-press__recognition-label">As featured in</span>
+      <ul role="list">
+        <li>TXG</li>
+        <li>Forbes</li>
+        <li>GOLF.com</li>
+        <li>GolfWRX</li>
+        <li>The Province</li>
+        <li>MyGolfSpy</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hw-press__shell hw-press__content">
+    {%- paginate press_blog.articles by 13 -%}
+      {%- if press_blog.articles.size > 0 -%}
+        {%- assign article_offset = 0 -%}
+
+        {%- if paginate.current_page == 1 -%}
+          {%- assign featured_article = press_blog.articles.first -%}
+          {%- assign featured_title_downcase = featured_article.title | downcase -%}
+          {%- assign featured_source = 'Press feature' -%}
+          {%- if featured_title_downcase contains 'golf.com' -%}
+            {%- assign featured_source = 'GOLF.com' -%}
+          {%- elsif featured_title_downcase contains 'txg' -%}
+            {%- assign featured_source = 'TXG' -%}
+          {%- elsif featured_title_downcase contains 'podcast' -%}
+            {%- assign featured_source = 'Podcast' -%}
+          {%- endif -%}
+          {%- assign featured_alt = featured_article.image.alt | default: featured_article.title -%}
+          {%- assign article_offset = 1 -%}
+
+          <article class="hw-press-feature">
+            <a class="hw-press-feature__media" href="{{ featured_article.url }}" aria-label="{{ featured_article.title | escape }}">
+              {%- if featured_article.image != blank -%}
+                {{ featured_article.image
+                  | image_url: width: 2000
+                  | image_tag:
+                    loading: 'eager',
+                    fetchpriority: 'high',
+                    widths: '550, 750, 1100, 1500, 2000',
+                    sizes: '(min-width: 990px) 58vw, 100vw',
+                    alt: featured_alt
+                }}
+              {%- else -%}
+                <span class="hw-press-feature__placeholder" aria-hidden="true">H</span>
+              {%- endif -%}
+            </a>
+            <div class="hw-press-feature__body">
+              <div class="hw-press-feature__meta">
+                <span>{{ featured_source | escape }}</span>
+                <time datetime="{{ featured_article.published_at | date: '%Y-%m-%d' }}">{{ featured_article.published_at | date: '%B %e, %Y' }}</time>
+              </div>
+              <p class="hw-press-feature__kicker">Latest coverage</p>
+              <h2><a href="{{ featured_article.url }}">{{ featured_article.title | escape }}</a></h2>
+              <p>{{ featured_article.excerpt_or_content | strip_html | truncatewords: 26 }}</p>
+              <a class="hw-press__text-link" href="{{ featured_article.url }}">View feature <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        {%- endif -%}
+
+        <div class="hw-press__archive-head">
+          <div>
+            <p class="hw-press__eyebrow">Coverage archive</p>
+            <h2>Reviews, features<br>and conversations.</h2>
+          </div>
+          <p>{{ press_blog.articles_count }} published feature{% unless press_blog.articles_count == 1 %}s{% endunless %}</p>
+        </div>
+
+        <ol class="hw-press__archive">
+          {%- for article in press_blog.articles offset: article_offset -%}
+            {%- assign article_title_downcase = article.title | downcase -%}
+            {%- assign article_source = 'Press' -%}
+            {%- if article_title_downcase contains 'golf.com' -%}
+              {%- assign article_source = 'GOLF.com' -%}
+            {%- elsif article_title_downcase contains 'txg' -%}
+              {%- assign article_source = 'TXG' -%}
+            {%- elsif article_title_downcase contains 'podcast' -%}
+              {%- assign article_source = 'Podcast' -%}
+            {%- elsif article_title_downcase contains 'province' -%}
+              {%- assign article_source = 'The Province' -%}
+            {%- endif -%}
+            {%- assign article_alt = article.image.alt | default: article.title -%}
+
+            <li class="hw-press-card">
+              <article>
+                <a class="hw-press-card__media" href="{{ article.url }}" aria-label="{{ article.title | escape }}">
+                  {%- if article.image != blank -%}
+                    {{ article.image
+                      | image_url: width: 900
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '300, 450, 650, 900',
+                        sizes: '(min-width: 990px) 20vw, (min-width: 750px) 38vw, 36vw',
+                        alt: article_alt
+                    }}
+                  {%- else -%}
+                    <span class="hw-press-card__placeholder" aria-hidden="true">H</span>
+                  {%- endif -%}
+                </a>
+                <div class="hw-press-card__body">
+                  <div class="hw-press-card__meta">
+                    <span>{{ article_source | escape }}</span>
+                    <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%Y' }}</time>
+                  </div>
+                  <h3><a href="{{ article.url }}">{{ article.title | escape }}</a></h3>
+                  <p>{{ article.excerpt_or_content | strip_html | truncatewords: 18 }}</p>
+                  <a class="hw-press__text-link" href="{{ article.url }}">Read coverage <span aria-hidden="true">→</span></a>
+                </div>
+              </article>
+            </li>
+          {%- endfor -%}
+        </ol>
+
+        {%- if paginate.pages > 1 -%}
+          {% render 'pagination', paginate: paginate %}
+        {%- endif -%}
+      {%- else -%}
+        <p class="hw-press__empty">Press coverage will be added here soon.</p>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
