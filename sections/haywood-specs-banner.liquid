@@ -10,22 +10,22 @@
     position: static;
     display: block;
     width: auto;
-    max-width: 100%;
+    max-width: 86rem;
     height: auto;
-    max-height: 58rem;
+    max-height: 48rem;
     margin-inline: auto;
     object-fit: contain;
   }
 
   #shopify-section-{{ section.id }} {
-    padding: clamp(5rem, 7vw, 9rem) 0;
+    padding: clamp(4.5rem, 5vw, 6.5rem) 0;
     background: #f2eee5;
   }
 
   #shopify-section-{{ section.id }} .hw-specs-shell {
-    width: min(calc(100% - 8rem), 118rem);
+    width: min(calc(100% - 8rem), 100rem);
     margin-inline: auto;
-    padding: clamp(3rem, 4vw, 5rem);
+    padding: clamp(3rem, 3vw, 4rem);
     border: 1px solid rgba(11, 35, 65, .14);
     background: #fff;
   }
@@ -61,6 +61,7 @@
 
     #Banner-{{ section.id }} .banner__media .banner__media-image {
       width: 100%;
+      max-width: 100%;
       max-height: none;
     }
   }
