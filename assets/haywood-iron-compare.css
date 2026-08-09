@@ -337,6 +337,10 @@
   background: #fff;
 }
 
+.hw-compare-spec[open] {
+  grid-column: 1 / -1;
+}
+
 .hw-compare-spec summary {
   display: flex;
   min-height: 8rem;
@@ -517,6 +521,10 @@
   .hw-compare__models,
   .hw-compare__specs {
     grid-template-columns: 1fr;
+  }
+
+  .hw-compare-spec[open] {
+    grid-column: auto;
   }
 
   .hw-compare__trial {
