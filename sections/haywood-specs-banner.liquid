@@ -1,20 +1,68 @@
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 {%- style -%}
-  /* Make URL-based banner use natural height instead of Dawn’s ratio shim */
+  /* Keep technical artwork legible without allowing it to become a full-screen banner. */
+  #Banner-{{ section.id }} {
+    width: 100%;
+  }
   #Banner-{{ section.id }} .banner__media { position: relative; }
   #Banner-{{ section.id }} .banner__media::before { content: none; display: none; }
   #Banner-{{ section.id }} .banner__media .banner__media-image {
     position: static;
     display: block;
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     height: auto;
-    object-fit: cover;
+    max-height: 58rem;
+    margin-inline: auto;
+    object-fit: contain;
   }
 
-  h2.specs_banner_title{
-    text-align:center;
-    font-weight: bold;
-    padding-top: 2rem;
+  #shopify-section-{{ section.id }} {
+    padding: clamp(5rem, 7vw, 9rem) 0;
+    background: #f2eee5;
+  }
+
+  #shopify-section-{{ section.id }} .hw-specs-shell {
+    width: min(calc(100% - 8rem), 118rem);
+    margin-inline: auto;
+    padding: clamp(3rem, 4vw, 5rem);
+    border: 1px solid rgba(11, 35, 65, .14);
+    background: #fff;
+  }
+
+  #shopify-section-{{ section.id }} .hw-specs-eyebrow {
+    margin: 0;
+    color: #c9a66b;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} h2.specs_banner_title {
+    margin: 1rem 0 3rem;
+    color: #0b2341;
+    font-family: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+    font-size: clamp(3.8rem, 4.5vw, 5.8rem);
+    font-weight: 400;
+    letter-spacing: -.045em;
+    line-height: .95;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} {
+      padding: 4rem 0;
+    }
+
+    #shopify-section-{{ section.id }} .hw-specs-shell {
+      width: calc(100% - 4rem);
+      padding: 2.4rem 1.6rem;
+    }
+
+    #Banner-{{ section.id }} .banner__media .banner__media-image {
+      width: 100%;
+      max-height: none;
+    }
   }
 {%- endstyle -%}
 
@@ -32,23 +80,26 @@
   If empty, the section outputs nothing (self-hiding).
 {%- endcomment -%}
 {%- if specs_url != blank -%}
-<h2 class="specs_banner_title" id="full-specs">Full Specifications</h2>
-<div
-  id="Banner-{{ section.id }}"
-  class="banner banner--content-align-center banner--{{ section.settings.image_height }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
->
-  <div class="banner__media media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    <img
-      src="{{ specs_url | escape }}"
-      alt="{{ product.title | escape }} Specs"
-      class="banner__media-image"
-      loading="lazy"
-      decoding="async"
-      fetchpriority="{{ fetch_priority }}"
-    >
+<div class="hw-specs-shell">
+  <p class="hw-specs-eyebrow">Technical reference</p>
+  <h2 class="specs_banner_title" id="full-specs">Full specifications</h2>
+  <div
+    id="Banner-{{ section.id }}"
+    class="banner banner--content-align-center banner--{{ section.settings.image_height }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  >
+    <div class="banner__media media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+      <img
+        src="{{ specs_url | escape }}"
+        alt="{{ product.title | escape }} specifications"
+        width="1600"
+        height="1600"
+        class="banner__media-image"
+        loading="lazy"
+        decoding="async"
+        fetchpriority="{{ fetch_priority }}"
+      >
+    </div>
   </div>
-
-
 </div>
 {%- endif -%}
 
