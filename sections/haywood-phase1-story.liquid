@@ -16,7 +16,7 @@
       {%- if section.settings.intro != blank -%}<div class="hw-copy">{{ section.settings.intro }}</div>{%- endif -%}
       <div class="hw-story__rows">
         {%- for block in section.blocks -%}
-          <details class="hw-story__row" {{ block.shopify_attributes }}>
+          <details class="hw-story__row"{% if forloop.first %} open{% endif %} {{ block.shopify_attributes }}>
             <summary>{{ block.settings.title | escape }}</summary>
             <p>{{ block.settings.copy | escape }}</p>
           </details>
