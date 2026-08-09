@@ -1,0 +1,63 @@
+{%- liquid
+  assign description_parts = product.description | split: '<!-- bullets -->'
+  assign overview_intro = product.description
+  assign overview_benefits = blank
+  assign overview_compare = blank
+
+  if description_parts.size > 1
+    assign detail_parts = description_parts[1] | split: '<!-- details -->'
+    assign overview_intro = description_parts[0]
+    assign overview_benefits = detail_parts[0]
+    if detail_parts.size > 1
+      assign overview_compare = detail_parts[1]
+    endif
+  endif
+
+  assign overview_heading = 'Built around the way you play.'
+  if product.title contains 'SV.2'
+    assign overview_heading = 'Distance and forgiveness, refined.'
+  elsif product.title contains 'PD.1'
+    assign overview_heading = 'Speed in a player’s profile.'
+  elsif product.title contains 'CB'
+    assign overview_heading = 'Forged control with added stability.'
+  elsif product.title contains 'MB'
+    assign overview_heading = 'Pure feedback. Total control.'
+  endif
+
+  assign is_iron = false
+  if product.type contains 'Iron' or product.title contains 'Iron' or product.title contains 'CB' or product.title contains 'MB' or product.title contains 'PD.1' or product.title contains 'SV.2'
+    assign is_iron = true
+  endif
+-%}
+
+<section class="hw-product-overview" aria-labelledby="ProductOverview-{{ product.id }}">
+  <div class="hw-product-overview__shell">
+    <div class="hw-product-overview__lead">
+      <p class="hw-product-overview__eyebrow">Performance overview</p>
+      <h2 id="ProductOverview-{{ product.id }}">{{ overview_heading }}</h2>
+      <div class="hw-product-overview__intro rte">
+        {{ overview_intro }}
+      </div>
+    </div>
+
+    {%- if overview_benefits != blank -%}
+      <div class="hw-product-overview__benefits rte">
+        {{ overview_benefits }}
+      </div>
+    {%- endif -%}
+
+    {%- if is_iron and overview_compare != blank -%}
+      <div class="hw-product-overview__compare">
+        <div class="hw-product-overview__compare-copy">
+          <p class="hw-product-overview__eyebrow">Compare the lineup</p>
+          <h3>See where {{ display_title }} fits.</h3>
+          <p>Compare forgiveness, launch, workability and player profile across the Haywood iron lineup.</p>
+          <a href="/pages/iron-selection">Compare all irons <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hw-product-overview__compare-art rte">
+          {{ overview_compare }}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
