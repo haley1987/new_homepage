@@ -388,6 +388,7 @@ div.product__description, div.product-description {
           class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
         >
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
+          {%- assign hw_show_product_overview = false -%}
 
           {%- for block in section.blocks -%}
             {%- case block.type -%}
@@ -471,7 +472,7 @@ div.product__description, div.product-description {
 
       {% assign iron_titles = "Signature V2 Irons,PD.1 Players Distance Iron,SV.2 | PD.1 Combo Set,Haywood CB's,Haywood CB/MB Combo,Haywood MB's,SV.2 Irons (Game Improvement Model),PD.1 Irons (Players Distance Model)" | split: "," %}
       {% if iron_titles contains product.title %}
-        <a href="/pages/iron-selection" class="hw-quiz-link">Unsure? Take a 2-min fitting quiz »</a>
+        <a href="/pages/fitting-tool" class="hw-quiz-link">Unsure? Take a 2-minute fitting quiz <span aria-hidden="true">→</span></a>
       {% endif %}
     </div>
 
@@ -509,37 +510,9 @@ div.product__description, div.product-description {
 
 
 {%- when 'haywood_bullets' -%}
-      {% if has_apo %}
-{%- assign p1 = product.description | split: '<!-- bullets -->' -%}
-
-{% if p1.size > 1 %}
-  {%- assign p2 = p1[1] | split: '<!-- details -->' -%}
-
-  <!-- Bullets: always shown -->
-  <div class="product-description-bullets rte">
-    {{ p2[0] }}
-
-    <!-- Collapsible details (Read More) -->
-    <details class="hw-desc__more">
-      <summary class="hw-link"></summary>
-      <div class="rte hw-desc__body">
-        {{ p1[0] }}
-        {% if p2.size > 1 %}
-          <br>
-          {{ p2[1] }}
-        {% endif %}
-      </div>
-    </details>
-  </div>
-{% else %}
-  <!-- Fallback: no markers -->
-  <div class="product-description rte">
-    {{ product.description }}
-  </div>
-{% endif %}
-
-
-{% endif %}
+  {%- if has_apo -%}
+    {%- assign hw_show_product_overview = true -%}
+  {%- endif -%}
 
 
 
@@ -1134,6 +1107,10 @@ div.product__description, div.product-description {
         </section>
       </div>
     </div>
+
+    {%- if has_apo and hw_show_product_overview and product.description != blank -%}
+      {% render 'haywood-product-overview', product: product, display_title: hw_display_title %}
+    {%- endif -%}
 
     {% render 'product-media-modal', variant_images: variant_images %}
 
