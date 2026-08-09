@@ -1,5 +1,15 @@
 /* Haywood Journal: shared index and article presentation. */
 
+.hw-journal-page #MainContent,
+.hw-journal-page main.content-for-layout {
+  width: 100%;
+  max-width: none;
+  margin-left: 0 !important;
+}
+
+.hw-journal-page .sidebar-drawer { display: none !important; }
+.hw-journal-page footer.footer { margin-left: 0 !important; }
+
 .hw-journal,
 .hw-article {
   --hw-journal-navy: #0b2341;
@@ -10,6 +20,7 @@
   --hw-journal-muted: #62645f;
   --hw-journal-line: rgba(11, 35, 65, .16);
   --hw-journal-shell: 146rem;
+  --hw-journal-serif: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
   color: var(--hw-journal-ink);
   background: #fff;
 }
@@ -80,7 +91,7 @@
   max-width: 9ch;
   margin: 1.8rem 0 0;
   color: #fff;
-  font-family: var(--font-heading-family);
+  font-family: var(--hw-journal-serif);
   font-size: clamp(5.2rem, 6.2vw, 9rem);
   font-weight: 400;
   letter-spacing: -.045em;
@@ -171,7 +182,7 @@
 .hw-journal-feature__title {
   margin: 1.8rem 0 0;
   color: #fff;
-  font-family: var(--font-heading-family);
+  font-family: var(--hw-journal-serif);
   font-size: clamp(3.8rem, 4vw, 6rem);
   font-weight: 400;
   letter-spacing: -.035em;
@@ -226,7 +237,7 @@
 
 .hw-journal__latest-title {
   margin: 1.4rem 0 0;
-  font-family: var(--font-heading-family);
+  font-family: var(--hw-journal-serif);
   font-size: clamp(3.8rem, 4vw, 5.8rem);
   font-weight: 400;
   letter-spacing: -.035em;
@@ -268,7 +279,7 @@
 
 .hw-journal-card__title {
   margin: 1rem 0 0;
-  font-family: var(--font-heading-family);
+  font-family: var(--hw-journal-serif);
   font-size: clamp(2.6rem, 2.2vw, 3.4rem);
   font-weight: 400;
   letter-spacing: -.025em;
@@ -335,7 +346,7 @@
   max-width: 13ch;
   margin: 2rem 0 0;
   color: #fff;
-  font-family: var(--font-heading-family);
+  font-family: var(--hw-journal-serif);
   font-size: clamp(4.6rem, 5vw, 7.2rem);
   font-weight: 400;
   letter-spacing: -.045em;
@@ -427,7 +438,7 @@
 .hw-article__content h4 {
   margin: 5rem 0 1.8rem;
   color: var(--hw-journal-navy);
-  font-family: var(--font-heading-family);
+  font-family: var(--hw-journal-serif);
   font-weight: 400;
   letter-spacing: -.025em;
   line-height: 1.08;
@@ -448,7 +459,7 @@
 .hw-article__content a { color: var(--hw-journal-navy); text-underline-offset: .25em; }
 .hw-article__content hr { margin: 4.5rem 0; border: 0; border-top: 1px solid var(--hw-journal-line); }
 .hw-article__content img { width: min(100%, 98rem); height: auto; margin: 3.5rem auto; }
-.hw-article__content blockquote { padding: 1.8rem 0 1.8rem 2.5rem; border-left: 2px solid var(--hw-journal-gold); color: var(--hw-journal-navy); font-family: var(--font-heading-family); font-size: 2.7rem; line-height: 1.3; }
+.hw-article__content blockquote { padding: 1.8rem 0 1.8rem 2.5rem; border-left: 2px solid var(--hw-journal-gold); color: var(--hw-journal-navy); font-family: var(--hw-journal-serif); font-size: 2.7rem; line-height: 1.3; }
 .hw-article__content table { display: block; max-width: 100%; overflow-x: auto; }
 
 .hw-article__aside {
@@ -463,7 +474,7 @@
 .hw-article__aside-title {
   margin: 0;
   color: #fff;
-  font-family: var(--font-heading-family);
+  font-family: var(--hw-journal-serif);
   font-size: 2.8rem;
   font-weight: 400;
   line-height: 1.05;
@@ -525,7 +536,7 @@
 
 .hw-article__related-title {
   margin: 1.4rem 0 0;
-  font-family: var(--font-heading-family);
+  font-family: var(--hw-journal-serif);
   font-size: clamp(3.6rem, 4vw, 5.4rem);
   font-weight: 400;
   letter-spacing: -.035em;
@@ -565,7 +576,7 @@
 
 .hw-article-related__body { padding: 2rem; }
 .hw-article-related__date { color: var(--hw-journal-gold); font-size: 1rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-.hw-article-related__title { margin: 1rem 0 0; font-family: var(--font-heading-family); font-size: 2.6rem; font-weight: 400; line-height: 1.08; }
+.hw-article-related__title { margin: 1rem 0 0; font-family: var(--hw-journal-serif); font-size: 2.6rem; font-weight: 400; line-height: 1.08; }
 .hw-article-related__cta { margin-top: 1.6rem; color: var(--hw-journal-navy); }
 
 .hw-article .article-template__comment-wrapper {
