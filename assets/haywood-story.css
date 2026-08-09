@@ -100,6 +100,7 @@
 .hw-story__hero-media,
 .hw-story__origin-media,
 .hw-story__people-media {
+  position: relative;
   min-width: 0;
   overflow: hidden;
   background: #d7d5cf;
@@ -108,6 +109,9 @@
 .hw-story__hero-media img,
 .hw-story__origin-media img,
 .hw-story__people-media img {
+  position: absolute;
+  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -115,16 +119,18 @@
 
 .hw-story__hero-media img { object-position: center; }
 
-.hw-story__hero > .haywood-arc-mark,
-.hw-story__hero > [class*="haywood-arc"] {
+.hw-story .hw-arc-mark--story {
   position: absolute;
   z-index: 3;
   right: 4rem;
   bottom: 2rem;
   width: clamp(12rem, 14vw, 22rem);
   opacity: .1;
+  filter: invert(1);
   pointer-events: none;
 }
+
+.hw-story .hw-arc-mark--story img { display: block; width: 100%; height: auto; }
 
 .hw-story__origin {
   padding-block: clamp(7rem, 9vw, 13rem);
