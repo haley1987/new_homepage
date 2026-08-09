@@ -14,6 +14,15 @@
   margin-right: 0;
 }
 
+/* Dawn's base selector expands the cart SVG to the full 44px touch target.
+ * Keep the control accessible while matching the other header artwork. */
+@media screen and (max-width: 1199px) {
+  .header__icon--cart .icon {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}
+
 /* Bring the custom page buttons onto one readable, consistent label scale. */
 :is(
   .hwb__button,
