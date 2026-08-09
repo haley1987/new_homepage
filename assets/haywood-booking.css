@@ -121,3 +121,34 @@
 @media (prefers-reduced-motion: reduce) {
   .hwb * { scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+
+/* Booking remains the most informative utility hero, but no longer dominates
+ * the page before customers reach the scheduler. */
+.hwb__hero-grid { min-height: 44rem; }
+.hwb__hero-copy { padding-block: clamp(5rem, 6vw, 7rem); }
+.hwb__title { max-width: 12ch; margin-top: 1.6rem !important; font-size: clamp(5rem, 5.6vw, 7.4rem); line-height: .92; }
+.hwb__lead { margin-top: 2rem !important; }
+.hwb__button { margin-top: 2.8rem; }
+.hwb__session-card { min-height: 44rem; padding: clamp(2.8rem, 4vw, 4.5rem); }
+.hwb__session-statement { font-size: clamp(3.6rem, 4vw, 5rem); }
+.hwb__facts { margin-top: 2.8rem; }
+.hwb__process,
+.hwb__booking { padding-block: clamp(5rem, 7vw, 8rem); }
+.hwb__alternatives { padding-block: clamp(5rem, 7vw, 7.5rem); }
+.hwb__alternative-card { min-height: 24rem; }
+
+@media screen and (max-width: 749px) {
+  .hwb__hero-grid { min-height: 0; }
+  .hwb__hero-copy { padding-block: 3.8rem 4.2rem; }
+  .hwb__title { font-size: clamp(4.4rem, 12vw, 5.2rem); line-height: .94; }
+  .hwb__lead { font-size: 1.7rem !important; line-height: 1.55 !important; }
+  .hwb__button { margin-top: 2.4rem; }
+  .hwb__session-card { min-height: 22rem; padding: 2.4rem 2rem; }
+  .hwb__session-statement { max-width: 14ch; font-size: 3.2rem; }
+  .hwb__facts { margin-top: 2rem; }
+  .hwb__facts div { padding-top: 1.3rem; }
+  .hwb__process,
+  .hwb__booking,
+  .hwb__alternatives { padding-block: 4.5rem 5.5rem; }
+  .hwb__alternative-card { min-height: 19rem; }
+}
