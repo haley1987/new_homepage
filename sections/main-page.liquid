@@ -1,6 +1,9 @@
 {%- if page.handle == 'store-locator' -%}
   {{ 'haywood-store-locator.css' | asset_url | stylesheet_tag }}
   {%- render 'haywood-store-locator-page', page_settings: section.settings -%}
+{%- elsif page.handle == 'the-haywood-golf-story' -%}
+  {{ 'haywood-story.css' | asset_url | stylesheet_tag }}
+  {%- render 'haywood-story-page', page_settings: section.settings -%}
 {%- elsif page.handle == 'return-policy' -%}
   {{ 'haywood-return-policy.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'haywood-return-policy.js' | asset_url }}" defer="defer"></script>
@@ -41,6 +44,125 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Haywood story page"
+    },
+    {
+      "type": "text",
+      "id": "story_eyebrow",
+      "label": "Hero eyebrow",
+      "default": "OUR STORY"
+    },
+    {
+      "type": "text",
+      "id": "story_heading",
+      "label": "Hero heading",
+      "default": "Built from a better idea."
+    },
+    {
+      "type": "textarea",
+      "id": "story_intro",
+      "label": "Hero introduction",
+      "default": "Haywood began in Vancouver with a simple belief: golfers should not have to choose between considered design, custom specifications and fair pricing."
+    },
+    {
+      "type": "image_picker",
+      "id": "story_hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "story_origin_eyebrow",
+      "label": "Origin eyebrow",
+      "default": "VANCOUVER · 2018"
+    },
+    {
+      "type": "text",
+      "id": "story_origin_heading",
+      "label": "Origin heading",
+      "default": "Frustration became a blueprint."
+    },
+    {
+      "type": "textarea",
+      "id": "story_origin_copy",
+      "label": "Origin copy",
+      "default": "After a disappointing experience at a major golf retailer, we started asking better questions. What if we designed the clubs ourselves, worked directly with trusted manufacturing partners and built every order around the golfer receiving it?"
+    },
+    {
+      "type": "textarea",
+      "id": "story_origin_copy_2",
+      "label": "Origin copy — second paragraph",
+      "default": "We began with wedges—sourcing, prototyping and testing until the product met our standards for feel, performance and durability. That same process now guides every Haywood club."
+    },
+    {
+      "type": "image_picker",
+      "id": "story_origin_image",
+      "label": "Origin image"
+    },
+    {
+      "type": "text",
+      "id": "story_people_eyebrow",
+      "label": "People section eyebrow",
+      "default": "WHY WE BUILD"
+    },
+    {
+      "type": "text",
+      "id": "story_people_heading",
+      "label": "People section heading",
+      "default": "Golf is personal. Your equipment should be too."
+    },
+    {
+      "type": "textarea",
+      "id": "story_people_copy",
+      "label": "People section copy",
+      "default": "Every Haywood club is built to order. That lets us focus on the details that matter—head, shaft, length, lie and grip—while staying close to the golfers who play our equipment."
+    },
+    {
+      "type": "image_picker",
+      "id": "story_people_image",
+      "label": "People section image"
+    },
+    {
+      "type": "text",
+      "id": "story_cta_eyebrow",
+      "label": "CTA eyebrow",
+      "default": "THE STORY CONTINUES"
+    },
+    {
+      "type": "text",
+      "id": "story_cta_heading",
+      "label": "CTA heading",
+      "default": "See what we are building now."
+    },
+    {
+      "type": "textarea",
+      "id": "story_cta_copy",
+      "label": "CTA copy",
+      "default": "Explore the current Haywood lineup or visit the Journal for equipment insight, fitting knowledge and stories from the workshop."
+    },
+    {
+      "type": "text",
+      "id": "story_primary_label",
+      "label": "Primary button label",
+      "default": "SHOP ALL CLUBS"
+    },
+    {
+      "type": "url",
+      "id": "story_primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "story_secondary_label",
+      "label": "Secondary button label",
+      "default": "VISIT THE JOURNAL"
+    },
+    {
+      "type": "url",
+      "id": "story_secondary_link",
+      "label": "Secondary button link"
+    },
     {
       "type": "header",
       "content": "Store locator page"
