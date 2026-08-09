@@ -527,6 +527,31 @@
 .hw-product-overview__intro > :last-child { margin-bottom: 0; }
 .hw-product-overview .shop-app-warning { display: none; }
 
+.hw-product-overview__story {
+  margin-top: 2.4rem;
+  border-top: 1px solid var(--hw-commerce-line);
+}
+
+.hw-product-overview__story summary {
+  padding: 1.8rem 0;
+  color: var(--hw-commerce-navy);
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  list-style-position: inside;
+  text-transform: uppercase;
+}
+
+.hw-product-overview__story[open] summary {
+  border-bottom: 1px solid var(--hw-commerce-line);
+}
+
+.hw-product-overview__story > div {
+  padding-top: 2rem;
+  font-size: 1.55rem;
+}
+
 .hw-product-overview__benefits {
   margin-top: clamp(4rem, 6vw, 7rem);
   padding-top: clamp(3rem, 4vw, 4.5rem);
