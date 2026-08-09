@@ -663,6 +663,11 @@
 
 /* Product proof: a compact, editorial reason-to-buy sequence. */
 .why-players {
+  --hw-commerce-navy: #0b2341;
+  --hw-commerce-gold: #c9a66b;
+  --hw-commerce-muted: #5b5a55;
+  --hw-commerce-line: rgba(11, 35, 65, .16);
+  --hw-commerce-serif: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
   width: min(calc(100% - 8rem), 150rem);
   margin: clamp(4rem, 6vw, 8rem) auto 0 !important;
   padding: 0 !important;
