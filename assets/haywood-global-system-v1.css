@@ -1,0 +1,56 @@
+/* Haywood shared interface refinements.
+ * Limited to shared controls so bespoke page art direction remains intact. */
+
+:root {
+  --hw-touch-target: 4.8rem;
+}
+
+/* Keep the shared header controls optically balanced and inside the viewport. */
+.header__icons {
+  padding-right: 0;
+}
+
+.header__icon--cart {
+  margin-right: 0;
+}
+
+/* Bring the custom page buttons onto one readable, consistent label scale. */
+:is(
+  .hwb__button,
+  .hwfaq__button,
+  .hwl__button,
+  .hwrp__button,
+  .hwcontact__button,
+  .hw-story__button,
+  .hw-careers__button,
+  .hw-compare__button
+) {
+  min-height: var(--hw-touch-target);
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+/* Crisp's launcher previously sat 60px above the bottom edge on phones,
+ * covering low-page CTAs, prices and horizontal-scroll cues. */
+@media screen and (max-width: 749px) {
+  #crisp-chatbox > div > div {
+    bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header__icon,
+  .header__menu-item,
+  :is(
+    .hwb__button,
+    .hwfaq__button,
+    .hwl__button,
+    .hwrp__button,
+    .hwcontact__button,
+    .hw-story__button,
+    .hw-careers__button,
+    .hw-compare__button
+  ) {
+    transition: none !important;
+  }
+}
