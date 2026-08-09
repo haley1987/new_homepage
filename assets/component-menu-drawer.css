@@ -490,6 +490,11 @@ details[open].menu-opening > .menu-drawer__submenu {
     letter-spacing: 0.02em;
   }
 
+  .header .menu-drawer__navigation-container:has(.menu-drawer__secondary-link[href*='/account'])
+    .menu-drawer__account {
+    display: none;
+  }
+
   .header .menu-drawer__localization {
     padding: 0;
   }
