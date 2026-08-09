@@ -609,7 +609,7 @@
   .hw-journal__shell,
   .hw-article__shell { width: min(calc(100% - 4rem), var(--hw-journal-shell)); }
   .hw-journal__hero-inner { min-height: 32rem; padding-block: 6rem; }
-  .hw-journal__title { font-size: clamp(4.8rem, 15vw, 6.4rem); }
+  .hw-journal__title { font-size: clamp(4.4rem, 13vw, 5.8rem); }
   .hw-journal__intro { font-size: 1.6rem; }
   .hw-journal__content { padding-block: 4rem 6rem; }
   .hw-journal-feature { grid-template-columns: 1fr; min-height: 0; margin-bottom: 6rem; }
