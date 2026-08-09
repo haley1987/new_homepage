@@ -315,12 +315,37 @@ details[open].menu-opening > .menu-drawer__submenu {
     align-items: center;
     gap: 1rem;
     margin: 0 0 1.2rem;
+    padding-left: 3.4rem;
+    color: var(--hw-menu-gold);
+    background: linear-gradient(currentColor, currentColor) 0 50% / 2.4rem 1px no-repeat;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  /* CSS labels keep the hierarchy intact while Shopify refreshes the drawer snippet. */
+  .header .menu-drawer__navigation:not(:has(> .menu-drawer__eyebrow))::before,
+  .header .menu-drawer__secondary-navigation:not(:has(> .menu-drawer__eyebrow))::before {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0 0 1.2rem;
     color: var(--hw-menu-gold);
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: 0.18em;
     line-height: 1.2;
     text-transform: uppercase;
+  }
+
+  .header .menu-drawer__navigation:not(:has(> .menu-drawer__eyebrow))::before {
+    content: 'Shop Haywood';
+  }
+
+  .header .menu-drawer__secondary-navigation:not(:has(> .menu-drawer__eyebrow))::before {
+    content: 'Explore';
   }
 
   .header .menu-drawer__eyebrow::before {
