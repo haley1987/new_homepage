@@ -52,14 +52,16 @@
   }
 
   #shopify-section-{{ section.id }} h2.specs_banner_title {
-    max-width: 9ch;
+    max-width: 12ch;
     margin: 1.4rem 0 2rem;
     color: #0b2341;
     font-family: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
-    font-size: clamp(3.8rem, 4.5vw, 5.8rem);
+    font-size: clamp(3.8rem, 4vw, 5.2rem);
     font-weight: 400;
     letter-spacing: -.045em;
     line-height: .95;
+    overflow-wrap: normal;
+    word-break: normal;
   }
 
   #shopify-section-{{ section.id }} .hw-specs-copy {
@@ -126,7 +128,7 @@
 <div class="hw-specs-shell">
   <header class="hw-specs-intro">
     <p class="hw-specs-eyebrow">Technical reference</p>
-    <h2 class="specs_banner_title" id="full-specs">Full specifications.</h2>
+    <h2 class="specs_banner_title" id="full-specs">Club specifications.</h2>
     <p class="hw-specs-copy">Review loft, lie, length, offset and head specifications in one place. Open the original chart when you need a closer look.</p>
     <a class="hw-specs-link" href="{{ specs_url | escape }}" target="_blank" rel="noopener">
       Open full-size chart <span aria-hidden="true">→</span>
