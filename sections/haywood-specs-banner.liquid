@@ -3,17 +3,27 @@
   /* Keep technical artwork legible without allowing it to become a full-screen banner. */
   #Banner-{{ section.id }} {
     width: 100%;
+    min-height: 0 !important;
+    height: auto !important;
+    display: block;
   }
-  #Banner-{{ section.id }} .banner__media { position: relative; }
+  #Banner-{{ section.id }} .banner__media {
+    position: static;
+    min-height: 0 !important;
+    height: auto !important;
+    border: 1px solid rgba(11, 35, 65, .14);
+    background: #fff;
+  }
   #Banner-{{ section.id }} .banner__media::before { content: none; display: none; }
   #Banner-{{ section.id }} .banner__media .banner__media-image {
     position: static;
     display: block;
-    width: auto;
-    max-width: 86rem;
+    width: 100%;
+    max-width: 72rem;
     height: auto;
-    max-height: 48rem;
+    max-height: 62rem;
     margin-inline: auto;
+    padding: clamp(2rem, 4vw, 5rem);
     object-fit: contain;
   }
 
@@ -23,11 +33,12 @@
   }
 
   #shopify-section-{{ section.id }} .hw-specs-shell {
-    width: min(calc(100% - 8rem), 100rem);
+    display: grid;
+    grid-template-columns: minmax(24rem, .42fr) minmax(0, .58fr);
+    gap: clamp(4rem, 7vw, 9rem);
+    align-items: center;
+    width: min(calc(100% - 8rem), 120rem);
     margin-inline: auto;
-    padding: clamp(3rem, 3vw, 4rem);
-    border: 1px solid rgba(11, 35, 65, .14);
-    background: #fff;
   }
 
   #shopify-section-{{ section.id }} .hw-specs-eyebrow {
@@ -40,7 +51,8 @@
   }
 
   #shopify-section-{{ section.id }} h2.specs_banner_title {
-    margin: 1rem 0 3rem;
+    max-width: 9ch;
+    margin: 1.4rem 0 2rem;
     color: #0b2341;
     font-family: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
     font-size: clamp(3.8rem, 4.5vw, 5.8rem);
@@ -49,20 +61,49 @@
     line-height: .95;
   }
 
+  #shopify-section-{{ section.id }} .hw-specs-copy {
+    max-width: 42rem;
+    margin: 0;
+    color: #5d6470;
+    font-size: 1.65rem;
+    line-height: 1.65;
+  }
+
+  #shopify-section-{{ section.id }} .hw-specs-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 2.6rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid #c9a66b;
+    color: #0b2341;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .hw-specs-link:hover {
+    color: #8d6c37;
+  }
+
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} {
       padding: 4rem 0;
     }
 
     #shopify-section-{{ section.id }} .hw-specs-shell {
+      grid-template-columns: 1fr;
+      gap: 3rem;
       width: calc(100% - 4rem);
-      padding: 2.4rem 1.6rem;
     }
 
     #Banner-{{ section.id }} .banner__media .banner__media-image {
       width: 100%;
       max-width: 100%;
-      max-height: none;
+      max-height: 54rem;
+      padding: 1.6rem;
     }
   }
 {%- endstyle -%}
@@ -82,11 +123,17 @@
 {%- endcomment -%}
 {%- if specs_url != blank -%}
 <div class="hw-specs-shell">
-  <p class="hw-specs-eyebrow">Technical reference</p>
-  <h2 class="specs_banner_title" id="full-specs">Full specifications</h2>
+  <header class="hw-specs-intro">
+    <p class="hw-specs-eyebrow">Technical reference</p>
+    <h2 class="specs_banner_title" id="full-specs">Full specifications.</h2>
+    <p class="hw-specs-copy">Review loft, lie, length, offset and head specifications in one place. Open the original chart when you need a closer look.</p>
+    <a class="hw-specs-link" href="{{ specs_url | escape }}" target="_blank" rel="noopener">
+      Open full-size chart <span aria-hidden="true">→</span>
+    </a>
+  </header>
   <div
     id="Banner-{{ section.id }}"
-    class="banner banner--content-align-center banner--{{ section.settings.image_height }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+    class="banner banner--content-align-center{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
   >
     <div class="banner__media media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       <img
