@@ -57,7 +57,6 @@
         {%- else -%}
           <img src="https://cdn.shopify.com/s/files/1/0355/4757/8506/files/IMG_7243_1024x1024.jpg?v=1586635406" width="1024" height="683" alt="The early Haywood story on the golf course" loading="lazy">
         {%- endif -%}
-        <span class="hw-story__origin-caption">Richmond, British Columbia</span>
       </div>
       <div class="hw-story__origin-copy">
         <p class="hw-story__section-label">{{ origin_eyebrow | escape }}</p>
@@ -106,18 +105,6 @@
         <div><strong>WEDGES</strong><span>Where the first lineup began</span></div>
         <div><strong>BUILT TO ORDER</strong><span>How every club leaves us</span></div>
       </div>
-    </div>
-    <div class="hw-story__people-media">
-      {%- if page_settings.story_people_image != blank -%}
-        {{ page_settings.story_people_image | image_url: width: 1600 | image_tag:
-          widths: '500, 800, 1100, 1400, 1600',
-          sizes: '(min-width: 900px) 50vw, 100vw',
-          loading: 'lazy',
-          alt: page_settings.story_people_image.alt | default: 'Sharing the game of golf'
-        }}
-      {%- else -%}
-        <img src="https://cdn.shopify.com/s/files/1/0081/4068/5397/files/Haywood_Golf_WebSize-063_1024x1024.jpg?v=1586919758" width="1024" height="683" alt="Sharing the game of golf" loading="lazy">
-      {%- endif -%}
     </div>
   </section>
 
