@@ -19,12 +19,13 @@
         "overlay_top": 35,
         "overlay_middle": 40,
         "overlay_bottom": 75,
+        "overlay_tone": "light",
         "heading_color": "#000000",
         "text_color": "#000000",
         "eyebrow": "Meet Our Newest",
         "heading": "CB2 & MB2",
-        "body": "<p>Two distinct profiles. Forged for feel, precision and control. </p><p>Meet the new CB2 and MB2.</p>",
-        "primary_label": "Shop All Irons",
+        "body": "<p>Two distinct profiles. Forged for feel, precision and control.</p>",
+        "primary_label": "Explore CB2 & MB2",
         "primary_link": "shopify://collections/irons",
         "secondary_label": "Find My Fit",
         "secondary_link": "shopify://pages/fitting-tool",
@@ -38,27 +39,27 @@
           "type": "item",
           "settings": {
             "show_icon": true,
-            "icon": "tools",
-            "title": "Built to Your Specs",
-            "copy": "Configured for the way you play."
+            "icon": "maple",
+            "title": "Designed in Canada",
+            "copy": "Developed by our team in Vancouver."
           }
         },
         "trust_components": {
           "type": "item",
           "settings": {
             "show_icon": true,
-            "icon": "star",
-            "title": "Premium Components",
-            "copy": "Materials selected without shortcuts."
+            "icon": "tools",
+            "title": "Built to Your Specs",
+            "copy": "Configured for your swing and setup."
           }
         },
         "trust_order": {
           "type": "item",
           "settings": {
             "show_icon": true,
-            "icon": "box",
-            "title": "Built to Order",
-            "copy": "Assembled specifically for your build."
+            "icon": "star",
+            "title": "Premium Components",
+            "copy": "Quality shafts and grips without shortcuts."
           }
         },
         "trust_recommendations": {
@@ -66,17 +67,8 @@
           "settings": {
             "show_icon": true,
             "icon": "globe",
-            "title": "Transparent Recommendations",
-            "copy": "Clear tradeoffs. No manufacturer agenda."
-          }
-        },
-        "trust_golfers": {
-          "type": "item",
-          "settings": {
-            "show_icon": true,
-            "icon": "star",
-            "title": "Trusted by Golfers",
-            "copy": "Built for players who notice details."
+            "title": "Straight Answers",
+            "copy": "Clear guidance on fit, flight and feel."
           }
         }
       },
@@ -84,8 +76,7 @@
         "trust_specs",
         "trust_components",
         "trust_order",
-        "trust_recommendations",
-        "trust_golfers"
+        "trust_recommendations"
       ],
       "settings": {
         "accessibility_label": "Why golfers choose Haywood"
@@ -137,7 +128,7 @@
         "text_color": "#5b5a55",
         "eyebrow": "Why Haywood",
         "heading": "Built Differently",
-        "intro": ""
+        "intro": "<p>Designed in-house, built to your specifications and supported with clear guidance at every step.</p>"
       }
     },
     "hw_products": {
@@ -148,7 +139,7 @@
           "settings": {
             "title": "CB2",
             "category": "Players Cavity",
-            "fit": "",
+            "fit": "Compact shaping with added stability for players who want control without giving up confidence.",
             "image": "shopify://shop_images/cb2-master-v1.png",
             "image_fit": "cover",
             "image_position": "center center",
@@ -162,7 +153,7 @@
           "settings": {
             "title": "MB2",
             "category": "Muscle Back",
-            "fit": "",
+            "fit": "A traditional muscle-back profile for golfers who value direct feedback and complete workability.",
             "image": "shopify://shop_images/mb2-master-v1.png",
             "image_fit": "cover",
             "image_position": "center center",
@@ -176,7 +167,7 @@
           "settings": {
             "title": "PD.1",
             "category": "Players Distance",
-            "fit": "",
+            "fit": "Distance and launch in a refined players shape.",
             "image": "shopify://shop_images/pd1-master-v1.png",
             "image_fit": "cover",
             "image_position": "center center",
@@ -190,7 +181,7 @@
           "settings": {
             "title": "SV.2",
             "category": "Game Improvement",
-            "fit": "",
+            "fit": "Easy launch and forgiveness for more consistent iron play.",
             "image": "shopify://shop_images/sv2-master-v1.png",
             "image_fit": "cover",
             "image_position": "center center",
@@ -205,12 +196,12 @@
             "title": "Wedges",
             "category": "Built for Spin",
             "fit": "",
-            "image": "shopify://shop_images/di2-master-v1.webp",
+            "image": "",
             "image_fit": "cover",
             "image_position": "center center",
             "product": "",
             "collection": "",
-            "manual_link": "shopify://collections/drivers"
+            "manual_link": "/products/forged-golf-wedges"
           }
         },
         "product_putter": {
@@ -224,7 +215,7 @@
             "image_position": "center center",
             "product": "",
             "collection": "",
-            "manual_link": "shopify://collections/putters"
+            "manual_link": "/products/signature-driving-iron-2"
           }
         }
       },
@@ -237,9 +228,13 @@
         "product_putter"
       ],
       "settings": {
-        "eyebrow": "Explore the lineup",
-        "heading": "",
-        "copy": "",
+        "eyebrow": "Shop Haywood",
+        "heading": "Find the club built for your game.",
+        "copy": "<p>Start with the shape, flight and forgiveness you need. Every Haywood club can be configured around the way you play.</p>",
+        "primary_label": "Shop All Clubs",
+        "primary_link": "shopify://collections/all",
+        "secondary_label": "Find My Fit",
+        "secondary_link": "shopify://pages/fitting-tool",
         "accessibility_label": "Explore Haywood golf clubs"
       }
     },
@@ -308,8 +303,8 @@
       ],
       "settings": {
         "eyebrow": "The Haywood process",
-        "heading": "",
-        "body": ""
+        "heading": "Made one set at a time.",
+        "body": "<p>From first specification to final inspection, every build moves through the hands of our team.</p>"
       }
     },
     "hw_seven_iron": {
@@ -352,7 +347,7 @@
         "text_color": "#c8c8c4",
         "eyebrow": "The 7-Iron Purchase Program",
         "heading": "Try one. Then build the set.",
-        "body": "<p>Order a brand-new 7-iron built to your exact specs. When you’re ready for the full set, its purchase price is credited toward your order.</p>",
+        "body": "<p>Build one 7-iron to your specifications. If you move to the full set, its purchase price is credited toward your order.</p>",
         "cta_label": "Build Your 7-Iron",
         "cta_link": "https://www.haywoodgolf.com/products/7-iron-purchase-program",
         "note": "Custom-built 7-irons are non-refundable and non-returnable."
@@ -374,8 +369,8 @@
           "type": "card",
           "settings": {
             "article": "",
-            "title": "CB2 vs PD.1",
-            "excerpt": "Which iron is right for you?",
+            "title": "CB2 vs MB2",
+            "excerpt": "Two forged profiles. Which one fits your game?",
             "link": ""
           }
         },
@@ -405,9 +400,11 @@
         "education_4"
       ],
       "settings": {
-        "eyebrow": "Journal",
-        "heading": "",
-        "read_more_label": "Read More"
+        "eyebrow": "From the Journal",
+        "heading": "Know what you’re playing.",
+        "read_more_label": "Read More",
+        "view_all_label": "View All Journal",
+        "view_all_link": "shopify://blogs/news"
       }
     },
     "hw_customer_proof": {
@@ -417,11 +414,12 @@
         "heading_color": "#0b2341",
         "text_color": "#56647a",
         "eyebrow": "Customer proof",
-        "heading": "Built for golfers who care about the details.",
+        "heading": "Built, played and reviewed by golfers.",
         "quote": "",
         "customer_name": "",
         "product_purchased": "",
         "summary": "Trusted by golfers worldwide",
+        "source_label": "Verified customer reviews via Judge.me",
         "link_label": "Read Customer Reviews",
         "link": "/pages/customer-reviews"
       }
@@ -484,10 +482,11 @@
         "background_color": "#ffffff",
         "heading_color": "#0b0b0a",
         "text_color": "#5b5a55",
-        "eyebrow": "",
-        "heading": "Join our community.",
+        "eyebrow": "Community",
+        "heading": "Follow the Arc.",
         "handle": "@HAYWOODGOLF",
-        "link_label": "Follow Haywood",
+        "copy": "From the workshop to the course—see what the Haywood community is building and playing.",
+        "link_label": "Follow on Instagram",
         "link": "https://www.instagram.com/haywoodgolf/",
         "accessibility_label": "Haywood golfers, workshop and community"
       }
@@ -596,26 +595,28 @@
         "desktop_position": "center center",
         "mobile_position": "center center",
         "overlay": 70,
+        "show_points": false,
         "heading_color": "#ffffff",
         "text_color": "#c8c8c4",
         "eyebrow": "Your build starts here",
-        "heading": "Your best golf starts here.",
-        "body": "",
-        "primary_label": "Shop Clubs",
-        "primary_link": "shopify://collections/irons",
-        "secondary_label": "",
-        "secondary_link": ""
+        "heading": "Choose the clubs that fit your game.",
+        "body": "<p>Explore the complete Haywood lineup or get a clear starting recommendation with Find My Fit.</p>",
+        "primary_label": "Shop All Clubs",
+        "primary_link": "shopify://collections/all",
+        "secondary_label": "Find My Fit",
+        "secondary_link": "shopify://pages/fitting-tool"
       }
     },
     "hw_newsletter": {
       "type": "haywood-newsletter-bar",
       "settings": {
-        "background_color": "#0b2341",
+        "background_color": "#102d50",
         "heading_color": "#f2eee5",
         "text_color": "#c7cfda",
         "eyebrow": "From Haywood",
         "heading": "Better golf, delivered.",
         "copy": "New releases, fitting knowledge and stories from the workshop—sent occasionally.",
+        "helper_text": "Occasional emails. Unsubscribe anytime.",
         "button_label": "Subscribe"
       }
     }
@@ -623,15 +624,15 @@
   "order": [
     "hw_hero",
     "hw_trust",
-    "hw_story",
     "hw_products",
+    "hw_featured",
+    "hw_story",
     "hw_find_fit",
+    "hw_customer_proof",
     "hw_process",
     "hw_seven_iron",
     "hw_education",
-    "hw_customer_proof",
     "hw_community",
-    "hw_featured",
     "hw_final_cta",
     "hw_newsletter"
   ]
