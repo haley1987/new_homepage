@@ -12,8 +12,8 @@
   background: #fff;
 }
 
-.shopify-section:has(> .hw-compare) {
-  padding-inline: 0;
+.shopify-section.section:has(> .hw-compare) {
+  padding-inline: 0 !important;
 }
 
 .hw-compare *,
@@ -144,7 +144,7 @@
 
 .hw-compare__section {
   padding-block: clamp(6rem, 8vw, 11rem);
-  padding-inline: 0;
+  padding-inline: 0 !important;
 }
 
 .hw-compare__section--paper {
