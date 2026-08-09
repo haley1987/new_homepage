@@ -87,9 +87,39 @@
   if is_seven_iron_program or is_heads_only or is_complete_set or is_driving_iron
     assign show_iron_compare = false
   endif
+
+  assign buybox_summary = 'Purpose-built performance, configured around the way you play.'
+  if is_seven_iron_program
+    assign buybox_summary = 'Order one custom-built 7-iron, then apply its purchase price to a qualifying full set.'
+  elsif is_complete_set
+    assign buybox_summary = 'A coordinated club setup, configured around the way you play from tee to green.'
+  elsif is_heads_only
+    assign buybox_summary = 'Haywood performance without the standard build, ready for your preferred components.'
+  elsif is_driving_iron
+    assign buybox_summary = 'Controlled distance and a confident flight from the tee or turf.'
+  elsif is_wedge
+    assign buybox_summary = 'Forged feel and versatile sole geometry for flight, spin and touch.'
+  elsif is_wood
+    assign buybox_summary = 'Adjustable performance and dependable launch, built around your preferred setup.'
+  elsif is_putter
+    assign buybox_summary = 'Precision-milled feedback and balanced weighting for a repeatable stroke.'
+  elsif product.title contains 'CB'
+    assign buybox_summary = 'A compact cavity profile balancing forged feel, control and forgiveness.'
+  elsif product.title contains 'MB'
+    assign buybox_summary = 'A muscle-back profile created for feedback, precision and workability.'
+  elsif product.title contains 'PD.1'
+    assign buybox_summary = 'Players distance performance in a clean, confidence-inspiring profile.'
+  elsif product.title contains 'SV.2'
+    assign buybox_summary = 'Forgiveness, launch and speed for golfers who want help without excess bulk.'
+  endif
 -%}
 
-<section class="hw-product-overview" aria-labelledby="ProductOverview-{{ product.id }}">
+<section
+  class="hw-product-overview"
+  aria-labelledby="ProductOverview-{{ product.id }}"
+  data-buybox-summary="{{ buybox_summary | escape }}"
+  data-show-iron-guidance="{{ show_iron_compare }}"
+>
   <div class="hw-product-overview__shell">
     <div class="hw-product-overview__lead">
       <p class="hw-product-overview__eyebrow">Performance overview</p>
@@ -127,4 +157,45 @@
       </div>
     {%- endif -%}
   </div>
+
+  <script>
+    (() => {
+      const overview = document.currentScript.closest('.hw-product-overview');
+      const productShell = overview && overview.closest('.hw-product-shell');
+      const productInfo = productShell && productShell.querySelector('.product__info-container');
+      if (!productInfo) return;
+
+      const summary = productInfo.querySelector('.hw-product-summary');
+      if (summary && overview.dataset.buyboxSummary) {
+        summary.textContent = overview.dataset.buyboxSummary;
+      }
+
+      if (overview.dataset.showIronGuidance !== 'true' || productInfo.querySelector('.hw-product-guidance')) return;
+      const ctas = productInfo.querySelector('.hw-ctas');
+      if (!ctas) return;
+
+      const guidance = document.createElement('nav');
+      guidance.className = 'hw-product-guidance';
+      guidance.setAttribute('aria-label', 'Iron selection help');
+
+      const links = [
+        { href: '/pages/fitting-tool', label: 'Find My Fit' },
+        { href: '/pages/iron-selection', label: 'Compare irons' }
+      ];
+
+      links.forEach(({ href, label }) => {
+        const link = document.createElement('a');
+        link.className = 'hw-quiz-link';
+        link.href = href;
+        link.append(document.createTextNode(`${label} `));
+        const arrow = document.createElement('span');
+        arrow.setAttribute('aria-hidden', 'true');
+        arrow.textContent = '→';
+        link.append(arrow);
+        guidance.append(link);
+      });
+
+      ctas.append(guidance);
+    })();
+  </script>
 </section>
