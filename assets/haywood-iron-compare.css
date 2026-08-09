@@ -67,11 +67,11 @@
 }
 
 .hw-compare__title {
-  max-width: 10ch;
+  max-width: 12ch;
   margin: 2rem 0 0;
   color: #fff;
   font-family: var(--hw-compare-serif);
-  font-size: clamp(5.8rem, 8vw, 10rem);
+  font-size: clamp(5.6rem, 6.5vw, 8.8rem);
   font-weight: 400;
   letter-spacing: -.06em;
   line-height: .88;

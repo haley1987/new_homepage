@@ -14,7 +14,7 @@
         "sv2": {
           "type": "model",
           "settings": {
-            "product": "shopify://products/sv-2-game-improvement-irons",
+            "product": "sv-2-game-improvement-irons",
             "short_name": "SV.2",
             "position": "Game improvement",
             "best_for": "Golfers prioritizing launch, speed and stability across the face.",
@@ -26,7 +26,7 @@
         "pd1": {
           "type": "model",
           "settings": {
-            "product": "shopify://products/pd-1-players-distance-irons",
+            "product": "pd-1-players-distance-irons",
             "short_name": "PD.1",
             "position": "Players distance",
             "best_for": "Golfers wanting speed and forgiveness in a more compact players profile.",
@@ -38,7 +38,7 @@
         "cb2": {
           "type": "model",
           "settings": {
-            "product": "shopify://products/cb2-forged-players-cavity-back-irons",
+            "product": "cb2-forged-players-cavity-back-irons",
             "short_name": "CB2",
             "position": "Players cavity",
             "best_for": "Golfers wanting forged feel and control with added support on slight misses.",
@@ -50,7 +50,7 @@
         "mb2": {
           "type": "model",
           "settings": {
-            "product": "shopify://products/mb2-forged-muscle-back-irons",
+            "product": "mb2-forged-muscle-back-irons",
             "short_name": "MB2",
             "position": "Muscle back",
             "best_for": "Consistent ball strikers prioritizing feedback, precision and shot shaping.",
@@ -67,9 +67,9 @@
         "intro": "Compare the SV.2, PD.1, CB2 and MB2 by forgiveness, launch, workability and player profile—then explore the model that feels right.",
         "aside_copy": "Start with the performance characteristics you value most. Use Find My Fit if you would rather receive a recommendation.",
         "models_intro": "The lineup moves from maximum help and easy launch to maximum feedback and shot control. There is no universally best iron—only the best starting point for your game.",
-        "trial_product": "shopify://products/7-iron-purchase-program",
+        "trial_product": "7-iron-purchase-program",
         "trial_copy": "Order one brand-new 7-iron built to your specifications. If you move into the full set, its purchase price is applied toward your order.",
-        "fit_link": "shopify://pages/fitting-tool"
+        "fit_link": "/pages/fitting-tool"
       }
     }
   },
