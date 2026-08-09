@@ -296,8 +296,11 @@
 }
 
 .hw-product-main .product {
+  --grid-desktop-horizontal-spacing: clamp(4rem, 6vw, 9rem);
+  --grid-desktop-vertical-spacing: 0;
   align-items: start;
-  gap: clamp(4rem, 6vw, 9rem);
+  column-gap: var(--grid-desktop-horizontal-spacing);
+  row-gap: 0;
 }
 
 .hw-product-main .product__media-wrapper {
