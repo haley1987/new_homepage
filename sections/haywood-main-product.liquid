@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 30275)
+Total output lines: 2875
+
 <product-info
   id="MainProduct-{{ section.id }}"
   class="hw-commerce hw-product-main section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
@@ -314,23 +317,92 @@ div.product__description, div.product-description {
   assign hw_display_title = hw_display_title | replace: "Haywood MB's", "Haywood MB"
   assign hw_display_title = hw_display_title | replace: ' (Game Improvement Model)', ''
   assign hw_display_title = hw_display_title | replace: ' (Players Distance Model)', ''
+  assign hw_display_title = hw_display_title | replace: ' (Players Cavity Model)', ''
+  assign hw_display_title = hw_display_title | replace: ' (Muscle Back Model)', ''
+
+  assign hw_is_seven_iron_program = false
+  if product.handle == '7-iron-purchase-program'
+    assign hw_is_seven_iron_program = true
+  endif
+
+  assign hw_is_heads_only = false
+  if product.tags contains 'headsonly' or product.title contains 'Heads Only' or product.title contains 'Head Only'
+    assign hw_is_heads_only = true
+  endif
+
+  assign hw_is_complete_set = false
+  if product.title contains 'Complete Set'
+    assign hw_is_complete_set = true
+  endif
+
+  assign hw_is_driving_iron = false
+  if product.title contains 'Driving Iron' or product.title contains 'DI.2'
+    assign hw_is_driving_iron = true
+  endif
+
+  assign hw_is_wedge = false
+  if product.title contains 'Wedge'
+    assign hw_is_wedge = true
+  endif
+
+  assign hw_is_wood = false
+  if product.title contains 'Driver' or product.title contains 'Fairway' or product.title contains 'Hybrid'
+    assign hw_is_wood = true
+  endif
+
+  assign hw_is_putter = false
+  if product.title contains 'Putter'
+    assign hw_is_putter = true
+  endif
+
+  assign hw_is_iron = false
+  if product.type contains 'Iron' or product.title contains 'Iron' or product.title contains 'CB' or product.title contains 'MB' or product.title contains 'PD.1' or product.title contains 'SV.2'
+    assign hw_is_iron = true
+  endif
+
+  assign hw_show_iron_guidance = hw_is_iron
+  if hw_is_driving_iron or hw_is_seven_iron_program or hw_is_heads_only or hw_is_complete_set
+    assign hw_show_iron_guidance = false
+  endif
 
   assign hw_product_eyebrow = 'Haywood Golf'
-  if product.type contains 'Iron' or product.title contains 'Iron' or product.title contains 'CB' or product.title contains 'MB' or product.title contains 'PD.1' or product.title contains 'SV.2'
-    assign hw_product_eyebrow = 'Forged irons'
-  elsif product.title contains 'Driver' or product.title contains 'Fairway' or product.title contains 'Hybrid'
+  if hw_is_seven_iron_program
+    assign hw_product_eyebrow = 'Try before you build'
+  elsif hw_is_complete_set
+    assign hw_product_eyebrow = 'Complete sets'
+  elsif hw_is_heads_only
+    assign hw_product_eyebrow = 'Heads only'
+  elsif hw_is_driving_iron
+    assign hw_product_eyebrow = 'Driving irons'
+  elsif hw_is_wedge
+    assign hw_product_eyebrow = 'Forged wedges'
+  elsif hw_is_wood
     assign hw_product_eyebrow = 'Woods and hybrids'
-  elsif product.title contains 'Wedge'
-    assign hw_product_eyebrow = 'Wedges'
-  elsif product.title contains 'Putter'
-    assign hw_product_eyebrow = 'Putters'
+  elsif hw_is_putter
+    assign hw_product_eyebrow = 'Milled putters'
+  elsif hw_is_iron
+    assign hw_product_eyebrow = 'Forged irons'
   endif
 
   assign hw_product_summary = product.metafields.custom.product_subtitle.value
   if hw_product_summary == blank
     assign hw_product_summary = product.metafields.custom.short_description.value
   endif
-  if product.title contains 'CB'
+  if hw_is_seven_iron_program
+    assign hw_product_summary = 'Order one custom-built 7-iron, then apply its purchase price to a qualifying full set.'
+  elsif hw_is_complete_set
+    assign hw_product_summary = 'A coordinated club setup, configured around the way you play from tee to green.'
+  elsif hw_is_heads_only
+    assign hw_product_summary = 'Haywood performance without the standard build, ready for your preferred components.'
+  elsif hw_is_driving_iron
+    assign hw_product_summary = 'Controlled distance and a confident flight from the tee or turf.'
+  elsif hw_is_wedge
+    assign hw_product_summary = 'Forged feel and versatile sole geometry for flight, spin and touch.'
+  elsif hw_is_wood
+    assign hw_product_summary = 'Adjustable performance and dependable launch, built around your preferred setup.'
+  elsif hw_is_putter
+    assign hw_product_summary = 'Precision-milled feedback and balanced weighting for a repeatable stroke.'
+  elsif product.title contains 'CB'
     assign hw_product_summary = 'A compact cavity profile balancing forged feel, control and forgiveness.'
   elsif product.title contains 'MB'
     assign hw_product_summary = 'A muscle-back profile created for feedback, precision and workability.'
@@ -404,7 +476,7 @@ div.product__description, div.product-description {
               {%- when 'title' -%}
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <p class="hw-product-eyebrow">{{ hw_product_eyebrow }}</p>
-                  <h1>{{ hw_display_title | escape }}</h1>
+                  <h1{% if hw_display_title.size > 30 %} class="hw-product-title--long"{% endif %}>{{ hw_display_title | escape }}</h1>
                   <p class="hw-product-summary">{{ hw_product_summary | escape }}</p>
                 </div>
               {%- when 'price' -%}
@@ -470,9 +542,11 @@ div.product__description, div.product-description {
         <a href="#full-specs" class="hw-btn hw-btn--ghost js-show-specs">View Specs »</a>
       {% endif %}
 
-      {% assign iron_titles = "Signature V2 Irons,PD.1 Players Distance Iron,SV.2 | PD.1 Combo Set,Haywood CB's,Haywood CB/MB Combo,Haywood MB's,SV.2 Irons (Game Improvement Model),PD.1 Irons (Players Distance Model)" | split: "," %}
-      {% if iron_titles contains product.title %}
-        <a href="/pages/fitting-tool" class="hw-quiz-link">Unsure? Take a 2-minute fitting quiz <span aria-hidden="true">→</span></a>
+      {% if hw_show_iron_guidance %}
+        <nav class="hw-product-guidance" aria-label="Iron selection help">
+          <a href="/pages/fitting-tool" class="hw-quiz-link">Find My Fit <span aria-hidden="true">→</span></a>
+          <a href="/pages/iron-selection" class="hw-quiz-link">Compare irons <span aria-hidden="true">→</span></a>
+        </nav>
       {% endif %}
     </div>
 
@@ -1211,37 +1285,7 @@ div.product__description, div.product-description {
               "label": "t:sections.main-product.blocks.text.settings.text_style.options__1.label"
             },
             {
-              "value": "subtitle",
-              "label": "t:sections.main-product.blocks.text.settings.text_style.options__2.label"
-            },
-            {
-              "value": "uppercase",
-              "label": "t:sections.main-product.blocks.text.settings.text_style.options__3.label"
-            }
-          ],
-          "default": "body",
-          "label": "t:sections.main-product.blocks.text.settings.text_style.label"
-        }
-      ]
-    },
-    {
-      "type": "title",
-      "name": "t:sections.main-product.blocks.title.name",
-      "limit": 1
-    },
-    {
-      "type": "price",
-      "name": "t:sections.main-product.blocks.price.name",
-      "limit": 1
-    },
-    {
-  "type": "haywood_cta",
-  "name": "Haywood • Product CTAs",
-  "limit": 1,
-  "settings": [
-    { "type": "text", "id": "configure_label", "label": "Configure button label", "default": "Configure your " },
-    { "type": "checkbox", "id": "show_specs", "label": "Show View Specs (when metafield exists)", "default": true },
-    { "type": "checkbox", "id": "show_quiz", "label": "Show fitting quiz link (when metafield exists)", "default": true }
+              "value": "subti…275 tokens truncated…metafield exists)", "default": true }
   ]
 },
 {
