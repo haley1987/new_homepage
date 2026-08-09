@@ -190,6 +190,8 @@
 }
 
 .hw-collection-grid .product-grid {
+  --grid-desktop-horizontal-spacing: 2.4rem;
+  --grid-desktop-vertical-spacing: 5rem;
   column-gap: 2.4rem;
   row-gap: 5rem;
 }
@@ -544,6 +546,8 @@
   }
 
   .hw-collection-grid .product-grid {
+    --grid-mobile-horizontal-spacing: 0;
+    --grid-mobile-vertical-spacing: 4rem;
     row-gap: 4rem;
   }
 
