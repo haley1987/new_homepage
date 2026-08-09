@@ -1,6 +1,5 @@
 {%- liquid
   assign fallback_menu = linklists['footer-new']
-  assign primary_menu = linklists['main-menu']
   assign shop_menu = section.settings.shop_menu
   assign support_menu = section.settings.support_menu
   assign company_menu = section.settings.company_menu
@@ -26,12 +25,11 @@
               <li><a href="{{ link.url }}">{{ link.title }}</a></li>
             {%- endfor -%}
           {%- else -%}
-            {%- for link in primary_menu.links -%}
-              {%- if link.title == 'Complete Sets' or link.title == 'Woods & Hybrid' or link.title == 'Irons' or link.title == 'Driving Iron' or link.title == 'Wedges' or link.title == 'Putters' -%}
+            {%- for link in fallback_menu.links -%}
+              {%- if link.title == 'Dealer Locator' or link.title == 'Gift Cards' -%}
                 <li><a href="{{ link.url }}">{{ link.title }}</a></li>
               {%- endif -%}
             {%- endfor -%}
-            <li><a href="/products/gift-card">Gift Cards</a></li>
           {%- endif -%}
         </ul>
       </nav>
@@ -44,11 +42,11 @@
               <li><a href="{{ link.url }}">{{ link.title }}</a></li>
             {%- endfor -%}
           {%- else -%}
-            <li><a href="{{ routes.account_url }}">Account</a></li>
-            <li><a href="/pages/store-locator?view=store-locator">Dealer Locator</a></li>
-            <li><a href="/pages/faqs?view=faqs">FAQs</a></li>
-            <li><a href="/pages/return-policy">Returns &amp; Shipping</a></li>
-            <li><a href="/pages/contact">Contact</a></li>
+            {%- for link in fallback_menu.links -%}
+              {%- if link.title == 'Sign in' or link.title == 'FAQs' or link.title == 'Return, Shipping, Club Policy' or link.title == 'Contact' -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
           {%- endif -%}
         </ul>
       </nav>
@@ -125,15 +123,15 @@
 
   .hw-site-footer__main,
   .hw-site-footer__bottom {
-    width: min(100%, 156rem);
+    width: min(100%, 144rem);
     margin-inline: auto;
     padding-inline: clamp(2rem, 5vw, 7rem);
   }
 
   .hw-site-footer__main {
     display: grid;
-    gap: clamp(4rem, 6vw, 8rem);
-    padding-block: clamp(5rem, 6vw, 7rem);
+    gap: clamp(5rem, 8vw, 11rem);
+    padding-block: clamp(6rem, 8vw, 9rem);
   }
 
   .hw-site-footer__brand { position: relative; min-width: 0; overflow: visible; }
@@ -141,18 +139,18 @@
   .hw-site-footer .hw-arc-mark--footer img { display: block; width: 100%; height: auto; }
   .hw-site-footer__brand > :not(.hw-arc-mark) { position: relative; z-index: 1; }
   .hw-site-footer__eyebrow { color: var(--hw-footer-gold); font-size: 1.1rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
-  .hw-site-footer__brand h2 { max-width: 9ch; margin-top: 1.6rem; color: var(--hw-footer-white); font-family: var(--hw-footer-serif); font-size: clamp(4.2rem, 5vw, 6rem); font-weight: 400; letter-spacing: -.055em; line-height: .92; }
+  .hw-site-footer__brand h2 { max-width: 9ch; margin-top: 1.8rem; color: var(--hw-footer-white); font-family: var(--hw-footer-serif); font-size: clamp(4.5rem, 6vw, 7rem); font-weight: 400; letter-spacing: -.055em; line-height: .9; }
   .hw-site-footer__statement { max-width: 42rem; margin-top: 2.4rem !important; color: rgba(255,255,255,.7); font-size: 1.6rem; line-height: 1.6; }
 
-  .hw-site-footer__menus { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3.2rem 2.5rem; }
+  .hw-site-footer__menus { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4rem 2.5rem; }
   .hw-site-footer__menu h3 { padding-bottom: 1.3rem; border-bottom: 1px solid rgba(255,255,255,.2); color: var(--hw-footer-gold); font-size: 1.05rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
-  .hw-site-footer__menu ul { display: grid; gap: .85rem; margin-top: 1.6rem; }
-  .hw-site-footer__menu a { display: inline-block; color: rgba(255,255,255,.82); font-size: 1.4rem; line-height: 1.4; text-decoration: none; transition: color 160ms ease, transform 160ms ease; }
+  .hw-site-footer__menu ul { display: grid; gap: 1.05rem; margin-top: 1.8rem; }
+  .hw-site-footer__menu a { display: inline-block; color: rgba(255,255,255,.82); font-size: 1.5rem; line-height: 1.45; text-decoration: none; transition: color 160ms ease, transform 160ms ease; }
   .hw-site-footer__menu a:hover { color: var(--hw-footer-white); transform: translateX(.3rem); }
   .hw-site-footer__menu a:focus-visible,
   .hw-site-footer__bottom a:focus-visible { outline: 2px solid var(--hw-footer-gold); outline-offset: 4px; }
 
-  .hw-site-footer__bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2rem; padding-block: 1.7rem; border-top: 1px solid rgba(255,255,255,.18); }
+  .hw-site-footer__bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2rem; padding-block: 2.2rem; border-top: 1px solid rgba(255,255,255,.18); }
   .hw-site-footer__social,
   .hw-site-footer__legal { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; }
   .hw-site-footer__social a { display: grid; width: 3.8rem; height: 3.8rem; place-items: center; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; color: var(--hw-footer-white); transition: color 160ms ease, border-color 160ms ease, background 160ms ease; }
@@ -163,7 +161,7 @@
   .hw-site-footer__legal a:hover { color: var(--hw-footer-white); }
 
   @media screen and (min-width: 750px) {
-    .hw-site-footer__main { grid-template-columns: minmax(28rem, .72fr) minmax(54rem, 1.28fr); }
+    .hw-site-footer__main { grid-template-columns: minmax(28rem, .85fr) minmax(44rem, 1.15fr); }
     .hw-site-footer__menus { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
 
