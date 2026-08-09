@@ -18,8 +18,12 @@
     </summary>
     <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
       <div class="menu-drawer__inner-container">
+        <div class="menu-drawer__arc" aria-hidden="true">
+          {%- render 'haywood-arc-mark', variant: 'drawer' -%}
+        </div>
         <div class="menu-drawer__navigation-container">
           <nav class="menu-drawer__navigation">
+            <p class="menu-drawer__eyebrow">Shop Haywood</p>
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">
               {%- for link in section.settings.menu.links -%}
                 <li>
@@ -141,6 +145,7 @@
     {%- if secondary and secondary.links.size > 0 -%}
 
       <nav class="menu-drawer__secondary-navigation" aria-label="More links" {{ block.shopify_attributes }}>
+        <p class="menu-drawer__eyebrow">Explore</p>
         <ul class="menu-drawer__secondary-menu list-menu" role="list">
           {%- for link in secondary.links -%}
             <li class="menu-drawer__secondary-item">
