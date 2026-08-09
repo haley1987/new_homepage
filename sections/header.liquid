@@ -105,31 +105,59 @@
       width: min(100%, 172rem);
       max-width: 172rem;
       min-height: clamp(9.6rem, 5.5vw, 11.2rem);
-      grid-template-columns: minmax(20rem, 1fr) auto minmax(20rem, 1fr);
+      grid-template-columns: auto minmax(0, 1fr) auto;
       margin-inline: auto;
-      padding-inline: clamp(2.8rem, 2.4vw, 4.8rem);
+      padding-inline: clamp(2.4rem, 2.2vw, 4.8rem);
     }
 
     .header--top-left {
       grid-template-areas: 'heading navigation icons';
-      grid-template-columns: minmax(20rem, 1fr) auto minmax(20rem, 1fr);
-      column-gap: 2.6rem;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      column-gap: clamp(1.2rem, 1.6vw, 2.8rem);
     }
 
     .header--top-left .header__heading,
     .header--top-left > .header__heading-link { justify-self: start; }
     .header--top-left .header__icons { justify-self: end; }
     .header:not(.header--middle-left, .header--middle-center) .header__inline-menu { margin-top: 0; }
-    .header--top-left .header__heading-logo-wrapper { width: clamp(18.5rem, 10.5vw, 22rem); }
-    .header--top-left .list-menu--inline { flex-wrap: nowrap; column-gap: clamp(.25rem, .45vw, .85rem); }
-    .header--top-left .header__menu-item { padding-inline: .4rem; font-size: clamp(1.15rem, .68vw, 1.35rem); font-weight: 650; letter-spacing: .035em; white-space: nowrap; }
-    .header--top-left .header__icons { gap: .15rem; }
-    .header--top-left .header__icon { width: 5.2rem; min-width: 5.2rem; height: 5.2rem; }
-    .header--top-left .header__icon .icon { width: 2.8rem; height: 2.8rem; }
+    .header--top-left .header__heading-logo-wrapper { width: clamp(16.5rem, 10vw, 21rem); }
+    .header--top-left .header__inline-menu { min-width: 0; justify-self: center; }
+    .header--top-left .list-menu--inline { flex-wrap: nowrap; column-gap: clamp(.05rem, .25vw, .45rem); }
+    .header--top-left .header__menu-item { padding-inline: .2rem; font-size: clamp(1.2rem, .67vw, 1.35rem); font-weight: 650; letter-spacing: .025em; white-space: nowrap; }
+    .header--top-left .header__icons { gap: 0; padding-right: 0; }
+    .header--top-left .header__icon { width: 4.8rem; min-width: 4.8rem; height: 4.8rem; }
+    .header--top-left .header__icon--search .icon,
+    .header--top-left .header__icon--account .icon { width: 2.5rem; height: 2.5rem; }
+    .header--top-left .header__icon--cart .icon { width: 2.35rem; height: 2.35rem; }
+    .header--top-left .header__icon--cart { margin-right: 0; }
   }
 
-  /* The complete menu is too wide for smaller laptops, so use the drawer there. */
-  @media screen and (min-width: 990px) and (max-width: 1279px) {
+  /* Keep the complete menu at common desktop widths, then use the drawer only
+     when the labels genuinely no longer fit. */
+  @media screen and (min-width: 1200px) and (max-width: 1279px) {
+    .header--top-left {
+      grid-template-areas: 'heading navigation icons';
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      column-gap: 1rem;
+      min-height: 8.8rem;
+      padding-inline: 2.4rem;
+    }
+
+    .header--top-left header-drawer { display: none !important; }
+    .header--top-left .header__inline-menu { display: block !important; min-width: 0; justify-self: center; margin-top: 0; }
+    .header--top-left .header__heading,
+    .header--top-left > .header__heading-link { justify-self: start; }
+    .header--top-left .header__heading-logo-wrapper { width: 14.5rem; }
+    .header--top-left .list-menu--inline { flex-wrap: nowrap; column-gap: 0; }
+    .header--top-left .header__menu-item { padding-inline: .15rem; font-size: 1.08rem; font-weight: 650; letter-spacing: .015em; white-space: nowrap; }
+    .header--top-left .header__icons { justify-self: end; gap: 0; padding-right: 0; }
+    .header--top-left .header__icon { width: 4.4rem; min-width: 4.4rem; height: 4.4rem; }
+    .header--top-left .header__icon .icon { width: 2.25rem; height: 2.25rem; }
+    .header--top-left .header__icon--cart .icon { width: 2.15rem; height: 2.15rem; }
+    .header--top-left .header__icon--cart { margin-right: 0; }
+  }
+
+  @media screen and (min-width: 990px) and (max-width: 1199px) {
     .header--top-left {
       grid-template-areas: 'navigation heading icons';
       grid-template-columns: 1fr auto 1fr;
