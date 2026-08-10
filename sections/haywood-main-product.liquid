@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 30845)
-Total output lines: 2916
-
 {% comment %}Product-family presentation refresh v2; configuration markup remains unchanged.{% endcomment %}
 {% liquid
   assign has_apo = true
@@ -570,7 +567,12 @@ div.product__description, div.product-description {
         <a href="#full-specs" class="hw-btn hw-btn--ghost js-show-specs">View Specs »</a>
       {% endif %}
 
-      <aside class="hw-shop-app-note" aria-label="Shop app purchasing information">
+      <aside
+        class="hw-shop-app-note"
+        data-shop-app-only
+        hidden
+        aria-label="Shop app purchasing information"
+      >
         <strong>Purchasing through the Shop app?</strong>
         <span>
           Custom build options may not appear there.
@@ -578,6 +580,22 @@ div.product__description, div.product-description {
           to select your specifications before checkout.
         </span>
       </aside>
+      <script>
+        (function () {
+          var script = document.currentScript;
+          var note = script && script.previousElementSibling;
+
+          if (!note || !note.hasAttribute('data-shop-app-only')) return;
+
+          var userAgent = window.navigator.userAgent || '';
+          var isShopApp = /(?:^|[\s;(])(?:ShopApp|Shop-App|com\.shopify\.arrive)(?:[\/\s;)]|$)/i.test(userAgent);
+
+          if (isShopApp) {
+            note.hidden = false;
+            note.classList.add('is-shop-app-visible');
+          }
+        })();
+      </script>
 
       {% if hw_show_iron_guidance %}
         <nav class="hw-product-guidance" aria-label="Iron selection help">
@@ -1248,7 +1266,115 @@ div.product__description, div.product-description {
             {{- 'icon-close.svg' | inline_asset_content -}}
           </button>
           <div class="product-popup-modal__content-info">
-            <h1 class="h2…845 tokens truncated…metafield exists)", "default": true }
+            <h1 class="h2">{{ block.settings.page.title | escape }}</h1>
+            {{ block.settings.page.content }}
+          </div>
+        </div>
+      </modal-dialog>
+    {%- endfor -%}
+
+    {%- if product.media.size > 0 -%}
+      <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if first_3d_model -%}
+      <script type="application/json" id="ProductJSON-{{ product.id }}">
+        {{ product.media | where: 'media_type', 'model' | json }}
+      </script>
+      <script src="{{ 'product-model.js' | asset_url }}" defer></script>
+    {%- endif -%}
+
+    {%- liquid
+      if product.selected_or_first_available_variant.featured_media
+        assign seo_media = product.selected_or_first_available_variant.featured_media
+      else
+        assign seo_media = product.featured_media
+      endif
+    -%}
+    
+    <script type="application/ld+json">
+      {{ product | structured_data }}
+    </script>
+             {% render 'config-overlay' %}
+             {% render 'mw_PO_objects' %}
+{% render 'mws_apo_helper' %}
+{% if product.tags contains 'headsonly' %}
+<style>
+
+/* Hide radio pills where input has the 'disabled' class */
+.product-form__input--pill input.disabled,
+.product-form__input--pill input.disabled + label {
+  display: none !important;
+}
+
+</style>
+
+{%- endif -%}
+
+  </div>
+</product-info>
+
+
+{% schema %}
+{
+  "name": "t:sections.main-product.name",
+  "tag": "section",
+  "class": "section",
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "text",
+      "name": "t:sections.main-product.blocks.text.name",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "default": "t:sections.main-product.blocks.text.settings.text.default",
+          "label": "t:sections.main-product.blocks.text.settings.text.label"
+        },
+        {
+          "type": "select",
+          "id": "text_style",
+          "options": [
+            {
+              "value": "body",
+              "label": "t:sections.main-product.blocks.text.settings.text_style.options__1.label"
+            },
+            {
+              "value": "subtitle",
+              "label": "t:sections.main-product.blocks.text.settings.text_style.options__2.label"
+            },
+            {
+              "value": "uppercase",
+              "label": "t:sections.main-product.blocks.text.settings.text_style.options__3.label"
+            }
+          ],
+          "default": "body",
+          "label": "t:sections.main-product.blocks.text.settings.text_style.label"
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "t:sections.main-product.blocks.title.name",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "t:sections.main-product.blocks.price.name",
+      "limit": 1
+    },
+    {
+  "type": "haywood_cta",
+  "name": "Haywood • Product CTAs",
+  "limit": 1,
+  "settings": [
+    { "type": "text", "id": "configure_label", "label": "Configure button label", "default": "Configure your " },
+    { "type": "checkbox", "id": "show_specs", "label": "Show View Specs (when metafield exists)", "default": true },
+    { "type": "checkbox", "id": "show_quiz", "label": "Show fitting quiz link (when metafield exists)", "default": true }
   ]
 },
 {
