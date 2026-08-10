@@ -389,16 +389,6 @@
     display: none !important;
   }
 
-  #ConfigDrawer .cfg-swatch-description {
-    margin: 0 0 1rem;
-    padding: 1.2rem 1.4rem;
-    color: var(--cfg-muted);
-    border: 1px solid var(--cfg-line);
-    background: var(--cfg-paper);
-    font-size: 1.2rem;
-    line-height: 1.55;
-  }
-
   #ConfigDrawer .mw-option__helptext:not(.mw-hidden) {
     margin-top: 1rem;
     padding: 1rem 1.2rem;
@@ -603,6 +593,37 @@
       aspect-ratio: 1.55 / 1;
     }
 
+    #ConfigDrawer .mw-option--type-swatch .mws_tippy-add {
+      display: block !important;
+      margin: 0 !important;
+      padding: 1.2rem 1.3rem 1.4rem !important;
+      color: var(--cfg-muted) !important;
+      border-top: 1px solid var(--cfg-line) !important;
+      border-radius: 0 !important;
+      background: var(--cfg-paper) !important;
+      box-shadow: none !important;
+      font-family: inherit !important;
+      font-size: 1.2rem !important;
+      font-weight: 400 !important;
+      letter-spacing: 0 !important;
+      line-height: 1.5 !important;
+      text-align: left !important;
+      text-transform: none !important;
+    }
+
+    #ConfigDrawer .mw-option--type-swatch .mws-custom-tooltip,
+    #ConfigDrawer .mw-option--type-swatch .mws-custom-tooltip-wrapper,
+    #ConfigDrawer .mw-option--type-swatch .mws-custom-tooltip-description {
+      margin: 0 !important;
+      padding: 0 !important;
+      color: inherit !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      font: inherit !important;
+    }
+
     .cfg-footer {
       min-height: 9.2rem;
       grid-template-columns: minmax(0, 1fr) minmax(15rem, 42%);
@@ -766,62 +787,14 @@ function maybeShowStickyBar() {
   if (stickyBar && window.scrollY > 600) stickyBar.style.display = "flex";
 }
 
-let descriptionFrame;
-
-function refreshSwatchDescriptions() {
-  overlay.querySelectorAll(".mw-option--type-swatch").forEach(option => {
-    const container = option.querySelector(".mw-option__container");
-    const selected = option.querySelector(".mw-option__value--selected");
-    const description = selected
-      ?.querySelector(".mws-custom-tooltip-description")
-      ?.textContent
-      ?.trim();
-    let panel = option.querySelector(".cfg-swatch-description");
-
-    if (!description || !container) {
-      if (panel) panel.remove();
-      return;
-    }
-
-    if (!panel) {
-      panel = document.createElement("div");
-      panel.className = "cfg-swatch-description";
-      panel.setAttribute("aria-live", "polite");
-      container.insertAdjacentElement("beforebegin", panel);
-    }
-
-    if (panel.textContent !== description) panel.textContent = description;
-  });
-}
-
-function scheduleSwatchDescriptionRefresh() {
-  if (descriptionFrame) return;
-  descriptionFrame = requestAnimationFrame(() => {
-    descriptionFrame = null;
-    refreshSwatchDescriptions();
-  });
-}
-
 openBtns.forEach(btn => {
   btn.addEventListener("click", function (e) {
     e.preventDefault();
     overlay.setAttribute("open", "true");
     document.body.classList.add("overlay-open");
     hideStickyBar();
-    scheduleSwatchDescriptionRefresh();
   });
 });
-
-const optionContainer = overlay.querySelector(".mw-product-options");
-if (optionContainer) {
-  const optionObserver = new MutationObserver(scheduleSwatchDescriptionRefresh);
-  optionObserver.observe(optionContainer, {
-    attributes: true,
-    childList: true,
-    subtree: true,
-    attributeFilter: ["class", "checked"]
-  });
-}
 
   closeTriggers.forEach(trigger => {
     trigger.addEventListener("click", function () {
@@ -842,10 +815,6 @@ if (optionContainer) {
 
   // ✅ Image update ONLY for Finish swatches
   document.body.addEventListener("click", function (e) {
-    if (e.target.closest(".mw-option--type-swatch .mw-option__value")) {
-      setTimeout(scheduleSwatchDescriptionRefresh, 0);
-    }
-
     const swatch = e.target.closest(".mw-option__swatch-media");
     if (!swatch || !swatch.querySelector("img")) return;
 
