@@ -328,6 +328,47 @@
   border-bottom: 1px solid var(--hw-commerce-line);
 }
 
+.hw-product-heading-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
+
+.hw-product-share {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: .65rem;
+  min-height: 3.4rem;
+  padding: .65rem .9rem;
+  border: 1px solid var(--hw-commerce-line);
+  color: var(--hw-commerce-navy);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.hw-product-share:hover {
+  border-color: var(--hw-commerce-gold);
+  background: rgba(201, 166, 107, .08);
+}
+
+.hw-product-share:focus-visible {
+  outline: 2px solid var(--hw-commerce-navy);
+  outline-offset: 3px;
+}
+
+.hw-product-share svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 .hw-product-main .product__title h1 {
   max-width: 13ch;
   margin: 1.5rem 0 0;
