@@ -1,10 +1,24 @@
-Warning: truncated output (original token count: 30302)
-Total output lines: 2876
-
 {% comment %}Product-family presentation refresh v2; configuration markup remains unchanged.{% endcomment %}
+{% liquid
+  assign has_apo = true
+  if product.type == 'Gift Card' or product.type == 'Merch'
+    assign has_apo = false
+  endif
+  if product.tags contains 'force-native' or product.tags contains 'native-variants'
+    assign has_apo = false
+  endif
+  if product.tags contains 'force-apo'
+    assign has_apo = true
+  endif
+
+  assign hw_is_gift_card = false
+  if product.gift_card?
+    assign hw_is_gift_card = true
+  endif
+%}
 <product-info
   id="MainProduct-{{ section.id }}"
-  class="hw-commerce hw-product-main section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
+  class="hw-commerce hw-product-main{% unless has_apo %} hw-product-main--native{% endunless %}{% if hw_is_gift_card %} hw-product-main--gift-card{% endif %} section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
   data-update-url="true"
@@ -302,17 +316,6 @@ div.product__description, div.product-description {
   {%- endstyle -%}
   {{ 'haywood-commerce.css' | asset_url | stylesheet_tag }}
   {% liquid
-  assign has_apo = true
-  if product.type == 'Gift Card' or product.type == 'Merch'
-    assign has_apo = false
-  endif
-  if product.tags contains 'force-native' or product.tags contains 'native-variants'
-    assign has_apo = false
-  endif
-  if product.tags contains 'force-apo'
-    assign has_apo = true
-  endif
-
   assign hw_display_title = product.title
   assign hw_display_title = hw_display_title | replace: "Haywood CB's", "Haywood CB"
   assign hw_display_title = hw_display_title | replace: "Haywood MB's", "Haywood MB"
@@ -367,7 +370,11 @@ div.product__description, div.product-description {
   endif
 
   assign hw_product_eyebrow = 'Haywood Golf'
-  if hw_is_seven_iron_program
+  if hw_is_gift_card
+    assign hw_product_eyebrow = 'Haywood gift cards'
+  elsif has_apo == false
+    assign hw_product_eyebrow = 'Accessories and apparel'
+  elsif hw_is_seven_iron_program
     assign hw_product_eyebrow = 'Try before you build'
   elsif hw_is_complete_set
     assign hw_product_eyebrow = 'Complete sets'
@@ -381,6 +388,8 @@ div.product__description, div.product-description {
     assign hw_product_eyebrow = 'Woods and hybrids'
   elsif hw_is_putter
     assign hw_product_eyebrow = 'Milled putters'
+  elsif product.title contains 'PD.1' or product.title contains 'SV.2'
+    assign hw_product_eyebrow = 'Cast irons'
   elsif hw_is_iron
     assign hw_product_eyebrow = 'Forged irons'
   endif
@@ -389,7 +398,11 @@ div.product__description, div.product-description {
   if hw_product_summary == blank
     assign hw_product_summary = product.metafields.custom.short_description.value
   endif
-  if hw_is_seven_iron_program
+  if hw_is_gift_card
+    assign hw_product_summary = 'A flexible Haywood gift, delivered by email and ready to use online.'
+  elsif has_apo == false and hw_product_summary == blank
+    assign hw_product_summary = product.description | strip_html | truncatewords: 22
+  elsif hw_is_seven_iron_program
     assign hw_product_summary = 'Order one custom-built 7-iron, then apply its purchase price to a qualifying full set.'
   elsif hw_is_complete_set
     assign hw_product_summary = 'A coordinated club setup, configured around the way you play from tee to green.'
@@ -1283,7 +1296,40 @@ div.product__description, div.product-description {
           "options": [
             {
               "value": "body",
-              "label": "t:sections.main-product.bl…302 tokens truncated…metafield exists)", "default": true }
+              "label": "t:sections.main-product.blocks.text.settings.text_style.options__1.label"
+            },
+            {
+              "value": "subtitle",
+              "label": "t:sections.main-product.blocks.text.settings.text_style.options__2.label"
+            },
+            {
+              "value": "uppercase",
+              "label": "t:sections.main-product.blocks.text.settings.text_style.options__3.label"
+            }
+          ],
+          "default": "body",
+          "label": "t:sections.main-product.blocks.text.settings.text_style.label"
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "t:sections.main-product.blocks.title.name",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "t:sections.main-product.blocks.price.name",
+      "limit": 1
+    },
+    {
+  "type": "haywood_cta",
+  "name": "Haywood • Product CTAs",
+  "limit": 1,
+  "settings": [
+    { "type": "text", "id": "configure_label", "label": "Configure button label", "default": "Configure your " },
+    { "type": "checkbox", "id": "show_specs", "label": "Show View Specs (when metafield exists)", "default": true },
+    { "type": "checkbox", "id": "show_quiz", "label": "Show fitting quiz link (when metafield exists)", "default": true }
   ]
 },
 {
