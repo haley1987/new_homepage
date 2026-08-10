@@ -76,6 +76,14 @@
       assign hw_is_complete_set_card = true
     endif
 
+    if hw_is_complete_set_card
+      if card_product.title contains 'SV.2'
+        assign hw_display_title = 'Complete Set w/ SV.2 Irons (Game Improvement)'
+      elsif card_product.title contains 'PD.1'
+        assign hw_display_title = 'Complete Set w/ PD.1 Irons (Players Distance)'
+      endif
+    endif
+
     assign hw_card_eyebrow = 'Built to your specs'
     assign hw_card_cta = 'Explore model'
     assign hw_card_summary = card_product.metafields.custom.card_subtitle.value
