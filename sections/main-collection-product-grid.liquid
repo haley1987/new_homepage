@@ -37,14 +37,27 @@
 {%- endstyle -%}
 {{ 'haywood-commerce.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign hw_is_accessories_collection = false
+  if collection.handle == 'merch' or collection.title contains 'Accessories' or collection.title contains 'Merch'
+    assign hw_is_accessories_collection = true
+  endif
+-%}
+
 <div class="hw-commerce hw-collection-grid section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
     <div class="hw-collection-results">
       <div>
-        <p class="hw-collection-results__eyebrow">Explore the collection</p>
-        <h2>Choose your starting point.</h2>
+        <p class="hw-collection-results__eyebrow">{% if hw_is_accessories_collection %}The finishing details{% else %}Explore the collection{% endif %}</p>
+        <h2>{% if hw_is_accessories_collection %}Made for the course and beyond.{% else %}Choose your starting point.{% endif %}</h2>
       </div>
-      <p class="hw-collection-results__copy">Review the profiles below, compare the details and configure every component when you are ready.</p>
+      <p class="hw-collection-results__copy">
+        {% if hw_is_accessories_collection %}
+          Shop useful on-course tools, club accessories and understated Haywood apparel.
+        {% else %}
+          Review the profiles below, compare the details and configure every component when you are ready.
+        {% endif %}
+      </p>
     </div>
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
