@@ -286,9 +286,9 @@
 
     #HaywoodSpecs-{{ section.id }} table {
       width: 100%;
-      min-width: max(100%, calc(var(--hw-columns) * 13rem));
+      min-width: calc(var(--hw-columns) * 10rem);
       border-collapse: collapse;
-      table-layout: auto;
+      table-layout: fixed;
       color: var(--hw-navy);
       font-size: 1.6rem;
     }
@@ -298,7 +298,8 @@
       padding: 1.55rem 1.8rem;
       border-bottom: 1px solid var(--hw-line);
       text-align: left;
-      white-space: nowrap;
+      overflow-wrap: anywhere;
+      white-space: normal;
     }
 
     #HaywoodSpecs-{{ section.id }} thead th {
@@ -519,7 +520,14 @@
 
       #HaywoodSpecs-{{ section.id }} .hw-specs__mobile-table table {
         width: max(70rem, calc(var(--hw-columns) * 13rem));
+        table-layout: auto;
         font-size: 1.45rem;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__mobile-table th,
+      #HaywoodSpecs-{{ section.id }} .hw-specs__mobile-table td {
+        overflow-wrap: normal;
+        white-space: nowrap;
       }
 
       #HaywoodSpecs-{{ section.id }} .hw-specs__mobile-table th:first-child,
