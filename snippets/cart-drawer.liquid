@@ -7,6 +7,7 @@
 
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'haywood-cart.css' | asset_url | stylesheet_tag }}
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
@@ -31,7 +32,9 @@
         <div class="drawer__inner-empty">
           <div class="cart-drawer__warnings center{% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
             <div class="cart-drawer__empty-content">
-              <h2 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h2>
+              <p class="hw-cart-eyebrow"><span aria-hidden="true"></span>Your Haywood build</p>
+              <h2 class="cart__empty-text">Your cart is empty.</h2>
+              <p class="hw-cart-empty-copy">Explore the club lineup or find the right fit for your game.</p>
               <button
                 class="drawer__close"
                 type="button"
@@ -42,9 +45,8 @@
                   {{- 'icon-close.svg' | inline_asset_content -}}
                 </span>
               </button>
-              <a href="{{ routes.all_products_collection_url }}" class="button">
-                {{ 'general.continue_shopping' | t }}
-              </a>
+              <a href="/collections/all-clubs" class="button">Explore all clubs</a>
+              <a href="/pages/fitting-tool" class="hw-cart-drawer-fit">Find my fit</a>
 
               {%- if shop.customer_accounts_enabled and customer == null -%}
                 <p class="cart__login-title h3">{{ 'sections.cart.login.title' | t }}</p>
@@ -62,7 +64,10 @@
         </div>
       {%- endif -%}
       <div class="drawer__header">
-        <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
+        <div>
+          <p class="hw-cart-eyebrow"><span aria-hidden="true"></span>Your Haywood build</p>
+          <h2 class="drawer__heading">Review your cart.</h2>
+        </div>
         <button
           class="drawer__close"
           type="button"
@@ -232,6 +237,7 @@
                             <p class="product-option">{{ item.selling_plan_allocation.selling_plan.name }}</p>
                           {%- endif -%}
                           {% endcomment %}
+                           <p class="hw-cart-config-label">Selected configuration</p>
                            {% render 'mw_PO_cart', mw_PO_cart: item, code: 'properties' %}
 
                           <ul
@@ -580,6 +586,10 @@
               {%- endif -%}
             {%- endif -%}
           </small>
+
+          <div class="hw-cart-drawer-assurance">
+            Custom clubs are typically assembled within 2.5–4 weeks. In-stock products may ship sooner.
+          </div>
         </div>
 
         <!-- CTAs -->
