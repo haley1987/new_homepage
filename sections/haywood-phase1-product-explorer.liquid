@@ -28,6 +28,10 @@
         if card_image == blank and block.settings.collection != blank
           assign card_image = block.settings.collection.featured_image
         endif
+        assign card_badge = block.settings.badge
+        if card_badge == blank and forloop.index <= 2
+          assign card_badge = 'New'
+        endif
       -%}
       <article class="hw-product-card{% if forloop.index <= 2 %} hw-product-card--featured{% else %} hw-product-card--supporting{% endif %}" style="--hw-card-fit: {{ block.settings.image_fit }}; --hw-card-position: {{ block.settings.image_position }};" {{ block.shopify_attributes }}>
         <div class="hw-product-card__media">
@@ -44,7 +48,7 @@
             </div>
           {%- endif -%}
         </div>
-        {%- if block.settings.badge != blank -%}<span class="hw-product-card__badge">{{ block.settings.badge | escape }}</span>{%- endif -%}
+        {%- if card_badge != blank -%}<span class="hw-product-card__badge">{{ card_badge | escape }}</span>{%- endif -%}
         <div class="hw-product-card__content">
           <h3 class="hw-product-card__title">{{ block.settings.title | escape }}</h3>
           {%- if block.settings.category != blank -%}<p class="hw-product-card__category">{{ block.settings.category | escape }}</p>{%- endif -%}
