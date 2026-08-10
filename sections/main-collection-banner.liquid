@@ -2,6 +2,31 @@
 {{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
 {{ 'haywood-commerce.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign hw_is_accessories_collection = false
+  if collection.handle == 'merch' or collection.title contains 'Accessories' or collection.title contains 'Merch'
+    assign hw_is_accessories_collection = true
+  endif
+
+  assign hw_collection_eyebrow = section.settings.eyebrow
+  assign hw_collection_description = section.settings.fallback_description
+  assign hw_collection_aside = section.settings.aside_copy
+  assign hw_collection_count_label = 'models'
+  if collection.products_count == 1
+    assign hw_collection_count_label = 'model'
+  endif
+
+  if hw_is_accessories_collection
+    assign hw_collection_eyebrow = 'Accessories and apparel'
+    assign hw_collection_description = 'Course-ready essentials, thoughtful tools and Haywood apparel for on and off the golf course.'
+    assign hw_collection_aside = 'Useful details, clean design and everyday pieces made to carry the Haywood identity.'
+    assign hw_collection_count_label = 'items'
+    if collection.products_count == 1
+      assign hw_collection_count_label = 'item'
+    endif
+  endif
+-%}
+
 {%- style -%}
   @media screen and (max-width: 749px) {
     .collection-hero--with-image .collection-hero__inner {
@@ -14,7 +39,7 @@
   <div class="hw-collection-hero__inner{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <div class="hw-collection-hero__main">
       <div>
-        <p class="hw-collection-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <p class="hw-collection-hero__eyebrow">{{ hw_collection_eyebrow | escape }}</p>
         <h1 class="hw-collection-hero__title" id="CollectionHeading-{{ section.id }}">
           <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
           {{- collection.title | escape -}}
@@ -25,23 +50,27 @@
             {%- if collection.description != blank -%}
               {{ collection.description }}
             {%- else -%}
-              <p>{{ section.settings.fallback_description | escape }}</p>
+              <p>{{ hw_collection_description | escape }}</p>
             {%- endif -%}
           </div>
         {%- endif -%}
       </div>
 
       <div class="hw-collection-hero__aside">
-        <p class="hw-collection-hero__count">{{ collection.products_count }} {% if collection.products_count == 1 %}model{% else %}models{% endif %}</p>
-        <p class="hw-collection-hero__aside-copy">{{ section.settings.aside_copy | escape }}</p>
+        <p class="hw-collection-hero__count">{{ collection.products_count }} {{ hw_collection_count_label }}</p>
+        <p class="hw-collection-hero__aside-copy">{{ hw_collection_aside | escape }}</p>
       </div>
     </div>
 
     {%- if section.settings.show_decision_links -%}
       <nav class="hw-collection-hero__links" aria-label="Shop and fitting tools">
         <a class="hw-collection-hero__link" href="{{ routes.all_products_collection_url }}">Shop all clubs</a>
-        <a class="hw-collection-hero__link" href="/pages/fitting-tool">Find My Fit</a>
-        <a class="hw-collection-hero__link" href="/pages/fitting-tool?view=iron-Selection">Compare irons</a>
+        {%- if hw_is_accessories_collection -%}
+          <a class="hw-collection-hero__link" href="/products/gift-card">Shop gift cards</a>
+        {%- else -%}
+          <a class="hw-collection-hero__link" href="/pages/fitting-tool">Find My Fit</a>
+          <a class="hw-collection-hero__link" href="/pages/fitting-tool?view=iron-Selection">Compare irons</a>
+        {%- endif -%}
       </nav>
     {%- endif -%}
   </div>
