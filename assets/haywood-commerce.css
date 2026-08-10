@@ -671,6 +671,10 @@
   line-height: 1.15;
 }
 
+.hw-product-main--golf-bag .product__description {
+  display: none;
+}
+
 .hw-product-main--gift-card .product__info-wrapper {
   position: relative;
   isolation: isolate;
@@ -839,6 +843,98 @@
   color: var(--hw-commerce-muted);
   font-size: 1.45rem;
   line-height: 1.55;
+}
+
+.hw-product-overview__bag-guide {
+  display: grid;
+  grid-template-columns: minmax(24rem, .34fr) minmax(0, 1fr);
+  gap: clamp(3rem, 6vw, 8rem);
+  margin-top: clamp(4rem, 6vw, 7rem);
+  padding-top: clamp(3rem, 4vw, 4.5rem);
+  border-top: 1px solid var(--hw-commerce-line);
+}
+
+.hw-product-overview__bag-heading h3 {
+  max-width: 10ch;
+  margin: 1.6rem 0 0;
+  color: var(--hw-commerce-navy);
+  font-family: var(--hw-commerce-serif);
+  font-size: clamp(3.2rem, 3.5vw, 4.8rem);
+  font-weight: 400;
+  letter-spacing: -.045em;
+  line-height: .98;
+}
+
+.hw-product-overview__bag-features {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--hw-commerce-line);
+}
+
+.hw-product-overview__bag-features article {
+  padding: 2.4rem clamp(1.8rem, 2.5vw, 3rem) 2.8rem;
+  border-bottom: 1px solid var(--hw-commerce-line);
+}
+
+.hw-product-overview__bag-features article:nth-child(even) {
+  border-left: 1px solid var(--hw-commerce-line);
+}
+
+.hw-product-overview__bag-features span,
+.hw-product-overview__bag-features strong {
+  display: block;
+}
+
+.hw-product-overview__bag-features span {
+  color: var(--hw-commerce-gold);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+.hw-product-overview__bag-features strong {
+  margin-top: .9rem;
+  color: var(--hw-commerce-navy);
+  font-size: 1.65rem;
+}
+
+.hw-product-overview__bag-features p {
+  margin: .8rem 0 0;
+  color: var(--hw-commerce-muted);
+  font-size: 1.45rem;
+  line-height: 1.55;
+}
+
+.hw-product-overview__bag-specs {
+  display: grid;
+  grid-column: 2;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  border-bottom: 1px solid var(--hw-commerce-line);
+}
+
+.hw-product-overview__bag-specs div {
+  padding: 2.2rem clamp(1.8rem, 2.5vw, 3rem);
+}
+
+.hw-product-overview__bag-specs div + div {
+  border-left: 1px solid var(--hw-commerce-line);
+}
+
+.hw-product-overview__bag-specs dt {
+  color: var(--hw-commerce-muted);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.hw-product-overview__bag-specs dd {
+  margin: .8rem 0 0;
+  color: var(--hw-commerce-navy);
+  font-family: var(--hw-commerce-serif);
+  font-size: clamp(2.2rem, 2.4vw, 3rem);
+  line-height: 1;
 }
 
 .hw-product-overview__benefits {
@@ -1345,6 +1441,41 @@
   }
 
   .hw-product-overview__wedge-options article + article {
+    border-top: 1px solid var(--hw-commerce-line);
+    border-left: 0;
+  }
+
+  .hw-product-overview__bag-guide {
+    grid-template-columns: 1fr;
+    gap: 2.8rem;
+  }
+
+  .hw-product-overview__bag-heading h3 {
+    max-width: none;
+  }
+
+  .hw-product-overview__bag-features {
+    grid-template-columns: 1fr;
+  }
+
+  .hw-product-overview__bag-features article {
+    padding: 2rem 0 2.2rem;
+  }
+
+  .hw-product-overview__bag-features article:nth-child(even) {
+    border-left: 0;
+  }
+
+  .hw-product-overview__bag-specs {
+    grid-column: 1;
+    grid-template-columns: 1fr;
+  }
+
+  .hw-product-overview__bag-specs div {
+    padding: 1.8rem 0;
+  }
+
+  .hw-product-overview__bag-specs div + div {
     border-top: 1px solid var(--hw-commerce-line);
     border-left: 0;
   }
