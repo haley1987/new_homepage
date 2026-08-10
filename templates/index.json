@@ -94,9 +94,9 @@
             "image": "shopify://shop_images/cb2-master-v1.png",
             "image_fit": "cover",
             "image_position": "center center",
-            "product": "",
-            "collection": "",
-            "manual_link": "shopify://products/cb-players-cavity-back-irons"
+            "product": "cb2-forged-players-cavity-back-irons",
+            "collection": "forged-players-irons",
+            "manual_link": "shopify://products/cb2-forged-players-cavity-back-irons"
           }
         },
         "product_mb": {
