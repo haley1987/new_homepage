@@ -62,6 +62,9 @@
     if card_product.tags contains 'force-apo'
       assign hw_is_native_card = false
     endif
+    if collection.handle == 'merch' or collection.title contains 'Accessories' or collection.title contains 'Merch' or request.path contains '/collections/merch'
+      assign hw_is_native_card = true
+    endif
 
     assign hw_card_eyebrow = 'Built to your specs'
     assign hw_card_summary = card_product.metafields.custom.card_subtitle.value
