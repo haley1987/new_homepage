@@ -64,18 +64,23 @@
   background: linear-gradient(112deg, var(--hw-journal-navy), #102d4f 68%, #263e58);
 }
 
-.hw-journal__hero::after,
-.hw-article__hero::after {
+.hw-journal__hero > .hw-arc-mark--journal,
+.hw-article__hero > .hw-arc-mark--article {
   position: absolute;
-  right: -5rem;
-  bottom: -12rem;
-  width: clamp(30rem, 32vw, 52rem);
-  height: clamp(30rem, 32vw, 52rem);
-  border: clamp(3rem, 3.3vw, 5.4rem) solid rgba(255, 255, 255, .045);
-  border-radius: 48% 48% 42% 42%;
-  content: "";
+  z-index: 0;
+  right: clamp(-5rem, -2vw, -1rem);
+  bottom: clamp(-10rem, -6vw, -4rem);
+  width: clamp(34rem, 34vw, 58rem);
+  opacity: .075;
+  filter: invert(1);
   pointer-events: none;
-  transform: rotate(45deg);
+}
+
+.hw-journal__hero > .hw-arc-mark--journal img,
+.hw-article__hero > .hw-arc-mark--article img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .hw-journal__hero-inner {
@@ -609,6 +614,13 @@
   .hw-journal__shell,
   .hw-article__shell { width: min(calc(100% - 4rem), var(--hw-journal-shell)); }
   .hw-journal__hero-inner { min-height: 32rem; padding-block: 6rem; }
+  .hw-journal__hero > .hw-arc-mark--journal,
+  .hw-article__hero > .hw-arc-mark--article {
+    right: -5rem;
+    bottom: -2rem;
+    width: 24rem;
+    opacity: .065;
+  }
   .hw-journal__title { font-size: clamp(4.4rem, 13vw, 5.8rem); }
   .hw-journal__intro { font-size: 1.6rem; }
   .hw-journal__content { padding-block: 4rem 6rem; }
