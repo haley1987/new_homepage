@@ -390,7 +390,7 @@
   }
 
   #ConfigDrawer .cfg-swatch-description {
-    margin-top: 1rem;
+    margin: 0 0 1rem;
     padding: 1.2rem 1.4rem;
     color: var(--cfg-muted);
     border: 1px solid var(--cfg-line);
@@ -787,7 +787,7 @@ function refreshSwatchDescriptions() {
       panel = document.createElement("div");
       panel.className = "cfg-swatch-description";
       panel.setAttribute("aria-live", "polite");
-      container.insertAdjacentElement("afterend", panel);
+      container.insertAdjacentElement("beforebegin", panel);
     }
 
     if (panel.textContent !== description) panel.textContent = description;
