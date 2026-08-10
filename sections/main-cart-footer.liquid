@@ -2,6 +2,7 @@
 {{ 'component-totals.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+{{ 'haywood-cart.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -110,6 +111,10 @@ label.order-confirm-checkbox{
       {%- endif -%}
 
       <div class="cart__blocks">
+        <div class="hw-cart-summary-heading">
+          <p class="hw-cart-eyebrow"><span aria-hidden="true"></span>Order summary</p>
+          <h2>Ready when you are.</h2>
+        </div>
         {% for block in section.blocks %}
           {%- case block.type -%}
             {%- when '@app' -%}
@@ -177,6 +182,12 @@ label.order-confirm-checkbox{
                     {%- endif -%}
                   {%- endif -%}
                 </small>
+
+                <div class="hw-cart-assurance">
+                  <p><strong>Custom build timing</strong> Custom clubs are typically assembled within 2.5–4 weeks. In-stock products may ship sooner.</p>
+                  <p><strong>Tracked delivery</strong> Orders are insured in transit and require a signature on delivery.</p>
+                  <a href="/pages/return-policy">Review returns, orders and shipping</a>
+                </div>
               </div>
               
 
@@ -185,7 +196,7 @@ label.order-confirm-checkbox{
       type="checkbox"
       id="order-confirm-checkbox"
     >
-    <span class="order-confirm-text">I confirm that my order and configurations are accurate</span>
+    <span class="order-confirm-text">I have reviewed my products and custom specifications.</span>
   </label>
 
             {%- else -%}
