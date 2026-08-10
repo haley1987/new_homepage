@@ -497,6 +497,71 @@
   gap: .6rem;
 }
 
+.hw-combo-prompt {
+  display: grid;
+  gap: 1.4rem;
+  margin-top: 1.8rem;
+  padding: 1.8rem 0 0;
+  border-top: 1px solid var(--hw-commerce-line);
+}
+
+.hw-combo-prompt__content {
+  display: grid;
+  gap: .5rem;
+}
+
+.hw-combo-prompt__eyebrow {
+  color: var(--hw-commerce-gold);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .15em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.hw-combo-prompt__heading {
+  color: var(--hw-commerce-navy);
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.hw-combo-prompt__copy {
+  max-width: 54rem;
+  color: var(--hw-commerce-muted);
+  font-size: 1.35rem;
+  line-height: 1.5;
+}
+
+.hw-combo-prompt__link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  align-self: end;
+  gap: .7rem;
+  padding-bottom: .35rem;
+  border-bottom: 1px solid var(--hw-commerce-gold);
+  color: var(--hw-commerce-navy);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  line-height: 1.3;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.hw-combo-prompt__link:hover {
+  color: var(--hw-commerce-gold);
+}
+
+@media screen and (min-width: 750px) {
+  .hw-combo-prompt {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+}
+
 .hw-product-main .hw-objections {
   margin-top: 2.4rem;
   padding: 2.4rem 0 !important;
