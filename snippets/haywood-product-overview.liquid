@@ -63,6 +63,7 @@
     assign overview_heading = 'Controlled flight. Confident distance.'
   elsif is_wedge
     assign overview_heading = 'Versatility where scoring happens.'
+    assign overview_summary = 'Forged from S20C carbon steel with CNC-milled grooves and versatile sole shaping, Signature Wedges are built for predictable flight, spin and touch—from full swings to greenside shots.'
   elsif is_wood
     assign overview_heading = 'Launch, speed and stability—dialled in.'
   elsif is_putter
@@ -132,6 +133,32 @@
         </details>
       </div>
     </div>
+
+    {%- if is_wedge -%}
+      <div class="hw-product-overview__wedge-guide" aria-labelledby="WedgeGuide-{{ product.id }}">
+        <div class="hw-product-overview__wedge-heading">
+          <p class="hw-product-overview__eyebrow">Build your scoring setup</p>
+          <h3 id="WedgeGuide-{{ product.id }}">Choose your loft.</h3>
+        </div>
+        <div class="hw-product-overview__wedge-options">
+          <article>
+            <span>48°–52°</span>
+            <strong>8°–10° bounce</strong>
+            <p>Bridge the distance between your iron set and higher-lofted scoring wedges.</p>
+          </article>
+          <article>
+            <span>54°–56°</span>
+            <strong>12° bounce</strong>
+            <p>A versatile choice for approach shots, controlled pitches and bunker play.</p>
+          </article>
+          <article>
+            <span>58°–60°</span>
+            <strong>10° bounce</strong>
+            <p>Add height and touch when the shot calls for more greenside control.</p>
+          </article>
+        </div>
+      </div>
+    {%- endif -%}
 
     {%- if overview_benefits != blank -%}
       <div class="hw-product-overview__benefits rte">
