@@ -15,7 +15,8 @@
   endif
 
   assign overview_heading = 'Built around the way you play.'
-  assign overview_summary = overview_intro | strip_html | truncatewords: 58
+  assign shop_app_warning = '⚠️ Important: Options may not appear in the Shop App. Please view this product on our website to select your custom options before purchasing.'
+  assign overview_summary = overview_intro | strip_html | replace: shop_app_warning, '' | strip | truncatewords: 58
 
   assign is_seven_iron_program = false
   if product.handle == '7-iron-purchase-program'
