@@ -1124,6 +1124,10 @@
 
   .hw-collection-hero__link:last-child { grid-column: 1 / -1; }
 
+  .hw-collection-hero__links--two .hw-collection-hero__link:last-child {
+    grid-column: auto;
+  }
+
   .hw-collection-results {
     padding-top: 3.5rem;
   }
