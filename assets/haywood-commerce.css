@@ -404,6 +404,30 @@
   background: transparent;
 }
 
+.hw-shop-app-note {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .6rem 1rem;
+  margin-top: .4rem;
+  padding: 1.4rem 1.6rem;
+  border-left: 2px solid var(--hw-commerce-gold);
+  color: var(--hw-commerce-muted);
+  background: rgba(242, 238, 229, .62);
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.hw-shop-app-note strong {
+  color: var(--hw-commerce-navy);
+  font-weight: 700;
+}
+
+.hw-shop-app-note a {
+  color: var(--hw-commerce-navy);
+  font-weight: 700;
+  text-underline-offset: .22em;
+}
+
 .hw-product-main .hw-quiz-link {
   margin-top: 0;
   color: var(--hw-commerce-navy);
