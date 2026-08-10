@@ -32,6 +32,10 @@
   align-items: end;
 }
 
+.hw-collection-hero--minimal .hw-collection-hero__main {
+  grid-template-columns: minmax(0, 85rem);
+}
+
 .hw-collection-hero__eyebrow,
 .hw-product-eyebrow,
 .hw-card-eyebrow,
