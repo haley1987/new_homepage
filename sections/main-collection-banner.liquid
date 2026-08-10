@@ -38,6 +38,11 @@
     assign hw_is_all_clubs_collection = true
   endif
 
+  assign hw_is_complete_sets_collection = false
+  if collection.handle == 'complete-iron-sets' or collection.title contains 'Complete Iron Sets' or request.path contains '/collections/complete-iron-sets'
+    assign hw_is_complete_sets_collection = true
+  endif
+
   assign hw_collection_title = collection.title
   assign hw_collection_eyebrow = section.settings.eyebrow
   assign hw_collection_description = section.settings.fallback_description
@@ -91,6 +96,12 @@
     assign hw_collection_eyebrow = 'Explore the complete lineup'
     assign hw_collection_description = 'Build your bag with Haywood. Explore every club category, compare the profiles and configure each club around the way you play.'
   endif
+
+  if hw_is_complete_sets_collection
+    assign hw_collection_title = 'Complete Sets'
+    assign hw_collection_eyebrow = 'Build the whole bag'
+    assign hw_collection_description = 'Start with SV.2 forgiveness or PD.1 players-distance performance, then configure a complete Haywood set around the way you play.'
+  endif
 -%}
 
 {%- style -%}
@@ -101,7 +112,7 @@
   }
 {%- endstyle -%}
 
-<section class="hw-commerce hw-collection-hero{% if hw_is_accessories_collection or hw_is_lab_collection or hw_is_irons_collection or hw_is_woods_collection or hw_is_putters_collection or hw_is_heads_only_collection or hw_is_all_clubs_collection %} hw-collection-hero--minimal{% endif %}" aria-labelledby="CollectionHeading-{{ section.id }}">
+<section class="hw-commerce hw-collection-hero{% if hw_is_accessories_collection or hw_is_lab_collection or hw_is_irons_collection or hw_is_woods_collection or hw_is_putters_collection or hw_is_heads_only_collection or hw_is_all_clubs_collection or hw_is_complete_sets_collection %} hw-collection-hero--minimal{% endif %}" aria-labelledby="CollectionHeading-{{ section.id }}">
   <div class="hw-collection-hero__inner{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <div class="hw-collection-hero__main">
       <div>
@@ -113,7 +124,7 @@
 
         {%- if section.settings.show_collection_description -%}
           <div class="hw-collection-hero__description rte">
-            {%- if hw_is_accessories_collection or hw_is_lab_collection or hw_is_irons_collection or hw_is_woods_collection or hw_is_putters_collection or hw_is_heads_only_collection or hw_is_all_clubs_collection -%}
+            {%- if hw_is_accessories_collection or hw_is_lab_collection or hw_is_irons_collection or hw_is_woods_collection or hw_is_putters_collection or hw_is_heads_only_collection or hw_is_all_clubs_collection or hw_is_complete_sets_collection -%}
               <p>{{ hw_collection_description | escape }}</p>
             {%- elsif collection.description != blank -%}
               {{ collection.description }}
@@ -124,7 +135,7 @@
         {%- endif -%}
       </div>
 
-      {%- if hw_is_accessories_collection == false and hw_is_lab_collection == false and hw_is_irons_collection == false and hw_is_woods_collection == false and hw_is_putters_collection == false and hw_is_heads_only_collection == false and hw_is_all_clubs_collection == false -%}
+      {%- if hw_is_accessories_collection == false and hw_is_lab_collection == false and hw_is_irons_collection == false and hw_is_woods_collection == false and hw_is_putters_collection == false and hw_is_heads_only_collection == false and hw_is_all_clubs_collection == false and hw_is_complete_sets_collection == false -%}
         <div class="hw-collection-hero__aside">
           <p class="hw-collection-hero__count">{{ collection.products_count }} {{ hw_collection_count_label }}</p>
           <p class="hw-collection-hero__aside-copy">{{ hw_collection_aside | escape }}</p>
@@ -133,7 +144,13 @@
     </div>
 
     {%- if section.settings.show_decision_links -%}
-      {%- if hw_is_all_clubs_collection -%}
+      {%- if hw_is_complete_sets_collection -%}
+        <nav class="hw-collection-hero__links" aria-label="Complete-set shopping and fitting tools">
+          <a class="hw-collection-hero__link" href="#ProductGridContainer">Explore the sets</a>
+          <a class="hw-collection-hero__link" href="/pages/fitting-tool">Find My Fit</a>
+          <a class="hw-collection-hero__link" href="/pages/fitting-tool?view=iron-Selection">Compare irons</a>
+        </nav>
+      {%- elsif hw_is_all_clubs_collection -%}
         <nav class="hw-collection-hero__links hw-collection-hero__links--categories" aria-label="Shop clubs by category">
           <a class="hw-collection-hero__link" href="{{ routes.collections_url }}/golf-irons">Irons</a>
           <a class="hw-collection-hero__link" href="{{ routes.collections_url }}/drivers-fairway-woods-hybrids">Woods &amp; hybrids</a>
