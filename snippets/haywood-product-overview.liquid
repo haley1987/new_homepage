@@ -84,10 +84,13 @@
     assign overview_summary = 'SV.2 blends game-improvement forgiveness with a more refined profile. A 431 body, S450 face and injected foam are engineered for faster ball speed, softer feel and more consistent sound. Progressive offset adds confidence in the long irons without sacrificing control in the scoring clubs.'
   elsif product.title contains 'PD.1'
     assign overview_heading = 'Speed in a player’s profile.'
+    assign overview_summary = 'PD.1 combines a compact, player-preferred profile with distance-producing construction. Its 431 stainless body, S450 face and injected foam support speed, feel and forgiveness without excessive offset.'
   elsif product.title contains 'CB'
     assign overview_heading = 'Forged control with added stability.'
+    assign overview_summary = 'CB2 combines compact players-cavity shaping with forged feel and added stability. It is built for golfers who want feedback and control without moving to a pure muscle back.'
   elsif product.title contains 'MB'
     assign overview_heading = 'Pure feedback. Total control.'
+    assign overview_summary = 'MB2 is a traditional forged muscle back built for precise shotmaking, direct feedback and maximum workability.'
   endif
 
   assign is_iron = false
