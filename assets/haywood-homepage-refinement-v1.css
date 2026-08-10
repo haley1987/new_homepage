@@ -289,7 +289,7 @@
 
 .hw-homepage .hw-product-explorer__footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-top: 2.8rem;
 }
 
@@ -435,15 +435,15 @@
 
 .hw-homepage .hw-seven__panel {
   grid-template-columns: minmax(0, 1.12fr) minmax(42rem, .88fr);
-  min-height: 38rem;
+  min-height: 0;
 }
 
 .hw-homepage .hw-seven__media {
-  min-height: 38rem;
+  min-height: 34rem;
 }
 
 .hw-homepage .hw-seven__content {
-  padding: clamp(2.6rem, 3vw, 4rem);
+  padding: clamp(2.2rem, 2.5vw, 3.2rem);
 }
 
 .hw-homepage .hw-seven__steps {
@@ -463,6 +463,66 @@
   flex-basis: 100%;
   max-width: 48rem;
   padding-left: .1rem;
+}
+
+@media screen and (min-width: 1100px) {
+  .hw-homepage .hw-seven__panel {
+    grid-template-columns: minmax(0, 1.08fr) minmax(58rem, .92fr);
+  }
+
+  .hw-homepage .hw-seven__media {
+    min-height: 43rem;
+  }
+
+  .hw-homepage .hw-seven__content {
+    padding: 2.6rem clamp(2.8rem, 3vw, 4.5rem);
+  }
+
+  .hw-homepage .hw-seven .hw-title {
+    font-size: clamp(3.4rem, 2.7vw, 4.6rem);
+  }
+
+  .hw-homepage .hw-seven .hw-copy {
+    max-width: 58rem;
+    margin-top: 1rem;
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
+
+  .hw-homepage .hw-seven__steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 1.8rem;
+    border-bottom: 1px solid rgba(255,255,255,.22);
+  }
+
+  .hw-homepage .hw-seven__step {
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+    gap: .7rem;
+    padding: 1.2rem 1.4rem 1.2rem 0;
+    border-bottom: 0;
+  }
+
+  .hw-homepage .hw-seven__step + .hw-seven__step {
+    padding-left: 1.4rem;
+    border-left: 1px solid rgba(255,255,255,.22);
+  }
+
+  .hw-homepage .hw-seven__step p {
+    margin-top: .4rem;
+    font-size: 1.3rem;
+    line-height: 1.4;
+  }
+
+  .hw-homepage .hw-seven__footer {
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
+
+  .hw-homepage .hw-seven__note {
+    flex-basis: auto;
+    max-width: 30rem;
+  }
 }
 
 /* Editorial journal */
@@ -692,6 +752,11 @@
 }
 
 @media screen and (min-width: 750px) {
+  .hw-homepage .hw-product-explorer__footer {
+    width: min(calc(100% - 4rem), var(--hw-content));
+    padding-inline: 0;
+  }
+
   .hw-homepage .hw-trust__list {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
