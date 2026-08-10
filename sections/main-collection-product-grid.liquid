@@ -59,7 +59,7 @@
   endif
 
   assign hw_is_putters_collection = false
-  if collection.handle == 'golf-putters' or collection.title contains 'Putters' or request.path contains '/collections/golf-putters'
+  if collection.handle == 'golf-putters' or collection.title contains 'Putter' or request.path contains '/collections/golf-putters'
     assign hw_is_putters_collection = true
   endif
 -%}
