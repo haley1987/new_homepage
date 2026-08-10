@@ -500,7 +500,22 @@ div.product__description, div.product-description {
                 </p>
               {%- when 'title' -%}
                 <div class="product__title" {{ block.shopify_attributes }}>
-                  <p class="hw-product-eyebrow">{{ hw_product_eyebrow }}</p>
+                  <div class="hw-product-heading-meta">
+                    <p class="hw-product-eyebrow">{{ hw_product_eyebrow }}</p>
+                    <button
+                      type="button"
+                      class="hw-product-share"
+                      data-product-share
+                      data-share-title="{{ product.title | escape }}"
+                      data-share-url="{{ request.origin }}{{ product.url }}"
+                      aria-label="Share {{ product.title | escape }}"
+                    >
+                      <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                        <path d="M12 16V3m0 0L7.5 7.5M12 3l4.5 4.5M5 11v8h14v-8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+                      </svg>
+                      <span class="hw-product-share__label">Share</span>
+                    </button>
+                  </div>
                   <h1{% if hw_display_title.size > 30 %} class="hw-product-title--long"{% endif %}>{{ hw_display_title | escape }}</h1>
                   <p class="hw-product-summary">{{ hw_product_summary | escape }}</p>
                 </div>
@@ -1314,6 +1329,59 @@ div.product__description, div.product-description {
 
   </div>
 </product-info>
+
+<script>
+  (function () {
+    var section = document.getElementById('MainProduct-{{ section.id }}');
+    var button = section && section.querySelector('[data-product-share]');
+
+    if (!button || button.dataset.shareReady === 'true') return;
+    button.dataset.shareReady = 'true';
+
+    var label = button.querySelector('.hw-product-share__label');
+    var defaultLabel = label ? label.textContent : 'Share';
+
+    function confirmCopied() {
+      if (!label) return;
+      label.textContent = 'Copied';
+      window.setTimeout(function () {
+        label.textContent = defaultLabel;
+      }, 1800);
+    }
+
+    function copyFallback(url) {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(url).then(confirmCopied);
+      }
+
+      var field = document.createElement('textarea');
+      field.value = url;
+      field.setAttribute('readonly', '');
+      field.style.position = 'fixed';
+      field.style.opacity = '0';
+      document.body.appendChild(field);
+      field.select();
+      document.execCommand('copy');
+      field.remove();
+      confirmCopied();
+      return Promise.resolve();
+    }
+
+    button.addEventListener('click', function () {
+      var title = button.dataset.shareTitle;
+      var url = button.dataset.shareUrl;
+
+      if (navigator.share) {
+        navigator.share({ title: title, url: url }).catch(function (error) {
+          if (error && error.name !== 'AbortError') copyFallback(url);
+        });
+        return;
+      }
+
+      copyFallback(url);
+    });
+  })();
+</script>
 
 
 {% schema %}
