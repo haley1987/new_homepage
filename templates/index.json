@@ -367,6 +367,7 @@
           "settings": {
             "title": "Built",
             "copy": "Hand-assembled by our expert builders.",
+            "image": "shopify://shop_images/build.png",
             "image_purpose": "PROCESS: BUILT"
           }
         },
@@ -397,7 +398,7 @@
       ],
       "settings": {
         "eyebrow": "The Haywood process",
-        "heading": "Made one set at a time.",
+        "heading": "Made one club at a time.",
         "body": "<p>From first specification to final inspection, every build moves through the hands of our team.</p>"
       }
     },
