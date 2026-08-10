@@ -66,7 +66,13 @@
       assign hw_is_native_card = true
     endif
 
+    assign hw_is_lab_card = false
+    if collection.handle == 'the-lab' or collection.title == 'The Lab' or request.path contains '/collections/the-lab'
+      assign hw_is_lab_card = true
+    endif
+
     assign hw_card_eyebrow = 'Built to your specs'
+    assign hw_card_cta = 'Explore model'
     assign hw_card_summary = card_product.metafields.custom.card_subtitle.value
     if hw_card_summary == blank
       assign hw_card_summary = card_product.metafields.custom.short_description.value
@@ -75,11 +81,18 @@
     if hw_is_program
       assign hw_card_eyebrow = 'The 7-Iron Program'
       assign hw_card_summary = 'Try one custom-built club before committing to the full set.'
+    elsif hw_is_lab_card
+      assign hw_card_eyebrow = 'One of one'
+      assign hw_card_cta = 'View the build'
+      if hw_card_summary == blank
+        assign hw_card_summary = card_product.description | strip_html | truncatewords: 18
+      endif
     elsif card_product.gift_card?
       assign hw_card_eyebrow = 'Haywood gift cards'
       assign hw_card_summary = 'A flexible gift for the golfer in your life, delivered by email.'
     elsif hw_is_native_card
       assign hw_card_eyebrow = 'Haywood essentials'
+      assign hw_card_cta = 'View details'
       if hw_card_summary == blank
         assign hw_card_summary = card_product.description | strip_html | truncatewords: 18
       endif
@@ -99,6 +112,10 @@
       assign hw_card_summary = 'Precision focused design, built to your preferred setup.'
     elsif hw_card_summary == blank
       assign hw_card_summary = 'Purpose-built performance, configured around the way you play.'
+    endif
+
+    if hw_is_lab_card and hw_card_summary == blank
+      assign hw_card_summary = 'A unique build created at Haywood HQ and available only while it lasts.'
     endif
   -%}
   <div class="hw-product-card{% if hw_is_program %} hw-product-card--program{% endif %}{% if hw_is_native_card %} hw-product-card--native{% endif %} card-wrapper product-card-wrapper underline-links-hover">
@@ -330,7 +347,7 @@
                 </quantity-popover>
               {% endif %}
             {%- endif -%}
-            <span class="hw-card-cta" aria-hidden="true">{% if hw_is_native_card %}View details{% else %}Explore model{% endif %} <span>→</span></span>
+            <span class="hw-card-cta" aria-hidden="true">{{ hw_card_cta }} <span>→</span></span>
           </div>
         </div>
         {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
