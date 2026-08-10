@@ -47,17 +47,24 @@
   if collection.handle == 'the-lab' or collection.title == 'The Lab' or request.path contains '/collections/the-lab'
     assign hw_is_lab_collection = true
   endif
+
+  assign hw_is_irons_collection = false
+  if collection.handle == 'golf-irons' or request.path contains '/collections/golf-irons'
+    assign hw_is_irons_collection = true
+  endif
 -%}
 
 <div class="hw-commerce hw-collection-grid section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
     <div class="hw-collection-results">
       <div>
-        <p class="hw-collection-results__eyebrow">{% if hw_is_lab_collection %}Available from The Lab{% elsif hw_is_accessories_collection %}The finishing details{% else %}Explore the collection{% endif %}</p>
-        <h2>{% if hw_is_lab_collection %}Built once. Available now.{% elsif hw_is_accessories_collection %}Made for the course and beyond.{% else %}Choose your starting point.{% endif %}</h2>
+        <p class="hw-collection-results__eyebrow">{% if hw_is_irons_collection %}Compare the profiles{% elsif hw_is_lab_collection %}Available from The Lab{% elsif hw_is_accessories_collection %}The finishing details{% else %}Explore the collection{% endif %}</p>
+        <h2>{% if hw_is_irons_collection %}Choose the iron that fits your game.{% elsif hw_is_lab_collection %}Built once. Available now.{% elsif hw_is_accessories_collection %}Made for the course and beyond.{% else %}Choose your starting point.{% endif %}</h2>
       </div>
       <p class="hw-collection-results__copy">
-        {% if hw_is_lab_collection %}
+        {% if hw_is_irons_collection %}
+          Start with the shape, forgiveness and feedback you want. Every model can be built around your preferred shafts, grips and specs.
+        {% elsif hw_is_lab_collection %}
           Explore unique clubs and one-off builds from Haywood HQ. Each release is available only while it lasts.
         {% elsif hw_is_accessories_collection %}
           Shop useful on-course tools, club accessories and understated Haywood apparel.
