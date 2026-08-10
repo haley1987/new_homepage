@@ -136,6 +136,12 @@
   border-color: var(--hw-review-gold) !important;
 }
 
+.jdgm-widget-revamp .jm-button--disabled,
+.jdgm-widget-revamp .jm-button:disabled {
+  opacity: .45;
+  pointer-events: none;
+}
+
 .jdgm-widget-revamp .jm-media-preview {
   padding-top: clamp(2.5rem, 4vw, 4rem);
   border-top: 1px solid var(--hw-review-line);
@@ -297,8 +303,8 @@
 .jdgm-all-reviews-widget-v2025 .jdgm-tab {
   padding: 1.6rem 0;
   border: 0;
-  color: var(--hw-review-muted);
-  background: transparent;
+  color: var(--hw-review-muted) !important;
+  background: transparent !important;
   font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: .1em;
@@ -306,7 +312,7 @@
 }
 
 .jdgm-all-reviews-widget-v2025 .jdgm-tab--active {
-  color: var(--hw-review-navy);
+  color: var(--hw-review-navy) !important;
   box-shadow: inset 0 -2px 0 var(--hw-review-gold);
 }
 
@@ -427,4 +433,3 @@
     display: block;
   }
 }
-
