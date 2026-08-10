@@ -35,7 +35,7 @@
   }
 {%- endstyle -%}
 
-<section class="hw-commerce hw-collection-hero" aria-labelledby="CollectionHeading-{{ section.id }}">
+<section class="hw-commerce hw-collection-hero{% if hw_is_accessories_collection %} hw-collection-hero--minimal{% endif %}" aria-labelledby="CollectionHeading-{{ section.id }}">
   <div class="hw-collection-hero__inner{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <div class="hw-collection-hero__main">
       <div>
@@ -56,21 +56,19 @@
         {%- endif -%}
       </div>
 
-      <div class="hw-collection-hero__aside">
-        <p class="hw-collection-hero__count">{{ collection.products_count }} {{ hw_collection_count_label }}</p>
-        <p class="hw-collection-hero__aside-copy">{{ hw_collection_aside | escape }}</p>
-      </div>
+      {%- unless hw_is_accessories_collection -%}
+        <div class="hw-collection-hero__aside">
+          <p class="hw-collection-hero__count">{{ collection.products_count }} {{ hw_collection_count_label }}</p>
+          <p class="hw-collection-hero__aside-copy">{{ hw_collection_aside | escape }}</p>
+        </div>
+      {%- endunless -%}
     </div>
 
-    {%- if section.settings.show_decision_links -%}
+    {%- if section.settings.show_decision_links and hw_is_accessories_collection == false -%}
       <nav class="hw-collection-hero__links" aria-label="Shop and fitting tools">
         <a class="hw-collection-hero__link" href="{{ routes.all_products_collection_url }}">Shop all clubs</a>
-        {%- if hw_is_accessories_collection -%}
-          <a class="hw-collection-hero__link" href="/products/gift-card">Shop gift cards</a>
-        {%- else -%}
-          <a class="hw-collection-hero__link" href="/pages/fitting-tool">Find My Fit</a>
-          <a class="hw-collection-hero__link" href="/pages/fitting-tool?view=iron-Selection">Compare irons</a>
-        {%- endif -%}
+        <a class="hw-collection-hero__link" href="/pages/fitting-tool">Find My Fit</a>
+        <a class="hw-collection-hero__link" href="/pages/fitting-tool?view=iron-Selection">Compare irons</a>
       </nav>
     {%- endif -%}
   </div>
