@@ -18,6 +18,12 @@
     assign hw_is_irons_collection = true
   endif
 
+  assign hw_is_woods_collection = false
+  if collection.handle == 'drivers-fairway-woods-hybrids' or request.path contains '/collections/drivers-fairway-woods-hybrids'
+    assign hw_is_woods_collection = true
+  endif
+
+  assign hw_collection_title = collection.title
   assign hw_collection_eyebrow = section.settings.eyebrow
   assign hw_collection_description = section.settings.fallback_description
   assign hw_collection_aside = section.settings.aside_copy
@@ -46,6 +52,12 @@
     assign hw_collection_eyebrow = 'Find your iron'
     assign hw_collection_description = 'Four distinct profiles, from confidence-building forgiveness to compact forged precision. Compare the differences, then choose the iron built for your game.'
   endif
+
+  if hw_is_woods_collection
+    assign hw_collection_title = 'Drivers, woods & hybrids'
+    assign hw_collection_eyebrow = 'Build the top of your bag'
+    assign hw_collection_description = 'Choose speed off the tee, versatile distance from the fairway or easier launch into long approaches. Find the club and flight your game needs.'
+  endif
 -%}
 
 {%- style -%}
@@ -56,19 +68,19 @@
   }
 {%- endstyle -%}
 
-<section class="hw-commerce hw-collection-hero{% if hw_is_accessories_collection or hw_is_lab_collection or hw_is_irons_collection %} hw-collection-hero--minimal{% endif %}" aria-labelledby="CollectionHeading-{{ section.id }}">
+<section class="hw-commerce hw-collection-hero{% if hw_is_accessories_collection or hw_is_lab_collection or hw_is_irons_collection or hw_is_woods_collection %} hw-collection-hero--minimal{% endif %}" aria-labelledby="CollectionHeading-{{ section.id }}">
   <div class="hw-collection-hero__inner{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <div class="hw-collection-hero__main">
       <div>
         <p class="hw-collection-hero__eyebrow">{{ hw_collection_eyebrow | escape }}</p>
         <h1 class="hw-collection-hero__title" id="CollectionHeading-{{ section.id }}">
           <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
-          {{- collection.title | escape -}}
+          {{- hw_collection_title | escape -}}
         </h1>
 
         {%- if section.settings.show_collection_description -%}
           <div class="hw-collection-hero__description rte">
-            {%- if hw_is_accessories_collection or hw_is_lab_collection or hw_is_irons_collection -%}
+            {%- if hw_is_accessories_collection or hw_is_lab_collection or hw_is_irons_collection or hw_is_woods_collection -%}
               <p>{{ hw_collection_description | escape }}</p>
             {%- elsif collection.description != blank -%}
               {{ collection.description }}
@@ -79,7 +91,7 @@
         {%- endif -%}
       </div>
 
-      {%- if hw_is_accessories_collection == false and hw_is_lab_collection == false and hw_is_irons_collection == false -%}
+      {%- if hw_is_accessories_collection == false and hw_is_lab_collection == false and hw_is_irons_collection == false and hw_is_woods_collection == false -%}
         <div class="hw-collection-hero__aside">
           <p class="hw-collection-hero__count">{{ collection.products_count }} {{ hw_collection_count_label }}</p>
           <p class="hw-collection-hero__aside-copy">{{ hw_collection_aside | escape }}</p>
@@ -92,6 +104,11 @@
         <nav class="hw-collection-hero__links hw-collection-hero__links--two" aria-label="Iron fitting and comparison tools">
           <a class="hw-collection-hero__link" href="/pages/fitting-tool">Find My Fit</a>
           <a class="hw-collection-hero__link" href="/pages/fitting-tool?view=iron-Selection">Compare irons</a>
+        </nav>
+      {%- elsif hw_is_woods_collection -%}
+        <nav class="hw-collection-hero__links hw-collection-hero__links--two" aria-label="Woods and hybrid shopping tools">
+          <a class="hw-collection-hero__link" href="#ProductGridContainer">Explore the lineup</a>
+          <a class="hw-collection-hero__link" href="/pages/fitting-tool">Find My Fit</a>
         </nav>
       {%- elsif hw_is_accessories_collection == false and hw_is_lab_collection == false -%}
         <nav class="hw-collection-hero__links" aria-label="Shop and fitting tools">
