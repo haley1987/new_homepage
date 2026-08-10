@@ -67,17 +67,24 @@
   if collection.handle == 'heads-only' or collection.title contains 'Heads Only' or request.path contains '/collections/heads-only'
     assign hw_is_heads_only_collection = true
   endif
+
+  assign hw_is_all_clubs_collection = false
+  if collection.handle == 'collections-golf-clubs' or collection.title == 'All Clubs' or request.path contains '/collections/collections-golf-clubs'
+    assign hw_is_all_clubs_collection = true
+  endif
 -%}
 
 <div class="hw-commerce hw-collection-grid section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
     <div class="hw-collection-results">
       <div>
-        <p class="hw-collection-results__eyebrow">{% if hw_is_heads_only_collection %}Build from the head up{% elsif hw_is_putters_collection %}Blade or mid-mallet{% elsif hw_is_woods_collection %}From tee to fairway{% elsif hw_is_irons_collection %}Compare the profiles{% elsif hw_is_lab_collection %}Available from The Lab{% elsif hw_is_accessories_collection %}The finishing details{% else %}Explore the collection{% endif %}</p>
-        <h2>{% if hw_is_heads_only_collection %}Start with the component that defines the club.{% elsif hw_is_putters_collection %}Choose the shape that suits your stroke.{% elsif hw_is_woods_collection %}Choose the flight your game needs.{% elsif hw_is_irons_collection %}Choose the iron that fits your game.{% elsif hw_is_lab_collection %}Built once. Available now.{% elsif hw_is_accessories_collection %}Made for the course and beyond.{% else %}Choose your starting point.{% endif %}</h2>
+        <p class="hw-collection-results__eyebrow">{% if hw_is_all_clubs_collection %}Shop by club family{% elsif hw_is_heads_only_collection %}Build from the head up{% elsif hw_is_putters_collection %}Blade or mid-mallet{% elsif hw_is_woods_collection %}From tee to fairway{% elsif hw_is_irons_collection %}Compare the profiles{% elsif hw_is_lab_collection %}Available from The Lab{% elsif hw_is_accessories_collection %}The finishing details{% else %}Explore the collection{% endif %}</p>
+        <h2>{% if hw_is_all_clubs_collection %}Build the bag your game needs.{% elsif hw_is_heads_only_collection %}Start with the component that defines the club.{% elsif hw_is_putters_collection %}Choose the shape that suits your stroke.{% elsif hw_is_woods_collection %}Choose the flight your game needs.{% elsif hw_is_irons_collection %}Choose the iron that fits your game.{% elsif hw_is_lab_collection %}Built once. Available now.{% elsif hw_is_accessories_collection %}Made for the course and beyond.{% else %}Choose your starting point.{% endif %}</h2>
       </div>
       <p class="hw-collection-results__copy">
-        {% if hw_is_heads_only_collection %}
+        {% if hw_is_all_clubs_collection %}
+          Browse the full club lineup below, or use the category links above to narrow the field. Choose the profile you need, then configure the available build options around your game.
+        {% elsif hw_is_heads_only_collection %}
           Select the Haywood head you want, then complete the build independently. Review each product page for included components, hosel specifications and available configurations.
         {% elsif hw_is_putters_collection %}
           Start with the look and alignment you trust. The Signature blade offers a traditional profile and direct feedback; the Mid Mallet adds stability and visual confidence.
