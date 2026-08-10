@@ -42,17 +42,24 @@
   if collection.handle == 'merch' or collection.title contains 'Accessories' or collection.title contains 'Merch' or request.path contains '/collections/merch'
     assign hw_is_accessories_collection = true
   endif
+
+  assign hw_is_lab_collection = false
+  if collection.handle == 'the-lab' or collection.title == 'The Lab' or request.path contains '/collections/the-lab'
+    assign hw_is_lab_collection = true
+  endif
 -%}
 
 <div class="hw-commerce hw-collection-grid section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
     <div class="hw-collection-results">
       <div>
-        <p class="hw-collection-results__eyebrow">{% if hw_is_accessories_collection %}The finishing details{% else %}Explore the collection{% endif %}</p>
-        <h2>{% if hw_is_accessories_collection %}Made for the course and beyond.{% else %}Choose your starting point.{% endif %}</h2>
+        <p class="hw-collection-results__eyebrow">{% if hw_is_lab_collection %}Available from The Lab{% elsif hw_is_accessories_collection %}The finishing details{% else %}Explore the collection{% endif %}</p>
+        <h2>{% if hw_is_lab_collection %}Built once. Available now.{% elsif hw_is_accessories_collection %}Made for the course and beyond.{% else %}Choose your starting point.{% endif %}</h2>
       </div>
       <p class="hw-collection-results__copy">
-        {% if hw_is_accessories_collection %}
+        {% if hw_is_lab_collection %}
+          Explore unique clubs and one-off builds from Haywood HQ. Each release is available only while it lasts.
+        {% elsif hw_is_accessories_collection %}
           Shop useful on-course tools, club accessories and understated Haywood apparel.
         {% else %}
           Review the profiles below, compare the details and configure every component when you are ready.
