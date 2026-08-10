@@ -32,13 +32,19 @@
       <article class="hw-product-card{% if forloop.index <= 2 %} hw-product-card--featured{% else %} hw-product-card--supporting{% endif %}" style="--hw-card-fit: {{ block.settings.image_fit }}; --hw-card-position: {{ block.settings.image_position }};" {{ block.shopify_attributes }}>
         <div class="hw-product-card__media">
           {%- if card_image != blank -%}
-            {{ card_image | image_url: width: 1800 | image_tag: widths: '400, 550, 750, 1000, 1200, 1400, 1800', sizes: card_sizes, loading: 'lazy' }}
+            {%- if forloop.index <= 2 -%}
+              {{ card_image | image_url: width: 1800 | image_tag: class: 'hw-product-card__image hw-product-card__image--backdrop', widths: '400, 550, 750, 1000, 1200, 1400, 1800', sizes: card_sizes, loading: 'lazy', alt: '' }}
+              {{ card_image | image_url: width: 1800 | image_tag: class: 'hw-product-card__image hw-product-card__image--foreground', widths: '400, 550, 750, 1000, 1200, 1400, 1800', sizes: card_sizes, loading: 'lazy' }}
+            {%- else -%}
+              {{ card_image | image_url: width: 1800 | image_tag: class: 'hw-product-card__image', widths: '400, 550, 750, 1000, 1200, 1400, 1800', sizes: card_sizes, loading: 'lazy' }}
+            {%- endif -%}
           {%- else -%}
             <div class="hw-product-card__placeholder" data-image-purpose="{{ block.settings.title | escape }} PRODUCT IMAGE">
               <span>{{ block.settings.title | escape }} PRODUCT IMAGE</span>
             </div>
           {%- endif -%}
         </div>
+        {%- if block.settings.badge != blank -%}<span class="hw-product-card__badge">{{ block.settings.badge | escape }}</span>{%- endif -%}
         <div class="hw-product-card__content">
           <h3 class="hw-product-card__title">{{ block.settings.title | escape }}</h3>
           {%- if block.settings.category != blank -%}<p class="hw-product-card__category">{{ block.settings.category | escape }}</p>{%- endif -%}
@@ -75,6 +81,7 @@
     { "type": "card", "name": "Product family", "settings": [
       { "type": "text", "id": "title", "label": "Title", "default": "CB2" },
       { "type": "text", "id": "category", "label": "Category", "default": "Players cavity" },
+      { "type": "text", "id": "badge", "label": "Badge", "info": "Optional short label, such as New" },
       { "type": "textarea", "id": "fit", "label": "Golfer-fit context", "default": "Forgiveness and control without losing the feedback better players expect." },
       { "type": "image_picker", "id": "image", "label": "Image" },
       { "type": "select", "id": "image_fit", "label": "Image fit", "options": [
