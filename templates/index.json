@@ -195,6 +195,23 @@
         "accessibility_label": "Explore Haywood golf clubs"
       }
     },
+    "hw_woods": {
+      "type": "haywood-woods-feature",
+      "settings": {
+        "image_alt": "Haywood driver, fairway wood and hybrid",
+        "desktop_position": "center center",
+        "mobile_position": "center center",
+        "eyebrow": "Woods & Hybrids",
+        "heading": "Confidence from the tee.",
+        "body": "<p>Adjustable drivers, fairway woods and hybrids built to deliver speed, control and a clean look at address.</p>",
+        "button_label": "Explore Woods & Hybrids",
+        "button_link": "shopify://collections/drivers-fairway-woods-hybrids",
+        "background_color": "#f2eee5",
+        "panel_color": "#0b2341",
+        "heading_color": "#ffffff",
+        "text_color": "#c7cfda"
+      }
+    },
     "hw_featured": {
       "type": "haywood-featured-in",
       "blocks": {
@@ -358,6 +375,7 @@
           "settings": {
             "title": "Designed",
             "copy": "Thoughtfully engineered for performance that lasts.",
+            "image": "shopify://shop_images/design.png",
             "image_purpose": "PROCESS: DESIGNED"
           }
         },
@@ -632,23 +650,6 @@
         "copy": "New releases, fitting knowledge and stories from the workshop—sent occasionally.",
         "helper_text": "Occasional emails. Unsubscribe anytime.",
         "button_label": "Subscribe"
-      }
-    },
-    "hw_woods": {
-      "type": "haywood-woods-feature",
-      "settings": {
-        "image_alt": "Haywood driver, fairway wood and hybrid",
-        "desktop_position": "center center",
-        "mobile_position": "center center",
-        "eyebrow": "Woods & Hybrids",
-        "heading": "Confidence from the tee.",
-        "body": "<p>Adjustable drivers, fairway woods and hybrids built to deliver speed, control and a clean look at address.</p>",
-        "button_label": "Explore Woods & Hybrids",
-        "button_link": "shopify://collections/drivers-fairway-woods-hybrids",
-        "background_color": "#f2eee5",
-        "panel_color": "#0b2341",
-        "heading_color": "#ffffff",
-        "text_color": "#c7cfda"
       }
     }
   },
