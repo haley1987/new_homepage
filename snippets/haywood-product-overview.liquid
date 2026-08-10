@@ -6,15 +6,11 @@
   assign description_parts = cleaned_product_description | split: '<!-- bullets -->'
   assign overview_intro = cleaned_product_description
   assign overview_benefits = blank
-  assign overview_compare = blank
 
   if description_parts.size > 1
     assign detail_parts = description_parts[1] | split: '<!-- details -->'
     assign overview_intro = description_parts[0]
     assign overview_benefits = detail_parts[0]
-    if detail_parts.size > 1
-      assign overview_compare = detail_parts[1]
-    endif
   endif
 
   assign overview_heading = 'Built around the way you play.'
@@ -102,6 +98,21 @@
   if is_seven_iron_program or is_heads_only or is_complete_set or is_driving_iron
     assign show_iron_compare = false
   endif
+
+  assign current_iron_model = blank
+  if product.title contains 'CB2' and product.title contains 'MB2'
+    assign current_iron_model = 'Combo'
+  elsif product.title contains 'SV.2'
+    assign current_iron_model = 'SV.2'
+  elsif product.title contains 'PD.1'
+    assign current_iron_model = 'PD.1'
+  elsif product.title contains 'CB2'
+    assign current_iron_model = 'CB2'
+  elsif product.title contains 'MB2'
+    assign current_iron_model = 'MB2'
+  endif
+
+  assign iron_models = 'SV.2^Game improvement^Highest^High^Moderate^sv-2-game-improvement-irons~PD.1^Players distance^High^Mid–high^Balanced^pd-1-players-distance-irons~CB2^Players cavity^Moderate–high^Mid^High^cb2-forged-players-cavity-back-irons~MB2^Muscle back^Lowest^Controlled^Highest^mb2-forged-muscle-back-irons' | split: '~'
 
   assign buybox_summary = 'Purpose-built performance, configured around the way you play.'
   if is_seven_iron_program
@@ -232,18 +243,50 @@
 
     {%- if show_iron_compare -%}
       <div class="hw-product-overview__compare">
-        <div class="hw-product-overview__compare-copy">
-          <p class="hw-product-overview__eyebrow">Compare the lineup</p>
-          <h3>See where {{ display_title }} fits.</h3>
-          <p>Compare forgiveness, launch, workability and player profile across the Haywood iron lineup.</p>
-          <a href="/pages/iron-selection">Compare all irons <span aria-hidden="true">→</span></a>
+        <div class="hw-product-overview__compare-header">
+          <div class="hw-product-overview__compare-copy">
+            <p class="hw-product-overview__eyebrow">Compare the lineup</p>
+            <h3>Which iron fits your game?</h3>
+          </div>
+          <div class="hw-product-overview__compare-intro">
+            <p>See how each profile balances forgiveness, launch and workability. The highlighted model is the product you are viewing.</p>
+            <a href="/pages/iron-selection">View the full iron comparison <span aria-hidden="true">→</span></a>
+          </div>
         </div>
-        <div class="hw-product-overview__compare-art rte">
-          {%- if overview_compare != blank -%}
-            {{ overview_compare }}
-          {%- else -%}
-            {% render 'haywood-arc-mark', variant: 'product-compare' %}
-          {%- endif -%}
+
+        <div class="hw-product-overview__compare-models">
+          {%- for iron_model in iron_models -%}
+            {%- assign model_data = iron_model | split: '^' -%}
+            {%- assign model_name = model_data[0] -%}
+            {%- assign is_current_model = false -%}
+            {%- assign current_label = 'Viewing' -%}
+            {%- if current_iron_model == model_name -%}
+              {%- assign is_current_model = true -%}
+            {%- elsif current_iron_model == 'Combo' -%}
+              {%- if model_name == 'CB2' or model_name == 'MB2' -%}
+                {%- assign is_current_model = true -%}
+                {%- assign current_label = 'In your combo' -%}
+              {%- endif -%}
+            {%- endif -%}
+
+            <a
+              class="hw-product-overview__compare-card{% if is_current_model %} is-current{% endif %}"
+              href="/products/{{ model_data[5] }}"
+              {% if is_current_model %}aria-current="page"{% endif %}
+            >
+              <div class="hw-product-overview__compare-card-top">
+                <span>{{ model_data[1] }}</span>
+                {%- if is_current_model -%}<em>{{ current_label }}</em>{%- endif -%}
+              </div>
+              <h4>{{ model_name }}</h4>
+              <dl>
+                <div><dt>Forgiveness</dt><dd>{{ model_data[2] }}</dd></div>
+                <div><dt>Launch</dt><dd>{{ model_data[3] }}</dd></div>
+                <div><dt>Workability</dt><dd>{{ model_data[4] }}</dd></div>
+              </dl>
+              <span class="hw-product-overview__compare-card-link">Explore {{ model_name }} <span aria-hidden="true">→</span></span>
+            </a>
+          {%- endfor -%}
         </div>
       </div>
     {%- endif -%}
