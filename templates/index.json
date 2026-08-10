@@ -202,28 +202,28 @@
           "type": "logo",
           "settings": {
             "label": "TXG",
-            "link": ""
+            "link": "shopify://blogs/press/txg-review-2022-haywood-cb-mb-irons"
           }
         },
         "press_forbes": {
           "type": "logo",
           "settings": {
             "label": "Forbes",
-            "link": ""
+            "link": "shopify://blogs/press/vancouver-s-haywood-golf-debuts-woods-line"
           }
         },
         "press_golf": {
           "type": "logo",
           "settings": {
             "label": "GOLF.com",
-            "link": ""
+            "link": "https://golf.com/gear/irons/haywood-irons-reviews-clubtest-2022/%0ABack%20to%20blog"
           }
         },
         "press_golfwrx": {
           "type": "logo",
           "settings": {
             "label": "GolfWRX",
-            "link": ""
+            "link": "https://golfwrx.com/588428/an-introduction-to-haywood-golf/"
           }
         },
         "press_province": {
@@ -274,7 +274,7 @@
         "body": "<p>Adjustable drivers, fairway woods and hybrids built to deliver speed, control and a clean look at address.</p>",
         "button_label": "Explore Woods & Hybrids",
         "button_link": "shopify://collections/drivers-fairway-woods-hybrids",
-        "background_color": "#0B2341",
+        "background_color": "#0b2341",
         "panel_color": "#0b2341",
         "heading_color": "#ffffff",
         "text_color": "#c7cfda"
