@@ -71,6 +71,11 @@
       assign hw_is_lab_card = true
     endif
 
+    assign hw_is_complete_set_card = false
+    if card_product.handle contains 'complete-set' or card_product.title contains 'Complete Set'
+      assign hw_is_complete_set_card = true
+    endif
+
     assign hw_card_eyebrow = 'Built to your specs'
     assign hw_card_cta = 'Explore model'
     assign hw_card_summary = card_product.metafields.custom.card_subtitle.value
@@ -86,6 +91,14 @@
       assign hw_card_cta = 'View the build'
       if hw_card_summary == blank
         assign hw_card_summary = card_product.description | strip_html | truncatewords: 18
+      endif
+    elsif hw_is_complete_set_card
+      assign hw_card_eyebrow = 'Complete bag build'
+      assign hw_card_cta = 'Explore set'
+      if card_product.title contains 'SV.2'
+        assign hw_card_summary = 'A complete Haywood set anchored by forgiving, confidence-building SV.2 irons.'
+      elsif card_product.title contains 'PD.1'
+        assign hw_card_summary = 'A complete Haywood set anchored by clean, players-distance PD.1 irons.'
       endif
     elsif card_product.gift_card?
       assign hw_card_eyebrow = 'Haywood gift cards'
