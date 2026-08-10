@@ -82,6 +82,55 @@
         "accessibility_label": "Why golfers choose Haywood"
       }
     },
+    "hw_story": {
+      "type": "haywood-phase1-story",
+      "blocks": {
+        "story_objective": {
+          "type": "row",
+          "settings": {
+            "title": "Designed In-House",
+            "copy": "Every Haywood club is developed by our own team, from the first concept through testing and final production."
+          }
+        },
+        "story_explain": {
+          "type": "row",
+          "settings": {
+            "title": "Built to Your Specs",
+            "copy": "Your clubs are assembled to order with your selected head, shaft, length, lie and grip. They aren’t pulled from a warehouse shelf."
+          }
+        },
+        "story_specs": {
+          "type": "row",
+          "settings": {
+            "title": "Direct From Us",
+            "copy": "By selling directly, we avoid traditional retail layers and put more of the price into the club itself."
+          }
+        },
+        "story_value": {
+          "type": "row",
+          "settings": {
+            "title": "Help Finding Your Fit",
+            "copy": "Use our online fitting tool, visit Haywood HQ or work with a fitting partner to find the right setup for your swing."
+          }
+        }
+      },
+      "block_order": [
+        "story_objective",
+        "story_explain",
+        "story_specs",
+        "story_value"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Haywood-228.jpg",
+        "image_position": "center center",
+        "background_color": "#ffffff",
+        "heading_color": "#0b0b0a",
+        "text_color": "#5b5a55",
+        "eyebrow": "Why Haywood",
+        "heading": "Built Differently",
+        "intro": "<p>Designed in-house, built to your specifications and supported with clear guidance at every step.</p>"
+      }
+    },
     "hw_products": {
       "type": "haywood-phase1-product-explorer",
       "blocks": {
@@ -90,10 +139,11 @@
           "settings": {
             "title": "CB2",
             "category": "Players Cavity",
+            "badge": "New",
             "fit": "Compact shaping with added stability for players who want control without giving up confidence.",
             "image": "shopify://shop_images/cb2-master-v1.png",
-            "image_fit": "cover",
-            "image_position": "center center",
+            "image_fit": "contain",
+            "image_position": "right center",
             "product": "cb2-forged-players-cavity-back-irons",
             "collection": "forged-players-irons",
             "manual_link": "shopify://products/cb2-forged-players-cavity-back-irons"
@@ -104,10 +154,11 @@
           "settings": {
             "title": "MB2",
             "category": "Muscle Back",
+            "badge": "New",
             "fit": "A traditional muscle-back profile for golfers who value direct feedback and complete workability.",
             "image": "shopify://shop_images/mb2-master-v1.png",
-            "image_fit": "cover",
-            "image_position": "left center",
+            "image_fit": "contain",
+            "image_position": "right center",
             "product": "mb2-forged-muscle-back-irons",
             "collection": "forged-players-irons",
             "manual_link": "shopify://products/mb2-forged-muscle-back-irons"
@@ -189,123 +240,6 @@
         "accessibility_label": "Explore Haywood golf clubs"
       }
     },
-    "hw_featured": {
-      "type": "haywood-featured-in",
-      "blocks": {
-        "press_txg": {
-          "type": "logo",
-          "settings": {
-            "label": "TXG",
-            "link": ""
-          }
-        },
-        "press_forbes": {
-          "type": "logo",
-          "settings": {
-            "label": "Forbes",
-            "link": ""
-          }
-        },
-        "press_golf": {
-          "type": "logo",
-          "settings": {
-            "label": "GOLF.com",
-            "link": ""
-          }
-        },
-        "press_golfwrx": {
-          "type": "logo",
-          "settings": {
-            "label": "GolfWRX",
-            "link": ""
-          }
-        },
-        "press_province": {
-          "type": "logo",
-          "settings": {
-            "label": "The Province",
-            "link": ""
-          }
-        },
-        "press_bcgolf": {
-          "type": "logo",
-          "settings": {
-            "label": "British Columbia Golf",
-            "link": ""
-          }
-        },
-        "press_mygolfspy": {
-          "type": "logo",
-          "settings": {
-            "label": "MyGolfSpy",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "press_txg",
-        "press_forbes",
-        "press_golf",
-        "press_golfwrx",
-        "press_province",
-        "press_bcgolf",
-        "press_mygolfspy"
-      ],
-      "settings": {
-        "background_color": "#f2eee5",
-        "heading_color": "#0b2341",
-        "heading": "As Featured In"
-      }
-    },
-    "hw_story": {
-      "type": "haywood-phase1-story",
-      "blocks": {
-        "story_objective": {
-          "type": "row",
-          "settings": {
-            "title": "Designed In-House",
-            "copy": "Every Haywood club is developed by our own team, from the first concept through testing and final production."
-          }
-        },
-        "story_explain": {
-          "type": "row",
-          "settings": {
-            "title": "Built to Your Specs",
-            "copy": "Your clubs are assembled to order with your selected head, shaft, length, lie and grip. They aren’t pulled from a warehouse shelf."
-          }
-        },
-        "story_specs": {
-          "type": "row",
-          "settings": {
-            "title": "Direct From Us",
-            "copy": "By selling directly, we avoid traditional retail layers and put more of the price into the club itself."
-          }
-        },
-        "story_value": {
-          "type": "row",
-          "settings": {
-            "title": "Help Finding Your Fit",
-            "copy": "Use our online fitting tool, visit Haywood HQ or work with a fitting partner to find the right setup for your swing."
-          }
-        }
-      },
-      "block_order": [
-        "story_objective",
-        "story_explain",
-        "story_specs",
-        "story_value"
-      ],
-      "settings": {
-        "image": "shopify://shop_images/Haywood-228.jpg",
-        "image_position": "center center",
-        "background_color": "#ffffff",
-        "heading_color": "#0b0b0a",
-        "text_color": "#5b5a55",
-        "eyebrow": "Why Haywood",
-        "heading": "Built Differently",
-        "intro": "<p>Designed in-house, built to your specifications and supported with clear guidance at every step.</p>"
-      }
-    },
     "hw_find_fit": {
       "type": "haywood-phase2-find-fit",
       "settings": {
@@ -325,23 +259,6 @@
         "primary_link": "shopify://pages/fitting-tool",
         "secondary_label": "",
         "secondary_link": ""
-      }
-    },
-    "hw_customer_proof": {
-      "type": "haywood-phase2-customer-proof",
-      "settings": {
-        "background_color": "#f2eee5",
-        "heading_color": "#0b2341",
-        "text_color": "#56647a",
-        "eyebrow": "Customer proof",
-        "heading": "Built, played and reviewed by golfers.",
-        "quote": "",
-        "customer_name": "",
-        "product_purchased": "",
-        "summary": "Trusted by golfers worldwide",
-        "source_label": "Verified customer reviews via Judge.me",
-        "link_label": "Read Customer Reviews",
-        "link": "/pages/customer-reviews"
       }
     },
     "hw_process": {
@@ -492,6 +409,23 @@
         "view_all_link": "shopify://blogs/news"
       }
     },
+    "hw_customer_proof": {
+      "type": "haywood-phase2-customer-proof",
+      "settings": {
+        "background_color": "#f2eee5",
+        "heading_color": "#0b2341",
+        "text_color": "#56647a",
+        "eyebrow": "Customer proof",
+        "heading": "Built, played and reviewed by golfers.",
+        "quote": "",
+        "customer_name": "",
+        "product_purchased": "",
+        "summary": "Trusted by golfers worldwide",
+        "source_label": "Verified customer reviews via Judge.me",
+        "link_label": "Read Customer Reviews",
+        "link": "/pages/customer-reviews"
+      }
+    },
     "hw_community": {
       "type": "haywood-phase2-community",
       "blocks": {
@@ -565,6 +499,74 @@
         "accessibility_label": "Haywood golfers, workshop and community"
       }
     },
+    "hw_featured": {
+      "type": "haywood-featured-in",
+      "blocks": {
+        "press_txg": {
+          "type": "logo",
+          "settings": {
+            "label": "TXG",
+            "link": ""
+          }
+        },
+        "press_forbes": {
+          "type": "logo",
+          "settings": {
+            "label": "Forbes",
+            "link": ""
+          }
+        },
+        "press_golf": {
+          "type": "logo",
+          "settings": {
+            "label": "GOLF.com",
+            "link": ""
+          }
+        },
+        "press_golfwrx": {
+          "type": "logo",
+          "settings": {
+            "label": "GolfWRX",
+            "link": ""
+          }
+        },
+        "press_province": {
+          "type": "logo",
+          "settings": {
+            "label": "The Province",
+            "link": ""
+          }
+        },
+        "press_bcgolf": {
+          "type": "logo",
+          "settings": {
+            "label": "British Columbia Golf",
+            "link": ""
+          }
+        },
+        "press_mygolfspy": {
+          "type": "logo",
+          "settings": {
+            "label": "MyGolfSpy",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "press_txg",
+        "press_forbes",
+        "press_golf",
+        "press_golfwrx",
+        "press_province",
+        "press_bcgolf",
+        "press_mygolfspy"
+      ],
+      "settings": {
+        "background_color": "#f2eee5",
+        "heading_color": "#0b2341",
+        "heading": "As Featured In"
+      }
+    },
     "hw_final_cta": {
       "type": "haywood-phase2-final-cta",
       "blocks": {
@@ -601,9 +603,9 @@
         "desktop_position": "center center",
         "mobile_position": "center center",
         "overlay": 70,
+        "show_points": false,
         "heading_color": "#ffffff",
         "text_color": "#c8c8c4",
-        "show_points": false,
         "eyebrow": "Your build starts here",
         "heading": "Choose the clubs that fit your game.",
         "body": "<p>Explore the complete Haywood lineup or get a clear starting recommendation with Find My Fit.</p>",
