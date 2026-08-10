@@ -1,286 +1,320 @@
+{% comment %}
+  Product-page community media. Each numbered slot renders one item only,
+  in the order image → video → Instagram, so duplicate metafields cannot
+  create accidental extra cards.
+{% endcomment %}
 
-
-{% comment %}— Count UGC items (images + video URLs + Instagram URLs) —{% endcomment %}
 {% assign ugc_count = 0 %}
 {% for i in (1..5) %}
-  {% assign img_key = "ugc_image_"        | append: i %}
-  {% assign vid_key = "ugc_video_url_"    | append: i %}
-  {% assign ig_key  = "ugc_instagram_"    | append: i %}
+  {% assign img_key = 'ugc_image_' | append: i %}
+  {% assign vid_key = 'ugc_video_url_' | append: i %}
+  {% assign ig_key = 'ugc_instagram_' | append: i %}
+  {% assign img = product.metafields.custom[img_key] %}
+  {% assign video_url = product.metafields.custom[vid_key].value %}
+  {% assign instagram_url = product.metafields.custom[ig_key].value %}
 
-  {% if product.metafields.custom[img_key] %}
-    {% assign ugc_count = ugc_count | plus: 1 %}
-  {% endif %}
-  {% if product.metafields.custom[vid_key] %}
-    {% assign ugc_count = ugc_count | plus: 1 %}
-  {% endif %}
-  {% if product.metafields.custom[ig_key] %}
+  {% if img.value != blank or video_url != blank or instagram_url != blank %}
     {% assign ugc_count = ugc_count | plus: 1 %}
   {% endif %}
 {% endfor %}
 
 {% if ugc_count > 0 %}
-  <section class="ugc-carousel">
-    <h2 class="ugc-carousel__title">From Our Players</h2>
-    <div class="ugc-carousel__track">
+  <section class="ugc-gallery" aria-labelledby="ugc-gallery-title-{{ section.id }}">
+    <div class="ugc-gallery__header">
+      <div>
+        <p class="ugc-gallery__eyebrow">Haywood in play</p>
+        <h2 id="ugc-gallery-title-{{ section.id }}" class="ugc-gallery__title">From our players.</h2>
+      </div>
+      <p class="ugc-gallery__intro">Real builds, real swings and stories from the Haywood community.</p>
+    </div>
 
+    <div class="ugc-gallery__track" data-count="{{ ugc_count }}">
       {% for i in (1..5) %}
-        {% assign img_key = "ugc_image_"     | append: i %}
-        {% assign vid_key = "ugc_video_url_" | append: i %}
-        {% assign ig_key  = "ugc_instagram_" | append: i %}
-
-        {%- comment -%} — IMAGE {{ i }} — {%- endcomment -%}
+        {% assign img_key = 'ugc_image_' | append: i %}
+        {% assign vid_key = 'ugc_video_url_' | append: i %}
+        {% assign ig_key = 'ugc_instagram_' | append: i %}
         {% assign img = product.metafields.custom[img_key] %}
-        {% if img %}
-<div class="ugc-carousel__slide">
-  <img
-    class="lazyload"
-    src="{{ img | file_url }}"
-    data-src="{{ img | file_url }}"
-    alt="Player using {{ product.title }}"
-    decoding="async" loading="lazy" />
-</div>
+        {% assign video_url = product.metafields.custom[vid_key].value %}
+        {% assign instagram_url = product.metafields.custom[ig_key].value %}
 
-        {% endif %}
+        {% if img.value != blank %}
+          <figure class="ugc-gallery__card ugc-gallery__card--image">
+            <img
+              src="{{ img | file_url }}"
+              alt="Player using {{ product.title | escape }}"
+              width="1200"
+              height="1500"
+              loading="lazy"
+              decoding="async"
+            >
+          </figure>
+        {% elsif video_url != blank %}
+          {% assign video_id = '' %}
+          {% if video_url contains 'youtube.com/watch' %}
+            {% assign video_id = video_url | split: 'v=' | last | split: '&' | first %}
+          {% elsif video_url contains 'youtu.be/' %}
+            {% assign video_id = video_url | split: '/' | last | split: '?' | first %}
+          {% elsif video_url contains '/shorts/' %}
+            {% assign video_id = video_url | split: '/shorts/' | last | split: '?' | first %}
+          {% endif %}
 
-        {%- comment -%} — YOUTUBE / FB / HTML5 VIDEO {{ i }} — {%- endcomment -%}
-{% comment %}— pull the string out of the URL‐type metafield —{% endcomment %}
-{% assign raw   = product.metafields.custom[vid_key] %}
-{% assign url   = raw.value %}
-
-{% if url %}
-  <div class="ugc-carousel__slide video-slide">
-
- {% comment %}— determine the YouTube video ID for watch/, youtu.be/ or shorts/ —{% endcomment %}
-      {% assign vid_id = '' %}
-
-      {% if url contains 'youtube.com/watch' %}
-        {% assign vid_id = url | split: 'v='   | last | split: '?' | first %}
-
-      {% elsif url contains 'youtu.be/' %}
-        {% assign vid_id = url | split: '/'   | last %}
-
-      {% elsif url contains '/shorts/' %}
-        {% assign vid_id = url | split: '/shorts/' | last | split: '?' | first %}
-      {% endif %}
-
-      {% comment %}— embed if we have a YouTube ID —{% endcomment %}
-      {% if vid_id != '' %}
-        <iframe
-          src="https://www.youtube.com/embed/{{ vid_id }}"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-
-    {% comment %}— Facebook Reel via iframe plugin —{% endcomment %}
-    {% elsif url contains 'facebook.com' %}
-      {% assign full      = url %}
-      {% assign last_char = full | slice: -1 %}
-      {% if last_char != '/' %}
-        {% assign full = full | append: '/' %}
-      {% endif %}
-      {% assign enc = full | url_encode %}
-
-      <iframe
-        src="https://www.facebook.com/plugins/video.php?href={{ enc }}&show_text=false"
-        width="560" height="315"
-        style="border:none;overflow:hidden"
-        scrolling="no"
-        frameborder="0"
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-
-    {% comment %}— Self-hosted or other —{% endcomment %}
-    {% else %}
-      <video
-        src="{{ url }}"
-        controls
-        playsinline
-        preload="metadata">
-        Your browser doesn’t support HTML5 video.
-      </video>
-    {% endif %}
-
-  </div>
-{% endif %}
-
-
-        {%- comment -%} — INSTAGRAM REEL {{ i }} — {%- endcomment -%}
-        {% assign ig = product.metafields.custom[ig_key] %}
-        {% if ig %}
-          <div class="ugc-carousel__slide ig-slide">
+          <figure class="ugc-gallery__card ugc-gallery__card--video">
+            {% if video_id != blank %}
+              <iframe
+                src="https://www.youtube.com/embed/{{ video_id }}?rel=0"
+                title="Player video featuring {{ product.title | escape }}"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            {% elsif video_url contains 'facebook.com' %}
+              {% assign facebook_url = video_url %}
+              {% assign last_character = facebook_url | slice: -1 %}
+              {% if last_character != '/' %}
+                {% assign facebook_url = facebook_url | append: '/' %}
+              {% endif %}
+              <iframe
+                src="https://www.facebook.com/plugins/video.php?href={{ facebook_url | url_encode }}&show_text=false"
+                title="Player video featuring {{ product.title | escape }}"
+                loading="lazy"
+                scrolling="no"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            {% else %}
+              <video src="{{ video_url }}" controls playsinline preload="metadata">
+                Your browser does not support HTML5 video.
+              </video>
+            {% endif %}
+          </figure>
+        {% elsif instagram_url != blank %}
+          <figure class="ugc-gallery__card ugc-gallery__card--instagram">
             <blockquote
               class="instagram-media"
-              data-instgrm-permalink="{{ ig }}"
+              data-instgrm-permalink="{{ instagram_url }}"
               data-instgrm-version="14"
-              style="background:#FFF; border:0; margin:0 auto; max-width:540px; width:100%;">
-            </blockquote>
-          </div>
+            ></blockquote>
+          </figure>
         {% endif %}
-
       {% endfor %}
-
     </div>
+
+    {% if ugc_count > 1 %}
+      <p class="ugc-gallery__swipe" aria-hidden="true">Swipe <span>→</span></p>
+    {% endif %}
   </section>
-{% endif %}
-<script>
-(function () {
-  var target = document.querySelector('.ugc-carousel');
-  if (!target) return;
 
-  var loaded = false;
+  <script>
+    (() => {
+      const section = document.currentScript.previousElementSibling;
+      if (!section || !section.querySelector('.instagram-media')) return;
 
-  function loadIG(cb) {
-    // Already present?
-    if (window.instgrm && instgrm.Embeds && typeof instgrm.Embeds.process === 'function') {
-      cb && cb();
-      return;
-    }
-    if (loaded) return;
-    loaded = true;
+      const loadInstagram = () => {
+        if (window.instgrm?.Embeds?.process) {
+          window.instgrm.Embeds.process();
+          return;
+        }
+        if (document.querySelector('script[data-haywood-instagram]')) return;
+        const script = document.createElement('script');
+        script.src = 'https://www.instagram.com/embed.js';
+        script.async = true;
+        script.dataset.haywoodInstagram = 'true';
+        document.body.appendChild(script);
+      };
 
-    var s = document.createElement('script');
-    s.src = 'https://www.instagram.com/embed.js';
-    s.async = true;
-    s.onload = function(){ try { instgrm.Embeds.process(); } catch(e){} };
-    document.body.appendChild(s);
-  }
-
-  // JIT load when near viewport
-  var seen = false;
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (!seen && e.isIntersecting) {
-        seen = true;
-        io.disconnect();
-        loadIG();
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          observer.disconnect();
+          loadInstagram();
+        }, { rootMargin: '300px 0px' });
+        observer.observe(section);
+      } else {
+        loadInstagram();
       }
-    });
-  }, { rootMargin: '200px 0px' });
-  io.observe(target);
+    })();
+  </script>
+{% endif %}
 
-  // Fallback: if user never scrolls
-  setTimeout(function(){ if (!seen) { seen = true; loadIG(); } }, 5000);
-})();
-</script>
-
-  {%- style -%}
-  /* UGC Carousel */
-
-.ugc-carousel__title {
-  text-align: center;
-  font-weight:bold;
-  margin-bottom: 1.5rem;
-}
-.ugc-carousel {
-    margin: 2rem 0;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    padding-top: 2rem;
-}
-
-.ugc-carousel__track {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-}
-
-
-.ugc-carousel__slide img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-
-
-/* 1) Make every slide a 16:9 container */
-.ugc-carousel__slide {
-  position: relative;
-  flex: 0 0 80%;               /* or whatever width you're using */
-  scroll-snap-align: center;
-  margin-right: 1rem;
-  padding-bottom: 56.25%;      /* 16 ÷ 9 = 0.5625 */
-  height: 0;                   
-  overflow: hidden;
-}
-
-/* 2) Force all media to fill that container */
-.ugc-carousel__slide img,
-.ugc-carousel__slide video,
-.ugc-carousel__slide iframe,
-.ugc-carousel__slide blockquote.instagram-media {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-
-
-
-
-
-@media(min-width: 640px) {
-  .ugc-carousel__slide { width: 45%; max-width: 300px; }
-}
-@media(min-width: 1024px) {
-  .ugc-carousel__slide { width: 30%; max-width: 360px; }
-}
-
-/* UGC — mobile no-crop overrides (wins against stale 16:9 rules) */
-@media (max-width: 749px) {
-  .ugc-carousel__track {
-    height: auto !important;
-    align-items: stretch !important;
-    overflow-y: hidden !important;
+{% style %}
+  .ugc-gallery {
+    width: min(calc(100% - 4rem), 150rem);
+    margin: clamp(5rem, 8vw, 9rem) auto;
   }
 
-  /* kill any 16:9 hacks on slides */
-  .ugc-carousel .ugc-carousel__slide,
-  .ugc-carousel .ugc-carousel__slide.video-slide,
-  .ugc-carousel .ugc-carousel__slide.ig-slide {
-    height: auto !important;
-    padding: 0 !important;
-    padding-bottom: 0 !important;
-    overflow: visible !important;
+  .ugc-gallery__header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(28rem, .7fr);
+    align-items: end;
+    gap: 3rem;
+    margin-bottom: 2.4rem;
   }
 
-  /* children should not be absolutely positioned */
-  .ugc-carousel .ugc-carousel__slide > *,
-  .ugc-carousel .ugc-carousel__slide .fb_iframe_widget,
-  .ugc-carousel .ugc-carousel__slide iframe,
-  .ugc-carousel .ugc-carousel__slide blockquote.instagram-media {
-    position: static !important;
+  .ugc-gallery__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin: 0 0 1rem;
+    color: #0b2a4b;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+
+  .ugc-gallery__eyebrow::before {
+    width: 3.2rem;
+    height: 1px;
+    content: '';
+    background: #c9a66b;
+  }
+
+  .ugc-gallery__title {
+    margin: 0;
+    color: #0b2a4b;
+    font-family: var(--font-heading-family);
+    font-size: clamp(3.6rem, 4.5vw, 6.2rem);
+    font-weight: 400;
+    line-height: .98;
+  }
+
+  .ugc-gallery__intro {
+    max-width: 46rem;
+    margin: 0 0 .4rem auto;
+    color: #5f625f;
+    font-size: 1.6rem;
+    line-height: 1.6;
+  }
+
+  .ugc-gallery__track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+    gap: 1.2rem;
+  }
+
+  .ugc-gallery__card {
+    position: relative;
+    min-width: 0;
+    aspect-ratio: 4 / 5;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid #d8d8d4;
+    background: linear-gradient(145deg, #e9e9e5, #d7d8d7);
+  }
+
+  .ugc-gallery__card::after {
+    position: absolute;
+    inset: auto 0 0;
+    height: 18%;
+    content: '';
+    pointer-events: none;
+    background: linear-gradient(transparent, rgba(3, 16, 29, .24));
+  }
+
+  .ugc-gallery__card > img,
+  .ugc-gallery__card > video,
+  .ugc-gallery__card > iframe,
+  .ugc-gallery__card > .instagram-media,
+  .ugc-gallery__card > .instagram-media-rendered {
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
     width: 100% !important;
-    
-    max-width: 100% !important;
-    min-width: 0 !important; /* beats IG inline 326px */
+    max-width: none !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
   }
- 
 
-}
-
- @media only screen and (min-width: 900px) {
-   .sticky-media {
-    position: sticky;
-    top: 2rem;
-    align-self: flex-start;
+  .ugc-gallery__card > img,
+  .ugc-gallery__card > video {
+    object-fit: cover;
   }
-}
 
-  {%- endstyle -%}
+  .ugc-gallery__card--video {
+    background: #071726;
+  }
+
+  .ugc-gallery__swipe {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ugc-gallery {
+      width: 100%;
+      margin: 4.5rem 0;
+    }
+
+    .ugc-gallery__header {
+      display: block;
+      padding: 0 1.5rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .ugc-gallery__title {
+      font-size: clamp(3.4rem, 12vw, 4.8rem);
+    }
+
+    .ugc-gallery__intro {
+      margin: 1.4rem 0 0;
+      font-size: 1.5rem;
+    }
+
+    .ugc-gallery__track {
+      display: flex;
+      gap: 1rem;
+      padding: 0 1.5rem 1.2rem;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scroll-padding-inline: 1.5rem;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+
+    .ugc-gallery__track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .ugc-gallery__card {
+      flex: 0 0 82vw;
+      max-width: 34rem;
+      scroll-snap-align: start;
+    }
+
+    .ugc-gallery__swipe {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin: .6rem 1.5rem 0;
+      color: #0b2a4b;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .ugc-gallery__swipe::before {
+      width: 3rem;
+      height: 1px;
+      content: '';
+      background: #c9a66b;
+    }
+
+    .ugc-gallery__swipe span {
+      color: #c9a66b;
+      font-size: 1.8rem;
+    }
+  }
+{% endstyle %}
 
 {% schema %}
 {
-  "name": "Haywood • UGC carousel",
+  "name": "Haywood • UGC gallery",
   "tag": "section",
   "class": "section",
-  "templates": ["product"],
   "settings": [],
-  "presets": [{ "name": "Haywood • UGC carousel" }]
+  "presets": [{ "name": "Haywood • UGC gallery" }]
 }
 {% endschema %}
