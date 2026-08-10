@@ -468,10 +468,11 @@
 @media screen and (min-width: 1100px) {
   .hw-homepage .hw-seven__panel {
     grid-template-columns: minmax(0, 1.08fr) minmax(58rem, .92fr);
+    height: clamp(52rem, 40vw, 56rem);
   }
 
   .hw-homepage .hw-seven__media {
-    min-height: 43rem;
+    min-height: 0;
   }
 
   .hw-homepage .hw-seven__content {
