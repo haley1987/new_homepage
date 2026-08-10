@@ -1,7 +1,10 @@
 {% comment %}Product-family overview refresh.{% endcomment %}
+{%- capture cleaned_product_description -%}
+  {% render 'haywood-clean-product-description', description: product.description %}
+{%- endcapture -%}
 {%- liquid
-  assign description_parts = product.description | split: '<!-- bullets -->'
-  assign overview_intro = product.description
+  assign description_parts = cleaned_product_description | split: '<!-- bullets -->'
+  assign overview_intro = cleaned_product_description
   assign overview_benefits = blank
   assign overview_compare = blank
 
@@ -15,8 +18,7 @@
   endif
 
   assign overview_heading = 'Built around the way you play.'
-  assign shop_app_warning = '⚠️ Important: Options may not appear in the Shop App. Please view this product on our website to select your custom options before purchasing.'
-  assign overview_summary = overview_intro | strip_html | replace: shop_app_warning, '' | strip | truncatewords: 58
+  assign overview_summary = overview_intro | strip_html | strip | truncatewords: 58
 
   assign is_seven_iron_program = false
   if product.handle == '7-iron-purchase-program'
