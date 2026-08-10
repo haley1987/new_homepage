@@ -405,7 +405,7 @@
 }
 
 .hw-shop-app-note {
-  display: grid;
+  display: none;
   grid-template-columns: 1fr;
   gap: .6rem 1rem;
   margin-top: .4rem;
@@ -415,6 +415,14 @@
   background: rgba(242, 238, 229, .62);
   font-size: 1.25rem;
   line-height: 1.5;
+}
+
+.hw-shop-app-note[hidden] {
+  display: none !important;
+}
+
+.hw-shop-app-note.is-shop-app-visible {
+  display: grid;
 }
 
 .hw-shop-app-note strong {
