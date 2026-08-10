@@ -1,0 +1,16 @@
+{%- comment -%}
+  Removes the retired Shop app warning paragraph while preserving the rest of the
+  merchant-authored product description. Splitting on closing paragraphs handles
+  plain text, bold-prefix and spacing variants without altering other content.
+{%- endcomment -%}
+{%- assign description_paragraphs = description | split: '</p>' -%}
+{%- for description_paragraph in description_paragraphs -%}
+  {%- unless description_paragraph contains 'Options may not appear in the Shop App'
+    or description_paragraph contains 'custom options before purchasing'
+  -%}
+    {{- description_paragraph -}}
+    {%- if description_paragraph contains '<p' -%}
+      {{- '</p>' -}}
+    {%- endif -%}
+  {%- endunless -%}
+{%- endfor -%}
