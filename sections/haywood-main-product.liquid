@@ -15,10 +15,15 @@
   if product.gift_card?
     assign hw_is_gift_card = true
   endif
+
+  assign hw_is_golf_bag = false
+  if product.handle == 'premium-golf-stand-bag' or product.title contains 'Golf Bag'
+    assign hw_is_golf_bag = true
+  endif
 %}
 <product-info
   id="MainProduct-{{ section.id }}"
-  class="hw-commerce hw-product-main{% unless has_apo %} hw-product-main--native{% endunless %}{% if hw_is_gift_card %} hw-product-main--gift-card{% endif %} section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
+  class="hw-commerce hw-product-main{% unless has_apo %} hw-product-main--native{% endunless %}{% if hw_is_gift_card %} hw-product-main--gift-card{% endif %}{% if hw_is_golf_bag %} hw-product-main--golf-bag{% endif %} section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
   data-update-url="true"
@@ -372,6 +377,8 @@ div.product__description, div.product-description {
   assign hw_product_eyebrow = 'Haywood Golf'
   if hw_is_gift_card
     assign hw_product_eyebrow = 'Haywood gift cards'
+  elsif hw_is_golf_bag
+    assign hw_product_eyebrow = 'Premium stand bags'
   elsif has_apo == false
     assign hw_product_eyebrow = 'Accessories and apparel'
   elsif hw_is_seven_iron_program
@@ -400,6 +407,8 @@ div.product__description, div.product-description {
   endif
   if hw_is_gift_card
     assign hw_product_summary = 'A flexible Haywood gift, delivered by email and ready to use online.'
+  elsif hw_is_golf_bag
+    assign hw_product_summary = 'A refined six-way stand bag with considered storage, balanced carrying comfort and weather-ready protection.'
   elsif has_apo == false and hw_product_summary == blank
     assign hw_product_summary = product.description | strip_html | truncatewords: 22
   elsif hw_is_seven_iron_program
@@ -1205,8 +1214,12 @@ div.product__description, div.product-description {
       </div>
     </div>
 
-    {%- if has_apo and hw_show_product_overview and product.description != blank -%}
-      {% render 'haywood-product-overview', product: product, display_title: hw_display_title %}
+    {%- if product.description != blank -%}
+      {%- if hw_is_golf_bag -%}
+        {% render 'haywood-product-overview', product: product, display_title: hw_display_title %}
+      {%- elsif has_apo and hw_show_product_overview -%}
+        {% render 'haywood-product-overview', product: product, display_title: hw_display_title %}
+      {%- endif -%}
     {%- endif -%}
 
     {% render 'product-media-modal', variant_images: variant_images %}
