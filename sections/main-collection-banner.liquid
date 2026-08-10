@@ -8,6 +8,11 @@
     assign hw_is_accessories_collection = true
   endif
 
+  assign hw_is_lab_collection = false
+  if collection.handle == 'the-lab' or collection.title == 'The Lab' or request.path contains '/collections/the-lab'
+    assign hw_is_lab_collection = true
+  endif
+
   assign hw_collection_eyebrow = section.settings.eyebrow
   assign hw_collection_description = section.settings.fallback_description
   assign hw_collection_aside = section.settings.aside_copy
@@ -25,6 +30,12 @@
       assign hw_collection_count_label = 'item'
     endif
   endif
+
+
+  if hw_is_lab_collection
+    assign hw_collection_eyebrow = 'One of one · Haywood HQ'
+    assign hw_collection_description = 'One-of-a-kind clubs, experimental builds and limited pieces created at Haywood HQ. Each release is unique and available only while it lasts.'
+  endif
 -%}
 
 {%- style -%}
@@ -35,7 +46,7 @@
   }
 {%- endstyle -%}
 
-<section class="hw-commerce hw-collection-hero{% if hw_is_accessories_collection %} hw-collection-hero--minimal{% endif %}" aria-labelledby="CollectionHeading-{{ section.id }}">
+<section class="hw-commerce hw-collection-hero{% if hw_is_accessories_collection or hw_is_lab_collection %} hw-collection-hero--minimal{% endif %}" aria-labelledby="CollectionHeading-{{ section.id }}">
   <div class="hw-collection-hero__inner{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <div class="hw-collection-hero__main">
       <div>
@@ -47,7 +58,9 @@
 
         {%- if section.settings.show_collection_description -%}
           <div class="hw-collection-hero__description rte">
-            {%- if collection.description != blank -%}
+            {%- if hw_is_accessories_collection or hw_is_lab_collection -%}
+              <p>{{ hw_collection_description | escape }}</p>
+            {%- elsif collection.description != blank -%}
               {{ collection.description }}
             {%- else -%}
               <p>{{ hw_collection_description | escape }}</p>
@@ -56,15 +69,15 @@
         {%- endif -%}
       </div>
 
-      {%- unless hw_is_accessories_collection -%}
+      {%- if hw_is_accessories_collection == false and hw_is_lab_collection == false -%}
         <div class="hw-collection-hero__aside">
           <p class="hw-collection-hero__count">{{ collection.products_count }} {{ hw_collection_count_label }}</p>
           <p class="hw-collection-hero__aside-copy">{{ hw_collection_aside | escape }}</p>
         </div>
-      {%- endunless -%}
+      {%- endif -%}
     </div>
 
-    {%- if section.settings.show_decision_links and hw_is_accessories_collection == false -%}
+    {%- if section.settings.show_decision_links and hw_is_accessories_collection == false and hw_is_lab_collection == false -%}
       <nav class="hw-collection-hero__links" aria-label="Shop and fitting tools">
         <a class="hw-collection-hero__link" href="{{ routes.all_products_collection_url }}">Shop all clubs</a>
         <a class="hw-collection-hero__link" href="/pages/fitting-tool">Find My Fit</a>
