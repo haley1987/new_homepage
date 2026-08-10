@@ -52,6 +52,17 @@
       assign hw_is_program = true
     endif
 
+    assign hw_is_native_card = false
+    if card_product.type == 'Gift Card' or card_product.type == 'Merch'
+      assign hw_is_native_card = true
+    endif
+    if card_product.tags contains 'force-native' or card_product.tags contains 'native-variants'
+      assign hw_is_native_card = true
+    endif
+    if card_product.tags contains 'force-apo'
+      assign hw_is_native_card = false
+    endif
+
     assign hw_card_eyebrow = 'Built to your specs'
     assign hw_card_summary = card_product.metafields.custom.card_subtitle.value
     if hw_card_summary == blank
@@ -61,6 +72,14 @@
     if hw_is_program
       assign hw_card_eyebrow = 'The 7-Iron Program'
       assign hw_card_summary = 'Try one custom-built club before committing to the full set.'
+    elsif card_product.gift_card?
+      assign hw_card_eyebrow = 'Haywood gift cards'
+      assign hw_card_summary = 'A flexible gift for the golfer in your life, delivered by email.'
+    elsif hw_is_native_card
+      assign hw_card_eyebrow = 'Haywood essentials'
+      if hw_card_summary == blank
+        assign hw_card_summary = card_product.description | strip_html | truncatewords: 18
+      endif
     elsif card_product.title contains 'CB'
       assign hw_card_summary = 'A compact cavity profile balancing forged feel, control and forgiveness.'
     elsif card_product.title contains 'MB'
@@ -79,7 +98,7 @@
       assign hw_card_summary = 'Purpose-built performance, configured around the way you play.'
     endif
   -%}
-  <div class="hw-product-card{% if hw_is_program %} hw-product-card--program{% endif %} card-wrapper product-card-wrapper underline-links-hover">
+  <div class="hw-product-card{% if hw_is_program %} hw-product-card--program{% endif %}{% if hw_is_native_card %} hw-product-card--native{% endif %} card-wrapper product-card-wrapper underline-links-hover">
     <div
       class="
         card card--{{ settings.card_style }}
@@ -308,7 +327,7 @@
                 </quantity-popover>
               {% endif %}
             {%- endif -%}
-            <span class="hw-card-cta" aria-hidden="true">Explore model <span>→</span></span>
+            <span class="hw-card-cta" aria-hidden="true">{% if hw_is_native_card %}View details{% else %}Explore model{% endif %} <span>→</span></span>
           </div>
         </div>
         {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
