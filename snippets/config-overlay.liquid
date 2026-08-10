@@ -331,6 +331,7 @@
     width: auto !important;
     overflow: hidden;
     border: 1px solid var(--cfg-line);
+    border-radius: 0 !important;
     background: #fff;
     transition: border-color 0.18s ease, box-shadow 0.18s ease;
   }
@@ -522,6 +523,10 @@
     margin-bottom: 11rem !important;
   }
 
+  body.overlay-open #crisp-chatbox {
+    display: none !important;
+  }
+
   @media (max-width: 990px) {
     .cfg-inner,
     .cfg-footer {
@@ -646,7 +651,7 @@
   alt="{{ product.title }}"
   width="{{ product.images.first.width }}"
   height="{{ product.images.first.height }}"
-  loading="lazy"
+  loading="eager"
 >
 </div>
 <div class="cfg-right">
