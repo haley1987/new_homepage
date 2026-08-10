@@ -113,6 +113,11 @@
   border-top: 1px solid rgba(255,255,255,.2);
 }
 
+.hw-collection-hero__links--categories {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .hw-collection-hero__link {
   display: inline-flex;
   min-height: 4.4rem;
@@ -1126,6 +1131,10 @@
   .hw-collection-hero__link:last-child { grid-column: 1 / -1; }
 
   .hw-collection-hero__links--two .hw-collection-hero__link:last-child {
+    grid-column: auto;
+  }
+
+  .hw-collection-hero__links--categories .hw-collection-hero__link:last-child {
     grid-column: auto;
   }
 
