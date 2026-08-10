@@ -82,6 +82,187 @@
         "accessibility_label": "Why golfers choose Haywood"
       }
     },
+    "hw_products": {
+      "type": "haywood-phase1-product-explorer",
+      "blocks": {
+        "product_cb": {
+          "type": "card",
+          "settings": {
+            "title": "CB2",
+            "category": "Players Cavity",
+            "badge": "",
+            "fit": "Compact shaping with added stability for players who want control without giving up confidence.",
+            "image": "shopify://shop_images/cb2-master-v1.png",
+            "image_fit": "contain",
+            "image_position": "right center",
+            "product": "cb2-forged-players-cavity-back-irons",
+            "collection": "forged-players-irons",
+            "manual_link": "shopify://products/cb2-forged-players-cavity-back-irons"
+          }
+        },
+        "product_mb": {
+          "type": "card",
+          "settings": {
+            "title": "MB2",
+            "category": "Muscle Back",
+            "badge": "",
+            "fit": "A traditional muscle-back profile for golfers who value direct feedback and complete workability.",
+            "image": "shopify://shop_images/mb2-master-v1.png",
+            "image_fit": "contain",
+            "image_position": "right center",
+            "product": "mb2-forged-muscle-back-irons",
+            "collection": "forged-players-irons",
+            "manual_link": "shopify://products/mb2-forged-muscle-back-irons"
+          }
+        },
+        "product_pd": {
+          "type": "card",
+          "settings": {
+            "title": "PD.1",
+            "category": "Players Distance",
+            "badge": "",
+            "fit": "Distance and launch in a refined players shape.",
+            "image": "shopify://shop_images/pd1-master-v1.png",
+            "image_fit": "cover",
+            "image_position": "center center",
+            "product": "pd-1-players-distance-irons",
+            "collection": "collections-golf-clubs",
+            "manual_link": "shopify://products/pd-1-players-distance-irons"
+          }
+        },
+        "product_sv": {
+          "type": "card",
+          "settings": {
+            "title": "SV.2",
+            "category": "Game Improvement",
+            "badge": "",
+            "fit": "Easy launch and forgiveness for more consistent iron play.",
+            "image": "shopify://shop_images/sv2-master-v1.png",
+            "image_fit": "cover",
+            "image_position": "center center",
+            "product": "sv-2-game-improvement-irons",
+            "collection": "collections-golf-clubs",
+            "manual_link": "shopify://products/sv-2-game-improvement-irons"
+          }
+        },
+        "product_driver": {
+          "type": "card",
+          "settings": {
+            "title": "Wedges",
+            "category": "Built for Spin",
+            "badge": "3 finishes",
+            "fit": "",
+            "image": "shopify://shop_images/wedges-master-v2.png",
+            "image_fit": "cover",
+            "image_position": "center center",
+            "product": "forged-golf-wedges",
+            "collection": "collections-golf-clubs",
+            "manual_link": "/products/forged-golf-wedges"
+          }
+        },
+        "product_putter": {
+          "type": "card",
+          "settings": {
+            "title": "DI.2",
+            "category": "Built to Go",
+            "badge": "2 Finishes",
+            "fit": "",
+            "image": "shopify://shop_images/di2-master-v1_8c920f0a-eda3-4107-a6a3-3fe96d9d08b8.webp",
+            "image_fit": "cover",
+            "image_position": "center center",
+            "product": "signature-driving-iron-2",
+            "collection": "collections-golf-clubs",
+            "manual_link": "/products/signature-driving-iron-2"
+          }
+        }
+      },
+      "block_order": [
+        "product_cb",
+        "product_mb",
+        "product_pd",
+        "product_sv",
+        "product_driver",
+        "product_putter"
+      ],
+      "settings": {
+        "eyebrow": "Shop Haywood",
+        "heading": "Find the club built for your game.",
+        "copy": "<p>Start with the shape, flight and forgiveness you need. Every Haywood club can be configured around the way you play.</p>",
+        "primary_label": "Shop All Clubs",
+        "primary_link": "shopify://collections/all",
+        "secondary_label": "Find My Fit",
+        "secondary_link": "shopify://pages/fitting-tool",
+        "accessibility_label": "Explore Haywood golf clubs"
+      }
+    },
+    "hw_featured": {
+      "type": "haywood-featured-in",
+      "blocks": {
+        "press_txg": {
+          "type": "logo",
+          "settings": {
+            "label": "TXG",
+            "link": ""
+          }
+        },
+        "press_forbes": {
+          "type": "logo",
+          "settings": {
+            "label": "Forbes",
+            "link": ""
+          }
+        },
+        "press_golf": {
+          "type": "logo",
+          "settings": {
+            "label": "GOLF.com",
+            "link": ""
+          }
+        },
+        "press_golfwrx": {
+          "type": "logo",
+          "settings": {
+            "label": "GolfWRX",
+            "link": ""
+          }
+        },
+        "press_province": {
+          "type": "logo",
+          "settings": {
+            "label": "The Province",
+            "link": ""
+          }
+        },
+        "press_bcgolf": {
+          "type": "logo",
+          "settings": {
+            "label": "British Columbia Golf",
+            "link": ""
+          }
+        },
+        "press_mygolfspy": {
+          "type": "logo",
+          "settings": {
+            "label": "MyGolfSpy",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "press_txg",
+        "press_forbes",
+        "press_golf",
+        "press_golfwrx",
+        "press_province",
+        "press_bcgolf",
+        "press_mygolfspy"
+      ],
+      "settings": {
+        "background_color": "#f2eee5",
+        "heading_color": "#0b2341",
+        "heading": "As Featured In"
+      }
+    },
     "hw_story": {
       "type": "haywood-phase1-story",
       "blocks": {
@@ -131,115 +312,6 @@
         "intro": "<p>Designed in-house, built to your specifications and supported with clear guidance at every step.</p>"
       }
     },
-    "hw_products": {
-      "type": "haywood-phase1-product-explorer",
-      "blocks": {
-        "product_cb": {
-          "type": "card",
-          "settings": {
-            "title": "CB2",
-            "category": "Players Cavity",
-            "badge": "New",
-            "fit": "Compact shaping with added stability for players who want control without giving up confidence.",
-            "image": "shopify://shop_images/cb2-master-v1.png",
-            "image_fit": "contain",
-            "image_position": "right center",
-            "product": "cb2-forged-players-cavity-back-irons",
-            "collection": "forged-players-irons",
-            "manual_link": "shopify://products/cb2-forged-players-cavity-back-irons"
-          }
-        },
-        "product_mb": {
-          "type": "card",
-          "settings": {
-            "title": "MB2",
-            "category": "Muscle Back",
-            "badge": "New",
-            "fit": "A traditional muscle-back profile for golfers who value direct feedback and complete workability.",
-            "image": "shopify://shop_images/mb2-master-v1.png",
-            "image_fit": "contain",
-            "image_position": "right center",
-            "product": "mb2-forged-muscle-back-irons",
-            "collection": "forged-players-irons",
-            "manual_link": "shopify://products/mb2-forged-muscle-back-irons"
-          }
-        },
-        "product_pd": {
-          "type": "card",
-          "settings": {
-            "title": "PD.1",
-            "category": "Players Distance",
-            "fit": "Distance and launch in a refined players shape.",
-            "image": "shopify://shop_images/pd1-master-v1.png",
-            "image_fit": "cover",
-            "image_position": "center center",
-            "product": "pd-1-players-distance-irons",
-            "collection": "collections-golf-clubs",
-            "manual_link": "shopify://products/pd-1-players-distance-irons"
-          }
-        },
-        "product_sv": {
-          "type": "card",
-          "settings": {
-            "title": "SV.2",
-            "category": "Game Improvement",
-            "fit": "Easy launch and forgiveness for more consistent iron play.",
-            "image": "shopify://shop_images/sv2-master-v1.png",
-            "image_fit": "cover",
-            "image_position": "center center",
-            "product": "sv-2-game-improvement-irons",
-            "collection": "collections-golf-clubs",
-            "manual_link": "shopify://products/sv-2-game-improvement-irons"
-          }
-        },
-        "product_driver": {
-          "type": "card",
-          "settings": {
-            "title": "Wedges",
-            "category": "Built for Spin",
-            "fit": "",
-            "image": "shopify://shop_images/wedges-master-v2.png",
-            "image_fit": "cover",
-            "image_position": "center center",
-            "product": "forged-golf-wedges",
-            "collection": "collections-golf-clubs",
-            "manual_link": "/products/forged-golf-wedges"
-          }
-        },
-        "product_putter": {
-          "type": "card",
-          "settings": {
-            "title": "DI.2",
-            "category": "Built to Go",
-            "fit": "",
-            "image": "shopify://shop_images/di2-master-v1_8c920f0a-eda3-4107-a6a3-3fe96d9d08b8.webp",
-            "image_fit": "cover",
-            "image_position": "center center",
-            "product": "signature-driving-iron-2",
-            "collection": "collections-golf-clubs",
-            "manual_link": "/products/signature-driving-iron-2"
-          }
-        }
-      },
-      "block_order": [
-        "product_cb",
-        "product_mb",
-        "product_pd",
-        "product_sv",
-        "product_driver",
-        "product_putter"
-      ],
-      "settings": {
-        "eyebrow": "Shop Haywood",
-        "heading": "Find the club built for your game.",
-        "copy": "<p>Start with the shape, flight and forgiveness you need. Every Haywood club can be configured around the way you play.</p>",
-        "primary_label": "Shop All Clubs",
-        "primary_link": "shopify://collections/all",
-        "secondary_label": "Find My Fit",
-        "secondary_link": "shopify://pages/fitting-tool",
-        "accessibility_label": "Explore Haywood golf clubs"
-      }
-    },
     "hw_find_fit": {
       "type": "haywood-phase2-find-fit",
       "settings": {
@@ -259,6 +331,23 @@
         "primary_link": "shopify://pages/fitting-tool",
         "secondary_label": "",
         "secondary_link": ""
+      }
+    },
+    "hw_customer_proof": {
+      "type": "haywood-phase2-customer-proof",
+      "settings": {
+        "background_color": "#f2eee5",
+        "heading_color": "#0b2341",
+        "text_color": "#56647a",
+        "eyebrow": "Customer proof",
+        "heading": "Built, played and reviewed by golfers.",
+        "quote": "",
+        "customer_name": "",
+        "product_purchased": "",
+        "summary": "Trusted by golfers worldwide",
+        "source_label": "Verified customer reviews via Judge.me",
+        "link_label": "Read Customer Reviews",
+        "link": "/pages/customer-reviews"
       }
     },
     "hw_process": {
@@ -409,23 +498,6 @@
         "view_all_link": "shopify://blogs/news"
       }
     },
-    "hw_customer_proof": {
-      "type": "haywood-phase2-customer-proof",
-      "settings": {
-        "background_color": "#f2eee5",
-        "heading_color": "#0b2341",
-        "text_color": "#56647a",
-        "eyebrow": "Customer proof",
-        "heading": "Built, played and reviewed by golfers.",
-        "quote": "",
-        "customer_name": "",
-        "product_purchased": "",
-        "summary": "Trusted by golfers worldwide",
-        "source_label": "Verified customer reviews via Judge.me",
-        "link_label": "Read Customer Reviews",
-        "link": "/pages/customer-reviews"
-      }
-    },
     "hw_community": {
       "type": "haywood-phase2-community",
       "blocks": {
@@ -499,74 +571,6 @@
         "accessibility_label": "Haywood golfers, workshop and community"
       }
     },
-    "hw_featured": {
-      "type": "haywood-featured-in",
-      "blocks": {
-        "press_txg": {
-          "type": "logo",
-          "settings": {
-            "label": "TXG",
-            "link": ""
-          }
-        },
-        "press_forbes": {
-          "type": "logo",
-          "settings": {
-            "label": "Forbes",
-            "link": ""
-          }
-        },
-        "press_golf": {
-          "type": "logo",
-          "settings": {
-            "label": "GOLF.com",
-            "link": ""
-          }
-        },
-        "press_golfwrx": {
-          "type": "logo",
-          "settings": {
-            "label": "GolfWRX",
-            "link": ""
-          }
-        },
-        "press_province": {
-          "type": "logo",
-          "settings": {
-            "label": "The Province",
-            "link": ""
-          }
-        },
-        "press_bcgolf": {
-          "type": "logo",
-          "settings": {
-            "label": "British Columbia Golf",
-            "link": ""
-          }
-        },
-        "press_mygolfspy": {
-          "type": "logo",
-          "settings": {
-            "label": "MyGolfSpy",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "press_txg",
-        "press_forbes",
-        "press_golf",
-        "press_golfwrx",
-        "press_province",
-        "press_bcgolf",
-        "press_mygolfspy"
-      ],
-      "settings": {
-        "background_color": "#f2eee5",
-        "heading_color": "#0b2341",
-        "heading": "As Featured In"
-      }
-    },
     "hw_final_cta": {
       "type": "haywood-phase2-final-cta",
       "blocks": {
@@ -603,9 +607,9 @@
         "desktop_position": "center center",
         "mobile_position": "center center",
         "overlay": 70,
-        "show_points": false,
         "heading_color": "#ffffff",
         "text_color": "#c8c8c4",
+        "show_points": false,
         "eyebrow": "Your build starts here",
         "heading": "Choose the clubs that fit your game.",
         "body": "<p>Explore the complete Haywood lineup or get a clear starting recommendation with Find My Fit.</p>",
