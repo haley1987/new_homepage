@@ -53,6 +53,11 @@
     assign is_putter = true
   endif
 
+  assign is_golf_bag = false
+  if product.handle == 'premium-golf-stand-bag' or product.title contains 'Golf Bag'
+    assign is_golf_bag = true
+  endif
+
   if is_seven_iron_program
     assign overview_heading = 'Try one before you build the set.'
     assign overview_summary = 'Choose your model, shaft, grip and adjustments, then put your custom-built 7-iron into play. When you are ready to order a qualifying full set, the 7-iron purchase price is applied to that build.'
@@ -65,6 +70,9 @@
   elsif is_wedge
     assign overview_heading = 'Versatility where scoring happens.'
     assign overview_summary = 'Forged from S20C carbon steel with CNC-milled grooves and versatile sole shaping, Signature Wedges are built for predictable flight, spin and touch—from full swings to greenside shots.'
+  elsif is_golf_bag
+    assign overview_heading = 'Built to carry the full round.'
+    assign overview_summary = 'A stable six-way stand bag with comfortable dual straps, protected storage and the details needed from the first tee to the final green.'
   elsif is_wood
     assign overview_heading = 'Launch, speed and stability—dialled in.'
   elsif is_putter
@@ -101,6 +109,8 @@
     assign buybox_summary = 'Controlled distance and a confident flight from the tee or turf.'
   elsif is_wedge
     assign buybox_summary = 'Forged feel and versatile sole geometry for flight, spin and touch.'
+  elsif is_golf_bag
+    assign buybox_summary = 'A refined six-way stand bag with considered storage, balanced carrying comfort and weather-ready protection.'
   elsif is_wood
     assign buybox_summary = 'Adjustable performance and dependable launch, built around your preferred setup.'
   elsif is_putter
@@ -158,6 +168,54 @@
             <p>Add height and touch when the shot calls for more greenside control.</p>
           </article>
         </div>
+      </div>
+    {%- endif -%}
+
+    {%- if is_golf_bag -%}
+      <div class="hw-product-overview__bag-guide" aria-labelledby="BagGuide-{{ product.id }}">
+        <div class="hw-product-overview__bag-heading">
+          <p class="hw-product-overview__eyebrow">Designed for the round</p>
+          <h3 id="BagGuide-{{ product.id }}">Everything in its place.</h3>
+        </div>
+
+        <div class="hw-product-overview__bag-features">
+          <article>
+            <span>01</span>
+            <strong>Six-way protection</strong>
+            <p>A velvet-wrapped divider and reinforced base help protect and organize every club.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <strong>Balanced carrying</strong>
+            <p>Padded dual straps use easy-release clasps for comfortable adjustment.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <strong>Fast access</strong>
+            <p>A velvet-lined magnetic pocket keeps your rangefinder close at hand.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <strong>Protected storage</strong>
+            <p>A waterproof valuables pocket and water-resistant cooler compartment secure essentials.</p>
+          </article>
+          <article>
+            <span>05</span>
+            <strong>Stable stance</strong>
+            <p>Carbon-fibre legs and a stability base provide dependable support on uneven ground.</p>
+          </article>
+          <article>
+            <span>06</span>
+            <strong>Weather ready</strong>
+            <p>An included rain hood helps keep your clubs protected when conditions change.</p>
+          </article>
+        </div>
+
+        <dl class="hw-product-overview__bag-specs">
+          <div><dt>Weight</dt><dd>6.6 lb</dd></div>
+          <div><dt>Bag dimensions</dt><dd>35 × 12 × 13 in</dd></div>
+          <div><dt>Top dimensions</dt><dd>9 × 11 in</dd></div>
+        </dl>
       </div>
     {%- endif -%}
 
