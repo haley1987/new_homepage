@@ -195,23 +195,6 @@
         "accessibility_label": "Explore Haywood golf clubs"
       }
     },
-    "hw_woods": {
-      "type": "haywood-woods-feature",
-      "settings": {
-        "image_alt": "Haywood driver, fairway wood and hybrid",
-        "desktop_position": "center center",
-        "mobile_position": "center center",
-        "eyebrow": "Woods & Hybrids",
-        "heading": "Confidence from the tee.",
-        "body": "<p>Adjustable drivers, fairway woods and hybrids built to deliver speed, control and a clean look at address.</p>",
-        "button_label": "Explore Woods & Hybrids",
-        "button_link": "shopify://collections/drivers-fairway-woods-hybrids",
-        "background_color": "#f2eee5",
-        "panel_color": "#0b2341",
-        "heading_color": "#ffffff",
-        "text_color": "#c7cfda"
-      }
-    },
     "hw_featured": {
       "type": "haywood-featured-in",
       "blocks": {
@@ -278,6 +261,23 @@
         "background_color": "#f2eee5",
         "heading_color": "#0b2341",
         "heading": "As Featured In"
+      }
+    },
+    "hw_woods": {
+      "type": "haywood-woods-feature",
+      "settings": {
+        "image_alt": "Haywood driver, fairway wood and hybrid",
+        "desktop_position": "center center",
+        "mobile_position": "center center",
+        "eyebrow": "Woods & Hybrids",
+        "heading": "Confidence from the tee.",
+        "body": "<p>Adjustable drivers, fairway woods and hybrids built to deliver speed, control and a clean look at address.</p>",
+        "button_label": "Explore Woods & Hybrids",
+        "button_link": "shopify://collections/drivers-fairway-woods-hybrids",
+        "background_color": "#0B2341",
+        "panel_color": "#0b2341",
+        "heading_color": "#ffffff",
+        "text_color": "#c7cfda"
       }
     },
     "hw_story": {
@@ -350,23 +350,6 @@
         "secondary_link": ""
       }
     },
-    "hw_customer_proof": {
-      "type": "haywood-phase2-customer-proof",
-      "settings": {
-        "background_color": "#f2eee5",
-        "heading_color": "#0b2341",
-        "text_color": "#56647a",
-        "eyebrow": "Customer proof",
-        "heading": "Built, played and reviewed by golfers.",
-        "quote": "",
-        "customer_name": "",
-        "product_purchased": "",
-        "summary": "Trusted by golfers worldwide",
-        "source_label": "Verified customer reviews via Judge.me",
-        "link_label": "Read Customer Reviews",
-        "link": "/pages/customer-reviews"
-      }
-    },
     "hw_process": {
       "type": "haywood-phase2-process",
       "blocks": {
@@ -416,6 +399,23 @@
         "eyebrow": "The Haywood process",
         "heading": "Made one set at a time.",
         "body": "<p>From first specification to final inspection, every build moves through the hands of our team.</p>"
+      }
+    },
+    "hw_customer_proof": {
+      "type": "haywood-phase2-customer-proof",
+      "settings": {
+        "background_color": "#f2eee5",
+        "heading_color": "#0b2341",
+        "text_color": "#56647a",
+        "eyebrow": "Customer proof",
+        "heading": "Built, played and reviewed by golfers.",
+        "quote": "",
+        "customer_name": "",
+        "product_purchased": "",
+        "summary": "Trusted by golfers worldwide",
+        "source_label": "Verified customer reviews via Judge.me",
+        "link_label": "Read Customer Reviews",
+        "link": "/pages/customer-reviews"
       }
     },
     "hw_seven_iron": {
@@ -657,12 +657,12 @@
     "hw_hero",
     "hw_trust",
     "hw_products",
-    "hw_woods",
     "hw_featured",
+    "hw_woods",
     "hw_story",
     "hw_find_fit",
-    "hw_customer_proof",
     "hw_process",
+    "hw_customer_proof",
     "hw_seven_iron",
     "hw_education",
     "hw_community",
