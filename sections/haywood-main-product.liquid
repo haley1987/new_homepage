@@ -556,6 +556,15 @@ div.product__description, div.product-description {
         <a href="#full-specs" class="hw-btn hw-btn--ghost js-show-specs">View Specs »</a>
       {% endif %}
 
+      <aside class="hw-shop-app-note" aria-label="Shop app purchasing information">
+        <strong>Purchasing through the Shop app?</strong>
+        <span>
+          Custom build options may not appear there.
+          <a href="{{ shop.url }}{{ product.url }}">Open this product at haywoodgolf.com</a>
+          to select your specifications before checkout.
+        </span>
+      </aside>
+
       {% if hw_show_iron_guidance %}
         <nav class="hw-product-guidance" aria-label="Iron selection help">
           <a href="/pages/fitting-tool" class="hw-quiz-link">Find My Fit <span aria-hidden="true">→</span></a>
