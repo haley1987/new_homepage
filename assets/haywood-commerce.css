@@ -604,9 +604,9 @@
 .hw-product-main--native .product-form__submit {
   min-height: 5.4rem;
   border: 1px solid var(--hw-commerce-navy);
-  border-radius: 0;
-  color: #fff;
-  background: var(--hw-commerce-navy);
+  border-radius: 0 !important;
+  color: #fff !important;
+  background: var(--hw-commerce-navy) !important;
   font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: .13em;
@@ -616,8 +616,8 @@
 
 .hw-product-main--native .product-form__submit:not([disabled]):hover {
   border-color: var(--hw-commerce-gold);
-  color: var(--hw-commerce-navy);
-  background: var(--hw-commerce-gold);
+  color: var(--hw-commerce-navy) !important;
+  background: var(--hw-commerce-gold) !important;
 }
 
 .hw-product-main--native .product__description {
