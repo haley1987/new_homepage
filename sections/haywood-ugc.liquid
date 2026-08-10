@@ -188,8 +188,25 @@
 
   .ugc-gallery__track {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1.2rem;
+  }
+
+  .ugc-gallery__track[data-count='1'] {
+    grid-template-columns: minmax(0, 38rem);
+  }
+
+  .ugc-gallery__track[data-count='2'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 78rem;
+  }
+
+  .ugc-gallery__track[data-count='3'] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ugc-gallery__track[data-count='5'] {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .ugc-gallery__card {
