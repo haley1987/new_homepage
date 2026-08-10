@@ -54,7 +54,7 @@
   endif
 
   assign hw_is_woods_collection = false
-  if collection.handle == 'drivers-fairway-woods-hybrids' or request.path contains '/collections/drivers-fairway-woods-hybrids'
+  if collection.handle == 'drivers-fairway-woods-hybrids' or collection.title contains 'Woods' or request.path contains '/collections/drivers-fairway-woods-hybrids'
     assign hw_is_woods_collection = true
   endif
 -%}
