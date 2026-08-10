@@ -377,6 +377,7 @@ div.product__description, div.product-description {
   assign hw_combo_url = blank
   assign hw_combo_heading = blank
   assign hw_combo_copy = blank
+  assign hw_combo_path = blank
   assign hw_is_cb2_mb2_combo = false
   if product.title contains 'CB2' and product.title contains 'MB2'
     assign hw_is_cb2_mb2_combo = true
@@ -389,12 +390,14 @@ div.product__description, div.product-description {
   unless hw_is_cb2_mb2_combo or hw_is_sv2_pd1_combo
     if product.title contains 'CB2' or product.title contains 'MB2'
       assign hw_combo_url = '/products/cb2-mb2-forged-combo-irons'
-      assign hw_combo_heading = 'Build a CB2 + MB2 combo'
-      assign hw_combo_copy = 'Blend CB2 long irons with MB2 scoring irons for added support where you want it and precision where you need it.'
+      assign hw_combo_heading = 'Blend CB2 with MB2'
+      assign hw_combo_path = 'CB2 long irons → MB2 scoring irons'
+      assign hw_combo_copy = 'Use CB2 in the longer irons for added stability, then transition to MB2 in the scoring irons for maximum feedback and control.'
     elsif product.title contains 'SV.2' or product.title contains 'PD.1'
       assign hw_combo_url = '/products/sv-2-pd-1-combo-iron-set'
-      assign hw_combo_heading = 'Build an SV.2 + PD.1 combo'
-      assign hw_combo_copy = 'Pair easy-launching SV.2 long irons with the more compact PD.1 scoring profile in one coordinated set.'
+      assign hw_combo_heading = 'Blend SV.2 with PD.1'
+      assign hw_combo_path = 'SV.2 long irons → PD.1 scoring irons'
+      assign hw_combo_copy = 'Use easy-launching SV.2 in the longer irons, then transition to the more compact PD.1 profile through the scoring irons.'
     endif
   endunless
 
@@ -591,6 +594,17 @@ div.product__description, div.product-description {
 
 {%- when 'haywood_cta' -%}
   {% if has_apo %}
+    {% liquid
+      assign hw_show_specs_link = false
+      if block.settings.show_specs and product.metafields.specs-image.specs-image
+        assign hw_show_specs_link = true
+      endif
+
+      assign hw_show_guidance_links = false
+      if block.settings.show_quiz and hw_show_iron_guidance
+        assign hw_show_guidance_links = true
+      endif
+    %}
     <div class="hw-ctas">
       <button class="hw-btn hw-btn--primary js-show-configs"
               data-config-overlay-open
@@ -602,8 +616,24 @@ div.product__description, div.product-description {
         {% endif %}
       </button>
 
-      {% if block.settings.show_specs and product.metafields.specs-image.specs-image %}
-        <a href="#full-specs" class="hw-btn hw-btn--ghost js-show-specs">View Specs »</a>
+      {% if hw_show_specs_link or hw_show_guidance_links %}
+        <div class="hw-product-utilities{% unless hw_show_specs_link %} hw-product-utilities--guidance-only{% endunless %}{% unless hw_show_guidance_links %} hw-product-utilities--specs-only{% endunless %}">
+          {% if hw_show_specs_link %}
+            <a href="#full-specs" class="hw-product-utilities__specs js-show-specs">
+              View specifications <span aria-hidden="true">↓</span>
+            </a>
+          {% endif %}
+
+          {% if hw_show_guidance_links %}
+            <nav class="hw-product-guidance" aria-label="Iron selection help">
+              <span class="hw-product-guidance__label">Need help choosing?</span>
+              <span class="hw-product-guidance__links">
+                <a href="/pages/fitting-tool" class="hw-quiz-link">Find My Fit <span aria-hidden="true">→</span></a>
+                <a href="/pages/iron-selection" class="hw-quiz-link">Compare irons <span aria-hidden="true">→</span></a>
+              </span>
+            </nav>
+          {% endif %}
+        </div>
       {% endif %}
 
       <aside
@@ -636,22 +666,16 @@ div.product__description, div.product-description {
         })();
       </script>
 
-      {% if hw_show_iron_guidance %}
-        <nav class="hw-product-guidance" aria-label="Iron selection help">
-          <a href="/pages/fitting-tool" class="hw-quiz-link">Find My Fit <span aria-hidden="true">→</span></a>
-          <a href="/pages/iron-selection" class="hw-quiz-link">Compare irons <span aria-hidden="true">→</span></a>
-        </nav>
-      {% endif %}
-
       {% if block.settings.show_combo_link and hw_combo_url != blank %}
         <aside class="hw-combo-prompt" aria-labelledby="ComboPrompt-{{ section.id }}">
           <div class="hw-combo-prompt__content">
-            <span class="hw-combo-prompt__eyebrow">Blended set</span>
+            <span class="hw-combo-prompt__eyebrow">Blended-set option</span>
             <strong id="ComboPrompt-{{ section.id }}" class="hw-combo-prompt__heading">{{ hw_combo_heading }}</strong>
+            <span class="hw-combo-prompt__path">{{ hw_combo_path }}</span>
             <span class="hw-combo-prompt__copy">{{ hw_combo_copy }}</span>
           </div>
           <a class="hw-combo-prompt__link" href="{{ hw_combo_url }}">
-            Explore combo set <span aria-hidden="true">→</span>
+            Explore this combo <span aria-hidden="true">→</span>
           </a>
         </aside>
       {% endif %}
@@ -665,6 +689,7 @@ div.product__description, div.product-description {
 {%- when 'haywood_trust' -%}
   {% if has_apo %}
     <section class="hw-objections">
+      <p class="hw-objections__eyebrow">Why order from Haywood</p>
       <ul class="hw-objections__list">
         <li>
           <span class="hw-objections__icon" aria-hidden="true">01</span>
