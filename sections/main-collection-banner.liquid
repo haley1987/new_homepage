@@ -23,6 +23,11 @@
     assign hw_is_woods_collection = true
   endif
 
+  assign hw_is_putters_collection = false
+  if collection.handle == 'golf-putters' or request.path contains '/collections/golf-putters'
+    assign hw_is_putters_collection = true
+  endif
+
   assign hw_collection_title = collection.title
   assign hw_collection_eyebrow = section.settings.eyebrow
   assign hw_collection_description = section.settings.fallback_description
@@ -58,6 +63,12 @@
     assign hw_collection_eyebrow = 'Build the top of your bag'
     assign hw_collection_description = 'Choose speed off the tee, versatile distance from the fairway or easier launch into long approaches. Find the club and flight your game needs.'
   endif
+
+  if hw_is_putters_collection
+    assign hw_collection_title = 'Putters'
+    assign hw_collection_eyebrow = 'Find your shape'
+    assign hw_collection_description = 'Two precision-milled profiles with distinct alignment and stability. Choose a traditional blade or the added confidence of a mid-mallet.'
+  endif
 -%}
 
 {%- style -%}
@@ -68,7 +79,7 @@
   }
 {%- endstyle -%}
 
-<section class="hw-commerce hw-collection-hero{% if hw_is_accessories_collection or hw_is_lab_collection or hw_is_irons_collection or hw_is_woods_collection %} hw-collection-hero--minimal{% endif %}" aria-labelledby="CollectionHeading-{{ section.id }}">
+<section class="hw-commerce hw-collection-hero{% if hw_is_accessories_collection or hw_is_lab_collection or hw_is_irons_collection or hw_is_woods_collection or hw_is_putters_collection %} hw-collection-hero--minimal{% endif %}" aria-labelledby="CollectionHeading-{{ section.id }}">
   <div class="hw-collection-hero__inner{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <div class="hw-collection-hero__main">
       <div>
@@ -80,7 +91,7 @@
 
         {%- if section.settings.show_collection_description -%}
           <div class="hw-collection-hero__description rte">
-            {%- if hw_is_accessories_collection or hw_is_lab_collection or hw_is_irons_collection or hw_is_woods_collection -%}
+            {%- if hw_is_accessories_collection or hw_is_lab_collection or hw_is_irons_collection or hw_is_woods_collection or hw_is_putters_collection -%}
               <p>{{ hw_collection_description | escape }}</p>
             {%- elsif collection.description != blank -%}
               {{ collection.description }}
@@ -91,7 +102,7 @@
         {%- endif -%}
       </div>
 
-      {%- if hw_is_accessories_collection == false and hw_is_lab_collection == false and hw_is_irons_collection == false and hw_is_woods_collection == false -%}
+      {%- if hw_is_accessories_collection == false and hw_is_lab_collection == false and hw_is_irons_collection == false and hw_is_woods_collection == false and hw_is_putters_collection == false -%}
         <div class="hw-collection-hero__aside">
           <p class="hw-collection-hero__count">{{ collection.products_count }} {{ hw_collection_count_label }}</p>
           <p class="hw-collection-hero__aside-copy">{{ hw_collection_aside | escape }}</p>
@@ -109,6 +120,11 @@
         <nav class="hw-collection-hero__links hw-collection-hero__links--two" aria-label="Woods and hybrid shopping tools">
           <a class="hw-collection-hero__link" href="#ProductGridContainer">Explore the lineup</a>
           <a class="hw-collection-hero__link" href="/pages/fitting-tool">Find My Fit</a>
+        </nav>
+      {%- elsif hw_is_putters_collection -%}
+        <nav class="hw-collection-hero__links hw-collection-hero__links--two" aria-label="Putter shopping and fitting tools">
+          <a class="hw-collection-hero__link" href="#ProductGridContainer">Explore the putters</a>
+          <a class="hw-collection-hero__link" href="/pages/booking">Book a fitting</a>
         </nav>
       {%- elsif hw_is_accessories_collection == false and hw_is_lab_collection == false -%}
         <nav class="hw-collection-hero__links" aria-label="Shop and fitting tools">
