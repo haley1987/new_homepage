@@ -755,6 +755,7 @@
 
 .hw-product-overview__intro > :first-child { margin-top: 0; }
 .hw-product-overview__intro > :last-child { margin-bottom: 0; }
+.hw-product-overview__intro > p:has(+ .hw-product-overview__story[open]) { display: none; }
 .hw-product-overview .shop-app-warning { display: none; }
 
 .hw-product-overview__story {
