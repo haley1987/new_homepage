@@ -136,8 +136,8 @@
             "image": "shopify://shop_images/sv2-master-v1.png",
             "image_fit": "cover",
             "image_position": "center center",
-            "product": "",
-            "collection": "",
+            "product": "sv-2-game-improvement-irons",
+            "collection": "collections-golf-clubs",
             "manual_link": "shopify://products/sv-2-game-improvement-irons"
           }
         },
@@ -150,8 +150,8 @@
             "image": "shopify://shop_images/wedges-master-v2.png",
             "image_fit": "cover",
             "image_position": "center center",
-            "product": "",
-            "collection": "",
+            "product": "forged-golf-wedges",
+            "collection": "collections-golf-clubs",
             "manual_link": "/products/forged-golf-wedges"
           }
         },
@@ -164,8 +164,8 @@
             "image": "shopify://shop_images/di2-master-v1_8c920f0a-eda3-4107-a6a3-3fe96d9d08b8.webp",
             "image_fit": "cover",
             "image_position": "center center",
-            "product": "",
-            "collection": "",
+            "product": "signature-driving-iron-2",
+            "collection": "collections-golf-clubs",
             "manual_link": "/products/signature-driving-iron-2"
           }
         }
