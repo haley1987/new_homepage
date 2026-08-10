@@ -754,6 +754,69 @@
   font-size: 1.55rem;
 }
 
+.hw-product-overview__wedge-guide {
+  display: grid;
+  grid-template-columns: minmax(24rem, .38fr) minmax(0, 1fr);
+  gap: clamp(3rem, 6vw, 8rem);
+  margin-top: clamp(4rem, 6vw, 7rem);
+  padding-top: clamp(3rem, 4vw, 4.5rem);
+  border-top: 1px solid var(--hw-commerce-line);
+}
+
+.hw-product-overview__wedge-heading h3 {
+  max-width: 10ch;
+  margin: 1.6rem 0 0;
+  color: var(--hw-commerce-navy);
+  font-family: var(--hw-commerce-serif);
+  font-size: clamp(3.2rem, 3.5vw, 4.8rem);
+  font-weight: 400;
+  letter-spacing: -.045em;
+  line-height: .98;
+}
+
+.hw-product-overview__wedge-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--hw-commerce-line);
+  border-bottom: 1px solid var(--hw-commerce-line);
+}
+
+.hw-product-overview__wedge-options article {
+  padding: 2.4rem clamp(1.8rem, 2.5vw, 3rem) 2.8rem;
+}
+
+.hw-product-overview__wedge-options article + article {
+  border-left: 1px solid var(--hw-commerce-line);
+}
+
+.hw-product-overview__wedge-options span,
+.hw-product-overview__wedge-options strong {
+  display: block;
+}
+
+.hw-product-overview__wedge-options span {
+  color: var(--hw-commerce-navy);
+  font-family: var(--hw-commerce-serif);
+  font-size: clamp(3rem, 3.2vw, 4.4rem);
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.hw-product-overview__wedge-options strong {
+  margin-top: 1rem;
+  color: var(--hw-commerce-gold);
+  font-size: 1rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.hw-product-overview__wedge-options p {
+  margin: 1.6rem 0 0;
+  color: var(--hw-commerce-muted);
+  font-size: 1.45rem;
+  line-height: 1.55;
+}
+
 .hw-product-overview__benefits {
   margin-top: clamp(4rem, 6vw, 7rem);
   padding-top: clamp(3rem, 4vw, 4.5rem);
@@ -1238,6 +1301,28 @@
 
   .hw-product-overview__benefits ul {
     grid-template-columns: 1fr;
+  }
+
+  .hw-product-overview__wedge-guide {
+    grid-template-columns: 1fr;
+    gap: 2.8rem;
+  }
+
+  .hw-product-overview__wedge-heading h3 {
+    max-width: none;
+  }
+
+  .hw-product-overview__wedge-options {
+    grid-template-columns: 1fr;
+  }
+
+  .hw-product-overview__wedge-options article {
+    padding: 2rem 0 2.2rem;
+  }
+
+  .hw-product-overview__wedge-options article + article {
+    border-top: 1px solid var(--hw-commerce-line);
+    border-left: 0;
   }
 
   .hw-product-overview__benefits li,
