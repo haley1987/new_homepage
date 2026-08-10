@@ -270,6 +270,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {%- endif -%}
     {{ 'haywood-type-scale-v3.css' | asset_url | stylesheet_tag }}
     {{ 'haywood-global-system-v1.css' | asset_url | stylesheet_tag }}
+    {{ 'haywood-commerce-feedback.css' | asset_url | stylesheet_tag }}
     {%- if request.page_type == 'index' -%}
       {{ 'haywood-homepage-refinement-v1.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
@@ -504,36 +505,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script defer src="{{ 'haywood-sidebar.js' | asset_url }}"></script>
 
 
-<!-- Add-to-Cart Confirmation Drawer -->
-<div id="cart-notification-drawer" style="
-  position: fixed;
-    top: 63px;
-    right: 0;
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 1rem;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-  display: none;
-  max-width: 340px;
-  z-index: 99999;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  transform: translateY(-10px);
-  opacity: 0;
-      width: 250px;
-    text-align: center;
-">
-  <p style="font-weight: bold;">Item added to cart!</p>
-  <a href="/cart" style="
-    display: inline-block;
-    text-align: center;
-    background: #000;
-    color: #fff;
-    padding: 0.75rem 1rem;
-    border-radius: 9999px;
-    font-weight: bold;
-    text-decoration: none;
-    width: 100%;
-  ">VIEW CART</a>
+<!-- Add-to-cart confirmation used by configured products. -->
+<div
+  id="cart-notification-drawer"
+  class="hw-cart-toast"
+  role="dialog"
+  aria-labelledby="hw-cart-toast-title"
+  aria-describedby="hw-cart-toast-copy"
+  aria-live="polite"
+  aria-hidden="true"
+  hidden
+>
+  <button class="hw-cart-toast__close" type="button" aria-label="Close cart confirmation">&times;</button>
+  <p class="hw-cart-toast__eyebrow">Added to cart</p>
+  <p class="hw-cart-toast__title" id="hw-cart-toast-title">Your build is ready.</p>
+  <p class="hw-cart-toast__copy" id="hw-cart-toast-copy">Review your selection or continue shopping.</p>
+  <a href="{{ routes.cart_url }}" class="hw-cart-toast__link">
+    <span>View cart</span>
+    <span aria-hidden="true">&rarr;</span>
+  </a>
 </div>
 
 <script>
@@ -572,10 +562,12 @@ document.addEventListener('submit', function (e) {
 
     // Open your custom drawer
     if (drawer) {
-      drawer.style.display = 'block';
+      window.clearTimeout(window.haywoodCartNotificationTimer);
+      window.clearTimeout(window.haywoodCartNotificationHideTimer);
+      drawer.hidden = false;
+      drawer.setAttribute('aria-hidden', 'false');
       requestAnimationFrame(() => {
-        drawer.style.opacity = '1';
-        drawer.style.transform = 'translateY(0)';
+        drawer.classList.add('is-visible');
       });
     }
 
@@ -607,11 +599,7 @@ document.addEventListener('submit', function (e) {
   .then(() => {
     // Auto-hide drawer after 5s
     if (drawer) {
-      setTimeout(() => {
-        drawer.style.opacity = '0';
-        drawer.style.transform = 'translateY(-10px)';
-        setTimeout(() => { drawer.style.display = 'none'; }, 300);
-      }, 5000);
+      window.haywoodCartNotificationTimer = window.setTimeout(hideHaywoodCartNotification, 5000);
     }
   })
   .catch(err => {
@@ -622,6 +610,28 @@ document.addEventListener('submit', function (e) {
     if (submitBtn) submitBtn.disabled = false;
   });
 }, true); // <-- capture phase is key
+
+function hideHaywoodCartNotification() {
+  const drawer = document.getElementById('cart-notification-drawer');
+  if (!drawer || drawer.hidden) return;
+
+  window.clearTimeout(window.haywoodCartNotificationTimer);
+  drawer.classList.remove('is-visible');
+  drawer.setAttribute('aria-hidden', 'true');
+  window.haywoodCartNotificationHideTimer = window.setTimeout(() => {
+    drawer.hidden = true;
+  }, 220);
+}
+
+document.addEventListener('click', function (event) {
+  if (event.target.closest('.hw-cart-toast__close')) {
+    hideHaywoodCartNotification();
+  }
+});
+
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape') hideHaywoodCartNotification();
+});
 </script>
 
 
