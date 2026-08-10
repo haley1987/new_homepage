@@ -13,6 +13,11 @@
     assign hw_is_lab_collection = true
   endif
 
+  assign hw_is_irons_collection = false
+  if collection.handle == 'golf-irons' or request.path contains '/collections/golf-irons'
+    assign hw_is_irons_collection = true
+  endif
+
   assign hw_collection_eyebrow = section.settings.eyebrow
   assign hw_collection_description = section.settings.fallback_description
   assign hw_collection_aside = section.settings.aside_copy
@@ -36,6 +41,11 @@
     assign hw_collection_eyebrow = 'One of one · Haywood HQ'
     assign hw_collection_description = 'One-of-a-kind clubs, experimental builds and limited pieces created at Haywood HQ. Each release is unique and available only while it lasts.'
   endif
+
+  if hw_is_irons_collection
+    assign hw_collection_eyebrow = 'Find your iron'
+    assign hw_collection_description = 'Four distinct profiles, from confidence-building forgiveness to compact forged precision. Compare the differences, then choose the iron built for your game.'
+  endif
 -%}
 
 {%- style -%}
@@ -46,7 +56,7 @@
   }
 {%- endstyle -%}
 
-<section class="hw-commerce hw-collection-hero{% if hw_is_accessories_collection or hw_is_lab_collection %} hw-collection-hero--minimal{% endif %}" aria-labelledby="CollectionHeading-{{ section.id }}">
+<section class="hw-commerce hw-collection-hero{% if hw_is_accessories_collection or hw_is_lab_collection or hw_is_irons_collection %} hw-collection-hero--minimal{% endif %}" aria-labelledby="CollectionHeading-{{ section.id }}">
   <div class="hw-collection-hero__inner{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <div class="hw-collection-hero__main">
       <div>
@@ -58,7 +68,7 @@
 
         {%- if section.settings.show_collection_description -%}
           <div class="hw-collection-hero__description rte">
-            {%- if hw_is_accessories_collection or hw_is_lab_collection -%}
+            {%- if hw_is_accessories_collection or hw_is_lab_collection or hw_is_irons_collection -%}
               <p>{{ hw_collection_description | escape }}</p>
             {%- elsif collection.description != blank -%}
               {{ collection.description }}
@@ -69,7 +79,7 @@
         {%- endif -%}
       </div>
 
-      {%- if hw_is_accessories_collection == false and hw_is_lab_collection == false -%}
+      {%- if hw_is_accessories_collection == false and hw_is_lab_collection == false and hw_is_irons_collection == false -%}
         <div class="hw-collection-hero__aside">
           <p class="hw-collection-hero__count">{{ collection.products_count }} {{ hw_collection_count_label }}</p>
           <p class="hw-collection-hero__aside-copy">{{ hw_collection_aside | escape }}</p>
@@ -77,12 +87,19 @@
       {%- endif -%}
     </div>
 
-    {%- if section.settings.show_decision_links and hw_is_accessories_collection == false and hw_is_lab_collection == false -%}
-      <nav class="hw-collection-hero__links" aria-label="Shop and fitting tools">
-        <a class="hw-collection-hero__link" href="{{ routes.all_products_collection_url }}">Shop all clubs</a>
-        <a class="hw-collection-hero__link" href="/pages/fitting-tool">Find My Fit</a>
-        <a class="hw-collection-hero__link" href="/pages/fitting-tool?view=iron-Selection">Compare irons</a>
-      </nav>
+    {%- if section.settings.show_decision_links -%}
+      {%- if hw_is_irons_collection -%}
+        <nav class="hw-collection-hero__links hw-collection-hero__links--two" aria-label="Iron fitting and comparison tools">
+          <a class="hw-collection-hero__link" href="/pages/fitting-tool">Find My Fit</a>
+          <a class="hw-collection-hero__link" href="/pages/fitting-tool?view=iron-Selection">Compare irons</a>
+        </nav>
+      {%- elsif hw_is_accessories_collection == false and hw_is_lab_collection == false -%}
+        <nav class="hw-collection-hero__links" aria-label="Shop and fitting tools">
+          <a class="hw-collection-hero__link" href="{{ routes.all_products_collection_url }}">Shop all clubs</a>
+          <a class="hw-collection-hero__link" href="/pages/fitting-tool">Find My Fit</a>
+          <a class="hw-collection-hero__link" href="/pages/fitting-tool?view=iron-Selection">Compare irons</a>
+        </nav>
+      {%- endif -%}
     {%- endif -%}
   </div>
 </section>
