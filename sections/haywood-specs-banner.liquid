@@ -1,194 +1,671 @@
-{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
-{% comment %}Haywood technical specifications — compact chart treatment, responsive at every breakpoint.{% endcomment %}
-{%- style -%}
-  /* Keep technical artwork legible without allowing it to become a full-screen banner. */
-  #Banner-{{ section.id }} {
-    width: 100%;
-    min-height: 0 !important;
-    height: auto !important;
-    display: block;
-  }
-  #Banner-{{ section.id }} .banner__media {
-    position: static;
-    min-height: 0 !important;
-    height: auto !important;
-    border: 1px solid rgba(11, 35, 65, .14);
-    background: #fff;
-  }
-  #Banner-{{ section.id }} .banner__media::before { content: none; display: none; }
-  #Banner-{{ section.id }} .banner__media .banner__media-image {
-    position: static;
-    display: block;
-    width: 100%;
-    max-width: 72rem;
-    height: auto;
-    max-height: 62rem;
-    margin-inline: auto;
-    padding: clamp(2rem, 4vw, 5rem);
-    object-fit: contain;
-  }
+{% comment %}
+  Haywood product specifications.
 
-  #shopify-section-{{ section.id }} {
-    padding: clamp(4.5rem, 5vw, 6.5rem) 0;
-    background: #f2eee5;
-  }
-
-  #shopify-section-{{ section.id }} .hw-specs-shell {
-    display: grid;
-    grid-template-columns: minmax(24rem, .42fr) minmax(0, .58fr);
-    gap: clamp(4rem, 7vw, 9rem);
-    align-items: center;
-    width: min(calc(100% - 8rem), 120rem);
-    margin-inline: auto;
-  }
-
-  #shopify-section-{{ section.id }} .hw-specs-eyebrow {
-    margin: 0;
-    color: #c9a66b;
-    font-size: 1.05rem;
-    font-weight: 700;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-  }
-
-  #shopify-section-{{ section.id }} h2.specs_banner_title {
-    max-width: 12ch;
-    margin: 1.4rem 0 2rem;
-    color: #0b2341;
-    font-family: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
-    font-size: clamp(3.8rem, 4vw, 5.2rem);
-    font-weight: 400;
-    letter-spacing: -.045em;
-    line-height: .95;
-    overflow-wrap: normal;
-    word-break: normal;
-  }
-
-  #shopify-section-{{ section.id }} .hw-specs-copy {
-    max-width: 42rem;
-    margin: 0;
-    color: #5d6470;
-    font-size: 1.65rem;
-    line-height: 1.65;
-  }
-
-  #shopify-section-{{ section.id }} .hw-specs-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 1.2rem;
-    margin-top: 2.6rem;
-    padding-bottom: .5rem;
-    border-bottom: 1px solid #c9a66b;
-    color: #0b2341;
-    font-size: 1.05rem;
-    font-weight: 700;
-    letter-spacing: .12em;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-
-  #shopify-section-{{ section.id }} .hw-specs-link:hover {
-    color: #8d6c37;
-  }
-
-  @media screen and (max-width: 749px) {
-    #shopify-section-{{ section.id }} {
-      padding: 4rem 0;
-    }
-
-    #shopify-section-{{ section.id }} .hw-specs-shell {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      width: calc(100% - 4rem);
-    }
-
-    #Banner-{{ section.id }} .banner__media .banner__media-image {
-      width: 100%;
-      max-width: 100%;
-      max-height: 54rem;
-      padding: 1.6rem;
-    }
-  }
-{%- endstyle -%}
-
+  The four core iron models use live, responsive HTML so customers never need
+  to zoom a flattened chart image. Other product families retain the existing
+  metafield-image fallback until their approved measurements are migrated.
+{% endcomment %}
 
 {%- liquid
   assign specs_url = product.metafields['specs-image']['specs-image']
-  assign fetch_priority = 'auto'
-  assign specs_copy = 'Review loft, lie, length, offset and head specifications in one place. Open the original chart when you need a closer look.'
-  if product.title contains 'Driver' or product.title contains 'Fairway' or product.title contains 'Hybrid'
-    assign specs_copy = 'Review loft, lie, head profile, length and available setup information in one place.'
-  elsif product.title contains 'Putter'
-    assign specs_copy = 'Review loft, lie, head weight and available length information in one place.'
-  elsif product.title contains 'Wedge'
-    assign specs_copy = 'Review loft, lie, length, bounce and sole specifications in one place.'
-  elsif product.tags contains 'headsonly' or product.title contains 'Heads Only' or product.title contains 'Head Only'
-    assign specs_copy = 'Review available lofts and head specifications before planning your build.'
-  endif
-  if section.index == 1
-    assign fetch_priority = 'high'
-  endif
+  assign has_structured_specs = false
+  assign model_name = product.title
+  assign model_type = 'Iron specifications'
+  assign profile_handicap = blank
+  assign profile_distance = 0
+  assign profile_forgiveness = 0
+  assign profile_workability = 0
+  assign spec_rows = blank
+  assign geometry_rows = blank
+
+  case product.handle
+    when 'cb2-forged-players-cavity-back-irons'
+      assign has_structured_specs = true
+      assign model_name = 'CB2'
+      assign model_type = 'Players cavity iron'
+      assign profile_handicap = '0–13'
+      assign profile_distance = 3
+      assign profile_forgiveness = 4
+      assign profile_workability = 4
+      assign spec_rows = '4^23°^38.5″^60.5°^0.11″^D3~5^26°^38″^61°^0.10″^D3~6^30°^37.5″^61.5°^0.09″^D3~7^34°^37″^62°^0.08″^D3~8^38°^36.5″^62.5°^0.07″^D3~9^42°^36″^63°^0.06″^D3~PW^46°^35.75″^63.5°^0.04″^D4~AW^50°^35.5″^63.5°^0.04″^D4' | split: '~'
+      assign geometry_rows = 'Blade length^3″~Club height^2.1″~Sole width^0.7″' | split: '~'
+    when 'mb2-forged-muscle-back-irons'
+      assign has_structured_specs = true
+      assign model_name = 'MB2'
+      assign model_type = 'Muscle back iron'
+      assign profile_handicap = '0–9'
+      assign profile_distance = 3
+      assign profile_forgiveness = 3
+      assign profile_workability = 5
+      assign spec_rows = '4^23°^38.5″^60.5°^0.11″^D3~5^26°^38″^61°^0.10″^D3~6^30°^37.5″^61.5°^0.09″^D3~7^34°^37″^62°^0.08″^D3~8^38°^36.5″^62.5°^0.07″^D3~9^42°^36″^63°^0.06″^D3~PW^46°^35.75″^63.5°^0.05″^D4~AW^50°^35.5″^63.5°^0.04″^D4' | split: '~'
+      assign geometry_rows = 'Blade length^3″~Club height^2.1″~Sole width^0.6″' | split: '~'
+    when 'pd-1-players-distance-irons'
+      assign has_structured_specs = true
+      assign model_name = 'PD.1'
+      assign model_type = 'Players distance iron'
+      assign profile_handicap = '5–15'
+      assign profile_distance = 4
+      assign profile_forgiveness = 4
+      assign profile_workability = 3
+      assign spec_rows = '4^21°^38.5″^61°^0.12″^D1~5^23°^38″^61.5°^0.10″^D1~6^26.5°^37.5″^62°^0.09″^D1~7^30.5°^37″^62.5°^0.08″^D1~8^35°^36.5″^63°^0.07″^D1~9^40°^36″^63.5°^0.06″^D1~PW^45°^35.75″^64°^0.05″^D2~AW^50°^35.5″^64°^0.04″^D2' | split: '~'
+      assign geometry_rows = 'Blade length^3″~Top line^0.25″~Sole width^0.75″~Club height^2.2″' | split: '~'
+    when 'sv-2-game-improvement-irons'
+      assign has_structured_specs = true
+      assign model_name = 'SV.2'
+      assign model_type = 'Game improvement iron'
+      assign profile_handicap = '15+'
+      assign profile_distance = 5
+      assign profile_forgiveness = 5
+      assign profile_workability = 3
+      assign spec_rows = '4^19°^38.5″^61.5°^0.20″^D1~5^22°^38″^62°^0.18″^D1~6^25.5°^37.5″^62.5°^0.16″^D1~7^29.5°^37″^63°^0.13″^D1~8^33.5°^36.5″^63.5°^0.10″^D1~9^38°^36″^64°^0.08″^D1~PW^43°^35.75″^64.5°^0.07″^D2~AW^48°^35.5″^64.5°^0.06″^D2' | split: '~'
+      assign geometry_rows = 'Blade length^3.15″~Top line^0.3″~Sole width^0.90″~Club height^2.2″' | split: '~'
+  endcase
 -%}
 
-{%- comment -%}
-  Renders only when product.metafields['specs-image']['specs-image'] (URL) is present.
-  If empty, the section outputs nothing (self-hiding).
-{%- endcomment -%}
-{%- if specs_url != blank -%}
-<div class="hw-specs-shell">
-  <header class="hw-specs-intro">
-    <p class="hw-specs-eyebrow">Technical reference</p>
-    <h2 class="specs_banner_title" id="full-specs">Club specifications.</h2>
-    <p class="hw-specs-copy">{{ specs_copy }}</p>
-    <a class="hw-specs-link" href="{{ specs_url | escape }}" target="_blank" rel="noopener">
-      Open full-size chart <span aria-hidden="true">→</span>
-    </a>
-  </header>
-  <div
-    id="Banner-{{ section.id }}"
-    class="banner banner--content-align-center{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
-  >
-    <div class="banner__media media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      <img
-        src="{{ specs_url | escape }}"
-        alt="{{ product.title | escape }} specifications"
-        width="1600"
-        height="1600"
-        class="banner__media-image"
-        loading="lazy"
-        decoding="async"
-        fetchpriority="{{ fetch_priority }}"
-      >
+{%- if has_structured_specs -%}
+  {%- style -%}
+    #HaywoodSpecs-{{ section.id }} {
+      --hw-navy: #0b2341;
+      --hw-gold: #c9a66b;
+      --hw-cream: #f3efe7;
+      --hw-line: rgba(11, 35, 65, .14);
+      --hw-muted: #5d6470;
+      padding: clamp(5rem, 7vw, 9rem) 0;
+      background: var(--hw-cream);
+      color: var(--hw-navy);
+    }
+
+    #HaywoodSpecs-{{ section.id }} * { box-sizing: border-box; }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__shell {
+      width: min(calc(100% - 8rem), 120rem);
+      margin-inline: auto;
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__header {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(32rem, .45fr);
+      gap: clamp(4rem, 8vw, 12rem);
+      align-items: end;
+      margin-bottom: clamp(3.5rem, 5vw, 6rem);
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__eyebrow,
+    #HaywoodSpecs-{{ section.id }} .hw-specs__label {
+      margin: 0;
+      color: var(--hw-gold);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__title {
+      margin: 1.3rem 0 0;
+      color: var(--hw-navy);
+      font-family: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+      font-size: clamp(4.2rem, 5vw, 6.8rem);
+      font-weight: 400;
+      letter-spacing: -.045em;
+      line-height: .95;
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__intro {
+      max-width: 48rem;
+      margin: 0;
+      color: var(--hw-muted);
+      font-size: 1.7rem;
+      line-height: 1.65;
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__profile {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-bottom: 2.4rem;
+      border: 1px solid var(--hw-line);
+      background: rgba(255, 255, 255, .55);
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__profile-card {
+      min-width: 0;
+      padding: 2.2rem 2.4rem;
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__profile-card + .hw-specs__profile-card {
+      border-left: 1px solid var(--hw-line);
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__profile-card strong {
+      display: block;
+      margin-top: 1.1rem;
+      color: var(--hw-navy);
+      font-size: 2.1rem;
+      font-weight: 500;
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__rating {
+      display: flex;
+      gap: .65rem;
+      margin-top: 1.4rem;
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__rating span {
+      width: .9rem;
+      height: .9rem;
+      border: 1px solid rgba(11, 35, 65, .45);
+      border-radius: 50%;
+      background: transparent;
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__rating span.is-filled {
+      border-color: var(--hw-navy);
+      background: var(--hw-navy);
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__table-card {
+      overflow: hidden;
+      border: 1px solid var(--hw-line);
+      background: #fff;
+    }
+
+    #HaywoodSpecs-{{ section.id }} table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      color: var(--hw-navy);
+      font-size: 1.6rem;
+    }
+
+    #HaywoodSpecs-{{ section.id }} th,
+    #HaywoodSpecs-{{ section.id }} td {
+      padding: 1.55rem 1.8rem;
+      border-bottom: 1px solid var(--hw-line);
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    #HaywoodSpecs-{{ section.id }} thead th {
+      background: var(--hw-navy);
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    #HaywoodSpecs-{{ section.id }} tbody th {
+      color: var(--hw-navy);
+      font-weight: 700;
+    }
+
+    #HaywoodSpecs-{{ section.id }} tbody tr:nth-child(even) {
+      background: rgba(243, 239, 231, .45);
+    }
+
+    #HaywoodSpecs-{{ section.id }} tbody tr:last-child > * { border-bottom: 0; }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__note {
+      margin: 1.5rem 0 0;
+      color: var(--hw-muted);
+      font-size: 1.25rem;
+      line-height: 1.55;
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__geometry {
+      display: grid;
+      grid-template-columns: repeat({{ geometry_rows.size }}, 1fr);
+      margin: 3rem 0 0;
+      border: 1px solid var(--hw-line);
+      background: rgba(255, 255, 255, .55);
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__geometry div {
+      padding: 2rem 2.4rem;
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__geometry div + div {
+      border-left: 1px solid var(--hw-line);
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__geometry dt {
+      color: var(--hw-muted);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__geometry dd {
+      margin: .9rem 0 0;
+      color: var(--hw-navy);
+      font-family: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+      font-size: 2.6rem;
+      line-height: 1;
+    }
+
+    #HaywoodSpecs-{{ section.id }} .hw-specs__mobile { display: none; }
+
+    @media screen and (max-width: 749px) {
+      #HaywoodSpecs-{{ section.id }} { padding: 4.8rem 0; }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__shell {
+        width: calc(100% - 4rem);
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__header {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 3.2rem;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__title {
+        font-size: clamp(4rem, 13vw, 5.4rem);
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__intro { font-size: 1.6rem; }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__profile {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__profile-card {
+        padding: 1.8rem;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__profile-card:nth-child(3) {
+        border-left: 0;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__profile-card:nth-child(n+3) {
+        border-top: 1px solid var(--hw-line);
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__desktop { display: none; }
+      #HaywoodSpecs-{{ section.id }} .hw-specs__mobile { display: block; }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__club-picker {
+        display: flex;
+        gap: .8rem;
+        margin: 1.2rem -2rem 0;
+        padding: .4rem 2rem 1rem;
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        scrollbar-width: thin;
+        scroll-snap-type: x proximity;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__club-picker button {
+        min-width: 5rem;
+        min-height: 4.8rem;
+        flex: 0 0 auto;
+        border: 1px solid var(--hw-line);
+        border-radius: 0;
+        background: #fff;
+        color: var(--hw-navy);
+        font: inherit;
+        font-size: 1.5rem;
+        font-weight: 700;
+        scroll-snap-align: start;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__club-picker button[aria-selected="true"] {
+        border-color: var(--hw-navy);
+        background: var(--hw-navy);
+        color: #fff;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__panel {
+        margin-top: 1rem;
+        padding: 2rem;
+        border: 1px solid var(--hw-line);
+        background: #fff;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__panel[hidden] { display: none; }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__panel h3 {
+        margin: 0 0 1.8rem;
+        color: var(--hw-navy);
+        font-family: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+        font-size: 3rem;
+        font-weight: 400;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__panel dl {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin: 0;
+        border-top: 1px solid var(--hw-line);
+        border-left: 1px solid var(--hw-line);
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__panel dl div {
+        min-width: 0;
+        padding: 1.5rem;
+        border-right: 1px solid var(--hw-line);
+        border-bottom: 1px solid var(--hw-line);
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__panel dt {
+        color: var(--hw-muted);
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__panel dd {
+        margin: .7rem 0 0;
+        color: var(--hw-navy);
+        font-size: 1.8rem;
+        font-weight: 600;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__compare-all {
+        margin-top: 1.6rem;
+        border-top: 1px solid var(--hw-line);
+        border-bottom: 1px solid var(--hw-line);
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__compare-all summary {
+        display: flex;
+        min-height: 5.6rem;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--hw-navy);
+        cursor: pointer;
+        font-size: 1.15rem;
+        font-weight: 700;
+        letter-spacing: .12em;
+        list-style: none;
+        text-transform: uppercase;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__compare-all summary::-webkit-details-marker { display: none; }
+      #HaywoodSpecs-{{ section.id }} .hw-specs__compare-all summary::after { content: '+'; font-size: 2rem; font-weight: 400; }
+      #HaywoodSpecs-{{ section.id }} .hw-specs__compare-all[open] summary::after { content: '−'; }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__swipe-hint {
+        margin: 0 0 1rem;
+        color: var(--hw-muted);
+        font-size: 1.2rem;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__mobile-table {
+        max-width: 100%;
+        margin-bottom: 1.6rem;
+        overflow-x: auto;
+        border: 1px solid var(--hw-line);
+        background: #fff;
+        scrollbar-width: thin;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__mobile-table table {
+        width: 70rem;
+        font-size: 1.45rem;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__mobile-table th:first-child,
+      #HaywoodSpecs-{{ section.id }} .hw-specs__mobile-table td:first-child {
+        position: sticky;
+        left: 0;
+        z-index: 1;
+        background: #fff;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__mobile-table thead th:first-child {
+        z-index: 2;
+        background: var(--hw-navy);
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__geometry {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__geometry div {
+        padding: 1.7rem;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__geometry div:nth-child(odd) {
+        border-left: 0;
+      }
+
+      #HaywoodSpecs-{{ section.id }} .hw-specs__geometry div:nth-child(n+3) {
+        border-top: 1px solid var(--hw-line);
+      }
+    }
+  {%- endstyle -%}
+
+  <section id="HaywoodSpecs-{{ section.id }}" class="hw-specs" data-hw-specs>
+    <div class="hw-specs__shell">
+      <header class="hw-specs__header">
+        <div>
+          <p class="hw-specs__eyebrow">Technical reference</p>
+          <h2 class="hw-specs__title" id="full-specs">{{ model_name }} specifications.</h2>
+        </div>
+        <p class="hw-specs__intro">
+          Review every club without opening a separate chart. Select a club on mobile or compare the complete set on desktop.
+        </p>
+      </header>
+
+      <div class="hw-specs__profile" aria-label="{{ model_name }} player profile">
+        <article class="hw-specs__profile-card">
+          <p class="hw-specs__label">Player profile</p>
+          <strong>{{ profile_handicap }} handicap</strong>
+        </article>
+        <article class="hw-specs__profile-card">
+          <p class="hw-specs__label">Distance</p>
+          <div class="hw-specs__rating" aria-label="{{ profile_distance }} out of 5">
+            {%- for rating_index in (1..5) -%}<span{% if rating_index <= profile_distance %} class="is-filled"{% endif %} aria-hidden="true"></span>{%- endfor -%}
+          </div>
+        </article>
+        <article class="hw-specs__profile-card">
+          <p class="hw-specs__label">Forgiveness</p>
+          <div class="hw-specs__rating" aria-label="{{ profile_forgiveness }} out of 5">
+            {%- for rating_index in (1..5) -%}<span{% if rating_index <= profile_forgiveness %} class="is-filled"{% endif %} aria-hidden="true"></span>{%- endfor -%}
+          </div>
+        </article>
+        <article class="hw-specs__profile-card">
+          <p class="hw-specs__label">Workability</p>
+          <div class="hw-specs__rating" aria-label="{{ profile_workability }} out of 5">
+            {%- for rating_index in (1..5) -%}<span{% if rating_index <= profile_workability %} class="is-filled"{% endif %} aria-hidden="true"></span>{%- endfor -%}
+          </div>
+        </article>
+      </div>
+
+      <div class="hw-specs__desktop">
+        <div class="hw-specs__table-card">
+          <table>
+            <caption class="visually-hidden">{{ model_name }} loft, length, lie, offset and swing weight by club</caption>
+            <thead>
+              <tr><th scope="col">Club</th><th scope="col">Loft</th><th scope="col">Length</th><th scope="col">Lie</th><th scope="col">Offset</th><th scope="col">Swing weight</th></tr>
+            </thead>
+            <tbody>
+              {%- for spec_row in spec_rows -%}
+                {%- assign cells = spec_row | split: '^' -%}
+                <tr><th scope="row">{{ cells[0] }}</th><td>{{ cells[1] }}</td><td>{{ cells[2] }}</td><td>{{ cells[3] }}</td><td>{{ cells[4] }}</td><td>{{ cells[5] }}</td></tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="hw-specs__mobile">
+        <p class="hw-specs__label">Choose a club</p>
+        <div class="hw-specs__club-picker" role="tablist" aria-label="Choose a {{ model_name }} club">
+          {%- for spec_row in spec_rows -%}
+            {%- assign cells = spec_row | split: '^' -%}
+            <button type="button" role="tab" id="SpecsTab-{{ section.id }}-{{ forloop.index0 }}" aria-controls="SpecsPanel-{{ section.id }}-{{ forloop.index0 }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" tabindex="{% if forloop.first %}0{% else %}-1{% endif %}">{{ cells[0] }}</button>
+          {%- endfor -%}
+        </div>
+
+        <div class="hw-specs__panels">
+          {%- for spec_row in spec_rows -%}
+            {%- assign cells = spec_row | split: '^' -%}
+            <article class="hw-specs__panel" role="tabpanel" id="SpecsPanel-{{ section.id }}-{{ forloop.index0 }}" aria-labelledby="SpecsTab-{{ section.id }}-{{ forloop.index0 }}"{% unless forloop.first %} hidden{% endunless %}>
+              <h3>{{ cells[0] }} iron</h3>
+              <dl>
+                <div><dt>Loft</dt><dd>{{ cells[1] }}</dd></div>
+                <div><dt>Length</dt><dd>{{ cells[2] }}</dd></div>
+                <div><dt>Lie</dt><dd>{{ cells[3] }}</dd></div>
+                <div><dt>Offset</dt><dd>{{ cells[4] }}</dd></div>
+                <div><dt>Swing weight</dt><dd>{{ cells[5] }}</dd></div>
+              </dl>
+            </article>
+          {%- endfor -%}
+        </div>
+
+        <details class="hw-specs__compare-all">
+          <summary>Compare all clubs</summary>
+          <p class="hw-specs__swipe-hint">Swipe across to review every measurement.</p>
+          <div class="hw-specs__mobile-table" tabindex="0" role="region" aria-label="Scrollable {{ model_name }} specifications">
+            <table>
+              <caption class="visually-hidden">{{ model_name }} loft, length, lie, offset and swing weight by club</caption>
+              <thead>
+                <tr><th scope="col">Club</th><th scope="col">Loft</th><th scope="col">Length</th><th scope="col">Lie</th><th scope="col">Offset</th><th scope="col">Swing weight</th></tr>
+              </thead>
+              <tbody>
+                {%- for spec_row in spec_rows -%}
+                  {%- assign cells = spec_row | split: '^' -%}
+                  <tr><th scope="row">{{ cells[0] }}</th><td>{{ cells[1] }}</td><td>{{ cells[2] }}</td><td>{{ cells[3] }}</td><td>{{ cells[4] }}</td><td>{{ cells[5] }}</td></tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+
+      <p class="hw-specs__note">Swing weights are based on standard length with a 110 g shaft. Actual swing weight varies with custom length, shaft and grip selections.</p>
+
+      <dl class="hw-specs__geometry" aria-label="{{ model_name }} number 7 iron head geometry">
+        {%- for geometry_row in geometry_rows -%}
+          {%- assign geometry_cells = geometry_row | split: '^' -%}
+          <div><dt>{{ geometry_cells[0] }}</dt><dd>{{ geometry_cells[1] }}</dd></div>
+        {%- endfor -%}
+      </dl>
     </div>
-  </div>
-</div>
+  </section>
+
+  <script>
+    (() => {
+      const root = document.getElementById('HaywoodSpecs-{{ section.id }}');
+      if (!root || root.dataset.enhanced === 'true') return;
+      root.dataset.enhanced = 'true';
+
+      const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
+      const panels = Array.from(root.querySelectorAll('[role="tabpanel"]'));
+
+      const selectTab = (nextTab, moveFocus = false) => {
+        tabs.forEach((tab) => {
+          const selected = tab === nextTab;
+          tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+          tab.tabIndex = selected ? 0 : -1;
+        });
+        panels.forEach((panel) => {
+          panel.hidden = panel.id !== nextTab.getAttribute('aria-controls');
+        });
+        if (moveFocus) nextTab.focus();
+      };
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => selectTab(tab));
+        tab.addEventListener('keydown', (event) => {
+          let nextIndex = null;
+          if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+          if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+          if (event.key === 'Home') nextIndex = 0;
+          if (event.key === 'End') nextIndex = tabs.length - 1;
+          if (nextIndex === null) return;
+          event.preventDefault();
+          selectTab(tabs[nextIndex], true);
+        });
+      });
+    })();
+  </script>
+{%- elsif specs_url != blank -%}
+  {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+  {%- style -%}
+    #shopify-section-{{ section.id }} {
+      padding: clamp(4.5rem, 5vw, 6.5rem) 0;
+      background: #f3efe7;
+    }
+    #shopify-section-{{ section.id }} .hw-specs-fallback {
+      width: min(calc(100% - 8rem), 120rem);
+      margin-inline: auto;
+    }
+    #shopify-section-{{ section.id }} .hw-specs-fallback__header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 4rem;
+      margin-bottom: 3rem;
+    }
+    #shopify-section-{{ section.id }} .hw-specs-fallback__eyebrow {
+      margin: 0 0 1rem;
+      color: #c9a66b;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    #shopify-section-{{ section.id }} .hw-specs-fallback h2 {
+      margin: 0;
+      color: #0b2341;
+      font-family: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+      font-size: clamp(3.8rem, 4vw, 5.2rem);
+      font-weight: 400;
+      letter-spacing: -.045em;
+      line-height: .95;
+    }
+    #shopify-section-{{ section.id }} .hw-specs-fallback__copy {
+      max-width: 46rem;
+      margin: 0;
+      color: #5d6470;
+      font-size: 1.6rem;
+      line-height: 1.6;
+    }
+    #shopify-section-{{ section.id }} .hw-specs-fallback__media {
+      display: grid;
+      min-height: 32rem;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid rgba(11, 35, 65, .14);
+      background: #fff;
+    }
+    #shopify-section-{{ section.id }} .hw-specs-fallback__media img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 64rem;
+      object-fit: contain;
+    }
+    @media screen and (max-width: 749px) {
+      #shopify-section-{{ section.id }} .hw-specs-fallback { width: calc(100% - 4rem); }
+      #shopify-section-{{ section.id }} .hw-specs-fallback__header { display: block; }
+      #shopify-section-{{ section.id }} .hw-specs-fallback__copy { margin-top: 1.5rem; }
+      #shopify-section-{{ section.id }} .hw-specs-fallback__media { min-height: 0; }
+      #shopify-section-{{ section.id }} .hw-specs-fallback__media img { max-height: 56rem; }
+    }
+  {%- endstyle -%}
+  <section class="hw-specs-fallback">
+    <header class="hw-specs-fallback__header">
+      <div><p class="hw-specs-fallback__eyebrow">Technical reference</p><h2 id="full-specs">Club specifications.</h2></div>
+      <p class="hw-specs-fallback__copy">Review the approved measurements for {{ product.title }}. This product will move to the same live specification format as the core iron lineup.</p>
+    </header>
+    <div class="hw-specs-fallback__media">
+      <img src="{{ specs_url | escape }}" alt="{{ product.title | escape }} specifications" width="1600" height="1600" loading="lazy" decoding="async">
+    </div>
+  </section>
 {%- endif -%}
 
 {% schema %}
 {
-  "name": "Specs Image Banner",
+  "name": "Club specifications",
   "tag": "section",
   "class": "section",
   "disabled_on": { "groups": ["header", "footer"] },
-  "settings": [
-    {
-      "type": "select",
-      "id": "image_height",
-      "label": "Image height",
-      "options": [
-        { "value": "small", "label": "Small" },
-        { "value": "medium", "label": "Medium" },
-        { "value": "large", "label": "Large" }
-      ],
-      "default": "medium"
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "Color scheme",
-      "default": "scheme-1"
-    }
-  ],
-  "presets": [{ "name": "Specs Image Banner (URL metafield)" }]
+  "settings": [],
+  "presets": [{ "name": "Club specifications" }]
 }
 {% endschema %}
