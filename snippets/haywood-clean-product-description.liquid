@@ -3,14 +3,28 @@
   merchant-authored product description. Splitting on closing paragraphs handles
   plain text, bold-prefix and spacing variants without altering other content.
 {%- endcomment -%}
-{%- assign description_paragraphs = description | split: '</p>' -%}
-{%- for description_paragraph in description_paragraphs -%}
-  {%- unless description_paragraph contains 'Options may not appear in the Shop App'
-    or description_paragraph contains 'custom options before purchasing'
-  -%}
-    {{- description_paragraph -}}
-    {%- if description_paragraph contains '<p' -%}
-      {{- '</p>' -}}
-    {%- endif -%}
-  {%- endunless -%}
-{%- endfor -%}
+{%- capture cleaned_description -%}
+  {%- assign description_paragraphs = description | split: '</p>' -%}
+  {%- for description_paragraph in description_paragraphs -%}
+    {%- unless description_paragraph contains 'Options may not appear in the Shop App'
+      or description_paragraph contains 'custom options before purchasing'
+    -%}
+      {{- description_paragraph -}}
+      {%- if description_paragraph contains '<p' -%}
+        {{- '</p>' -}}
+      {%- endif -%}
+    {%- endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- comment -%}
+  Some legacy descriptions wrapped the retired warning in a div. Removing the
+  warning paragraph can leave its closing tag at the start of the remaining
+  description, which would close the product-overview layout prematurely.
+{%- endcomment -%}
+{%- assign cleaned_description = cleaned_description | strip -%}
+{%- assign leading_tag = cleaned_description | slice: 0, 6 -%}
+{%- if leading_tag == '</div>' -%}
+  {%- assign cleaned_description = cleaned_description | remove_first: '</div>' | strip -%}
+{%- endif -%}
+{{- cleaned_description -}}
