@@ -1,1 +1,192 @@
-{"sections":{"sidebar-drawer":{"type":"sidebar-drawer","settings":{"sidebar_second_menu":"footer-new","menu":"new-menu","menu_color_scheme":"1"}},"main":{"type":"haywood-main-product","blocks":{"title":{"type":"title","settings":{}},"judge_me_reviews_preview_badge_9CCyGN":{"type":"shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{}},"variant_picker_heads_only_3jUBxT":{"type":"variant_picker_heads_only","disabled":true,"settings":{"picker_type":"button","swatch_shape":"circle"}},"variant_picker_EHFnij":{"type":"variant_picker","settings":{"picker_type":"button","swatch_shape":"circle"}},"haywood_from_price_hAUtKp":{"type":"haywood_from_price","settings":{"prefix":"From","always_show":false,"text_style":"subtitle"}},"price_QDr4yX":{"type":"price","settings":{}},"buy_buttons_cURrpf":{"type":"buy_buttons","settings":{"show_dynamic_checkout":false,"show_gift_card_recipient":false}},"haywood_cta":{"type":"haywood_cta","settings":{"configure_label":"Configure your","show_specs":true,"show_quiz":true}},"haywood_trust":{"type":"haywood_trust","settings":{}},"haywood_bullets":{"type":"haywood_bullets","settings":{}},"description_WXXr9i":{"type":"description","settings":{}}},"block_order":["title","judge_me_reviews_preview_badge_9CCyGN","variant_picker_heads_only_3jUBxT","variant_picker_EHFnij","haywood_from_price_hAUtKp","price_QDr4yX","buy_buttons_cURrpf","haywood_cta","haywood_trust","haywood_bullets","description_WXXr9i"],"settings":{"enable_sticky_info":true,"color_scheme":"scheme-1","media_size":"small","constrain_to_viewport":false,"media_fit":"cover","gallery_layout":"thumbnail_slider","mobile_thumbnails":"show","media_position":"left","image_zoom":"none","hide_variants":true,"enable_video_looping":false,"padding_top":12,"padding_bottom":12}},"haywood-why-players":{"type":"haywood-why-players","custom_css":[],"settings":{}},"haywood_specs_banner_8GDpmp":{"type":"haywood-specs-banner","name":"Specs Image Banner (URL metafield)","settings":{"image_height":"large","color_scheme":""}},"haywood-ugc":{"type":"haywood-ugc","settings":{}},"haywood-sticky-bar":{"type":"haywood-sticky-bar","settings":{"sticky_text":"Ready to configure your build?","sticky_cta":"Configure »"}},"share_buttons_custom_NUBeUH":{"type":"share-buttons-custom","name":"Share row (custom)","settings":{"heading":"","enable_facebook":true,"enable_twitter":true,"enable_pinterest":true,"enable_instagram":true,"label_facebook":"SHARE","label_twitter":"TWEET","label_pinterest":"PIN IT","label_instagram":"INSTA"}},"1760032837c8e7d26b":{"type":"apps","settings":{"include_margins":true}},"1770052810edf0027a":{"type":"apps","blocks":{"judge_me_reviews_review_widget_eg7Fci":{"type":"shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{"review_data":"sample_data","max_width":1200,"show_shop_reviews":false,"empty_state":"other_products_reviews"}}},"block_order":["judge_me_reviews_review_widget_eg7Fci"],"settings":{"include_margins":true}}},"order":["sidebar-drawer","main","haywood-why-players","haywood_specs_banner_8GDpmp","haywood-ugc","haywood-sticky-bar","share_buttons_custom_NUBeUH","1760032837c8e7d26b","1770052810edf0027a"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "sidebar-drawer": {
+      "type": "sidebar-drawer",
+      "settings": {
+        "sidebar_second_menu": "footer-new",
+        "menu": "new-menu",
+        "menu_color_scheme": "1"
+      }
+    },
+    "main": {
+      "type": "haywood-main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge_9CCyGN": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "variant_picker_heads_only_3jUBxT": {
+          "type": "variant_picker_heads_only",
+          "disabled": true,
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "variant_picker_EHFnij": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "haywood_from_price_hAUtKp": {
+          "type": "haywood_from_price",
+          "settings": {
+            "prefix": "From",
+            "always_show": false,
+            "text_style": "subtitle"
+          }
+        },
+        "price_QDr4yX": {
+          "type": "price",
+          "settings": {}
+        },
+        "buy_buttons_cURrpf": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "haywood_cta": {
+          "type": "haywood_cta",
+          "settings": {
+            "configure_label": "Configure your",
+            "show_specs": true,
+            "show_quiz": true
+          }
+        },
+        "haywood_trust": {
+          "type": "haywood_trust",
+          "settings": {}
+        },
+        "haywood_bullets": {
+          "type": "haywood_bullets",
+          "settings": {}
+        },
+        "description_WXXr9i": {
+          "type": "description",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "title",
+        "judge_me_reviews_preview_badge_9CCyGN",
+        "variant_picker_heads_only_3jUBxT",
+        "variant_picker_EHFnij",
+        "haywood_from_price_hAUtKp",
+        "price_QDr4yX",
+        "buy_buttons_cURrpf",
+        "haywood_cta",
+        "haywood_trust",
+        "haywood_bullets",
+        "description_WXXr9i"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "small",
+        "constrain_to_viewport": false,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "none",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "haywood-why-players": {
+      "type": "haywood-why-players",
+      "custom_css": [],
+      "settings": {}
+    },
+    "haywood_specs_banner_8GDpmp": {
+      "type": "haywood-specs-banner",
+      "name": "Specs Image Banner (URL metafield)",
+      "settings": {
+        "image_height": "large",
+        "color_scheme": ""
+      }
+    },
+    "haywood-ugc": {
+      "type": "haywood-ugc",
+      "settings": {}
+    },
+    "haywood-sticky-bar": {
+      "type": "haywood-sticky-bar",
+      "settings": {
+        "sticky_text": "Ready to configure your build?",
+        "sticky_cta": "Configure »"
+      }
+    },
+    "share_buttons_custom_NUBeUH": {
+      "type": "share-buttons-custom",
+      "name": "Share row (custom)",
+      "settings": {
+        "heading": "",
+        "enable_facebook": true,
+        "enable_twitter": true,
+        "enable_pinterest": true,
+        "enable_instagram": true,
+        "label_facebook": "SHARE",
+        "label_twitter": "TWEET",
+        "label_pinterest": "PIN IT",
+        "label_instagram": "INSTA"
+      }
+    },
+    "1760032837c8e7d26b": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "1770052810edf0027a": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_eg7Fci": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "other_products_reviews"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_eg7Fci"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "sidebar-drawer",
+    "main",
+    "haywood-why-players",
+    "haywood_specs_banner_8GDpmp",
+    "haywood-ugc",
+    "haywood-sticky-bar",
+    "share_buttons_custom_NUBeUH",
+    "1760032837c8e7d26b",
+    "1770052810edf0027a"
+  ]
+}
