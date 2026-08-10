@@ -39,7 +39,7 @@
 
 {%- liquid
   assign hw_is_accessories_collection = false
-  if collection.handle == 'merch' or collection.title contains 'Accessories' or collection.title contains 'Merch'
+  if collection.handle == 'merch' or collection.title contains 'Accessories' or collection.title contains 'Merch' or request.path contains '/collections/merch'
     assign hw_is_accessories_collection = true
   endif
 -%}
