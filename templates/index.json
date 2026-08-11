@@ -511,6 +511,7 @@
         "education_3",
         "education_4"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "From the Journal",
         "heading": "Know what you’re playing.",
