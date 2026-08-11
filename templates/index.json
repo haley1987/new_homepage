@@ -525,6 +525,7 @@
         "community_1": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/haywood-27_resized.jpg",
             "image_purpose": "COMMUNITY IMAGE 01",
             "caption": "",
             "link": ""
@@ -533,6 +534,7 @@
         "community_2": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/camo_towel_-_product.jpg",
             "image_purpose": "COMMUNITY IMAGE 02",
             "caption": "",
             "link": ""
@@ -541,6 +543,7 @@
         "community_3": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/haywood-34.jpg",
             "image_purpose": "COMMUNITY IMAGE 03",
             "caption": "",
             "link": ""
@@ -549,6 +552,7 @@
         "community_4": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/black_putter_-_ugc_-_back_2.jpg",
             "image_purpose": "COMMUNITY IMAGE 04",
             "caption": "",
             "link": ""
@@ -557,6 +561,7 @@
         "community_5": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/haywood-1_resized.jpg",
             "image_purpose": "COMMUNITY IMAGE 05",
             "caption": "",
             "link": ""
