@@ -196,7 +196,7 @@ label.order-confirm-checkbox{
       type="checkbox"
       id="order-confirm-checkbox"
     >
-    <span class="order-confirm-text">I have reviewed my products and custom specifications.</span>
+    <span class="order-confirm-text">I confirm that I’ve reviewed my order and all custom specifications. Changes requested after checkout may incur a $25 adjustment fee.</span>
   </label>
 
             {%- else -%}
@@ -244,7 +244,7 @@ label.order-confirm-checkbox{
         if (!checkbox.checked) {
           e.preventDefault();
 
-          alert('Please confirm that your order and configurations are accurate before proceeding to checkout.');
+          alert('Please review and confirm your order and custom specifications before proceeding to checkout.');
 
           // Scroll into view
           checkbox.scrollIntoView({ behavior: 'smooth', block: 'center' });
