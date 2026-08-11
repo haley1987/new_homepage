@@ -1,0 +1,33 @@
+{%- comment -%}
+  Renders one collection product card in a stable DOM position.
+  The iron collection supplies its own fixed item_index sequence so scroll
+  animations never need CSS order values that can be overwritten in-browser.
+{%- endcomment -%}
+
+{%- liquid
+  assign lazy_load = false
+  if item_index > 2
+    assign lazy_load = true
+  endif
+-%}
+
+<li
+  class="grid__item{% if reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if reveal_on_scroll %}
+    data-cascade
+    style="--animation-order: {{ item_index }};"
+  {% endif %}
+>
+  {% render 'card-product',
+    card_product: card_product,
+    media_aspect_ratio: media_aspect_ratio,
+    image_shape: image_shape,
+    show_secondary_image: show_secondary_image,
+    show_vendor: show_vendor,
+    show_rating: show_rating,
+    lazy_load: lazy_load,
+    skip_styles: skip_styles,
+    quick_add: quick_add,
+    section_id: section_id
+  %}
+</li>
