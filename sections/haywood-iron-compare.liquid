@@ -2,6 +2,7 @@
 
 {%- liquid
   assign trial_product = section.settings.trial_product
+  assign combo_product = section.settings.combo_product
 -%}
 
 <main class="hw-compare">
@@ -24,6 +25,9 @@
           {%- assign compare_product = block.settings.product -%}
           {%- if compare_product != blank -%}
             <a href="#compare-{{ compare_product.handle }}">{{ block.settings.short_name | default: compare_product.title | escape }}</a>
+          {%- endif -%}
+          {%- if forloop.index == 2 and combo_product != blank -%}
+            <a href="#compare-{{ combo_product.handle }}">SV.2 + PD.1 Combo</a>
           {%- endif -%}
         {%- endfor -%}
       </nav>
@@ -60,6 +64,27 @@
                 <h3>{{ block.settings.short_name | default: compare_product.title | escape }}</h3>
                 <p class="hw-compare-card__best">{{ block.settings.best_for | escape }}</p>
                 <a class="hw-compare-card__link" href="{{ compare_product.url }}">Explore model <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+          {%- endif -%}
+          {%- if forloop.index == 2 and combo_product != blank -%}
+            <article class="hw-compare-combo" id="compare-{{ combo_product.handle }}">
+              <a class="hw-compare-combo__media" href="{{ combo_product.url }}" aria-label="Explore the SV.2 and PD.1 combo set">
+                {%- if combo_product.featured_image != blank -%}
+                  {{ combo_product.featured_image | image_url: width: 1600 | image_tag:
+                    widths: '600, 900, 1200, 1600',
+                    sizes: '(min-width: 990px) 48vw, 100vw',
+                    loading: 'lazy',
+                    alt: combo_product.featured_image.alt | default: combo_product.title
+                  }}
+                {%- endif -%}
+              </a>
+              <div class="hw-compare-combo__body">
+                <p class="hw-compare-card__position">Blended set</p>
+                <h3>SV.2 + PD.1 Combo</h3>
+                <p class="hw-compare-combo__path">SV.2 long irons <span aria-hidden="true">→</span> PD.1 scoring irons</p>
+                <p class="hw-compare-card__best">Combine easier-launching SV.2 long irons with the more compact control of PD.1 through the scoring clubs.</p>
+                <a class="hw-compare-card__link" href="{{ combo_product.url }}">Explore combo set <span aria-hidden="true">→</span></a>
               </div>
             </article>
           {%- endif -%}
@@ -200,6 +225,7 @@
     { "type": "textarea", "id": "intro", "label": "Introduction", "default": "Compare the SV.2, PD.1, CB2 and MB2 by forgiveness, launch, workability and player profile—then explore the model that feels right." },
     { "type": "textarea", "id": "aside_copy", "label": "Hero supporting copy", "default": "Start with the performance characteristics you value most. Use Find My Fit if you would rather receive a recommendation." },
     { "type": "textarea", "id": "models_intro", "label": "Model section copy", "default": "The lineup moves from maximum help and easy launch to maximum feedback and shot control. There is no universally best iron—only the best starting point for your game." },
+    { "type": "product", "id": "combo_product", "label": "SV.2 + PD.1 combo product" },
     { "type": "product", "id": "trial_product", "label": "7-Iron Program product" },
     { "type": "textarea", "id": "trial_copy", "label": "7-Iron Program copy", "default": "Order one brand-new 7-iron built to your specifications. If you move into the full set, its purchase price is applied toward your order." },
     { "type": "url", "id": "fit_link", "label": "Find My Fit link" }
