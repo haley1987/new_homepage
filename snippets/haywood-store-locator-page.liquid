@@ -37,9 +37,29 @@
     </div>
   </section>
 
-  <section class="hwl__locator" aria-label="Haywood dealer and fitting partner locations">
-    <div class="hwl__locator-frame">
-      {{ page.content }}
+  <section class="hwl__locator" aria-labelledby="hwl-locator-title">
+    <div class="hwl__locator-shell">
+      <div class="hwl__locator-heading">
+        <div>
+          <p class="hwl__locator-eyebrow">SEARCH LOCATIONS</p>
+          <h2 id="hwl-locator-title">Find your nearest fitter.</h2>
+          <p>Enter a city, postcode or address to see the most relevant locations first.</p>
+        </div>
+        <button
+          class="hwl__browse-toggle"
+          type="button"
+          aria-controls="stockist-widget"
+          aria-expanded="false"
+          data-hwl-browse-toggle
+        >
+          <span data-hwl-browse-label>Browse all locations</span>
+          <span class="hwl__browse-icon" aria-hidden="true">+</span>
+        </button>
+      </div>
+
+      <div class="hwl__locator-frame" data-hwl-locator>
+        {{ page.content }}
+      </div>
     </div>
   </section>
 
@@ -61,3 +81,5 @@
     </div>
   </section>
 </div>
+
+<script src="{{ 'haywood-store-locator.js' | asset_url }}" defer="defer"></script>
