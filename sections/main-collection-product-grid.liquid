@@ -223,53 +223,70 @@
               "
             >
               {% assign skip_card_product_styles = false %}
-              {%- for product in collection.products -%}
+              {%- if hw_is_irons_collection -%}
                 {%- liquid
-                  assign hw_grid_order = forloop.index
-                  if hw_is_irons_collection
-                    assign hw_grid_order = forloop.index | plus: 20
-                    case product.handle
-                      when 'sv-2-game-improvement-irons'
-                        assign hw_grid_order = 1
-                      when 'sv-2-pd-1-combo-iron-set'
-                        assign hw_grid_order = 2
-                      when 'pd-1-players-distance-irons'
-                        assign hw_grid_order = 3
-                      when 'cb2-forged-players-cavity-back-irons'
-                        assign hw_grid_order = 4
-                      when 'mb2-forged-muscle-back-irons'
-                        assign hw_grid_order = 5
-                      when 'cb2-mb2-forged-combo-irons'
-                        assign hw_grid_order = 6
-                    endcase
-                  endif
+                  assign hw_iron_product_order = '7-iron-purchase-program,sv-2-game-improvement-irons,pd-1-players-distance-irons,sv-2-pd-1-combo-iron-set,cb2-forged-players-cavity-back-irons,mb2-forged-muscle-back-irons,cb2-mb2-forged-combo-irons,haywood-cbs,haywoodmb-irons' | split: ','
+                  assign hw_render_index = 0
                 -%}
-                {% assign lazy_load = false %}
-                {%- if forloop.index > 2 -%}
-                  {%- assign lazy_load = true -%}
-                {%- endif -%}
-                <li
-                  class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                  {% if settings.animations_reveal_on_scroll %}data-cascade{% endif %}
-                  {% if hw_is_irons_collection or settings.animations_reveal_on_scroll %}
-                    style="{% if hw_is_irons_collection %}order: {{ hw_grid_order }};{% endif %}{% if settings.animations_reveal_on_scroll %} --animation-order: {{ forloop.index }};{% endif %}"
-                  {% endif %}
-                >
-                  {% render 'card-product',
+
+                {%- for ordered_handle in hw_iron_product_order -%}
+                  {%- assign ordered_product = collection.products | where: 'handle', ordered_handle | first -%}
+                  {%- if ordered_product != blank -%}
+                    {%- assign hw_render_index = hw_render_index | plus: 1 -%}
+                    {% render 'haywood-collection-grid-item',
+                      card_product: ordered_product,
+                      item_index: hw_render_index,
+                      media_aspect_ratio: section.settings.image_ratio,
+                      image_shape: section.settings.image_shape,
+                      show_secondary_image: section.settings.show_secondary_image,
+                      show_vendor: section.settings.show_vendor,
+                      show_rating: section.settings.show_rating,
+                      skip_styles: skip_card_product_styles,
+                      quick_add: section.settings.quick_add,
+                      section_id: section.id,
+                      reveal_on_scroll: settings.animations_reveal_on_scroll
+                    %}
+                    {%- assign skip_card_product_styles = true -%}
+                  {%- endif -%}
+                {%- endfor -%}
+
+                {%- for product in collection.products -%}
+                  {%- unless hw_iron_product_order contains product.handle -%}
+                    {%- assign hw_render_index = hw_render_index | plus: 1 -%}
+                    {% render 'haywood-collection-grid-item',
+                      card_product: product,
+                      item_index: hw_render_index,
+                      media_aspect_ratio: section.settings.image_ratio,
+                      image_shape: section.settings.image_shape,
+                      show_secondary_image: section.settings.show_secondary_image,
+                      show_vendor: section.settings.show_vendor,
+                      show_rating: section.settings.show_rating,
+                      skip_styles: skip_card_product_styles,
+                      quick_add: section.settings.quick_add,
+                      section_id: section.id,
+                      reveal_on_scroll: settings.animations_reveal_on_scroll
+                    %}
+                    {%- assign skip_card_product_styles = true -%}
+                  {%- endunless -%}
+                {%- endfor -%}
+              {%- else -%}
+                {%- for product in collection.products -%}
+                  {% render 'haywood-collection-grid-item',
                     card_product: product,
+                    item_index: forloop.index,
                     media_aspect_ratio: section.settings.image_ratio,
                     image_shape: section.settings.image_shape,
                     show_secondary_image: section.settings.show_secondary_image,
                     show_vendor: section.settings.show_vendor,
                     show_rating: section.settings.show_rating,
-                    lazy_load: lazy_load,
                     skip_styles: skip_card_product_styles,
                     quick_add: section.settings.quick_add,
-                    section_id: section.id
+                    section_id: section.id,
+                    reveal_on_scroll: settings.animations_reveal_on_scroll
                   %}
-                </li>
-                {%- assign skip_card_product_styles = true -%}
-              {%- endfor -%}
+                  {%- assign skip_card_product_styles = true -%}
+                {%- endfor -%}
+              {%- endif -%}
             </ul>
 
             {%- if paginate.pages > 1 -%}
