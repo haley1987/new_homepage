@@ -44,8 +44,19 @@
 .hwl__visit-heading h2 { color: var(--hwl-navy); font-family: var(--hwl-serif); font-size: clamp(3rem, 3.8vw, 4.8rem); font-weight: 400; letter-spacing: -.04em; line-height: 1; }
 .hwl__visit-inner > p { max-width: 86rem; color: var(--hwl-muted); font-size: 1.6rem; line-height: 1.7; }
 
-.hwl__locator { padding: clamp(1.5rem, 3vw, 3rem); background: var(--hwl-white); }
-.hwl__locator-frame { width: min(100%, 160rem); min-height: 62rem; margin-inline: auto; overflow: hidden; border: 1px solid rgba(11,35,65,.18); background: #fff; box-shadow: 0 2.4rem 6rem rgba(11,35,65,.08); }
+.hwl__locator { padding: clamp(3.5rem, 5vw, 6rem) clamp(1.5rem, 3vw, 3rem); background: var(--hwl-white); }
+.hwl__locator-shell { width: min(100%, 160rem); margin-inline: auto; }
+.hwl__locator-heading { display: flex; gap: 3rem; align-items: end; justify-content: space-between; margin-bottom: clamp(2.4rem, 3vw, 3.6rem); }
+.hwl__locator-heading > div { max-width: 74rem; }
+.hwl__locator-eyebrow { color: var(--hwl-gold); font-size: 1.1rem; font-weight: 700; letter-spacing: .15em; line-height: 1.2; text-transform: uppercase; }
+.hwl__locator-heading h2 { margin-top: 1.2rem; color: var(--hwl-navy); font-family: var(--hwl-serif); font-size: clamp(3.6rem, 4.5vw, 5.8rem); font-weight: 400; letter-spacing: -.045em; line-height: .95; }
+.hwl__locator-heading p:last-child { max-width: 62rem; margin-top: 1.6rem; color: var(--hwl-muted); font-size: 1.6rem; line-height: 1.6; }
+.hwl__browse-toggle { display: none; flex: 0 0 auto; min-height: 5rem; align-items: center; justify-content: space-between; gap: 2rem; padding: 1.3rem 1.6rem; border: 1px solid rgba(11,35,65,.35); border-radius: 0; color: var(--hwl-navy); background: transparent; font: inherit; font-size: 1.1rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
+.hwl__browse-icon { font-size: 2rem; font-weight: 400; line-height: 1; transition: transform 180ms ease; }
+.hwl__browse-toggle[aria-expanded="true"] .hwl__browse-icon { transform: rotate(45deg); }
+.hwl__browse-toggle:hover { border-color: var(--hwl-gold); background: var(--hwl-paper); }
+.hwl__browse-toggle:focus-visible { outline: 2px solid var(--hwl-navy); outline-offset: 4px; }
+.hwl__locator-frame { width: 100%; min-height: 62rem; margin-inline: auto; overflow: hidden; border: 1px solid rgba(11,35,65,.18); background: #fff; box-shadow: 0 2.4rem 6rem rgba(11,35,65,.08); }
 .hwl__locator-frame iframe { display: block; width: 100% !important; min-height: 68rem; border: 0; }
 
 .hwl__next { padding-block: clamp(5rem, 8vw, 9rem); border-top: 1px solid rgba(11,35,65,.16); background: var(--hwl-paper); }
@@ -72,9 +83,15 @@
   .hwl__hero-inner { min-height: 40rem; }
   .hwl__title { font-size: clamp(4.8rem, 14vw, 6.5rem); }
   .hwl .hw-arc-mark--locator { right: -2rem; bottom: -1rem; width: 22rem; opacity: .07; }
-  .hwl__locator { padding: 0; }
-  .hwl__locator-frame { min-height: 72rem; border-right: 0; border-left: 0; box-shadow: none; }
-  .hwl__locator-frame iframe { min-height: 78rem; }
+  .hwl__locator { padding: 3.6rem 0 0; }
+  .hwl__locator-heading { display: grid; gap: 2.2rem; padding-inline: 2rem; }
+  .hwl__locator-heading h2 { font-size: 4rem; }
+  .hwl__browse-toggle { display: inline-flex; width: 100%; }
+  .hwl__locator-frame { min-height: 0; border-right: 0; border-left: 0; box-shadow: none; }
+  .hwl__locator-frame iframe { min-height: 54rem; }
+  .hwl__locator-frame #stockist-widget { --stockist-mobile-list-height: 38rem !important; }
+  .hwl__locator-frame[data-hwl-ready="true"]:not(.hwl__locator-frame--show-results) .stockist-result-list { display: none !important; }
+  .hwl__locator-frame.hwl__locator-frame--show-results .stockist-result-list { display: block !important; max-height: 38rem !important; overflow-y: auto !important; overscroll-behavior: contain; }
   .hwl__card { min-height: 35rem; }
   .hwl__card + .hwl__card { border-top: 0; }
   .hwl__button { width: 100%; }
@@ -102,3 +119,5 @@
   .hwl__next { padding-block: 4.5rem 5.5rem; }
   .hwl__card { min-height: 27rem; }
 }
+
+/* GitHub theme sync: compact utility-page revision. */
