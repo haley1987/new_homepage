@@ -58,6 +58,8 @@
   letter-spacing: -.045em;
   line-height: .95;
   text-wrap: balance;
+    word-break: normal;
+  overflow-wrap: normal;
 }
 
 .hw-woods__body {
