@@ -49,7 +49,7 @@
 .hw-woods .hw-kicker { color: var(--hw-gold); }
 
 .hw-woods__heading {
-  max-width: 9ch;
+  max-width: 16ch;
   margin: .8rem 0 0;
   color: var(--hw-woods-heading);
   font-family: var(--hw-display);
