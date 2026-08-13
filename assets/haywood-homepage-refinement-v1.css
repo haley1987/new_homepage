@@ -371,7 +371,7 @@
 .hw-homepage .hw-process__header {
   display: grid;
   grid-template-columns: minmax(0, .8fr) minmax(28rem, .55fr);
-  align-items: end;
+  align-items: start;
   gap: 3rem 8rem;
   margin-bottom: 3rem;
 }
