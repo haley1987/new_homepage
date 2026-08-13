@@ -371,22 +371,26 @@
 .hw-homepage .hw-process__header {
   display: grid;
   grid-template-columns: minmax(0, .8fr) minmax(28rem, .55fr);
+  grid-template-areas: "kicker heading" "copy heading";
   align-items: start;
-  gap: 3rem 8rem;
+  gap: 0 8rem;
   margin-bottom: 3rem;
 }
 
-.hw-homepage .hw-process__header .hw-title,
-.hw-homepage .hw-process__header .hw-copy {
-  display: block;
+.hw-homepage .hw-process__header .hw-kicker {
+  grid-area: kicker;
 }
 
 .hw-homepage .hw-process__header .hw-title {
+  grid-area: heading;
+  display:block;
   max-width: 10ch;
 }
 
 .hw-homepage .hw-process__header .hw-copy {
-  margin: 0;
+  grid-area: copy;
+  display: block;
+  margin: 1.5rem 0 0;
 }
 
 .hw-homepage .hw-process__grid {
