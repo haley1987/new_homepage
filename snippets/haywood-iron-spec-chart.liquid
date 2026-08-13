@@ -1,0 +1,178 @@
+{% comment %}
+  Responsive iron specifications used inside comparison interfaces.
+
+  Required:
+  - iron_product: Shopify product drop
+  - instance_id: unique id fragment for tabs and panels
+{% endcomment %}
+
+{%- liquid
+  assign model_name = iron_product.title
+  assign model_type = 'Iron specifications'
+  assign profile_handicap = blank
+  assign profile_distance = 0
+  assign profile_forgiveness = 0
+  assign profile_workability = 0
+  assign spec_rows = blank
+  assign geometry_rows = blank
+
+  case iron_product.handle
+    when 'sv-2-game-improvement-irons'
+      assign model_name = 'SV.2'
+      assign model_type = 'Game improvement iron'
+      assign profile_handicap = '15+'
+      assign profile_distance = 5
+      assign profile_forgiveness = 5
+      assign profile_workability = 3
+      assign spec_rows = '4^19°^38.5″^61.5°^0.20″^D1~5^22°^38″^62°^0.18″^D1~6^25.5°^37.5″^62.5°^0.16″^D1~7^29.5°^37″^63°^0.13″^D1~8^33.5°^36.5″^63.5°^0.10″^D1~9^38°^36″^64°^0.08″^D1~PW^43°^35.75″^64.5°^0.07″^D2~AW^48°^35.5″^64.5°^0.06″^D2' | split: '~'
+      assign geometry_rows = 'Blade length^3.15″~Top line^0.3″~Sole width^0.90″~Club height^2.2″' | split: '~'
+    when 'pd-1-players-distance-irons'
+      assign model_name = 'PD.1'
+      assign model_type = 'Players distance iron'
+      assign profile_handicap = '5–15'
+      assign profile_distance = 4
+      assign profile_forgiveness = 4
+      assign profile_workability = 3
+      assign spec_rows = '4^21°^38.5″^61°^0.12″^D1~5^23°^38″^61.5°^0.10″^D1~6^26.5°^37.5″^62°^0.09″^D1~7^30.5°^37″^62.5°^0.08″^D1~8^35°^36.5″^63°^0.07″^D1~9^40°^36″^63.5°^0.06″^D1~PW^45°^35.75″^64°^0.05″^D2~AW^50°^35.5″^64°^0.04″^D2' | split: '~'
+      assign geometry_rows = 'Blade length^3″~Top line^0.25″~Sole width^0.75″~Club height^2.2″' | split: '~'
+    when 'cb2-forged-players-cavity-back-irons'
+      assign model_name = 'CB2'
+      assign model_type = 'Players cavity iron'
+      assign profile_handicap = '0–13'
+      assign profile_distance = 3
+      assign profile_forgiveness = 4
+      assign profile_workability = 4
+      assign spec_rows = '4^23°^38.5″^60.5°^0.11″^D3~5^26°^38″^61°^0.10″^D3~6^30°^37.5″^61.5°^0.09″^D3~7^34°^37″^62°^0.08″^D3~8^38°^36.5″^62.5°^0.07″^D3~9^42°^36″^63°^0.06″^D3~PW^46°^35.75″^63.5°^0.05″^D4~AW^50°^35.5″^63.5°^0.04″^D4' | split: '~'
+      assign geometry_rows = 'Blade length^3″~Club height^2.1″~Sole width^0.7″' | split: '~'
+    when 'mb2-forged-muscle-back-irons'
+      assign model_name = 'MB2'
+      assign model_type = 'Muscle back iron'
+      assign profile_handicap = '0–9'
+      assign profile_distance = 3
+      assign profile_forgiveness = 3
+      assign profile_workability = 5
+      assign spec_rows = '4^23°^38.5″^60.5°^0.10″^D3~5^26°^38″^61°^0.09″^D3~6^30°^37.5″^61.5°^0.08″^D3~7^34°^37″^62°^0.07″^D3~8^38°^36.5″^62.5°^0.06″^D3~9^42°^36″^63°^0.05″^D3~PW^46°^35.75″^63.5°^0.04″^D4~AW^50°^35.5″^63.5°^0.03″^D4' | split: '~'
+      assign geometry_rows = 'Blade length^3″~Club height^2.1″~Sole width^0.6″' | split: '~'
+  endcase
+
+  assign column_labels = 'Loft^Length^Lie^Offset^Swing weight' | split: '^'
+-%}
+
+{%- if spec_rows != blank -%}
+  <div id="CompareSpecChart-{{ instance_id }}" class="hw-compare-chart" data-hw-compare-chart style="--hw-columns: {{ column_labels.size | plus: 1 }}">
+    <div class="hw-compare-chart__intro">
+      <div>
+        <p class="hw-compare-chart__eyebrow">Technical reference</p>
+        <h3>{{ model_name }} specifications</h3>
+      </div>
+      <p>{{ model_type }} · Review one club on mobile or compare the complete set on desktop.</p>
+    </div>
+
+    <div class="hw-compare-chart__profile" aria-label="{{ model_name }} player profile">
+      <div>
+        <span>Player profile</span>
+        <strong>{{ profile_handicap }} handicap</strong>
+      </div>
+      {%- assign ratings = 'Distance^Forgiveness^Workability' | split: '^' -%}
+      {%- for rating_name in ratings -%}
+        {%- case rating_name -%}
+          {%- when 'Distance' -%}{%- assign rating_value = profile_distance -%}
+          {%- when 'Forgiveness' -%}{%- assign rating_value = profile_forgiveness -%}
+          {%- when 'Workability' -%}{%- assign rating_value = profile_workability -%}
+        {%- endcase -%}
+        <div>
+          <span>{{ rating_name }}</span>
+          <span class="hw-compare-chart__rating" aria-label="{{ rating_value }} out of 5">
+            {%- for rating_index in (1..5) -%}<i{% if rating_index <= rating_value %} class="is-filled"{% endif %} aria-hidden="true"></i>{%- endfor -%}
+          </span>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="hw-compare-chart__desktop">
+      <div class="hw-compare-chart__table-wrap">
+        <table>
+          <caption class="visually-hidden">{{ model_name }} specifications by club</caption>
+          <thead><tr><th scope="col">Club</th>{%- for label in column_labels -%}<th scope="col">{{ label }}</th>{%- endfor -%}</tr></thead>
+          <tbody>
+            {%- for spec_row in spec_rows -%}
+              {%- assign cells = spec_row | split: '^' -%}
+              <tr><th scope="row">{{ cells[0] }}</th>{%- for label in column_labels -%}{%- assign cell_index = forloop.index -%}<td>{{ cells[cell_index] }}</td>{%- endfor -%}</tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="hw-compare-chart__mobile">
+      <p class="hw-compare-chart__label">Choose a club</p>
+      <div class="hw-compare-chart__picker" role="tablist" aria-label="Choose a {{ model_name }} club">
+        {%- for spec_row in spec_rows -%}
+          {%- assign cells = spec_row | split: '^' -%}
+          <button type="button" role="tab" id="CompareSpecTab-{{ instance_id }}-{{ forloop.index0 }}" aria-controls="CompareSpecPanel-{{ instance_id }}-{{ forloop.index0 }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" tabindex="{% if forloop.first %}0{% else %}-1{% endif %}">{{ cells[0] }}</button>
+        {%- endfor -%}
+      </div>
+      <div>
+        {%- for spec_row in spec_rows -%}
+          {%- assign cells = spec_row | split: '^' -%}
+          <article class="hw-compare-chart__panel" role="tabpanel" id="CompareSpecPanel-{{ instance_id }}-{{ forloop.index0 }}" aria-labelledby="CompareSpecTab-{{ instance_id }}-{{ forloop.index0 }}"{% unless forloop.first %} hidden{% endunless %}>
+            <h4>{{ cells[0] }} iron</h4>
+            <dl>{%- for label in column_labels -%}{%- assign cell_index = forloop.index -%}<div><dt>{{ label }}</dt><dd>{{ cells[cell_index] }}</dd></div>{%- endfor -%}</dl>
+          </article>
+        {%- endfor -%}
+      </div>
+      <details class="hw-compare-chart__compare-all">
+        <summary>Compare all clubs</summary>
+        <p>Swipe across to review every measurement.</p>
+        <div class="hw-compare-chart__table-wrap" tabindex="0" role="region" aria-label="Scrollable {{ model_name }} specifications">
+          <table>
+            <caption class="visually-hidden">{{ model_name }} specifications by club</caption>
+            <thead><tr><th scope="col">Club</th>{%- for label in column_labels -%}<th scope="col">{{ label }}</th>{%- endfor -%}</tr></thead>
+            <tbody>{%- for spec_row in spec_rows -%}{%- assign cells = spec_row | split: '^' -%}<tr><th scope="row">{{ cells[0] }}</th>{%- for label in column_labels -%}{%- assign cell_index = forloop.index -%}<td>{{ cells[cell_index] }}</td>{%- endfor -%}</tr>{%- endfor -%}</tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+    <p class="hw-compare-chart__note">Swing weights are based on standard length with a 110 g shaft. Actual swing weight varies with custom length, shaft and grip selections.</p>
+
+    <dl class="hw-compare-chart__geometry" aria-label="{{ model_name }} number 7 iron head geometry">
+      {%- for geometry_row in geometry_rows -%}
+        {%- assign geometry_cells = geometry_row | split: '^' -%}
+        <div><dt>{{ geometry_cells[0] }}</dt><dd>{{ geometry_cells[1] }}</dd></div>
+      {%- endfor -%}
+    </dl>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.getElementById('CompareSpecChart-{{ instance_id }}');
+      if (!root || root.dataset.enhanced === 'true') return;
+      root.dataset.enhanced = 'true';
+      const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
+      const panels = Array.from(root.querySelectorAll('[role="tabpanel"]'));
+      const selectTab = (nextTab, focus = false) => {
+        tabs.forEach((tab) => {
+          const selected = tab === nextTab;
+          tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+          tab.tabIndex = selected ? 0 : -1;
+        });
+        panels.forEach((panel) => { panel.hidden = panel.id !== nextTab.getAttribute('aria-controls'); });
+        if (focus) nextTab.focus();
+      };
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => selectTab(tab));
+        tab.addEventListener('keydown', (event) => {
+          let nextIndex = null;
+          if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+          if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+          if (event.key === 'Home') nextIndex = 0;
+          if (event.key === 'End') nextIndex = tabs.length - 1;
+          if (nextIndex === null) return;
+          event.preventDefault();
+          selectTab(tabs[nextIndex], true);
+        });
+      });
+    })();
+  </script>
+{%- endif -%}
