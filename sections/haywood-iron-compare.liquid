@@ -148,34 +148,21 @@
           <p class="hw-compare__eyebrow">Technical specifications</p>
           <h2 id="CompareSpecs-{{ section.id }}">Go deeper when you need to.</h2>
         </div>
-        <p>Open any model to review its existing specification sheet. The artwork remains connected to the same product metafield used on its product page.</p>
+        <p>Open any model to review the same live, responsive specification chart used on its product page—no image zooming required.</p>
       </div>
 
       <div class="hw-compare__specs">
         {%- for block in section.blocks -%}
           {%- assign compare_product = block.settings.product -%}
-          {%- assign specs_url = compare_product.metafields['specs-image']['specs-image'] -%}
           {%- if compare_product != blank -%}
             <details class="hw-compare-spec"{% if forloop.first %} open{% endif %}>
               <summary>
                 <strong>{{ block.settings.short_name | escape }}</strong>
-                <span>View technical sheet</span>
+                <span>View specifications</span>
               </summary>
               <div class="hw-compare-spec__panel">
-                {%- if specs_url != blank -%}
-                  <div class="hw-compare-spec__image">
-                    <img
-                      src="{{ specs_url | escape }}"
-                      alt="{{ block.settings.short_name | escape }} technical specifications"
-                      width="1600"
-                      height="1600"
-                      loading="lazy"
-                      decoding="async"
-                    >
-                  </div>
-                {%- else -%}
-                  <p>Technical artwork is not currently available for this model.</p>
-                {%- endif -%}
+                {%- capture chart_instance_id -%}{{ section.id }}-{{ forloop.index0 }}{%- endcapture -%}
+                {%- render 'haywood-iron-spec-chart', iron_product: compare_product, instance_id: chart_instance_id -%}
                 <a class="hw-compare-spec__link" href="{{ compare_product.url }}#full-specs">View on the product page</a>
               </div>
             </details>
