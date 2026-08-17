@@ -1,0 +1,32 @@
+name: Clarity Current Page Diagnostic
+
+on:
+  push:
+    paths:
+      - 'scripts/clarity_current_audit.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build current-state diagnostic
+        run: python scripts/clarity_current_audit.py | tee /tmp/clarity-current.md
+      - name: Save report
+        run: |
+          git config user.name "haywood-clarity-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add clarity-data/reports
+          git diff --cached --quiet || (git commit -m "Current Clarity page diagnostic $(date -u +%F)" && git push)
+      - name: Open diagnostic issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue create --title "Clarity Page Diagnostic — $(date -u +%F)" --body-file /tmp/clarity-current.md
