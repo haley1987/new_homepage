@@ -1,0 +1,30 @@
+name: Clarity Daily Collector
+
+on:
+  schedule:
+    - cron: '20 13 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Collect Clarity snapshot
+        env:
+          CLARITY_API_TOKEN: ${{ secrets.CLARITY_API_TOKEN }}
+        run: python scripts/clarity_collect.py
+      - name: Save snapshot
+        run: |
+          git config user.name "haywood-clarity-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add clarity-data/daily
+          git diff --cached --quiet && exit 0
+          git commit -m "Clarity snapshot $(date -u +%F)"
+          git push

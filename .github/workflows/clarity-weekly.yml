@@ -1,0 +1,31 @@
+name: Clarity Weekly CRO Audit
+
+on:
+  schedule:
+    - cron: '0 15 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build weekly report
+        run: python scripts/clarity_weekly_report.py | tee /tmp/clarity-report.md
+      - name: Save report
+        run: |
+          git config user.name "haywood-clarity-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add clarity-data/reports
+          git diff --cached --quiet || (git commit -m "Weekly Clarity CRO audit $(date -u +%F)" && git push)
+      - name: Open audit issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue create --title "Clarity CRO Audit — $(date -u +%F)" --body-file /tmp/clarity-report.md
