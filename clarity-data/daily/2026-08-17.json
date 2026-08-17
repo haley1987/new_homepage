@@ -1,0 +1,414 @@
+{
+  "collected_at": "2026-08-17T01:10:36.386176+00:00",
+  "segments": {
+    "url_country": {
+      "data": [
+        {
+          "information": [
+            {
+              "pagesViews": "0",
+              "sessionsCount": "0",
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": "0"
+            }
+          ],
+          "metricName": "DeadClickCount"
+        },
+        {
+          "information": [
+            {
+              "pagesViews": "0",
+              "sessionsCount": "0",
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": "0"
+            }
+          ],
+          "metricName": "ExcessiveScroll"
+        },
+        {
+          "information": [
+            {
+              "pagesViews": "0",
+              "sessionsCount": "0",
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": "0"
+            }
+          ],
+          "metricName": "RageClickCount"
+        },
+        {
+          "information": [
+            {
+              "pagesViews": 0,
+              "sessionsCount": 0,
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": 0
+            }
+          ],
+          "metricName": "QuickbackClick"
+        },
+        {
+          "information": [
+            {
+              "pagesViews": 0,
+              "sessionsCount": 0,
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": 0
+            }
+          ],
+          "metricName": "ScriptErrorCount"
+        },
+        {
+          "information": [
+            {
+              "pagesViews": "0",
+              "sessionsCount": "0",
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": "0"
+            }
+          ],
+          "metricName": "ErrorClickCount"
+        },
+        {
+          "information": [
+            {
+              "averageScrollDepth": null
+            }
+          ],
+          "metricName": "ScrollDepth"
+        },
+        {
+          "information": [
+            {
+              "distinctUserCount": "0",
+              "pagesPerSessionPercentage": null,
+              "totalBotSessionCount": "0",
+              "totalSessionCount": "0"
+            }
+          ],
+          "metricName": "Traffic"
+        },
+        {
+          "information": [
+            {
+              "activeTime": null,
+              "totalTime": null
+            }
+          ],
+          "metricName": "EngagementTime"
+        },
+        {
+          "information": [],
+          "metricName": "Browser"
+        },
+        {
+          "information": [],
+          "metricName": "Device"
+        },
+        {
+          "information": [],
+          "metricName": "OS"
+        },
+        {
+          "information": [],
+          "metricName": "Country"
+        },
+        {
+          "information": [],
+          "metricName": "PageTitle"
+        },
+        {
+          "information": [],
+          "metricName": "ReferrerUrl"
+        },
+        {
+          "information": [],
+          "metricName": "PopularPages"
+        }
+      ],
+      "dimensions": [
+        "URL",
+        "Country/Region"
+      ]
+    },
+    "url_device": {
+      "data": [
+        {
+          "information": [
+            {
+              "pagesViews": "0",
+              "sessionsCount": "0",
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": "0"
+            }
+          ],
+          "metricName": "DeadClickCount"
+        },
+        {
+          "information": [
+            {
+              "pagesViews": "0",
+              "sessionsCount": "0",
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": "0"
+            }
+          ],
+          "metricName": "ExcessiveScroll"
+        },
+        {
+          "information": [
+            {
+              "pagesViews": "0",
+              "sessionsCount": "0",
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": "0"
+            }
+          ],
+          "metricName": "RageClickCount"
+        },
+        {
+          "information": [
+            {
+              "pagesViews": "0",
+              "sessionsCount": "0",
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": "0"
+            }
+          ],
+          "metricName": "QuickbackClick"
+        },
+        {
+          "information": [
+            {
+              "pagesViews": "0",
+              "sessionsCount": "0",
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": "0"
+            }
+          ],
+          "metricName": "ScriptErrorCount"
+        },
+        {
+          "information": [
+            {
+              "pagesViews": "0",
+              "sessionsCount": "0",
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": "0"
+            }
+          ],
+          "metricName": "ErrorClickCount"
+        },
+        {
+          "information": [
+            {
+              "averageScrollDepth": null
+            }
+          ],
+          "metricName": "ScrollDepth"
+        },
+        {
+          "information": [
+            {
+              "distinctUserCount": 0,
+              "pagesPerSessionPercentage": null,
+              "totalBotSessionCount": 0,
+              "totalSessionCount": 0
+            }
+          ],
+          "metricName": "Traffic"
+        },
+        {
+          "information": [
+            {
+              "activeTime": null,
+              "totalTime": null
+            }
+          ],
+          "metricName": "EngagementTime"
+        },
+        {
+          "information": [],
+          "metricName": "Browser"
+        },
+        {
+          "information": [],
+          "metricName": "Device"
+        },
+        {
+          "information": [],
+          "metricName": "OS"
+        },
+        {
+          "information": [],
+          "metricName": "Country"
+        },
+        {
+          "information": [],
+          "metricName": "PageTitle"
+        },
+        {
+          "information": [],
+          "metricName": "ReferrerUrl"
+        },
+        {
+          "information": [],
+          "metricName": "PopularPages"
+        }
+      ],
+      "dimensions": [
+        "URL",
+        "Device"
+      ]
+    },
+    "url_source": {
+      "data": [
+        {
+          "information": [
+            {
+              "pagesViews": "0",
+              "sessionsCount": "0",
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": "0"
+            }
+          ],
+          "metricName": "DeadClickCount"
+        },
+        {
+          "information": [
+            {
+              "pagesViews": 0,
+              "sessionsCount": 0,
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": 0
+            }
+          ],
+          "metricName": "ExcessiveScroll"
+        },
+        {
+          "information": [
+            {
+              "pagesViews": "0",
+              "sessionsCount": "0",
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": "0"
+            }
+          ],
+          "metricName": "RageClickCount"
+        },
+        {
+          "information": [
+            {
+              "pagesViews": "0",
+              "sessionsCount": "0",
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": "0"
+            }
+          ],
+          "metricName": "QuickbackClick"
+        },
+        {
+          "information": [
+            {
+              "pagesViews": "0",
+              "sessionsCount": "0",
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": "0"
+            }
+          ],
+          "metricName": "ScriptErrorCount"
+        },
+        {
+          "information": [
+            {
+              "pagesViews": "0",
+              "sessionsCount": "0",
+              "sessionsWithMetricPercentage": 0,
+              "sessionsWithoutMetricPercentage": 100,
+              "subTotal": "0"
+            }
+          ],
+          "metricName": "ErrorClickCount"
+        },
+        {
+          "information": [
+            {
+              "averageScrollDepth": null
+            }
+          ],
+          "metricName": "ScrollDepth"
+        },
+        {
+          "information": [
+            {
+              "distinctUserCount": "0",
+              "pagesPerSessionPercentage": null,
+              "totalBotSessionCount": "0",
+              "totalSessionCount": "0"
+            }
+          ],
+          "metricName": "Traffic"
+        },
+        {
+          "information": [
+            {
+              "activeTime": null,
+              "totalTime": null
+            }
+          ],
+          "metricName": "EngagementTime"
+        },
+        {
+          "information": [],
+          "metricName": "Browser"
+        },
+        {
+          "information": [],
+          "metricName": "Device"
+        },
+        {
+          "information": [],
+          "metricName": "OS"
+        },
+        {
+          "information": [],
+          "metricName": "Country"
+        },
+        {
+          "information": [],
+          "metricName": "PageTitle"
+        },
+        {
+          "information": [],
+          "metricName": "ReferrerUrl"
+        },
+        {
+          "information": [],
+          "metricName": "PopularPages"
+        }
+      ],
+      "dimensions": [
+        "URL",
+        "Source"
+      ]
+    }
+  },
+  "window_days": 1
+}
