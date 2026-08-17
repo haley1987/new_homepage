@@ -8,7 +8,7 @@
         shop: {
             domain: {{ shop.permanent_domain | json }},
             money_format : {{ shop.money_format  | json }},
-            money_with_currency_format : {{ shop.money_with_currency_format  | json }}
+            money_with_currency_format : {{ shop.money_with_currency_format | json }}
         },
       jquery: '1.11.0'
     };
@@ -30,46 +30,61 @@
         }
     }
     mwShowInitSpinner();
-  
-  
-(function () {
-  var originalAddClassMethod = jQuery.fn.addClass;
-  var originalRemoveClassMethod = jQuery.fn.removeClass;
-  jQuery.fn.addClass = function () {
+
+(function installMwClassHooks(attempt) {
+  var jq = window.jQuery;
+
+  if (!jq || !jq.fn) {
+    if (attempt < 100) {
+      window.setTimeout(function () {
+        installMwClassHooks(attempt + 1);
+      }, 50);
+    }
+    return;
+  }
+
+  if (jq.fn.__haywoodClassHooksInstalled) return;
+  jq.fn.__haywoodClassHooksInstalled = true;
+
+  var originalAddClassMethod = jq.fn.addClass;
+  var originalRemoveClassMethod = jq.fn.removeClass;
+
+  jq.fn.addClass = function () {
     var result = originalAddClassMethod.apply(this, arguments);
-    jQuery(this).trigger('classChanged');
+    jq(this).trigger('classChanged');
     return result;
-  }
-  jQuery.fn.removeClass = function () {
+  };
+
+  jq.fn.removeClass = function () {
     var result = originalRemoveClassMethod.apply(this, arguments);
-    jQuery(this).trigger('classChanged');
+    jq(this).trigger('classChanged');
     return result;
-  }
-})();
+  };
+})(0);
 
 window.mwProductOptionsObjects.onEvent = function (eventName, mwJquery) {
-  if (eventName === 'initialize-start') {
-    mwJquery('body').on('mw_apo', function (event, action) {
-      if (action === 'end-initialize') {
-        if ($(".mw-options-container").length) {
-      
-          setTimeout(function () {
-            $('.mw-option-tooltip').removeClass('needsclick')
-          }, 500)
-          $('.mw-option-tooltip, .mw-option-button').on('touchstart', function () {
-            $('.qtip').css('z-index', '0')
-          });
-          $('.mw-option-tooltip').click(function () {
-            $('.qtip').css('z-index', '9999999')
-          })
-          $(".overflow-y-scroll").scroll(function () {
-            $('.qtip').css('z-index', '0')
+  if (eventName !== 'initialize-start' || !mwJquery) return;
 
-          });
-        }
-      }
+  mwJquery('body').on('mw_apo', function (event, action) {
+    if (action !== 'end-initialize') return;
+    if (!mwJquery('.mw-options-container').length) return;
+
+    setTimeout(function () {
+      mwJquery('.mw-option-tooltip').removeClass('needsclick');
+    }, 500);
+
+    mwJquery('.mw-option-tooltip, .mw-option-button').on('touchstart', function () {
+      mwJquery('.qtip').css('z-index', '0');
     });
-  }
+
+    mwJquery('.mw-option-tooltip').on('click', function () {
+      mwJquery('.qtip').css('z-index', '9999999');
+    });
+
+    mwJquery('.overflow-y-scroll').on('scroll', function () {
+      mwJquery('.qtip').css('z-index', '0');
+    });
+  });
 };
 
 </script>
