@@ -36,7 +36,7 @@ def fnum(v, default=0.0):
     except (TypeError, ValueError):
         return default
 
-# key=(metric,path,device) -> denominator sessions + estimated affected sessions + occurrences
+# Aggregate each behavior metric by canonical page and device.
 agg = defaultdict(lambda: {'sessions': 0.0, 'affected': 0.0, 'occurrences': 0.0})
 traffic = defaultdict(float)
 
