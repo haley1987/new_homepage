@@ -13,10 +13,10 @@
       "settings": {
         "careers_eyebrow": "WORK WITH HAYWOOD",
         "careers_heading": "Different ways to be part of Haywood.",
-        "careers_intro": "We are not hiring for any roles right now. But if you fit golfers, run a retail business or create thoughtful golf content, there may still be a way for us to work together.",
+        "careers_intro": "Haywood is growing. Explore current openings and other ways to work with our team.",
         "careers_status_eyebrow": "CURRENT OPPORTUNITIES",
-        "careers_status_heading": "No open roles right now.",
-        "careers_status_copy": "When a position becomes available, we will post the complete role and application details here. We do not keep general employment applications on file between openings.",
+        "careers_status_heading": "Build with Haywood.",
+        "careers_status_copy": "We are looking for thoughtful, dependable people who care about precision, craftsmanship and doing things properly.",
         "careers_paths_eyebrow": "OTHER WAYS TO WORK TOGETHER",
         "careers_paths_heading": "A job is not the only way in.",
         "careers_fit_heading": "Fit Haywood.",
@@ -36,7 +36,31 @@
         "careers_contact_copy": "Tell us what you have in mind and our team will point you in the right direction.",
         "careers_contact_label": "CONTACT HAYWOOD",
         "careers_contact_link": "shopify://pages/contact"
-      }
+      },
+      "blocks": {
+        "job_club_builder": {
+          "type": "job",
+          "settings": {
+            "active": true,
+            "title": "Golf Club Builder / Order Prep Associate",
+            "location": "Vancouver, BC",
+            "hours": "32-40 hours/week",
+            "pay": "$20-$23/hour",
+            "intro": "Join our Vancouver operations team in a hands-on role preparing, finishing and inspecting custom golf clubs before they reach our customers. The position begins with order preparation and quality control, with the opportunity to develop additional club-building skills.",
+            "responsibilities": "<ul><li>Prepare and pack custom golf club orders for shipment</li><li>Clean and finish completed clubs to Haywood's quality standards</li><li>Perform quality-control checks on completed builds</li><li>Organize components and inventory</li><li>Maintain a clean, organized and efficient workspace</li><li>Assist with basic golf club assembly and building</li><li>Learn additional club-building processes through hands-on training</li></ul>",
+            "qualifications": "<ul><li>Strong attention to detail and a high standard for quality</li><li>Reliable, punctual and consistent</li><li>Comfortable performing hands-on and repetitive work</li><li>Organized and able to follow established processes</li><li>Willingness to learn and take on additional responsibilities</li><li>Interest in golf, golf equipment or craftsmanship is an asset, but not required</li><li>Previous club-building experience is not required; training will be provided</li></ul>",
+            "perks": "<p>$20-$23/hour | 32-40 hours per week</p><ul><li>Employee discount after a 3-month probationary period</li><li>Occasional team lunches</li><li>Periodic team golf rounds and outings</li><li>Weekly simulator golf challenges</li><li>Relaxed, respectful, detail-driven work environment</li><li>Opportunity to develop hands-on club-building skills</li></ul>",
+            "application_copy": "Send your resume and a brief cover letter to info@haywoodgolf.com.",
+            "apply_label": "APPLY BY EMAIL",
+            "apply_email": "info@haywoodgolf.com",
+            "details_label": "VIEW ROLE DETAILS",
+            "pdf_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "job_club_builder"
+      ]
     }
   },
   "order": [

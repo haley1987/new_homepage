@@ -26,6 +26,13 @@
   assign contact_copy = page_settings.careers_contact_copy | default: 'Tell us what you have in mind and our team will point you in the right direction.'
   assign contact_label = page_settings.careers_contact_label | default: 'CONTACT HAYWOOD'
   assign contact_link = page_settings.careers_contact_link | default: '/pages/contact'
+  assign has_open_jobs = false
+  for job_block in job_blocks
+    if job_block.type == 'job' and job_block.settings.active
+      assign has_open_jobs = true
+      break
+    endif
+  endfor
 -%}
 
 <div class="hw-careers">
@@ -43,18 +50,116 @@
     </div>
   </section>
 
-  <section class="hw-careers__status" aria-labelledby="hw-careers-status-title">
-    <div class="hw-careers__shell hw-careers__status-grid">
-      <p class="hw-careers__section-label">{{ status_eyebrow | escape }}</p>
-      <div>
-        <div class="hw-careers__status-heading">
-          <span class="hw-careers__status-dot" aria-hidden="true"></span>
-          <h2 id="hw-careers-status-title">{{ status_heading | escape }}</h2>
+  {%- if has_open_jobs -%}
+    <section class="hw-careers__openings" aria-labelledby="hw-careers-status-title">
+      <div class="hw-careers__shell">
+        <header class="hw-careers__openings-head">
+          <p class="hw-careers__section-label">{{ status_eyebrow | escape }}</p>
+          <div>
+            <div class="hw-careers__status-heading">
+              <span class="hw-careers__status-dot" aria-hidden="true"></span>
+              <h2 id="hw-careers-status-title">{{ status_heading | escape }}</h2>
+            </div>
+            <p>{{ status_copy | escape }}</p>
+          </div>
+        </header>
+
+        <div class="hw-careers-jobs">
+          {%- for block in job_blocks -%}
+            {%- if block.type == 'job' and block.settings.active -%}
+              {%- liquid
+                assign apply_email = block.settings.apply_email | default: 'info@haywoodgolf.com'
+                assign apply_subject = 'Application: ' | append: block.settings.title | url_encode
+                assign apply_link = 'mailto:' | append: apply_email | append: '?subject=' | append: apply_subject
+              -%}
+              <article class="hw-careers-job" {{ block.shopify_attributes }}>
+                <div class="hw-careers-job__masthead">
+                  <div class="hw-careers-job__title-group">
+                    <p class="hw-careers-job__label">Open role</p>
+                    <h3>{{ block.settings.title | escape }}</h3>
+                    <p class="hw-careers-job__intro">{{ block.settings.intro | escape }}</p>
+                  </div>
+
+                  <dl class="hw-careers-job__meta" aria-label="Position details">
+                    {%- if block.settings.location != blank -%}
+                      <div><dt>Location</dt><dd>{{ block.settings.location | escape }}</dd></div>
+                    {%- endif -%}
+                    {%- if block.settings.hours != blank -%}
+                      <div><dt>Schedule</dt><dd>{{ block.settings.hours | escape }}</dd></div>
+                    {%- endif -%}
+                    {%- if block.settings.pay != blank -%}
+                      <div><dt>Compensation</dt><dd>{{ block.settings.pay | escape }}</dd></div>
+                    {%- endif -%}
+                  </dl>
+                </div>
+
+                <details class="hw-careers-job__disclosure">
+                  <summary>
+                    <span>{{ block.settings.details_label | default: 'VIEW ROLE DETAILS' | escape }}</span>
+                    <span class="hw-careers-job__toggle" aria-hidden="true"></span>
+                  </summary>
+
+                  <div class="hw-careers-job__details">
+                    <div class="hw-careers-job__columns">
+                      <section aria-labelledby="job-duties-{{ block.id }}">
+                        <p class="hw-careers-job__kicker">The work</p>
+                        <h4 id="job-duties-{{ block.id }}">What you'll do</h4>
+                        <div class="hw-careers-job__richtext rte">{{ block.settings.responsibilities }}</div>
+                      </section>
+                      <section aria-labelledby="job-fit-{{ block.id }}">
+                        <p class="hw-careers-job__kicker">The fit</p>
+                        <h4 id="job-fit-{{ block.id }}">What we're looking for</h4>
+                        <div class="hw-careers-job__richtext rte">{{ block.settings.qualifications }}</div>
+                      </section>
+                    </div>
+
+                    {%- if block.settings.perks != blank -%}
+                      <section class="hw-careers-job__perks" aria-labelledby="job-perks-{{ block.id }}">
+                        <p class="hw-careers-job__kicker">What comes with the role</p>
+                        <h4 id="job-perks-{{ block.id }}">Compensation &amp; perks</h4>
+                        <div class="hw-careers-job__richtext rte">{{ block.settings.perks }}</div>
+                      </section>
+                    {%- endif -%}
+
+                    <div class="hw-careers-job__apply">
+                      <div>
+                        <p class="hw-careers-job__kicker">Ready to apply?</p>
+                        <h4>Introduce yourself.</h4>
+                        <p>{{ block.settings.application_copy | escape }}</p>
+                      </div>
+                      <div class="hw-careers-job__actions">
+                        <a class="hw-careers-job__apply-button" href="{{ apply_link }}">
+                          {{ block.settings.apply_label | default: 'APPLY BY EMAIL' | escape }} <span aria-hidden="true">↗</span>
+                        </a>
+                        {%- if block.settings.pdf_link != blank -%}
+                          <a class="hw-careers-job__pdf-link" href="{{ block.settings.pdf_link }}" target="_blank" rel="noopener">
+                            DOWNLOAD POSTING <span aria-hidden="true">↓</span>
+                          </a>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  </div>
+                </details>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
         </div>
-        <p>{{ status_copy | escape }}</p>
       </div>
-    </div>
-  </section>
+    </section>
+  {%- else -%}
+    <section class="hw-careers__status" aria-labelledby="hw-careers-status-title">
+      <div class="hw-careers__shell hw-careers__status-grid">
+        <p class="hw-careers__section-label">{{ status_eyebrow | escape }}</p>
+        <div>
+          <div class="hw-careers__status-heading">
+            <span class="hw-careers__status-dot" aria-hidden="true"></span>
+            <h2 id="hw-careers-status-title">{{ status_heading | escape }}</h2>
+          </div>
+          <p>{{ status_copy | escape }}</p>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
 
   <section class="hw-careers__paths" aria-labelledby="hw-careers-paths-title">
     <div class="hw-careers__shell">
