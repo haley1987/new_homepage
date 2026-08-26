@@ -191,13 +191,18 @@ label.order-confirm-checkbox{
               </div>
               
 
-  <label for="order-confirm-checkbox">
-    <input
-      type="checkbox"
-      id="order-confirm-checkbox"
-    >
-    <span class="order-confirm-text">By clicking this box I confirm that I’ve reviewed my order and that all custom specifications are correct. I understand that any changes after purchase will incur a 25$ adjustment fee. </span>
-  </label>
+<label for="order-confirm-checkbox">
+  <input
+    type="checkbox"
+    id="order-confirm-checkbox"
+  >
+
+  <span class="order-confirm-text">
+    By clicking this box I confirm that I’ve reviewed my order and that all custom specifications are correct.
+    <br>
+    <strong>I understand that any changes after purchase will incur a $25 adjustment fee.</strong>
+  </span>
+</label>
 
             {%- else -%}
               <div class="cart__ctas" {{ block.shopify_attributes }}>
