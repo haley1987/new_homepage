@@ -15,6 +15,7 @@
   assign profile_workability = 0
   assign spec_rows = blank
   assign geometry_rows = blank
+  assign column_labels = 'Loft^Length^Lie^Offset^Swing weight' | split: '^'
 
   case iron_product.handle
     when 'sv-2-game-improvement-irons'
@@ -53,9 +54,17 @@
       assign profile_workability = 5
       assign spec_rows = '4^23°^38.5″^60.5°^0.10″^D3~5^26°^38″^61°^0.09″^D3~6^30°^37.5″^61.5°^0.08″^D3~7^34°^37″^62°^0.07″^D3~8^38°^36.5″^62.5°^0.06″^D3~9^42°^36″^63°^0.05″^D3~PW^46°^35.75″^63.5°^0.04″^D4~AW^50°^35.5″^63.5°^0.03″^D4' | split: '~'
       assign geometry_rows = 'Blade length^3″~Club height^2.1″~Sole width^0.6″' | split: '~'
+    when 'mb-muscle-back-blade-irons'
+      assign model_name = 'Haywood MB'
+      assign model_type = 'Muscle back blade'
+      assign profile_handicap = '0–9'
+      assign profile_distance = 3
+      assign profile_forgiveness = 2
+      assign profile_workability = 5
+      assign column_labels = 'Loft^Length^Lie^Offset^Bounce^Swing weight' | split: '^'
+      assign spec_rows = '3^20°^39″^60°^0.11″^2°^D2~4^23°^38.5″^60.5°^0.10″^3°^D2~5^26°^38″^61°^0.09″^4°^D2~6^30°^37.5″^61.5°^0.08″^5°^D2~7^34°^37″^62°^0.07″^6°^D2~8^38°^36.5″^62.5°^0.06″^7°^D2~9^42°^36″^63°^0.05″^8°^D2~PW^46°^35.75″^63.5°^0.04″^9°^D3' | split: '~'
+      assign geometry_rows = 'Blade length^3″~Club height^2.1″~Sole width^0.6″' | split: '~'
   endcase
-
-  assign column_labels = 'Loft^Length^Lie^Offset^Swing weight' | split: '^'
 -%}
 
 {%- if spec_rows != blank -%}
