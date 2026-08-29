@@ -36,6 +36,18 @@
       assign spec_rows = '4^23°^38.5″^60.5°^0.11″^D3~5^26°^38″^61°^0.10″^D3~6^30°^37.5″^61.5°^0.09″^D3~7^34°^37″^62°^0.08″^D3~8^38°^36.5″^62.5°^0.07″^D3~9^42°^36″^63°^0.06″^D3~PW^46°^35.75″^63.5°^0.05″^D4~AW^50°^35.5″^63.5°^0.04″^D4' | split: '~'
       assign geometry_rows = 'Blade length^3″~Club height^2.1″~Sole width^0.7″' | split: '~'
       assign geometry_label = 'CB2 number 7 iron head geometry'
+    when 'cb-players-cavity-back-irons'
+      assign has_structured_specs = true
+      assign model_name = 'Haywood CB'
+      assign model_type = 'Cavity back iron'
+      assign profile_handicap = '0–13'
+      assign profile_distance = 3
+      assign profile_forgiveness = 3
+      assign profile_workability = 4
+      assign column_labels = 'Loft^Length^Lie^Offset^Bounce^Swing weight' | split: '^'
+      assign spec_rows = '4^23°^38.5″^60.5°^0.11″^3°^D2~5^26°^38″^61°^0.10″^4°^D2~6^30°^37.5″^61.5°^0.09″^5°^D2~7^34°^37″^62°^0.08″^6°^D2~8^38°^36.5″^62.5°^0.07″^7°^D2~9^42°^36″^63°^0.06″^8°^D2~PW^46°^35.75″^63.5°^0.05″^9°^D3' | split: '~'
+      assign geometry_rows = 'Blade length^3″~Club height^2.1″~Sole width^0.7″' | split: '~'
+      assign geometry_label = 'Haywood CB number 7 iron head geometry'
     when 'mb2-forged-muscle-back-irons'
       assign has_structured_specs = true
       assign model_name = 'MB2'
