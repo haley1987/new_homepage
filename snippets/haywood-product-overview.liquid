@@ -13,6 +13,21 @@
     assign overview_benefits = detail_parts[0]
   endif
 
+  assign is_legacy_cb = false
+  assign is_legacy_mb = false
+  assign is_legacy_iron = false
+  if product.handle == 'cb-players-cavity-back-irons'
+    assign is_legacy_cb = true
+    assign is_legacy_iron = true
+  elsif product.handle == 'mb-muscle-back-blade-irons'
+    assign is_legacy_mb = true
+    assign is_legacy_iron = true
+  endif
+
+  if is_legacy_iron and overview_benefits contains 'Compare Against Our Other Models'
+    assign overview_benefits = overview_benefits | split: '<p><strong>Compare Against Our Other Models</strong></p>' | first
+  endif
+
   assign overview_heading = 'Built around the way you play.'
   assign overview_summary = overview_intro | strip_html | strip | truncatewords: 58
 
@@ -81,6 +96,12 @@
   elsif product.title contains 'PD.1'
     assign overview_heading = 'Speed in a player’s profile.'
     assign overview_summary = 'PD.1 combines a compact, player-preferred profile with distance-producing construction. Its 431 stainless body, S450 face and injected foam support speed, feel and forgiveness without excessive offset.'
+  elsif is_legacy_cb
+    assign overview_heading = 'Forged control with added stability.'
+    assign overview_summary = 'The original Haywood CB combines compact players-cavity shaping with forged feel, control and added stability. It is built for golfers who want feedback and workability with more support than a pure muscle back.'
+  elsif is_legacy_mb
+    assign overview_heading = 'Pure feedback. Total control.'
+    assign overview_summary = 'The original Haywood MB is a forged muscle back built for precise shotmaking, direct feedback and maximum workability.'
   elsif product.title contains 'CB'
     assign overview_heading = 'Forged control with added stability.'
     assign overview_summary = 'CB2 combines compact players-cavity shaping with forged feel and added stability. It is built for golfers who want feedback and control without moving to a pure muscle back.'
@@ -100,7 +121,11 @@
   endif
 
   assign current_iron_model = blank
-  if product.title contains 'CB2' and product.title contains 'MB2'
+  if is_legacy_cb
+    assign current_iron_model = 'Haywood CB'
+  elsif is_legacy_mb
+    assign current_iron_model = 'Haywood MB'
+  elsif product.title contains 'CB2' and product.title contains 'MB2'
     assign current_iron_model = 'Combo'
   elsif product.title contains 'SV.2'
     assign current_iron_model = 'SV.2'
@@ -112,7 +137,11 @@
     assign current_iron_model = 'MB2'
   endif
 
-  assign iron_models = 'SV.2^Game improvement^Highest^High^Moderate^sv-2-game-improvement-irons~PD.1^Players distance^High^Mid–high^Balanced^pd-1-players-distance-irons~CB2^Players cavity^Moderate–high^Mid^High^cb2-forged-players-cavity-back-irons~MB2^Muscle back^Lowest^Controlled^Highest^mb2-forged-muscle-back-irons' | split: '~'
+  if is_legacy_iron
+    assign iron_models = 'SV.2^Game improvement^Highest^High^Moderate^sv-2-game-improvement-irons~PD.1^Players distance^High^Mid–high^Balanced^pd-1-players-distance-irons~Haywood CB^Players cavity^Moderate–high^Mid^High^cb-players-cavity-back-irons~Haywood MB^Muscle back^Lowest^Controlled^Highest^mb-muscle-back-blade-irons' | split: '~'
+  else
+    assign iron_models = 'SV.2^Game improvement^Highest^High^Moderate^sv-2-game-improvement-irons~PD.1^Players distance^High^Mid–high^Balanced^pd-1-players-distance-irons~CB2^Players cavity^Moderate–high^Mid^High^cb2-forged-players-cavity-back-irons~MB2^Muscle back^Lowest^Controlled^Highest^mb2-forged-muscle-back-irons' | split: '~'
+  endif
 
   assign buybox_summary = 'Purpose-built performance, configured around the way you play.'
   if is_seven_iron_program
