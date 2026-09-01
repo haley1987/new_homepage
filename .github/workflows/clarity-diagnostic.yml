@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'scripts/clarity_current_audit.py'
+      - 'scripts/clarity_metrics.py'
   workflow_dispatch:
 
 permissions:
