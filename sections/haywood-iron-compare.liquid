@@ -3,6 +3,7 @@
 {%- liquid
   assign trial_product = section.settings.trial_product
   assign combo_product = section.settings.combo_product
+  assign forged_combo_product = section.settings.forged_combo_product
 -%}
 
 <main class="hw-compare">
@@ -28,6 +29,9 @@
           {%- endif -%}
           {%- if forloop.index == 2 and combo_product != blank -%}
             <a href="#compare-{{ combo_product.handle }}">SV.2 + PD.1 Combo</a>
+          {%- endif -%}
+          {%- if forloop.index == 4 and forged_combo_product != blank -%}
+            <a href="#compare-{{ forged_combo_product.handle }}">CB2 + MB2 Combo</a>
           {%- endif -%}
         {%- endfor -%}
       </nav>
@@ -85,6 +89,27 @@
                 <p class="hw-compare-combo__path">SV.2 long irons <span aria-hidden="true">→</span> PD.1 scoring irons</p>
                 <p class="hw-compare-card__best">Combine easier-launching SV.2 long irons with the more compact control of PD.1 through the scoring clubs.</p>
                 <a class="hw-compare-card__link" href="{{ combo_product.url }}">Explore combo set <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+          {%- endif -%}
+          {%- if forloop.index == 4 and forged_combo_product != blank -%}
+            <article class="hw-compare-combo" id="compare-{{ forged_combo_product.handle }}">
+              <a class="hw-compare-combo__media" href="{{ forged_combo_product.url }}" aria-label="Explore the CB2 and MB2 combo set">
+                {%- if forged_combo_product.featured_image != blank -%}
+                  {{ forged_combo_product.featured_image | image_url: width: 1600 | image_tag:
+                    widths: '600, 900, 1200, 1600',
+                    sizes: '(min-width: 990px) 48vw, 100vw',
+                    loading: 'lazy',
+                    alt: forged_combo_product.featured_image.alt | default: forged_combo_product.title
+                  }}
+                {%- endif -%}
+              </a>
+              <div class="hw-compare-combo__body">
+                <p class="hw-compare-card__position">Blended forged set</p>
+                <h3>CB2 + MB2 Combo</h3>
+                <p class="hw-compare-combo__path">CB2 long irons <span aria-hidden="true">→</span> MB2 scoring irons</p>
+                <p class="hw-compare-card__best">Pair the added confidence of CB2 in the longer irons with the precision, feedback and workability of MB2 in the scoring clubs.</p>
+                <a class="hw-compare-card__link" href="{{ forged_combo_product.url }}">Explore combo set <span aria-hidden="true">→</span></a>
               </div>
             </article>
           {%- endif -%}
@@ -213,6 +238,7 @@
     { "type": "textarea", "id": "aside_copy", "label": "Hero supporting copy", "default": "Start with the performance characteristics you value most. Use Find My Fit if you would rather receive a recommendation." },
     { "type": "textarea", "id": "models_intro", "label": "Model section copy", "default": "The lineup moves from maximum help and easy launch to maximum feedback and shot control. There is no universally best iron—only the best starting point for your game." },
     { "type": "product", "id": "combo_product", "label": "SV.2 + PD.1 combo product" },
+    { "type": "product", "id": "forged_combo_product", "label": "CB2 + MB2 combo product" },
     { "type": "product", "id": "trial_product", "label": "7-Iron Program product" },
     { "type": "textarea", "id": "trial_copy", "label": "7-Iron Program copy", "default": "Order one brand-new 7-iron built to your specifications. If you move into the full set, its purchase price is applied toward your order." },
     { "type": "url", "id": "fit_link", "label": "Find My Fit link" }
