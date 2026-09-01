@@ -259,16 +259,15 @@
 
 .hw-compare-combo {
   display: grid;
-  grid-column: 1 / -1;
-  grid-template-columns: minmax(0, 1.15fr) minmax(32rem, .85fr);
-  min-height: 38rem;
+  grid-template-columns: minmax(0, .92fr) minmax(24rem, .72fr);
+  min-height: 43rem;
   border-right: 1px solid var(--hw-compare-line);
   border-bottom: 1px solid var(--hw-compare-line);
   background: var(--hw-compare-navy);
 }
 
 .hw-compare-combo__media {
-  min-height: 38rem;
+  min-height: 34rem;
   overflow: hidden;
   background: #e7e5e0;
 }
@@ -288,14 +287,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(3rem, 4.5vw, 6rem);
+  padding: clamp(2.6rem, 3.5vw, 4.5rem);
 }
 
 .hw-compare-combo h3 {
   margin: 1.2rem 0 0;
   color: #fff;
   font-family: var(--hw-compare-serif);
-  font-size: clamp(4rem, 4.5vw, 6.2rem);
+  font-size: clamp(3.5rem, 3.8vw, 5rem);
   font-weight: 400;
   letter-spacing: -.05em;
   line-height: .92;
@@ -708,11 +707,13 @@
 }
 
 @media screen and (max-width: 1199px) {
-  .hw-compare-card {
+  .hw-compare-card,
+  .hw-compare-combo {
     grid-template-columns: 1fr;
   }
 
-  .hw-compare-card__media {
+  .hw-compare-card__media,
+  .hw-compare-combo__media {
     min-height: 36rem;
   }
 }
@@ -804,7 +805,11 @@
   }
 
   .hw-compare-combo__media {
-    min-height: 30rem;
+    min-height: 32rem;
+  }
+
+  .hw-compare-combo__body {
+    min-height: 29rem;
   }
 
   .hw-compare__swipe-note {
