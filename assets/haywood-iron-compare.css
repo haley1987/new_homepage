@@ -699,7 +699,7 @@
   text-transform: uppercase;
 }
 
-.hw-compare__button--secondary {
+.hw-compare .hw-compare__button--secondary {
   border-color: rgba(255,255,255,.55);
   color: #fff;
   background: transparent;
