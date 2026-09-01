@@ -263,13 +263,13 @@
   min-height: 43rem;
   border-right: 1px solid var(--hw-compare-line);
   border-bottom: 1px solid var(--hw-compare-line);
-  background: var(--hw-compare-navy);
+  background: #fff;
 }
 
 .hw-compare-combo__media {
   min-height: 34rem;
   overflow: hidden;
-  background: #e7e5e0;
+  background: #eef1f3;
 }
 
 .hw-compare-combo__media img {
@@ -286,13 +286,12 @@
 .hw-compare-combo__body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   padding: clamp(2.6rem, 3.5vw, 4.5rem);
 }
 
 .hw-compare-combo h3 {
   margin: 1.2rem 0 0;
-  color: #fff;
+  color: var(--hw-compare-navy);
   font-family: var(--hw-compare-serif);
   font-size: clamp(3.5rem, 3.8vw, 5rem);
   font-weight: 400;
@@ -311,11 +310,11 @@
 
 .hw-compare-combo .hw-compare-card__best {
   max-width: 48rem;
-  color: rgba(255,255,255,.72);
+  color: var(--hw-compare-muted);
 }
 
 .hw-compare-combo .hw-compare-card__link {
-  color: #fff;
+  color: var(--hw-compare-navy);
 }
 
 .hw-compare__swipe-note {
