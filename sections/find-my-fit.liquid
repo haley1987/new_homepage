@@ -667,9 +667,9 @@
 
   /* Iron / club media — UNCHANGED */
   window.HAYWOOD_IRON_MEDIA = {
-    "haywoodmb-irons": {img:"https://www.haywoodgolf.com/cdn/shop/products/MB-Hero.png?v=1635829570",url:"/products/haywoodmb-irons",name:"Haywood MB's"},
-    "haywood-cb-mb-combo": {img:"https://cdn.shopify.com/s/files/1/0066/1202/5428/products/MBCB.png?v=1635832186",url:"/products/haywood-cb-mb-combo",name:"Haywood CB/MB Combo"},
-    "haywood-cbs": {img:"https://www.haywoodgolf.com/cdn/shop/products/CBHero.png?v=1635820503",url:"/products/haywood-cbs",name:"Haywood CB's"},
+    "mb2-forged-muscle-back-irons": {img:"https://cdn.shopify.com/s/files/1/0066/1202/5428/files/combo1_53138926-4621-4499-8c53-43b78af39203.png?v=1784905588",url:"/products/mb2-forged-muscle-back-irons",name:"MB2 Forged Muscle Back"},
+    "cb2-mb2-forged-combo-irons": {img:"https://cdn.shopify.com/s/files/1/0066/1202/5428/files/combo1_3.png?v=1784905588",url:"/products/cb2-mb2-forged-combo-irons",name:"CB2 + MB2 Combo"},
+    "cb2-forged-players-cavity-back-irons": {img:"https://cdn.shopify.com/s/files/1/0066/1202/5428/files/combo1_2_e72d7861-68a3-4403-812b-d3e751232255.png?v=1784905588",url:"/products/cb2-forged-players-cavity-back-irons",name:"CB2 Forged Players Cavity Back"},
     "pd-1s": {img:"https://cdn.shopify.com/s/files/1/0066/1202/5428/files/Haywood_PD_-_Back.png?v=1720678999",url:"/products/pd-1s",name:"PD.1 Irons (Players Distance)"},
     "sv-2-pd-1-combo-set": {img:"https://cdn.shopify.com/s/files/1/0066/1202/5428/files/SV.2PD.1_combo_Irons.png?v=1720661704",url:"/products/sv-2-pd-1-combo-set",name:"SV.2 | PD.1 Combo Set"},
     "sv-2s": {img:"https://www.haywoodgolf.com/cdn/shop/files/HaywoodSV2-Back2.png?v=1720471903",url:"/products/sv-2s",name:"SV.2 Irons (Game Improvement)"}
@@ -734,9 +734,9 @@
 
   function pickIronHead(strike,score,slot){
     const M={
-      "excellent":{"<76":{first:"haywoodmb-irons",second:"haywood-cb-mb-combo"},"77-82":{first:"haywood-cb-mb-combo",second:"haywood-cbs"},"83-86":{first:"haywood-cbs",second:"pd-1s"},"87-90":{first:"sv-2-pd-1-combo-set",second:"sv-2s"},"90>=":{first:"sv-2s",second:"sv-2s"}},
-      "above average":{"<76":{first:"haywood-cb-mb-combo",second:"haywood-cbs"},"77-82":{first:"haywood-cbs",second:"pd-1s"},"83-86":{first:"pd-1s",second:"sv-2-pd-1-combo-set"},"87-90":{first:"sv-2-pd-1-combo-set",second:"sv-2s"},"90>=":{first:"sv-2s",second:"sv-2s"}},
-      "average":{"<76":{first:"haywood-cbs",second:"pd-1s"},"77-82":{first:"pd-1s",second:"sv-2-pd-1-combo-set"},"83-86":{first:"sv-2-pd-1-combo-set",second:"sv-2s"},"87-90":{first:"sv-2s",second:"sv-2-pd-1-combo-set"},"90>=":{first:"sv-2s",second:"sv-2s"}},
+      "excellent":{"<76":{first:"mb2-forged-muscle-back-irons",second:"cb2-mb2-forged-combo-irons"},"77-82":{first:"cb2-mb2-forged-combo-irons",second:"cb2-forged-players-cavity-back-irons"},"83-86":{first:"cb2-forged-players-cavity-back-irons",second:"pd-1s"},"87-90":{first:"sv-2-pd-1-combo-set",second:"sv-2s"},"90>=":{first:"sv-2s",second:"sv-2s"}},
+      "above average":{"<76":{first:"cb2-mb2-forged-combo-irons",second:"cb2-forged-players-cavity-back-irons"},"77-82":{first:"cb2-forged-players-cavity-back-irons",second:"pd-1s"},"83-86":{first:"pd-1s",second:"sv-2-pd-1-combo-set"},"87-90":{first:"sv-2-pd-1-combo-set",second:"sv-2s"},"90>=":{first:"sv-2s",second:"sv-2s"}},
+      "average":{"<76":{first:"cb2-forged-players-cavity-back-irons",second:"pd-1s"},"77-82":{first:"pd-1s",second:"sv-2-pd-1-combo-set"},"83-86":{first:"sv-2-pd-1-combo-set",second:"sv-2s"},"87-90":{first:"sv-2s",second:"sv-2-pd-1-combo-set"},"90>=":{first:"sv-2s",second:"sv-2s"}},
       "below average":{"<76":{first:"pd-1s",second:"pd-1s"},"77-82":{first:"sv-2-pd-1-combo-set",second:"sv-2-pd-1-combo-set"},"83-86":{first:"sv-2s",second:"sv-2s"},"87-90":{first:"sv-2s",second:"sv-2s"},"90>=":{first:"sv-2s",second:"sv-2s"}}
     };
     const key=(strike||'Average').toLowerCase(), sc=(score||'83-86').toLowerCase();
