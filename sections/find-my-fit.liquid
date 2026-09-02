@@ -552,6 +552,49 @@
     #hyq-root-{{ section.id }} .hyq-shaft.is-best .hyq-shaft-name{font-size:18px;}
   }
 
+
+  /* Mobile results refinement */
+  @media (max-width:760px){
+    #hyq-root-{{ section.id }} .hyq-results{padding:0 14px 32px;}
+    #hyq-root-{{ section.id }} .hyq-model{
+      display:block;height:auto;overflow:visible;margin-bottom:28px;
+    }
+    #hyq-root-{{ section.id }} .hyq-model-img-wrap{
+      aspect-ratio:1 / 1;padding:0;background:#edf2f3;min-height:0;
+    }
+    #hyq-root-{{ section.id }} .hyq-model-img{
+      display:block;width:100%;height:100%;object-fit:contain;
+    }
+    #hyq-root-{{ section.id }} .hyq-model-body{
+      display:block;height:auto;min-height:0;min-width:0;overflow:visible;
+      padding:22px 18px 20px;
+    }
+    #hyq-root-{{ section.id }} .hyq-model-head{align-items:center;gap:10px;}
+    #hyq-root-{{ section.id }} .hyq-model-name{
+      font-size:24px;line-height:1.1;margin:12px 0 18px;
+    }
+    #hyq-root-{{ section.id }} .hyq-spec-grid{
+      gap:16px 20px;padding:18px 0;margin-bottom:18px;
+    }
+    #hyq-root-{{ section.id }} .hyq-spec-value{font-size:15px;}
+    #hyq-root-{{ section.id }} .hyq-model-ctas{
+      display:grid;grid-template-columns:1fr;gap:8px;
+      margin-top:18px !important;
+    }
+    #hyq-root-{{ section.id }} .hyq-cta{width:100%;padding:13px 16px;}
+    #hyq-root-{{ section.id }} .hyq-cta-ghost{
+      border:1px solid var(--hyq-cream-dim);text-decoration:none;
+    }
+    #hyq-root-{{ section.id }} .hyq-shafts-head{
+      clear:both;margin:0 0 14px;padding-top:0;
+    }
+    #hyq-root-{{ section.id }} .hyq-shaft-row{
+      flex-direction:row;flex-wrap:wrap;align-items:flex-start;gap:12px;
+    }
+    #hyq-root-{{ section.id }} .hyq-shaft-img{width:56px;height:56px;}
+    #hyq-root-{{ section.id }} .hyq-shaft-main{flex:1 1 180px;min-width:0;}
+    #hyq-root-{{ section.id }} .hyq-fit{width:100%;text-align:left;}
+  }
 </style>
 
 <script>
@@ -1058,7 +1101,7 @@
     if (marketing) marketing.onchange = e => state.optin_marketing = e.target.checked;
 
     const back = root.querySelector('#back');
-    if (back) back.onclick = ()=>{ idx = Math.max(0, idx-1); render(); };
+    if (back) back.onclick = ()=>{ idx = Math.max(0, idx-1); render(); scrollToQuiz(); };
 
     const next = root.querySelector('#next');
     if (next) next.onclick = () => {
@@ -1083,10 +1126,20 @@
       }
       idx = Math.min(steps.length-1, idx+1);
       render();
+      scrollToQuiz();
     };
 
     const finish = root.querySelector('#finish');
     if (finish) finish.onclick = onFinish;
+  }
+
+  function scrollToQuiz(){
+    requestAnimationFrame(() => {
+      const anchor = root.querySelector('.hyq-step') || root;
+      const offset = window.matchMedia('(max-width:760px)').matches ? 72 : 24;
+      const top = anchor.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({top:Math.max(0, top), behavior:'smooth'});
+    });
   }
 
   function seg(id, setter, current){
