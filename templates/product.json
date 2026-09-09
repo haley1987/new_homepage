@@ -17,6 +17,10 @@
         "menu_color_scheme": "1"
       }
     },
+    "seven-iron-landing": {
+      "type": "haywood-seven-iron-landing",
+      "settings": {}
+    },
     "main": {
       "type": "haywood-main-product",
       "blocks": {
@@ -162,6 +166,7 @@
   },
   "order": [
     "sidebar-drawer",
+    "seven-iron-landing",
     "main",
     "haywood-why-players",
     "haywood_specs_banner_8GDpmp",
