@@ -68,6 +68,7 @@
           <span>Choose a starting point</span>
           <strong>Which description sounds most like your game?</strong>
           <p>This is guidance—not a fitting. You can change your selection before ordering.</p>
+          <a class="hw7p-fit-quiz" href="/pages/fitting-tool">Take the full fitting quiz <span aria-hidden="true">→</span></a>
         </div>
         <div class="hw7p-fit-options">
           <button type="button" data-model="sv2"><span>Maximum help</span><small>I want the easiest launch and most stability.</small><b>SV.2</b></button>
@@ -94,7 +95,7 @@
               <div><dt>Forgiveness</dt><dd><span class="hw7p-meter" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></span></dd></div>
               <div><dt>Workability</dt><dd><span class="hw7p-meter" aria-label="3 out of 5"><i></i><i></i><i></i><i class="is-empty"></i><i class="is-empty"></i></span></dd></div>
             </dl>
-            <button class="hw7p-select" type="button" data-model="sv2">Select SV.2 <span aria-hidden="true">→</span></button>
+            <button class="hw7p-select" type="button" data-model="sv2" data-configure-model>Configure SV.2 <span aria-hidden="true">→</span></button>
           </div>
         </article>
 
@@ -113,7 +114,7 @@
               <div><dt>Forgiveness</dt><dd><span class="hw7p-meter" aria-label="4 out of 5"><i></i><i></i><i></i><i></i><i class="is-empty"></i></span></dd></div>
               <div><dt>Workability</dt><dd><span class="hw7p-meter" aria-label="3 out of 5"><i></i><i></i><i></i><i class="is-empty"></i><i class="is-empty"></i></span></dd></div>
             </dl>
-            <button class="hw7p-select" type="button" data-model="pd1" aria-pressed="true">✓ Selected</button>
+            <button class="hw7p-select" type="button" data-model="pd1" data-configure-model>Configure PD.1 <span aria-hidden="true">→</span></button>
           </div>
         </article>
 
@@ -131,7 +132,7 @@
               <div><dt>Forgiveness</dt><dd><span class="hw7p-meter" aria-label="4 out of 5"><i></i><i></i><i></i><i></i><i class="is-empty"></i></span></dd></div>
               <div><dt>Workability</dt><dd><span class="hw7p-meter" aria-label="4 out of 5"><i></i><i></i><i></i><i></i><i class="is-empty"></i></span></dd></div>
             </dl>
-            <button class="hw7p-select" type="button" data-model="cb2">Select CB2 <span aria-hidden="true">→</span></button>
+            <button class="hw7p-select" type="button" data-model="cb2" data-configure-model>Configure CB2 <span aria-hidden="true">→</span></button>
           </div>
         </article>
 
@@ -150,7 +151,7 @@
               <div><dt>Forgiveness</dt><dd><span class="hw7p-meter" aria-label="3 out of 5"><i></i><i></i><i></i><i class="is-empty"></i><i class="is-empty"></i></span></dd></div>
               <div><dt>Workability</dt><dd><span class="hw7p-meter" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></span></dd></div>
             </dl>
-            <button class="hw7p-select" type="button" data-model="mb2">Select MB2 <span aria-hidden="true">→</span></button>
+            <button class="hw7p-select" type="button" data-model="mb2" data-configure-model>Configure MB2 <span aria-hidden="true">→</span></button>
           </div>
         </article>
       </div>
@@ -182,7 +183,7 @@
     </section>
 
     <section class="hw7p-proof">
-      <div class="hw7p-rating"><div aria-label="5 out of 5 stars">★★★★★</div><strong>4.9 / 5</strong><span>From 12 program reviews</span></div>
+      <div class="hw7p-rating"><div aria-label="5 out of 5 stars">★★★★★</div><strong>4.9 / 5</strong></div>
       <blockquote>“Fantastic club. The sound, the look, the feel—never mind how easy it is to hit. So happy with it, purchased the rest without a second thought.”<footer>Adam · Toronto, Canada · Verified buyer</footer></blockquote>
     </section>
 
@@ -228,6 +229,7 @@
     .hw7-program-page #MainContent>.shopify-section:not(:has(#hw7-program)):not(:has(product-info[id^="MainProduct-"])){display:none!important}.hw7-program-page product-info[id^="MainProduct-"]{min-height:0!important;margin:0!important;padding:0!important}.hw7-program-page product-info[id^="MainProduct-"]>.hw-product-shell{min-height:0!important;margin-block:0!important;padding-block:0!important}.hw7-program-page product-info[id^="MainProduct-"]>.hw-product-shell>.product,.hw7-program-page product-info[id^="MainProduct-"]>.hw-product-shell>.hw-product-overview{display:none!important}
     @media(max-width:1320px){.hw7p-hero{min-height:calc(100svh - 82px);grid-template-columns:1fr 1fr}.hw7p-hero h1{font-size:clamp(64px,8vw,90px)}.hw7p-hero-visual{min-height:650px}.hw7p-fit{grid-template-columns:1fr}.hw7p-fit-heading{border-right:0;border-bottom:1px solid var(--line)}.hw7p-grid{grid-template-columns:repeat(2,1fr);gap:18px}.hw7p-selected{grid-template-columns:1fr 1fr auto}.hw7p-selected>div:nth-child(3){display:none}.hw7p-credit{grid-template-columns:1fr}.hw7p-credit-copy{max-width:720px}.hw7p-faq{grid-template-columns:1fr;gap:60px}}
     @media(max-width:749px){.hw7p-hero{min-height:0;grid-template-columns:1fr}.hw7p-hero-copy{padding:56px 24px 44px}.hw7p-hero h1{font-size:clamp(54px,15.5vw,64px);line-height:.88;letter-spacing:-.05em}.hw7p-lede{margin-top:28px;font-size:19px}.hw7p-actions{align-items:stretch;flex-direction:column;gap:12px}.hw7p-text-link{align-self:flex-start}.hw7p-trust{gap:12px;flex-direction:column}.hw7p-hero-visual{min-height:460px}.hw7p-hero-image{width:104%}.hw7p-stamp{width:108px;right:5%;top:8%}.hw7p-stamp strong{font-size:28px}.hw7p-viewing{left:20px;bottom:20px;min-width:220px}.hw7p-section-heading{grid-template-columns:1fr;gap:8px}.hw7p-steps{margin-top:50px;grid-template-columns:1fr}.hw7p-steps li,.hw7p-steps li+li{padding:24px 0;border-right:0;border-bottom:1px solid rgba(255,255,255,.18)}.hw7p-models{padding-left:20px;padding-right:20px}.hw7p-models-intro{grid-template-columns:1fr;gap:25px}.hw7p-fit{margin-top:38px}.hw7p-fit-heading{padding:22px 20px}.hw7p-fit-options{grid-template-columns:repeat(2,1fr)}.hw7p-fit-options button{min-height:128px;padding:18px;border-right:0;border-bottom:1px solid var(--line)}.hw7p-fit-options button:nth-child(odd){border-right:1px solid var(--line)}.hw7p-fit-options button:nth-child(n+3){border-bottom:0}.hw7p-swipe{margin:24px 0 10px;display:flex;align-items:center;gap:8px;color:#697077;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.hw7p-grid{display:flex;gap:12px;margin-right:-20px;padding:5px 20px 18px 0;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.hw7p-card{flex:0 0 min(84vw,350px);scroll-snap-align:start}.hw7p-card-image{height:310px}.hw7p-card-copy>p:not(.hw7p-category){min-height:0}.hw7p-source{margin-top:10px}.hw7p-return-note{margin-top:22px;text-align:left}.hw7p-selected{bottom:8px;grid-template-columns:1fr auto;margin-inline:-10px}.hw7p-selected>div:nth-child(2){display:none}.hw7p-selected>a{padding:0 16px;min-height:76px}.hw7p-credit-steps{grid-template-columns:1fr}.hw7p-credit-steps li{min-height:0}.hw7p-credit-steps li+li{border-left:0;border-top:1px solid #e1e3e4}.hw7p-proof{grid-template-columns:1fr}.hw7p-rating{padding:0 0 38px;border-right:0;border-bottom:1px solid rgba(255,255,255,.2)}.hw7p-final>span{font-size:15px}}
+    .hw7p-fit-heading>span{margin-bottom:9px}.hw7p-fit-quiz{align-self:flex-start;margin-top:14px;padding-bottom:4px;border-bottom:1px solid var(--navy);color:var(--navy)!important;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}.hw7p-fit-quiz span{display:inline;margin:0 0 0 6px;padding:0;color:inherit;font-size:12px}.hw7p .hw7p-select{background:var(--navy);color:#fff}.hw7p .hw7p-select:hover{background:var(--deep)}
   </style>
 
   <script>
@@ -264,8 +266,8 @@
           var active = button.dataset.model === key;
           if (button.closest('.hw7p-fit-options')) button.classList.toggle('is-active', active);
           if (button.classList.contains('hw7p-select')) {
-            button.setAttribute('aria-pressed', active ? 'true' : 'false');
-            button.innerHTML = active ? '✓ Selected' : 'Select ' + models[button.dataset.model].name + ' <span aria-hidden="true">→</span>';
+            button.removeAttribute('aria-pressed');
+            button.innerHTML = 'Configure ' + models[button.dataset.model].name + ' <span aria-hidden="true">→</span>';
           }
         });
         var heroImage = root.querySelector('.hw7p-hero-image');
@@ -282,7 +284,11 @@
       }
 
       root.querySelectorAll('[data-model]').forEach(function (button) {
-        button.addEventListener('click', function () { update(button.dataset.model, true); });
+        button.addEventListener('click', function () {
+          var shouldConfigure = button.hasAttribute('data-configure-model');
+          update(button.dataset.model, !shouldConfigure);
+          if (shouldConfigure) launchConfigurator(button.dataset.model, true);
+        });
       });
       update(selected, false);
 
