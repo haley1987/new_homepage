@@ -200,7 +200,7 @@
       <p>Built for the way you play</p>
       <h2>Start with one swing<br>you can trust.</h2>
       <span>Choose your model. Build your 7-iron. Know what belongs in the bag.</span>
-      <a class="hw7p-button" href="#hw7-models">Choose your iron <b aria-hidden="true">→</b></a>
+      <a class="hw7p-button" data-configure-final href="{{ product.url }}?apo-cfg=19917664,19917666,19917671,19917675,19917680,19917690,19917715,19917718,19917730,19917736,19917743,19917748,19917751#hw7-configurator">Configure Your 7 Iron <b aria-hidden="true">→</b></a>
     </section>
     <div id="hw7-configurator" class="hw7p-configurator-anchor" aria-hidden="true"></div>
   </div>
@@ -279,6 +279,10 @@
           update(button.dataset.model, !shouldConfigure);
           if (shouldConfigure) launchConfigurator(button.dataset.model, true);
         });
+      });
+      root.querySelector('[data-configure-final]').addEventListener('click', function (event) {
+        event.preventDefault();
+        launchConfigurator(selected, true);
       });
       update(selected, false);
 
