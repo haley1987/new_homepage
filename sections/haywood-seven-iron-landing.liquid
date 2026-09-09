@@ -159,12 +159,6 @@
       <p class="hw7p-source">Ratings and player profiles are taken directly from each model’s Haywood product specifications. Your delivery, strike pattern and preferred flight still matter. <a href="/pages/compare-irons">View the full iron comparison →</a></p>
       <p class="hw7p-return-note">Custom-built 7-irons are non-refundable and non-returnable.</p>
 
-      <div class="hw7p-selected" aria-live="polite">
-        <div><span>Selected model</span><strong data-selected-name>PD.1 7-iron</strong></div>
-        <div><span>Your credit</span><strong>Item price before tax &amp; shipping</strong></div>
-        <div><span>Next</span><strong>Choose shaft, grip &amp; adjustments</strong></div>
-        <a data-configure-link href="{{ product.url }}?apo-cfg=19917664,19917666,19917671,19917675,19917680,19917690,19917715,19917718,19917730,19917736,19917743,19917748,19917751#hw7-configurator">Configure selected PD.1 <span aria-hidden="true">→</span></a>
-      </div>
     </section>
 
     <section class="hw7p-credit">
@@ -274,10 +268,6 @@
         heroImage.src = root.dataset[key + 'Image'];
         heroImage.alt = model.name + ' 7-iron';
         root.querySelector('.hw7p-viewing strong').textContent = model.name + ' · ' + model.category;
-        root.querySelector('[data-selected-name]').textContent = model.name + ' 7-iron';
-        var link = root.querySelector('[data-configure-link]');
-        link.href = configurationUrl(key);
-        link.innerHTML = 'Configure selected ' + model.name + ' <span aria-hidden="true">→</span>';
         if (reveal && window.matchMedia('(max-width: 749px)').matches) {
           document.getElementById('hw7-model-' + key).scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
         }
@@ -315,11 +305,6 @@
         }
         openConfiguratorWhenReady();
       }
-
-      root.querySelector('[data-configure-link]').addEventListener('click', function (event) {
-        event.preventDefault();
-        launchConfigurator(selected, true);
-      });
 
       if (window.location.hash === '#hw7-configurator' && currentConfig) {
         launchConfigurator(selected, false);
