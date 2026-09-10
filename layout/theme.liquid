@@ -22,17 +22,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {%- endunless -%}
 
     <title>
-      {{ page_title }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- if request.page_type == 'index' -%}
+        Custom-Built Golf Clubs &amp; Forged Irons | Haywood Golf
+      {%- else -%}
+        {{ page_title }}
+        {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+        {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+        {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- endif -%}
     </title>
 
-    {% if page_description %}
+    {%- if request.page_type == 'index' -%}
+      <meta name="description" content="Shop custom-built golf clubs designed in Vancouver. Explore forged irons, wedges, drivers, putters and fitting tools from Haywood Golf.">
+    {%- elsif page_description -%}
       <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
+    {%- endif -%}
+
+    {%- if request.page_type == 'search' -%}
+      <meta name="robots" content="noindex,follow">
+    {%- endif -%}
 
     {% render 'meta-tags' %}
+    {% render 'structured-data-breadcrumbs' %}
 
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
@@ -318,35 +329,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <!-- Global site tag US (gtag.js) - Google Ads: 1013088769 --> <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1013088769"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-1013088769'); </script>
       <!-- Judge.me platform-independent widget loader -->
   <script src="https://cdn.judge.me/assets/embed.js" defer></script>
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Corporation",
-  "name": "Haywood Golf",
-  "url": "https://www.haywoodgolf.com/",
-  "logo": "",
-  "contactPoint": [{
-    "@type": "ContactPoint",
-    "telephone": "+1-844-794-0004",
-    "contactType": "customer service",
-    "contactOption": "TollFree",
-    "areaServed": ["US","CA"],
-    "availableLanguage": ["en","fr"]
-  },{
-    "@type": "ContactPoint",
-    "telephone": "info@haywoodgolf.com",
-    "contactType": "billing support",
-    "contactOption": "TollFree",
-    "areaServed": ["US","CA"],
-    "availableLanguage": ["en","fr"]
-  }],
-  "sameAs": [
-    "https://www.instagram.com/haywoodgolf/",
-    "https://www.facebook.com/HaywoodGolf/",
-    "https://twitter.com/haywoodgolf?lang=en"
-  ]
-}
-</script>
   </head>
 
   <body class="gradient{% if request.page_type == 'index' %} hw-homepage{% endif %}{% if request.page_type == 'blog' and blog.handle == 'press' %} hw-press-page{% elsif request.page_type == 'blog' or request.page_type == 'article' %} hw-journal-page{% endif %}{% if request.page_type == 'page' and page.handle == 'booking' %} hw-booking-page{% endif %}{% if request.page_type == 'page' and page.handle == 'store-locator' %} hw-locator-page{% endif %}{% if request.page_type == 'page' and page.handle == 'return-policy' %} hw-return-policy-page{% endif %}{% if request.page_type == 'page' and page.handle == 'faqs' %} hw-faq-page{% endif %}{% if request.page_type == 'page' and page.handle == 'contact' %} hw-contact-page{% endif %}{% if request.page_type == 'page' and page.handle == 'the-haywood-golf-story' %} hw-story-page{% endif %}{% if request.page_type == 'page' and page.handle == 'careers' %} hw-careers-page{% endif %}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">

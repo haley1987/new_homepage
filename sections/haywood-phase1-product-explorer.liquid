@@ -28,6 +28,7 @@
         if card_image == blank and block.settings.collection != blank
           assign card_image = block.settings.collection.featured_image
         endif
+        assign card_alt = card_image.alt | default: block.settings.title
         assign card_badge = block.settings.badge
         if card_badge == blank and forloop.index <= 2
           assign card_badge = 'New'
@@ -38,9 +39,9 @@
           {%- if card_image != blank -%}
             {%- if forloop.index <= 2 -%}
               {{ card_image | image_url: width: 1800 | image_tag: class: 'hw-product-card__image hw-product-card__image--backdrop', widths: '400, 550, 750, 1000, 1200, 1400, 1800', sizes: card_sizes, loading: 'lazy', alt: '' }}
-              {{ card_image | image_url: width: 1800 | image_tag: class: 'hw-product-card__image hw-product-card__image--foreground', widths: '400, 550, 750, 1000, 1200, 1400, 1800', sizes: card_sizes, loading: 'lazy' }}
+              {{ card_image | image_url: width: 1800 | image_tag: class: 'hw-product-card__image hw-product-card__image--foreground', widths: '400, 550, 750, 1000, 1200, 1400, 1800', sizes: card_sizes, loading: 'lazy', alt: card_alt }}
             {%- else -%}
-              {{ card_image | image_url: width: 1800 | image_tag: class: 'hw-product-card__image', widths: '400, 550, 750, 1000, 1200, 1400, 1800', sizes: card_sizes, loading: 'lazy' }}
+              {{ card_image | image_url: width: 1800 | image_tag: class: 'hw-product-card__image', widths: '400, 550, 750, 1000, 1200, 1400, 1800', sizes: card_sizes, loading: 'lazy', alt: card_alt }}
             {%- endif -%}
           {%- else -%}
             <div class="hw-product-card__placeholder" data-image-purpose="{{ block.settings.title | escape }} PRODUCT IMAGE">

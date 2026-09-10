@@ -19,7 +19,7 @@
                 sizes="100vw"
               >
             {%- endif -%}
-            {{ desktop_image | image_url: width: 1800 | image_tag: widths: '750, 1100, 1400, 1800', sizes: '(min-width: 750px) 54vw, 100vw', loading: 'lazy' }}
+            {{ desktop_image | image_url: width: 1800 | image_tag: widths: '750, 1100, 1400, 1800', sizes: '(min-width: 750px) 54vw, 100vw', loading: 'lazy', alt: desktop_image.alt | default: section.settings.heading }}
           </picture>
         {%- else -%}
           <div class="hw-seven__placeholder" data-image-purpose="7-IRON PROGRAM PHOTOGRAPHY">

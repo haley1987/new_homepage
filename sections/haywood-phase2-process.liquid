@@ -16,7 +16,7 @@
           </div>
           <div class="hw-process__media">
             {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 900 | image_tag: class: 'hw-process__image', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 13vw, 46vw', loading: 'lazy' }}
+              {{ block.settings.image | image_url: width: 900 | image_tag: class: 'hw-process__image', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 13vw, 46vw', loading: 'lazy', alt: block.settings.image.alt | default: block.settings.title }}
             {%- else -%}
               <div class="hw-process__placeholder" data-image-purpose="{{ block.settings.image_purpose | escape }}">
                 <span>{{ block.settings.image_purpose | escape }}</span>

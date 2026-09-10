@@ -2,7 +2,7 @@
   <div class="hw-shell hw-story__grid">
     <div class="hw-story__media">
       {%- if section.settings.image != blank -%}
-        {{ section.settings.image | image_url: width: 1600 | image_tag: widths: '550, 750, 1100, 1400, 1600', sizes: '(min-width: 750px) 52vw, 100vw', loading: 'lazy' }}
+        {{ section.settings.image | image_url: width: 1600 | image_tag: widths: '550, 750, 1100, 1400, 1600', sizes: '(min-width: 750px) 52vw, 100vw', loading: 'lazy', alt: section.settings.image.alt | default: section.settings.heading }}
       {%- else -%}
         <div class="hw-purpose-placeholder hw-purpose-placeholder--editorial" data-image-purpose="WHY HAYWOOD PHOTOGRAPHY">
           <span>WHY HAYWOOD PHOTOGRAPHY</span>

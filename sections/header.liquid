@@ -519,42 +519,47 @@
   customElements.define('sticky-header', StickyHeader);
 {% endjavascript %}
 
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Organization",
-    "name": {{ shop.name | json }},
-    {% if settings.logo %}
-      "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
-    {% endif %}
-    "sameAs": [
-      {{ settings.social_twitter_link | json }},
-      {{ settings.social_facebook_link | json }},
-      {{ settings.social_pinterest_link | json }},
-      {{ settings.social_instagram_link | json }},
-      {{ settings.social_tiktok_link | json }},
-      {{ settings.social_tumblr_link | json }},
-      {{ settings.social_snapchat_link | json }},
-      {{ settings.social_youtube_link | json }},
-      {{ settings.social_vimeo_link | json }}
-    ],
-    "url": {{ request.origin | append: page.url | json }}
-  }
-</script>
-
 {%- if request.page_type == 'index' -%}
   {% assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' %}
   <script type="application/ld+json">
     {
-      "@context": "http://schema.org",
-      "@type": "WebSite",
-      "name": {{ shop.name | json }},
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {{ potential_action_target | json }},
-        "query-input": "required name=search_term_string"
-      },
-      "url": {{ request.origin | append: page.url | json }}
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": {{ request.origin | append: '#organization' | json }},
+          "name": {{ shop.name | json }},
+          "url": {{ request.origin | json }},
+          "logo": {{ settings.logo | image_url: width: 500 | prepend: 'https:' | json }},
+          "email": "mailto:info@haywoodgolf.com",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+1-844-794-0004",
+            "contactType": "customer service",
+            "contactOption": "https://schema.org/TollFree",
+            "areaServed": ["US", "CA"]
+          },
+          "sameAs": [
+            {{ settings.social_twitter_link | default: 'https://x.com/haywoodgolf' | json }},
+            {{ settings.social_facebook_link | default: 'https://www.facebook.com/HaywoodGolf/' | json }},
+            {{ settings.social_instagram_link | default: 'https://www.instagram.com/haywoodgolf/' | json }}
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": {{ request.origin | append: '#website' | json }},
+          "name": {{ shop.name | json }},
+          "url": {{ request.origin | json }},
+          "publisher": {
+            "@id": {{ request.origin | append: '#organization' | json }}
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {{ potential_action_target | json }},
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
     }
   </script>
 {%- endif -%}
