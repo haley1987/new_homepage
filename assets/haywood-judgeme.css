@@ -520,3 +520,15 @@
     display: block;
   }
 }
+
+/* Photo-review popups have a narrow content pane, even on desktop. */
+.jdgm-modal.jdgm-widget-revamp .jm-review-item__content {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "rating" "reviewer" "review" "badge";
+  gap: 1.3rem !important;
+}
+
+.jdgm-modal.jdgm-widget-revamp .jm-review-content {
+  min-width: 0;
+  max-width: 100%;
+}
