@@ -6,6 +6,8 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
+from clarity_metrics import compact_raw_snapshot
+
 TOKEN = os.environ["CLARITY_API_TOKEN"]
 BASE = "https://www.clarity.ms/export-data/api/v1/project-live-insights"
 OUT = pathlib.Path("clarity-data/daily")
@@ -15,8 +17,6 @@ WINDOW_DAYS = 3
 QUERIES = {
     "device": ["Device"],
     "url_device": ["URL", "Device"],
-    "url_country": ["URL", "Country/Region"],
-    "url_source": ["URL", "Source"],
 }
 
 
@@ -80,6 +80,10 @@ if validation_sessions <= 0:
         "Snapshot not saved; verify the token/project and API response."
     )
 
+compact = compact_raw_snapshot(payload)
 path = OUT / f"{stamp}.json"
-path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
-print(f"Saved {path} with {validation_sessions} sessions in the 72-hour validation query")
+path.write_text(json.dumps(compact, indent=2, sort_keys=True) + "\n")
+print(
+    f"Saved {path} with {validation_sessions} sessions and "
+    f"{len(compact['page_device'])} canonical page/device rows"
+)
