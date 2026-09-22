@@ -121,7 +121,7 @@ function mwApoCustom() {
   window.mwApoInit.onCallback = function (event, data) {
     if (event == "applyAttributeStateToHtml::price") {
 		  
-      if (window.innerWidth < 1023) {
+      // Keep the selected shaft description available at every breakpoint.
         setTimeout(function () {
             
           let options = document.querySelectorAll( ".mw-option--type-swatch .mw-option__value.mw-option__value--selected , .mw-option--type-multiswatch .mw-option__value.mw-option__value--selected");
@@ -141,7 +141,6 @@ function mwApoCustom() {
           })
           
         }, 100);
-      }
    }
     return data;
   };
