@@ -1216,6 +1216,74 @@
 
 .hw-product-overview__benefits > div p { margin: 0 !important; }
 
+/* Product overview benefit list refinement */
+.hw-product-overview__benefits ul {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0.85rem 2rem !important;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hw-product-overview__benefits li,
+.hw-product-overview__benefits li:nth-child(n),
+.hw-product-overview__benefits li:nth-child(3n + 2),
+.hw-product-overview__benefits li:nth-child(3n + 3),
+.hw-product-overview__benefits li:nth-last-child(-n + 3) {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin: 0 !important;
+  padding: 0.15rem 0 !important;
+  border: 0 !important;
+  color: var(--hw-commerce-muted);
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+.hw-product-overview__benefits li::before {
+  flex: 0 0 auto;
+  color: var(--hw-commerce-gold);
+  content: '•';
+}
+
+.hw-product-overview__benefits li strong {
+  display: inline;
+  margin: 0;
+  color: var(--hw-commerce-navy);
+  font-size: inherit;
+}
+
+.hw-product-overview__benefits > div {
+  margin: 2.6rem 0 0 !important;
+  padding: 1.4rem 0 0 !important;
+  border: 0 !important;
+  border-top: 1px solid var(--hw-commerce-line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+@media screen and (max-width: 989px) {
+  .hw-product-overview__benefits ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .hw-product-overview__benefits ul {
+    grid-template-columns: 1fr !important;
+    gap: 0.6rem !important;
+  }
+
+  .hw-product-overview__benefits > div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+
 .hw-product-overview__compare {
   margin-top: clamp(5rem, 7vw, 8rem);
   padding: clamp(3rem, 5vw, 6rem);
@@ -1240,6 +1308,7 @@
   font-family: var(--hw-commerce-serif);
   font-size: clamp(3.8rem, 4.4vw, 6rem);
   font-weight: 400;
+  
   letter-spacing: -.045em;
   line-height: .96;
 }
