@@ -385,7 +385,25 @@
     padding: 0 !important;
   }
 
-  #ConfigDrawer .mw-option--type-swatch .mws_tippy-add {
+  /* Desktop: keep the selected shaft's profile visible. */
+  #ConfigDrawer .mw-option--type-swatch .mw-option__value--selected .mws_tippy-add {
+    display: block !important;
+    margin: 0 !important;
+    padding: 1.1rem 1.25rem 1.3rem !important;
+    color: var(--cfg-muted) !important;
+    border-top: 1px solid var(--cfg-line) !important;
+    border-radius: 0 !important;
+    background: var(--cfg-paper) !important;
+    box-shadow: none !important;
+    font-family: inherit !important;
+    font-size: 1.15rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    line-height: 1.5 !important;
+    text-align: left !important;
+    text-transform: none !important;
+  }
+  #ConfigDrawer .mw-option--type-swatch .mw-option__value:not(.mw-option__value--selected) .mws_tippy-add {
     display: none !important;
   }
 
