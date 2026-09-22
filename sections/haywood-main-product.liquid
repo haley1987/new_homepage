@@ -329,10 +329,7 @@ div.product__description, div.product-description {
   assign hw_display_title = hw_display_title | replace: ' (Players Cavity Model)', ''
   assign hw_display_title = hw_display_title | replace: ' (Muscle Back Model)', ''
 
-  if product.handle == 'adjustable-forgiving-golf-driver'
-  assign hw_display_title = 'Adjustable Golf Driver'
-endif
-
+  
   assign hw_is_seven_iron_program = false
   if product.handle == '7-iron-purchase-program'
     assign hw_is_seven_iron_program = true
