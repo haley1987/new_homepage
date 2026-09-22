@@ -54,9 +54,13 @@ function mwApoCustom() {
     }
 
 
-    let targetElement = option.querySelector( ".mw-option__control");
-    let id = targetElement.getAttribute("id");
-    let [description, isHover, urlImg] = getUrl(id);
+    const targetElement = option.querySelector(".mw-option__control");
+    if (!targetElement) return;
+
+    const popupData = getUrl(targetElement.getAttribute("id"));
+    if (!popupData) return;
+
+    const [description] = popupData;
 
       let div = document.createElement("div");
       div.classList.add("mws_tippy-add");
