@@ -1,0 +1,58 @@
+{% if product.handle == 'adjustable-forgiving-golf-driver' %}
+  <section class="hdfaq" aria-labelledby="hdfaq-title">
+    <style>
+      .hdfaq { background: #f3efe7; color: #0b2341; padding: clamp(3.5rem, 7vw, 7rem) clamp(1.25rem, 5vw, 5rem); }
+      .hdfaq__inner { max-width: 72rem; margin: 0 auto; }
+      .hdfaq__eyebrow { margin: 0 0 .75rem; color: #b88d4a; font-size: .75rem; font-weight: 700; letter-spacing: .17em; }
+      .hdfaq h2 { margin: 0 0 clamp(2rem, 4vw, 3rem); font-family: "Iowan Old Style", Baskerville, "Times New Roman", serif; font-size: clamp(2.25rem, 4vw, 4rem); font-weight: 400; line-height: 1; }
+      .hdfaq__items { border-top: 1px solid rgba(11, 35, 65, .24); }
+      .hdfaq details { border-bottom: 1px solid rgba(11, 35, 65, .24); }
+      .hdfaq summary { align-items: center; cursor: pointer; display: flex; font-size: clamp(1rem, 1.35vw, 1.2rem); font-weight: 700; gap: 1rem; justify-content: space-between; list-style: none; padding: 1.25rem 0; }
+      .hdfaq summary::-webkit-details-marker { display: none; }
+      .hdfaq summary::after { content: '+'; color: #b88d4a; font-size: 1.75rem; font-weight: 400; line-height: 1; }
+      .hdfaq details[open] summary::after { content: '−'; }
+      .hdfaq details p { color: #425164; font-size: 1rem; line-height: 1.65; margin: 0; max-width: 58rem; padding: 0 2.5rem 1.4rem 0; }
+      .hdfaq__help { border-top: 1px solid rgba(11, 35, 65, .24); color: #425164; font-size: 1rem; line-height: 1.65; margin: clamp(2rem, 4vw, 3rem) 0 0; padding-top: 1.5rem; }
+      .hdfaq a { color: #0b2341; font-weight: 700; text-decoration-color: #b88d4a; text-decoration-thickness: 1px; text-underline-offset: .22em; }
+    </style>
+    <div class="hdfaq__inner">
+      <p class="hdfaq__eyebrow">DRIVER FITTING &amp; SETUP</p>
+      <h2 id="hdfaq-title">Adjustable Golf Driver FAQs</h2>
+      <div class="hdfaq__items">
+        <details>
+          <summary>What lofts are available?</summary>
+          <p>The Haywood Driver is available in 9° and 10.5° lofts. Its adjustable hosel provides loft adjustment from −1.5° to +1.5° and allows the lie angle to be adjusted up to 4° upright.</p>
+        </details>
+        <details>
+          <summary>Is the Haywood Driver forgiving?</summary>
+          <p>Yes. The 460 cc head and 15-gram rear weight increase stability and help preserve performance on off-centre strikes.</p>
+        </details>
+        <details>
+          <summary>Is the Haywood Driver designed for low spin?</summary>
+          <p>The driver is designed to produce a mid-launch, low-spin flight. Actual launch and spin will also depend on the selected loft, shaft and individual delivery.</p>
+        </details>
+        <details>
+          <summary>Can the Haywood Driver be custom-built?</summary>
+          <p>Yes. Golfers can select their preferred shaft, grip and playing specifications before the club is assembled and inspected in-house.</p>
+        </details>
+        <details>
+          <summary>Does the Driver include a headcover and adjustment wrench?</summary>
+          <p>Yes. A Haywood headcover and adjustment wrench are included.</p>
+        </details>
+      </div>
+      <p class="hdfaq__help">Need help choosing a setup? Use the <a href="/pages/fitting-tool">Haywood fitting tool</a>, explore the complete <a href="{{ routes.collections_url }}/drivers-fairway-woods-hybrids">Drivers, Fairway Woods and Hybrids collection</a>, or review the available <a href="https://cdn.shopify.com/s/files/1/0066/1202/5428/files/SHAFT_GUIDE-2.pdf?v=1752864438">shaft guide</a>.</p>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Haywood Driver FAQ",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Haywood Driver FAQ"
+    }
+  ]
+}
+{% endschema %}

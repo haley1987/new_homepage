@@ -126,6 +126,10 @@
       "name": "Specs Image Banner (URL metafield)",
       "settings": {}
     },
+      "haywood_driver_faq": {
+        "type": "haywood-driver-faq",
+        "settings": {}
+      },
     "haywood-ugc": {
       "type": "haywood-ugc",
       "settings": {}
@@ -170,6 +174,7 @@
     "main",
     "haywood-why-players",
     "haywood_specs_banner_8GDpmp",
+    "haywood_driver_faq",
     "haywood-ugc",
     "haywood-sticky-bar",
     "1760032837c8e7d26b",
