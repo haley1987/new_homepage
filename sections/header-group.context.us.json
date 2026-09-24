@@ -12,5 +12,22 @@
     "market": "us"
   },
   "parent": "header-group.json",
-  "sections": {}
+  "sections": {
+    "announcement_bar_qE7BFR": {
+      "settings": {},
+      "blocks": {
+        "announcement_zhQfE": {
+          "type": "announcement",
+          "disabled": false,
+          "settings": {
+            "text": "U.S. orders, all-inclusive pricing. No surprise fees at your door.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_zhQfE"
+      ]
+    }
+  }
 }

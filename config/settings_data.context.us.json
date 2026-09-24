@@ -11,5 +11,28 @@
   "context": {
     "market": "us"
   },
-  "current": {}
+  "current": {
+    "color_schemes": {
+      "scheme-1": {
+        "settings": {}
+      },
+      "scheme-2": {
+        "settings": {}
+      },
+      "scheme-3": {
+        "settings": {}
+      },
+      "scheme-4": {
+        "settings": {}
+      },
+      "scheme-5": {
+        "settings": {}
+      }
+    }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      ".hw-homepage .section-header.section-header {position: relative !important; margin-bottom: calc(-1 * var(--header-height)) !important; }"
+    ]
+  }
 }
