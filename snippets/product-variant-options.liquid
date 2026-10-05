@@ -74,6 +74,18 @@
     if value.available
       assign option_disabled = false
     endif
+    if product.handle == 'complete-set-w-sv2-irons-game-improvement' or product.handle == 'complete-set-w-pd1-irons-players-distance'
+      if option.name == 'Shaft Flex'
+        assign option_disabled = true
+        assign hw_selected_hand = product.selected_or_first_available_variant.option1
+        for hw_variant in product.variants
+          if hw_variant.available and hw_variant.option1 == hw_selected_hand and hw_variant.option3 == hw_value_text
+            assign option_disabled = false
+            break
+          endif
+        endfor
+      endif
+    endif
   -%}
 
   {%- capture input_id -%}
