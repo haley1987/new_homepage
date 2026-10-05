@@ -62,13 +62,13 @@
           %}
         </fieldset>
       {%- elsif picker_type == 'button' -%}
-        <fieldset class="js product-form__input product-form__input--pill{% if hw_complete_set_picker and option.name == 'Shaft Selection' and hw_initial_cypher %} hw-set-cypher-only{% endif %}">
+        <fieldset {% if hw_complete_set_picker %}data-hw-option-position="{{ option.position }}"{% endif %} class="js product-form__input product-form__input--pill{% if hw_complete_set_picker and option.name == 'Shaft Selection' and hw_initial_cypher %} hw-set-cypher-only{% endif %}">
           {%- if hw_complete_set_picker and option.name == 'Shaft Selection' -%}
             <legend class="form__label">Iron shaft</legend>
-            <p class="hw-set-option-help">Shaft choices here match the flex selected below. This choice is for the irons; the driver, 3-wood and hybrid include Cypher 2.0 graphite.</p>
+            <p class="hw-set-option-help">Shown for the selected flex above. This iron-shaft choice does not change the driver, 3-wood or hybrid, which include Cypher 2.0 graphite.</p>
           {%- elsif hw_complete_set_picker and option.name == 'Shaft Flex' -%}
             <legend class="form__label">Shaft flex</legend>
-            <p class="hw-set-option-help">Ladies and Senior use Cypher 2.0 graphite. Regular and Stiff choose from Elevate, KBS Tour Lite or Dynamic Gold Mid.</p>
+            <p class="hw-set-option-help">Choose flex first: Ladies and Senior use Cypher 2.0 graphite; Regular and Stiff can choose from three steel shafts.</p>
           {%- else -%}
             <legend class="form__label">{{ option.name }}</legend>
           {%- endif -%}
@@ -123,12 +123,33 @@
       (() => {
         if (!window.hwCompleteSetFlexFilter) {
           window.hwCompleteSetFlexFilter = true;
+          const reorder = (picker) => {
+            const shaft = picker.querySelector('fieldset[data-hw-option-position="2"]');
+            const flex = picker.querySelector('fieldset[data-hw-option-position="3"]');
+            if (shaft && flex && shaft.compareDocumentPosition(flex) & Node.DOCUMENT_POSITION_FOLLOWING) {
+              shaft.before(flex);
+            }
+          };
+          const reorderAll = () => document.querySelectorAll('variant-selects[data-hw-complete-set]').forEach(reorder);
+          reorderAll();
+          new MutationObserver(reorderAll).observe(document.body, { childList: true, subtree: true });
+          customElements.whenDefined('variant-selects').then(() => {
+            const prototype = customElements.get('variant-selects').prototype;
+            const original = Object.getOwnPropertyDescriptor(prototype, 'selectedOptionValues');
+            Object.defineProperty(prototype, 'selectedOptionValues', {
+              configurable: true,
+              get() {
+                if (!this.hasAttribute('data-hw-complete-set')) return original.get.call(this);
+                return Array.from(this.querySelectorAll('fieldset input:checked'))
+                  .sort((a, b) => Number(a.closest('fieldset').dataset.hwOptionPosition) - Number(b.closest('fieldset').dataset.hwOptionPosition))
+                  .map((input) => input.dataset.optionValueId);
+              }
+            });
+          });
           document.addEventListener('change', (event) => {
             const picker = event.target.closest?.('variant-selects[data-hw-complete-set]');
-            if (!picker) return;
-            const fields = picker.querySelectorAll('fieldset');
-            if (event.target.closest('fieldset') !== fields[2]) return;
-            const shaftField = fields[1];
+            if (!picker || event.target.closest('fieldset')?.dataset.hwOptionPosition !== '3') return;
+            const shaftField = picker.querySelector('fieldset[data-hw-option-position="2"]');
             const cypherOnly = /Ladies|Senior/i.test(event.target.value);
             let firstAvailable = null;
             shaftField.classList.toggle('hw-set-cypher-only', cypherOnly);
@@ -147,7 +168,7 @@
           }, true);
         }
         const picker = document.getElementById('variant-selects-{{ section.id }}');
-        const shaftField = picker?.querySelectorAll('fieldset')[1];
+        const shaftField = picker?.querySelector('fieldset[data-hw-option-position="2"]');
         const selected = shaftField?.querySelector('input[type="radio"]:checked');
         if (shaftField && (!selected || selected.disabled)) {
           const firstAvailable = shaftField.querySelector('input[type="radio"]:not(:disabled):not(.disabled)');
