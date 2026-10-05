@@ -71,7 +71,8 @@
           "settings": {
             "configure_label": "Configure your",
             "show_specs": true,
-            "show_quiz": true
+            "show_quiz": true,
+            "show_combo_link": true
           }
         },
         "haywood_trust": {
@@ -84,6 +85,7 @@
         },
         "description_WXXr9i": {
           "type": "description",
+          "disabled": true,
           "settings": {}
         }
       },
@@ -116,6 +118,16 @@
         "padding_bottom": 12
       }
     },
+    "custom_liquid_WRYQkD": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{% if product.handle == 'complete-set-w-sv2-irons-game-improvement' or product.handle == 'complete-set-w-pd1-irons-players-distance' %}\n  {% if product.handle == 'complete-set-w-sv2-irons-game-improvement' %}\n    {% assign set_model = 'SV.2' %}{% assign set_count = '12' %}{% assign set_iron_range = '6–AW' %}{% assign set_iron_count = '6' %}{% assign set_wedges = '52° + 56°' %}\n    {% assign set_pitch = 'A complete club setup anchored by forgiving SV.2 irons.' %}\n    {% assign set_iron_image = 'https://www.haywoodgolf.com/cdn/shop/files/1ac9aefcd4998793c0de4f1b710146171915fec45898ecd93b86061b52422afb_0b466d5f-3b5e-4a9a-a402-8ba2b46eb2a6.webp?v=1738093352&width=600' %}\n  {% else %}\n    {% assign set_model = 'PD.1' %}{% assign set_count = '13' %}{% assign set_iron_range = '5–AW' %}{% assign set_iron_count = '7' %}{% assign set_wedges = '54° + 58°' %}\n    {% assign set_pitch = 'A complete club setup anchored by players-distance PD.1 irons.' %}\n    {% assign set_iron_image = 'https://www.haywoodgolf.com/cdn/shop/files/84c7bc4e998b727701b99e7cb84cd76075f9f28e1d57c0e0b9640eea66766c38_1ee5f395-76c0-4dcc-bb82-8d0dbdf45139.webp?v=1756072785&width=600' %}\n  {% endif %}\n  <style>\n    .hw-set-product{background:#f4f0e8;color:#0b2948;padding:clamp(48px,6vw,86px) 0}\n    .hw-set-product *{box-sizing:border-box}\n    .hw-set-product__inner{max-width:1440px;margin:auto;padding:0 clamp(20px,4vw,64px)}\n    .hw-set-product__intro{display:flex;justify-content:space-between;align-items:end;gap:24px;padding-bottom:28px;border-bottom:1px solid #d6d4cd}\n    .hw-set-product__eyebrow{margin:0 0 10px;color:#9a6c32;font-size:12px;font-weight:700;letter-spacing:.17em;text-transform:uppercase}\n    .hw-set-product h2{margin:0;font-size:clamp(34px,4vw,58px);line-height:1.06;letter-spacing:-.04em;font-weight:500;font-family:\"Iowan Old Style\",Baskerville,\"Times New Roman\",serif}\n    .hw-set-product__lead{font-size:16px;line-height:1.6;color:#4d5a66;margin:0;max-width:380px}\n    .hw-set-product__count{font-family:\"Iowan Old Style\",Baskerville,\"Times New Roman\",serif;font-size:38px;line-height:1;color:#0b2948;white-space:nowrap}\n    .hw-set-product__count small{font-family:inherit;font-size:17px;letter-spacing:0}\n    .hw-set-product__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-top:28px;background:#d6d4cd;border:1px solid #d6d4cd}\n    .hw-set-product__item{min-width:0;background:#f4f0e8;padding:12px 12px 20px}\n    .hw-set-product__photo{aspect-ratio:1.7;background:#f9f7f2;overflow:hidden}\n    .hw-set-product__photo img{display:block;width:100%;height:100%;object-fit:cover;filter:sepia(.08) saturate(.82)}\n    .hw-set-product__detail{display:flex;gap:16px;padding:16px 4px 0}\n    .hw-set-product__number{color:#9a6c32;font-size:12px;font-weight:700;letter-spacing:.12em;line-height:1.5}\n    .hw-set-product h3{font-size:18px;line-height:1.25;margin:0 0 6px;font-weight:600}\n    .hw-set-product__item p{font-size:14px;line-height:1.5;color:#4d5a66;margin:0}\n    .hw-set-product__note{font-size:14px;line-height:1.5;color:#4d5a66;margin:24px 0 0}\n    .hw-set-product__links{display:flex;flex-wrap:wrap;gap:20px 32px;margin-top:28px;padding-top:25px;border-top:1px solid #d6d4cd}\n    .hw-set-product__links a{color:#0b2948;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:5px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}\n    .hw-set-product__links a:hover{color:#a77535}\n    @media(max-width:900px){.hw-set-product__intro{align-items:start;flex-direction:column}.hw-set-product__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}\n    @media(max-width:560px){.hw-set-product__photo{aspect-ratio:1.15}.hw-set-product__item{padding:7px 7px 14px}.hw-set-product__detail{gap:8px;padding:12px 3px 0}.hw-set-product h3{font-size:15px}.hw-set-product__item p{font-size:12px}.hw-set-product__number{font-size:11px}}\n  </style>\n  <section class=\"hw-set-product\" aria-labelledby=\"hw-set-product-title\">\n    <div class=\"hw-set-product__inner\">\n      <div class=\"hw-set-product__intro\">\n        <div><p class=\"hw-set-product__eyebrow\">The Complete Set</p><h2 id=\"hw-set-product-title\">What’s included</h2></div>\n        <div><div class=\"hw-set-product__count\">{{ set_count }} <small>clubs included</small></div><p class=\"hw-set-product__lead\">{{ set_pitch }}</p></div>\n      </div>\n      <div class=\"hw-set-product__grid\">\n        <div class=\"hw-set-product__item\"><div class=\"hw-set-product__photo\"><img src=\"https://www.haywoodgolf.com/cdn/shop/products/Driver-crown_1.png?v=1675445600&width=600\" alt=\"Haywood driver head\" loading=\"lazy\" width=\"600\" height=\"600\"></div><div class=\"hw-set-product__detail\"><span class=\"hw-set-product__number\">01</span><div><h3>Driver</h3><p>9° · Cypher 2.0 graphite · 1 club</p></div></div></div>\n        <div class=\"hw-set-product__item\"><div class=\"hw-set-product__photo\"><img src=\"https://www.haywoodgolf.com/cdn/shop/files/3_wood_-_crown_3_15032243-bc86-43d5-95de-e6354449e47b.png?v=1738532797&width=600\" alt=\"Haywood 3-wood head\" loading=\"lazy\" width=\"600\" height=\"600\"></div><div class=\"hw-set-product__detail\"><span class=\"hw-set-product__number\">02</span><div><h3>3-wood</h3><p>15° · Cypher 2.0 graphite · 1 club</p></div></div></div>\n        <div class=\"hw-set-product__item\"><div class=\"hw-set-product__photo\"><img src=\"https://www.haywoodgolf.com/cdn/shop/files/Hybrid_-_crown_1.png?v=1738532797&width=600\" alt=\"Haywood hybrid head\" loading=\"lazy\" width=\"600\" height=\"600\"></div><div class=\"hw-set-product__detail\"><span class=\"hw-set-product__number\">03</span><div><h3>Hybrid</h3><p>22° · Cypher 2.0 graphite · 1 club</p></div></div></div>\n        <div class=\"hw-set-product__item\"><div class=\"hw-set-product__photo\"><img src=\"{{ set_iron_image }}\" alt=\"Haywood {{ set_model }} iron head\" loading=\"lazy\" width=\"600\" height=\"600\"></div><div class=\"hw-set-product__detail\"><span class=\"hw-set-product__number\">04</span><div><h3>{{ set_model }} irons</h3><p>{{ set_iron_range }} · {{ set_iron_count }} clubs</p></div></div></div>\n        <div class=\"hw-set-product__item\"><div class=\"hw-set-product__photo\"><img src=\"https://www.haywoodgolf.com/cdn/shop/products/haywood-signature-wedges.jpg?v=1595288005&width=600\" alt=\"Haywood silver forged wedge head\" loading=\"lazy\" width=\"600\" height=\"600\"></div><div class=\"hw-set-product__detail\"><span class=\"hw-set-product__number\">05</span><div><h3>Silver wedges</h3><p>{{ set_wedges }} · 2 clubs</p></div></div></div>\n        <div class=\"hw-set-product__item\"><div class=\"hw-set-product__photo\"><img src=\"https://www.haywoodgolf.com/cdn/shop/products/haywood-putter-98.jpg?v=1595288005&width=600\" alt=\"Haywood Signature Putter head\" loading=\"lazy\" width=\"600\" height=\"600\"></div><div class=\"hw-set-product__detail\"><span class=\"hw-set-product__number\">06</span><div><h3>Signature Putter</h3><p>Chrome shaft · 1 club</p></div></div></div>\n      </div>\n      <p class=\"hw-set-product__note\">Standard Haywood grips are included on all clubs. Iron shaft and flex are selected in the configuration above. Golf bag not included.</p>\n      <div class=\"hw-set-product__links\"><a href=\"/collections/complete-iron-sets\">Compare both complete sets →</a><a href=\"/pages/fitting-tool\">Get help choosing a setup →</a></div>\n    </div>\n  </section>\n{% endif %}",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "haywood-why-players": {
       "type": "haywood-why-players",
       "custom_css": [],
@@ -126,10 +138,10 @@
       "name": "Specs Image Banner (URL metafield)",
       "settings": {}
     },
-      "haywood_driver_faq": {
-        "type": "haywood-driver-faq",
-        "settings": {}
-      },
+    "haywood_driver_faq": {
+      "type": "haywood-driver-faq",
+      "settings": {}
+    },
     "haywood-ugc": {
       "type": "haywood-ugc",
       "settings": {}
@@ -172,6 +184,7 @@
     "sidebar-drawer",
     "seven-iron-landing",
     "main",
+    "custom_liquid_WRYQkD",
     "haywood-why-players",
     "haywood_specs_banner_8GDpmp",
     "haywood_driver_faq",
