@@ -440,7 +440,7 @@ div.product__description, div.product-description {
     assign hw_product_summary = 'A flexible Haywood gift, delivered by email and ready to use online.'
   elsif hw_is_golf_bag
     assign hw_product_summary = 'A refined six-way stand bag with considered storage, balanced carrying comfort and weather-ready protection.'
-  elsif has_apo == false and hw_product_summary == blank
+  elsif has_apo == false and hw_product_summary == blank and hw_is_complete_set == false
     assign hw_product_summary = product.description | strip_html
     assign hw_product_summary = hw_product_summary | replace: '⚠️ Important:', '' | replace: '⚠️Important:', ''
     assign hw_product_summary = hw_product_summary | replace: 'Options may not appear in the Shop App. Please view this product on our website to select your custom options before purchasing.', '' | strip | truncatewords: 22
