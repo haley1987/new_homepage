@@ -620,7 +620,8 @@ class ModalDialog extends HTMLElement {
   connectedCallback() {
     if (this.moved) return;
     this.moved = true;
-    this.dataset.section = this.closest('.shopify-section').id.replace('shopify-section-', '');
+    const section = this.closest('.shopify-section');
+    if (section) this.dataset.section = section.id.replace('shopify-section-', '');
     document.body.appendChild(this);
   }
 
