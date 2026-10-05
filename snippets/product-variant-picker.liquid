@@ -9,11 +9,30 @@
   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 {% endcomment %}
 {%- unless product.has_only_default_variant -%}
+  {%- liquid
+    assign hw_complete_set_picker = false
+    assign hw_initial_cypher = false
+    if product.handle == 'complete-set-w-sv2-irons-game-improvement' or product.handle == 'complete-set-w-pd1-irons-players-distance'
+      assign hw_complete_set_picker = true
+      assign hw_initial_flex = product.selected_or_first_available_variant.option3 | append: ''
+      if hw_initial_flex contains 'Ladies' or hw_initial_flex contains 'Senior'
+        assign hw_initial_cypher = true
+      endif
+    endif
+  -%}
   <variant-selects
     id="variant-selects-{{ section.id }}"
     data-section="{{ section.id }}"
+    {% if hw_complete_set_picker %}data-hw-complete-set="true"{% endif %}
     {{ block.shopify_attributes }}
   >
+    {%- if hw_complete_set_picker -%}
+      <style>
+        #variant-selects-{{ section.id }} .hw-set-option-help{grid-column:1/-1;margin:-2px 0 10px;color:#596a7c;font-size:14px;line-height:1.5}
+        #variant-selects-{{ section.id }} label.hw-set-incompatible{display:none!important}
+        #variant-selects-{{ section.id }} .hw-set-cypher-only label:not(.hw-set-incompatible){grid-column:1/-1}
+      </style>
+    {%- endif -%}
     {%- for option in product.options_with_values -%}
       {%- liquid
         assign swatch_count = option.values | map: 'swatch' | compact | size
@@ -43,8 +62,16 @@
           %}
         </fieldset>
       {%- elsif picker_type == 'button' -%}
-        <fieldset class="js product-form__input product-form__input--pill">
-          <legend class="form__label">{{ option.name }}</legend>
+        <fieldset class="js product-form__input product-form__input--pill{% if hw_complete_set_picker and option.name == 'Shaft Selection' and hw_initial_cypher %} hw-set-cypher-only{% endif %}">
+          {%- if hw_complete_set_picker and option.name == 'Shaft Selection' -%}
+            <legend class="form__label">Iron shaft</legend>
+            <p class="hw-set-option-help">Shaft choices here match the flex selected below. This choice is for the irons; the driver, 3-wood and hybrid include Cypher 2.0 graphite.</p>
+          {%- elsif hw_complete_set_picker and option.name == 'Shaft Flex' -%}
+            <legend class="form__label">Shaft flex</legend>
+            <p class="hw-set-option-help">Ladies and Senior use Cypher 2.0 graphite. Regular and Stiff choose from Elevate, KBS Tour Lite or Dynamic Gold Mid.</p>
+          {%- else -%}
+            <legend class="form__label">{{ option.name }}</legend>
+          {%- endif -%}
           {% render 'product-variant-options',
             product: product,
             option: option,
@@ -91,4 +118,45 @@
       {{ product.selected_or_first_available_variant | json }}
     </script>
   </variant-selects>
+  {%- if hw_complete_set_picker -%}
+    <script>
+      (() => {
+        if (!window.hwCompleteSetFlexFilter) {
+          window.hwCompleteSetFlexFilter = true;
+          document.addEventListener('change', (event) => {
+            const picker = event.target.closest?.('variant-selects[data-hw-complete-set]');
+            if (!picker) return;
+            const fields = picker.querySelectorAll('fieldset');
+            if (event.target.closest('fieldset') !== fields[2]) return;
+            const shaftField = fields[1];
+            const cypherOnly = /Ladies|Senior/i.test(event.target.value);
+            let firstAvailable = null;
+            shaftField.classList.toggle('hw-set-cypher-only', cypherOnly);
+            shaftField.querySelectorAll('input[type="radio"]').forEach((input) => {
+              const allowed = input.value.includes('Cypher 2.0') === cypherOnly;
+              const label = shaftField.querySelector(`label[for="${input.id}"]`);
+              input.disabled = !allowed;
+              if (label) {
+                label.hidden = !allowed;
+                label.classList.toggle('hw-set-incompatible', !allowed);
+              }
+              if (allowed && !input.classList.contains('disabled') && !firstAvailable) firstAvailable = input;
+            });
+            const selected = shaftField.querySelector('input[type="radio"]:checked');
+            if ((!selected || selected.disabled) && firstAvailable) firstAvailable.checked = true;
+          }, true);
+        }
+        const picker = document.getElementById('variant-selects-{{ section.id }}');
+        const shaftField = picker?.querySelectorAll('fieldset')[1];
+        const selected = shaftField?.querySelector('input[type="radio"]:checked');
+        if (shaftField && (!selected || selected.disabled)) {
+          const firstAvailable = shaftField.querySelector('input[type="radio"]:not(:disabled):not(.disabled)');
+          if (firstAvailable) {
+            firstAvailable.checked = true;
+            firstAvailable.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        }
+      })();
+    </script>
+  {%- endif -%}
 {%- endunless -%}

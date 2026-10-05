@@ -33,44 +33,46 @@
       assign swatch_value = null
     endif
 
+    assign hw_display_value = value | append: ''
+    assign hw_incompatible = false
+    assign hw_value_text = value | append: ''
+    if product.handle == 'complete-set-w-sv2-irons-game-improvement' or product.handle == 'complete-set-w-pd1-irons-players-distance'
+      if option.name == 'Shaft Flex'
+        if hw_value_text contains 'Ladies'
+          assign hw_display_value = 'Ladies'
+        elsif hw_value_text contains 'Senior'
+          assign hw_display_value = 'Senior'
+        elsif hw_value_text contains 'Regular'
+          assign hw_display_value = 'Regular'
+        elsif hw_value_text contains 'Stiff'
+          assign hw_display_value = 'Stiff'
+        endif
+      elsif option.name == 'Shaft Selection'
+        assign hw_selected_flex = product.selected_or_first_available_variant.option3 | append: ''
+        assign hw_selected_cypher = false
+        if hw_selected_flex contains 'Ladies' or hw_selected_flex contains 'Senior'
+          assign hw_selected_cypher = true
+        endif
+        assign hw_value_is_cypher = false
+        if hw_value_text contains 'Cypher 2.0'
+          assign hw_value_is_cypher = true
+          assign hw_display_value = 'Cypher 2.0 Graphite · 50–60g'
+        elsif hw_value_text contains 'Elevate 95g'
+          assign hw_display_value = 'Elevate 95g Steel'
+        elsif hw_value_text contains 'KBS Tour Lite 95g'
+          assign hw_display_value = 'KBS Tour Lite 95g Steel'
+        elsif hw_value_text contains 'Dynamic Gold Mid 115g'
+          assign hw_display_value = 'Dynamic Gold Mid 115g Steel'
+        endif
+        if hw_selected_cypher != hw_value_is_cypher
+          assign hw_incompatible = true
+        endif
+      endif
+    endif
+
     assign option_disabled = true
     if value.available
       assign option_disabled = false
-    endif
-
-    assign hw_set_option_title = value
-    assign hw_set_option_detail = blank
-    assign hw_value_text = value | append: ''
-    if product.handle == 'complete-set-w-sv2-irons-game-improvement' or product.handle == 'complete-set-w-pd1-irons-players-distance'
-      if option.name == 'Shaft Selection'
-        if hw_value_text contains 'Cypher 2.0 Graphite'
-          assign hw_set_option_title = 'Cypher 2.0 Graphite'
-          assign hw_set_option_detail = '50–60g · high launch and spin'
-        elsif hw_value_text contains 'Elevate 95g Steel'
-          assign hw_set_option_title = 'Elevate 95g Steel'
-          assign hw_set_option_detail = 'High launch and spin'
-        elsif hw_value_text contains 'KBS Tour Lite 95g'
-          assign hw_set_option_title = 'KBS Tour Lite 95g'
-          assign hw_set_option_detail = 'High launch and spin'
-        elsif hw_value_text contains 'Dynamic Gold Mid 115g'
-          assign hw_set_option_title = 'Dynamic Gold Mid 115g Steel'
-          assign hw_set_option_detail = 'Mid launch and spin'
-        endif
-      elsif option.name == 'Shaft Flex'
-        if hw_value_text contains 'Ladies'
-          assign hw_set_option_title = 'Ladies'
-          assign hw_set_option_detail = 'Cypher 2.0 graphite only'
-        elsif hw_value_text contains 'Senior'
-          assign hw_set_option_title = 'Senior'
-          assign hw_set_option_detail = 'Cypher 2.0 graphite only'
-        elsif hw_value_text contains 'Regular'
-          assign hw_set_option_title = 'Regular'
-          assign hw_set_option_detail = 'All listed iron shafts'
-        elsif hw_value_text contains 'Stiff'
-          assign hw_set_option_title = 'Stiff'
-          assign hw_set_option_detail = 'All listed iron shafts'
-        endif
-      endif
     endif
   -%}
 
@@ -124,15 +126,11 @@
       {% if option_disabled %}
         class="disabled"
       {% endif %}
+      {% if hw_incompatible %}disabled{% endif %}
       {{ input_dataset }}
     >
-    <label for="{{ input_id }}"{% if hw_set_option_detail != blank %} class="hw-complete-set-option"{% endif %}>
-      {%- if hw_set_option_detail != blank -%}
-        <span class="hw-complete-set-option-name">{{ hw_set_option_title }}</span>
-        <span class="hw-complete-set-option-detail">{{ hw_set_option_detail }}</span>
-      {%- else -%}
-        {{ value -}}
-      {%- endif -%}
+    <label for="{{ input_id }}"{% if hw_incompatible %} class="hw-set-incompatible" hidden{% endif %}>
+      {{ hw_display_value -}}
       {{ label_unavailable }}
     </label>
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
