@@ -409,6 +409,9 @@ div.product__description, div.product-description {
     assign hw_product_eyebrow = 'Premium stand bags'
   elsif has_apo == false
     assign hw_product_eyebrow = 'Accessories and apparel'
+    if hw_is_complete_set
+      assign hw_product_eyebrow = 'Complete sets'
+    endif
   elsif hw_is_seven_iron_program
     assign hw_product_eyebrow = 'Try before you build'
   elsif hw_is_complete_set
