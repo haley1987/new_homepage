@@ -101,8 +101,8 @@
         assign hw_card_summary = card_product.description | strip_html | truncatewords: 18
       endif
     elsif hw_is_complete_set_card
-      assign hw_card_eyebrow = 'Complete club set'
-      assign hw_card_cta = 'Explore set'
+      assign hw_card_eyebrow = 'Complete Set'
+      assign hw_card_cta = 'Explore Complete Set'
       if card_product.title contains 'SV.2'
         assign hw_card_summary = 'A Haywood Complete Set anchored by forgiving, confidence-building SV.2 irons.'
       elsif card_product.title contains 'PD.1'
