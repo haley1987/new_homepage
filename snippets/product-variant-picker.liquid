@@ -9,24 +9,11 @@
   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 {% endcomment %}
 {%- unless product.has_only_default_variant -%}
-  {%- liquid
-    assign hw_complete_set_picker = false
-    if product.handle == 'complete-set-w-sv2-irons-game-improvement' or product.handle == 'complete-set-w-pd1-irons-players-distance'
-      assign hw_complete_set_picker = true
-    endif
-  -%}
   <variant-selects
     id="variant-selects-{{ section.id }}"
     data-section="{{ section.id }}"
     {{ block.shopify_attributes }}
   >
-    {%- if hw_complete_set_picker -%}
-      <style>
-        #variant-selects-{{ section.id }} .hw-complete-set-option-help{grid-column:1/-1;margin:-2px 0 8px;color:#596a7c;font-size:14px;line-height:1.5}
-        #variant-selects-{{ section.id }} label.hw-complete-set-option{flex-direction:column;gap:4px;line-height:1.25}
-        #variant-selects-{{ section.id }} .hw-complete-set-option-detail{display:block;font-size:12px;font-weight:500;letter-spacing:0;line-height:1.3;opacity:.82;text-transform:none}
-      </style>
-    {%- endif -%}
     {%- for option in product.options_with_values -%}
       {%- liquid
         assign swatch_count = option.values | map: 'swatch' | compact | size
@@ -57,15 +44,7 @@
         </fieldset>
       {%- elsif picker_type == 'button' -%}
         <fieldset class="js product-form__input product-form__input--pill">
-          {%- if hw_complete_set_picker and option.name == 'Shaft Selection' -%}
-            <legend class="form__label">Iron shaft</legend>
-            <p class="hw-complete-set-option-help">This choice is for the irons. The driver, 3-wood and hybrid include Cypher 2.0 graphite shafts.</p>
-          {%- elsif hw_complete_set_picker and option.name == 'Shaft Flex' -%}
-            <legend class="form__label">Iron shaft flex</legend>
-            <p class="hw-complete-set-option-help">For Ladies or Senior flex, choose Cypher 2.0 graphite. Regular and Stiff work with every listed iron shaft.</p>
-          {%- else -%}
-            <legend class="form__label">{{ option.name }}</legend>
-          {%- endif -%}
+          <legend class="form__label">{{ option.name }}</legend>
           {% render 'product-variant-options',
             product: product,
             option: option,
